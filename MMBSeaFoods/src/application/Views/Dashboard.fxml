@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="760.0" prefWidth="1360.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.DashboardController">
+   <children>
+      <AnchorPane layoutY="-2.0" maxHeight="80.0" prefHeight="80.0" prefWidth="1467.0" style="-fx-background-color: #3F2B63;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="81.0" layoutY="6.0" prefHeight="42.0" prefWidth="102.0" text="MMB " textFill="#f8f6f6">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="83.0" layoutY="46.0" text="SEA FOOD" textFill="#f5f3f3">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fill="#fcf9f9" layoutX="21.0" layoutY="59.0" size="45" text="" wrappingWidth="60.0" />
+            <JFXButton fx:id="btnLogout" layoutX="1208.0" layoutY="15.0" maxWidth="208.0" onAction="#LogOut" prefHeight="50.0" prefWidth="138.0" style="-fx-alignment: left;" styleClass="nav-button" text="Log Out" textFill="#fefeff" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#fffefe" glyphName="SHARE" size="17.0" wrappingWidth="25.0" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <VBox layoutY="80.0" maxWidth="209.0" prefHeight="680.0" prefWidth="209.0" style="-fx-background-color: #3F2B63;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <JFXButton fx:id="btnHome" layoutX="10.0" maxWidth="208.0" onAction="#switchHome" prefHeight="50.0" prefWidth="208.0" style="-fx-alignment: left;" styleClass="nav-button" text="Home" textFill="#fefeff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#f7f8f8" glyphName="DASHBOARD" size="17.0" wrappingWidth="43.0" />
+               </graphic>
+               <VBox.margin>
+                  <Insets top="80.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="btnFtrade" layoutX="10.0" layoutY="132.0" maxWidth="208.0" onAction="#switchFtrade" prefHeight="50.0" prefWidth="208.0" style="-fx-alignment: left;" styleClass="nav-button" text="Foreign Trade" textFill="#fefeff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#fffefe" glyphName="PLANE" size="17.0" wrappingWidth="43.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnLTrade" layoutX="10.0" layoutY="67.0" maxWidth="208.0" onAction="#switchLtrade" prefHeight="50.0" prefWidth="208.0" style="-fx-alignment: left;" styleClass="nav-button" text="Local Trade" textFill="#fefeff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView fill="#fefeff" glyphName="SHOPPING" size="17.0" text="" wrappingWidth="42.99997329711914" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnVehicles" layoutX="10.0" layoutY="132.0" maxWidth="208.0" onAction="#switchVehicles" prefHeight="50.0" prefWidth="208.0" style="-fx-alignment: left;" styleClass="nav-button" text="Vehicles" textFill="#fefeff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#fffefe" glyphName="TRUCK" size="17.0" wrappingWidth="43.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnSettings" layoutX="10.0" layoutY="240.0" maxWidth="208.0" onAction="#switchSettings" prefHeight="50.0" prefWidth="208.0" style="-fx-alignment: left;" styleClass="nav-button" text="Settings" textFill="#fefeff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#fffefe" glyphName="COGS" size="17.0" wrappingWidth="43.0" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </VBox>
+      <AnchorPane layoutX="207.0" layoutY="80.0" prefHeight="680.0" prefWidth="1153.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <AnchorPane fx:id="holderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

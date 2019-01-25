@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="692.0" style="-fx-background-color: #1a237e;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.LoginController">
+   <children>
+      <AnchorPane layoutX="314.0" layoutY="66.0" prefHeight="335.0" prefWidth="348.0" style="-fx-background-color: #e8eaf6;" AnchorPane.bottomAnchor="66.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="66.0">
+         <children>
+            <JFXTextField fx:id="txtUsername" labelFloat="true" layoutX="43.0" layoutY="78.0" prefHeight="45.0" prefWidth="282.0" promptText="UserName" unFocusColor="#0d00ff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="43.0" layoutY="170.0" prefHeight="45.0" prefWidth="282.0" promptText="Password" unFocusColor="#0d00ff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="116.0" layoutY="260.0" onAction="#Login" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #1a237e;" text="Login" textFill="#fff9f9" AnchorPane.bottomAnchor="30.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="errorMessage" layoutX="86.0" layoutY="7.0" prefHeight="21.0" prefWidth="196.0" textFill="#fc0606">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="39.0" layoutY="68.0" prefHeight="335.0" prefWidth="262.0">
+         <children>
+            <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutX="50.0" layoutY="171.0" size="200" wrappingWidth="161.42857360839844" />
+            <Label contentDisplay="CENTER" layoutX="55.0" layoutY="227.0" prefHeight="70.0" prefWidth="153.0" text="M M B" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Label>
+            <Label layoutX="63.0" layoutY="297.0" text="SEA FOOD" textFill="WHITE">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

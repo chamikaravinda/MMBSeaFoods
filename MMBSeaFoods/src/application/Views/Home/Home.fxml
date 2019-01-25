@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.DashboardHomeController">
+     <children>
+      <Label layoutX="19.0" layoutY="17.0" prefHeight="29.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Dashboard" />
+      <Separator layoutX="3.0" layoutY="55.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
+      <GridPane layoutY="254.0" prefHeight="128.0" prefWidth="1221.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane maxWidth="300.0" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #00C0EF; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
+               <children>
+                  <Pane layoutY="101.0" maxWidth="300.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #009ABF;">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" prefHeight="20.0" prefWidth="155.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #F0F0F0;" text="More Info" />
+                     </children>
+                  </Pane>
+                  <VBox layoutY="12.0" prefHeight="66.0" prefWidth="155.0">
+                     <children>
+                        <Label fx:id="orders" prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" />
+                        <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="New Orders" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane maxWidth="300.0" prefHeight="128.0" prefWidth="300.0" style="-fx-background-color: #00A65A; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" GridPane.columnIndex="1">
+               <children>
+                  <Pane layoutY="101.0" maxWidth="300.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #008548;">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" prefHeight="20.0" prefWidth="155.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #F0F0F0;" text="More Info" />
+                     </children>
+                  </Pane>
+                  <VBox layoutY="12.0" prefHeight="66.0" prefWidth="155.0">
+                     <children>
+                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
+                        <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="New Orders" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane maxWidth="300.0" prefHeight="128.0" prefWidth="300.0" style="-fx-background-color: #F39C12; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" GridPane.columnIndex="2">
+               <children>
+                  <Pane layoutY="101.0" maxWidth="300.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #C37D0E;">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" prefHeight="20.0" prefWidth="155.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #F0F0F0;" text="More Info" />
+                     </children>
+                  </Pane>
+                  <VBox layoutY="12.0" prefHeight="66.0" prefWidth="155.0">
+                     <children>
+                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
+                        <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="New Orders" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane maxWidth="300.0" prefHeight="128.0" prefWidth="300.0" style="-fx-background-color: #DD4B39; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" GridPane.columnIndex="3">
+               <children>
+                  <Pane layoutY="101.0" maxWidth="300.0" prefHeight="27.0" prefWidth="300.0" style="-fx-background-color: #B13C2E;">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" prefHeight="20.0" prefWidth="155.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #F0F0F0;" text="More Info" />
+                     </children>
+                  </Pane>
+                  <VBox layoutY="12.0" prefHeight="66.0" prefWidth="155.0">
+                     <children>
+                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
+                        <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="New Orders" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+      
+   </children>
+</AnchorPane>
