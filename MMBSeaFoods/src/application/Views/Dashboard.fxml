@@ -71,6 +71,14 @@
                   <FontAwesomeIconView fill="#fffefe" glyphName="TRUCK" size="17.0" wrappingWidth="43.0" />
                </graphic>
             </JFXButton>
+            <JFXButton fx:id="btnVehicles1" layoutX="10.0" layoutY="240.0" maxWidth="208.0" onAction="#switchVehicles" prefHeight="50.0" prefWidth="208.0" style="-fx-alignment: left;" styleClass="nav-button" text="Accounts" textFill="#fefeff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#fffefe" glyphName="RUPEE" size="17.0" wrappingWidth="43.0" />
+               </graphic>
+            </JFXButton>
             <JFXButton fx:id="btnSettings" layoutX="10.0" layoutY="240.0" maxWidth="208.0" onAction="#switchSettings" prefHeight="50.0" prefWidth="208.0" style="-fx-alignment: left;" styleClass="nav-button" text="Settings" textFill="#fefeff">
                <font>
                   <Font size="18.0" />
