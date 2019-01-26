@@ -136,6 +136,13 @@ public class DBConnection {
 					         "  To_Pay		  DOUBLE            ," +
 					         "  Paid          DOUBLE            )" ;
 					 
+			          String ProfiteAndLose = "CREATE TABLE IF NOT EXISTS ProfiteAndLose " +
+			            		 "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," +
+			            		 "  Date     	  DATE      NOT NULL," + 		                         		                        
+			                     "  Reason        TEXT      NOT NULL," +
+			                     "  To_Pay		  DOUBLE            ," +
+			                     "  Paid          DOUBLE            )" ;	
+					 
 					 
 		             
 		             
@@ -155,6 +162,7 @@ public class DBConnection {
 			         stmt.executeUpdate(stock_fishes);	
 			         stmt.executeUpdate(Third_Party_Account);
 			         stmt.executeUpdate(Third_Party_Acc_Uncleared);
+			         stmt.executeUpdate(ProfiteAndLose);
 			         
 			         stmt.close();
 			         
