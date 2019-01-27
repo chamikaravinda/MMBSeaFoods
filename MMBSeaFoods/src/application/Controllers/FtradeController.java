@@ -27,7 +27,7 @@ public class FtradeController implements Initializable {
     private AnchorPane ftrade;
     @FXML
     
-    AnchorPane lots,stoks,boats,buyers,fishtypes;
+    AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,7 +54,37 @@ public class FtradeController implements Initializable {
     }
 
     public void switchStock(ActionEvent event) throws IOException {
+    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Stocks.fxml"));
+		setNode(lots);
+		
+	}
+    
+    public void AddNewLot(ActionEvent event) throws IOException {
+    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewLot.fxml"));
+		setNode(lots);
+		
+	}
+    
+    public void switchLot(ActionEvent event) throws IOException {
     	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+		setNode(lots);
+		
+	}
+    
+    public void switchBoat(ActionEvent event) throws IOException {
+    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+		setNode(lots);
+		
+	}
+    
+    public void switchBuyers(ActionEvent event) throws IOException {
+    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Buyers.fxml"));
+		setNode(lots);
+		
+	}
+    
+    public void switchFishTypes(ActionEvent event) throws IOException {
+    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/FishTypes.fxml"));
 		setNode(lots);
 		
 	}

@@ -1,17 +1,25 @@
 package application.Controllers;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.net.URL;
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.Notifications;
 
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 
+import application.Models.Fish_Lot;
+import application.Models.ProfiteAndLose;
+import application.Models.Third_Party_Account;
 import application.Models.Vehicles;
+import application.Services.Fish_LotServices;
+import application.Services.ProfiteAndLossService;
+import application.Services.Third_Party_AccountServices;
 import application.Services.VehiclesServices;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
@@ -22,6 +30,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -31,51 +40,66 @@ public class AddLottsController implements Initializable {
 	private AnchorPane Vehicles;
 	
 	@FXML
-	private JFXTextField txtPremiumeAmount;
+	private JFXTextField txtLorryNo;
 	
 	@FXML
-	private JFXTextField txtPaidAmount;
+	private JFXTextField txtIceFee;
 	
 	@FXML
-	private JFXTextField txtVno;
+	private JFXTextField txtLorryFee;
 	
 	@FXML
-	private JFXTextField txtTotalLease;
+	private JFXTextField txtOtherFee;
 	
-	AnchorPane add;
-
+	@FXML 
+	private CheckBox chkIce;
+	
+	@FXML 
+	private CheckBox chkLorry;
+	
+	
+	@FXML 
+	private CheckBox chkOther;
+	
+	AnchorPane back;
+	
+	Fish_LotServices service =new Fish_LotServices();
+	
+	Third_Party_AccountServices service2=new Third_Party_AccountServices();
+	
+	ProfiteAndLossService ProfitAndLossService=new ProfiteAndLossService();
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		RequiredFieldValidator VnumValidator = new RequiredFieldValidator();
-		NumberValidator PaidAmtValidator = new NumberValidator();
-		NumberValidator PremiumeAmtValidator = new NumberValidator();
-		NumberValidator TotalLeaseAmtValidator = new NumberValidator();
+		RequiredFieldValidator LorryNo = new RequiredFieldValidator();
+		NumberValidator IceFee = new NumberValidator();
+		NumberValidator LorryFee = new NumberValidator();
+		NumberValidator OtherFee = new NumberValidator();
 		
-		txtVno.getValidators().add(VnumValidator);
-		VnumValidator.setMessage("Please input the Vehicle Number");
+		txtLorryNo.getValidators().add(LorryNo);
+		LorryNo.setMessage("Please input the Lorry Number");
 		
-		txtVno.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		txtLorryNo.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					txtVno.validate();
+					txtLorryNo.validate();
 				}
 				
 			}
 			
 		});
 		
-		txtPaidAmount.getValidators().add(PaidAmtValidator);
-		PaidAmtValidator.setMessage("Please input correct values");
+		txtIceFee.getValidators().add(IceFee);
+		IceFee.setMessage("Please input correct values");
 		
-		txtPaidAmount.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		txtIceFee.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
-					txtPaidAmount.validate();
+					txtIceFee.validate();
 				}
 				
 			}
@@ -84,30 +108,30 @@ public class AddLottsController implements Initializable {
 		
 	
 	
-	txtPremiumeAmount.getValidators().add(PremiumeAmtValidator);
-	PremiumeAmtValidator.setMessage("Please input correct values");
+	txtLorryFee.getValidators().add(LorryFee);
+	LorryFee.setMessage("Please input correct values");
 	
-	txtPremiumeAmount.focusedProperty().addListener(new ChangeListener<Boolean>() {
+	txtLorryFee.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
 		@Override
 		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 			if(!newValue) {
-				txtPremiumeAmount.validate();
+				txtLorryFee.validate();
 			}
 			
 		}
 		
 	});
 	
-	txtTotalLease.getValidators().add(TotalLeaseAmtValidator);
-	TotalLeaseAmtValidator.setMessage("Please input correct values");
+	txtOtherFee.getValidators().add(OtherFee);
+	OtherFee.setMessage("Please input correct values");
 	
-	txtTotalLease.focusedProperty().addListener(new ChangeListener<Boolean>() {
+	txtOtherFee.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
 		@Override
 		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 			if(!newValue) {
-				txtTotalLease.validate();
+				txtOtherFee.validate();
 			}
 			
 		}
@@ -118,38 +142,94 @@ public class AddLottsController implements Initializable {
 	
 	public void AddLots(ActionEvent event) throws SQLException, IOException {
 		
-		Vehicles vehicel=new Vehicles();
-		VehiclesServices service =new VehiclesServices();
+		Fish_Lot newLot =new Fish_Lot();
+		Date date =new Date();
+		newLot.setAdded_Date(date.toString());
+		newLot.setLorry_Number(txtLorryNo.getText());
+		newLot.setLorry_fee(Double.parseDouble(txtLorryFee.getText()));
+		newLot.setIce_fee(Double.parseDouble(txtIceFee.getText()));
+		newLot.setOther_fees(Double.parseDouble(txtOtherFee.getText()));
 		
-		vehicel.setVehicle_No(txtVno.getText());
-		vehicel.setTotal_Lease(Double.parseDouble(txtTotalLease.getText()));
-		vehicel.setPaid_Amount(Double.parseDouble(txtPaidAmount.getText()));
-		vehicel.setPremium_Amount(Double.parseDouble(txtPremiumeAmount.getText()));
-		vehicel.setTo_Pay(vehicel.getTotal_Lease()-vehicel.getPaid_Amount());
-		
-		if(service.addVehicles(vehicel)) {
+		if(service.addLot(newLot)) {
+			if(newLot.getIce_fee() >0.0) {
+				if(chkIce.isSelected()) {
+					Third_Party_Account entry =new Third_Party_Account();
+					entry.setDate(date.toString());
+					entry.setTo_Pay(newLot.getIce_fee());
+					entry.setPaid(0);
+					entry.setReason("Ice fee for Lot form Lorry "+newLot.getLorry_Number());
+					
+					service2.addEntry_Uncleared(entry);
+					service2.addEntry(entry);
+					
+				}else {
+					
+					ProfiteAndLose entry=new ProfiteAndLose();
+					entry.setDate(date.toString());
+					entry.setTo_Pay(0);
+					entry.setPaid(newLot.getIce_fee());
+					entry.setReason("Ice fee for Lot form Lorry "+newLot.getLorry_Number());
+					
+					ProfitAndLossService.addProfitAndLossEntry(entry);
+				}
+			}
+			if(newLot.getLorry_fee() > 0.0) {	
+				if(chkLorry.isSelected()) {
+					Third_Party_Account entry =new Third_Party_Account();
+					entry.setDate(date.toString());
+					entry.setTo_Pay(newLot.getLorry_fee());
+					entry.setPaid(0);
+					entry.setReason("Lorry fee for Lot form  Lorry "+newLot.getLorry_Number());
+					
+					service2.addEntry_Uncleared(entry);
+					service2.addEntry(entry);
+				}else {
+					ProfiteAndLose entry=new ProfiteAndLose();
+					entry.setDate(date.toString());
+					entry.setTo_Pay(0);
+					entry.setPaid(newLot.getLorry_fee());
+					entry.setReason("Lorry fee for Lot form Lorry "+newLot.getLorry_Number());
+					ProfitAndLossService.addProfitAndLossEntry(entry);
+				}
+			}
+			if(newLot.getOther_fees()>0.0) {
+				if(chkOther.isSelected()) {
+					Third_Party_Account entry =new Third_Party_Account();
+					entry.setDate(date.toString());
+					entry.setTo_Pay(newLot.getLorry_fee());
+					entry.setPaid(0);
+					entry.setReason("Other expences for Lot form  Lorry  "+newLot.getLorry_Number());
+					
+					service2.addEntry_Uncleared(entry);
+					service2.addEntry(entry);
+				}else {
+					ProfiteAndLose entry=new ProfiteAndLose();
+					entry.setDate(date.toString());
+					entry.setTo_Pay(0);
+					entry.setPaid(newLot.getLorry_fee());
+					entry.setReason("Other expences for Lot form  Lorry "+newLot.getLorry_Number());
+					ProfitAndLossService.addProfitAndLossEntry(entry);
+				}
+			}
 			
 			Notifications notifications = Notifications.create();
 			notifications.title("Succesfull");
-			notifications.text("Vehicle added succesfully");
+			notifications.text("Lot added succesfully");
 			notifications.graphic(null);
 			notifications.hideAfter(Duration.seconds(2));
 			notifications.position(Pos.CENTER);
 			notifications.showConfirm();
 			
-			add=FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
-			setNode(add);
-			
-		}
-		else {
+		}else {
 			Notifications notifications = Notifications.create();
 			notifications.title("Error");
-			notifications.text("Vehicle adding unsuccesfull.Vehicle may be already in the database");
+			notifications.text("Lot adding unsuccesfull");
 			notifications.graphic(null);
 			notifications.hideAfter(Duration.seconds(2));
 			notifications.position(Pos.CENTER);
 			notifications.showError();
 		}
+
 		
 	}
 
@@ -176,8 +256,8 @@ public class AddLottsController implements Initializable {
 		
 	
 	public void back(ActionEvent event) throws IOException {
-		add=FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
-		setNode(add);
+		back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+		setNode(back);
 		
 	}
 	

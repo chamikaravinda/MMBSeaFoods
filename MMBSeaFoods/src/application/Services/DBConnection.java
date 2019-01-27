@@ -92,6 +92,7 @@ public class DBConnection {
 		                        "  Ice_fee        DOUBLE     ,"+
 		                        "  Lorry_fee      DOUBLE     ,"+
 		                        "  other_fees     DOUBLE     ,"+
+		                        "  brokerFee      DOUBLE     ,"+
 		                        "  buying_price   DOUBLE     ,"+
 		                        "  Sold_Weight    INTEGER    ,"+
 		                        "  Sold_price     DOUBLE     ,"+
@@ -129,7 +130,7 @@ public class DBConnection {
 		                     "  To_Pay		  DOUBLE            ," +
 		                     "  Paid          DOUBLE            )" ;		
 		                     
-					 String Third_Party_Acc_Uncleared = "CREATE TABLE IF NOT EXISTS Third_Party_Account" +
+					 String Third_Party_Acc_Uncleared = "CREATE TABLE IF NOT EXISTS Third_Party_Acc_Uncleared" +
 							 "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," +
 							 "  Date     	  DATE      NOT NULL," + 		                         		                        
 					         "  Reason        TEXT      NOT NULL," +

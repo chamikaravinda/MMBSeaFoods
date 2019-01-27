@@ -30,6 +30,8 @@ public class ProfiteAndLossService {
 		} catch (SQLException e) {
 			connection.close();
 			e.printStackTrace();
+		}finally {
+			connection.close();
 		}
 		
 	}
