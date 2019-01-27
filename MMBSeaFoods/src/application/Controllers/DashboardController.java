@@ -47,7 +47,7 @@ public class DashboardController implements Initializable {
         //Load all fxmls in a cache
         try {
              Home = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));            
-             Ftrade = FXMLLoader.load(getClass().getResource("../Views/Alerts.fxml"));
+             Ftrade = FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
              Ltrade = FXMLLoader.load(getClass().getResource("../Views/Pricing.fxml"));
              Vehicles = FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
              Settings = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
