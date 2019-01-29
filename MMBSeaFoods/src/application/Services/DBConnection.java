@@ -112,7 +112,9 @@ public class DBConnection {
 		             String Foreign_Fish_types = "CREATE TABLE IF NOT EXISTS Foreign_Fish_types" +
 		                        "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT," +           
 		                        "  Name           TEXT      NOT NULL,"+
-		                        "  buying_Price   DOUBLE    NOT NULL )";
+		                        "  price_20P      DOUBLE    NOT NULL, "+
+		                        "  price_15B      DOUBLE    NOT NULL, "+
+		                        "  price20_15     DOUBLE    NOT NULL )";
 		            
 		             //to add each fish separtaly to the stock
 		             

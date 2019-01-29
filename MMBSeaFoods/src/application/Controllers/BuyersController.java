@@ -6,95 +6,43 @@
 package application.Controllers;
 
 import com.jfoenix.controls.JFXButton;
-
-import application.Models.Fish_Lot;
-import application.Models.Vehicles;
-import application.Services.Fish_LotServices;
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
-public class FtradeController implements Initializable {
+public class BuyersController implements Initializable {
 
     @FXML
-    private AnchorPane ftrade;
-    
+    private AnchorPane Buyers;
     @FXML
-	private TableView<Fish_Lot> tableLots;
-	
-	@FXML
-	private TableColumn<?,?> clmDate;
-	
-	@FXML
-	private TableColumn<?,?> clmWeight;
-	
-	@FXML
-	private TableColumn<?,?> clmLorry;
-	
-	@FXML
-	private TableColumn<?,?> clmBprice;
-	
-	@FXML
-	private TableColumn<?,?> clmsell;
-	
-	
-	public ObservableList<Fish_Lot> list = FXCollections.observableArrayList();
     
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
    
-    	list.clear();
-    	Fish_LotServices service =new Fish_LotServices();
-    	ArrayList<Fish_Lot> lots=null;
-    	try {
-		 lots =service.getUnslodLots();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	for(Fish_Lot sup : lots) {
-			list.add(sup);
-		}
-    	
-    	clmDate.setCellValueFactory(new PropertyValueFactory<>("Added_Date"));
-    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("Buying_Weight"));
-    	clmLorry.setCellValueFactory(new PropertyValueFactory<>("Lorry_Number"));
-    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("buying_price"));
-		
-    	tableLots.setItems(list);
 
     }
     
 	//Set selected node to a content holder
     void setNode(Node node) {
-        ftrade.getChildren().clear();
-        ftrade.setTopAnchor(node,0.0);
-        ftrade.setRightAnchor(node, 0.0);
-        ftrade.setLeftAnchor(node, 0.0);
-        ftrade.setBottomAnchor(node, 0.0);
-        ftrade.getChildren().addAll((Node) node);
+    	Buyers.getChildren().clear();
+    	Buyers.setTopAnchor(node,0.0);
+    	Buyers.setRightAnchor(node, 0.0);
+    	Buyers.setLeftAnchor(node, 0.0);
+    	Buyers.setBottomAnchor(node, 0.0);
+    	Buyers.getChildren().addAll((Node) node);
 
         FadeTransition ft = new FadeTransition(Duration.millis(1500));
         ft.setNode(node);
@@ -111,8 +59,8 @@ public class FtradeController implements Initializable {
 		
 	}
     
-    public void AddNewLot(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewLot.fxml"));
+    public void AddNewBuyer(ActionEvent event) throws IOException {
+    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewBuyer.fxml"));
 		setNode(lots);
 		
 	}
