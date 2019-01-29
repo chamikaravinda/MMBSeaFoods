@@ -1,12 +1,13 @@
 package application.Controllers;
 
-import java.io.IOException; 
+import java.io.IOException;  
 import java.net.URL;
 import java.util.Date;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.Notifications;
+
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;

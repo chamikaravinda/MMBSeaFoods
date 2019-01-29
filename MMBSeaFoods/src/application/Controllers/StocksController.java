@@ -33,11 +33,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
-public class FtradeController implements Initializable {
+public class StocksController implements Initializable {
 
     @FXML
-    private AnchorPane ftrade;
-    
+    private AnchorPane Stocks;
+    /*
     @FXML
 	private TableView<Fish_Lot> tableLots;
 	
@@ -58,13 +58,13 @@ public class FtradeController implements Initializable {
 	
 	
 	public ObservableList<Fish_Lot> list = FXCollections.observableArrayList();
-    
+    */
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
    
-    	list.clear();
+    	/*list.clear();
     	Fish_LotServices service =new Fish_LotServices();
     	ArrayList<Fish_Lot> lots=null;
     	try {
@@ -82,18 +82,18 @@ public class FtradeController implements Initializable {
     	clmLorry.setCellValueFactory(new PropertyValueFactory<>("Lorry_Number"));
     	clmBprice.setCellValueFactory(new PropertyValueFactory<>("buying_price"));
 		
-    	tableLots.setItems(list);
+    	tableLots.setItems(list);*/
 
     }
     
 	//Set selected node to a content holder
     void setNode(Node node) {
-        ftrade.getChildren().clear();
-        ftrade.setTopAnchor(node,0.0);
-        ftrade.setRightAnchor(node, 0.0);
-        ftrade.setLeftAnchor(node, 0.0);
-        ftrade.setBottomAnchor(node, 0.0);
-        ftrade.getChildren().addAll((Node) node);
+    	Stocks.getChildren().clear();
+    	Stocks.setTopAnchor(node,0.0);
+    	Stocks.setRightAnchor(node, 0.0);
+    	Stocks.setLeftAnchor(node, 0.0);
+    	Stocks.setBottomAnchor(node, 0.0);
+    	Stocks.getChildren().addAll((Node) node);
 
         FadeTransition ft = new FadeTransition(Duration.millis(1500));
         ft.setNode(node);
@@ -110,7 +110,7 @@ public class FtradeController implements Initializable {
 		
 	}
     
-    public void AddNewLot(ActionEvent event) throws IOException {
+    public void AddStoks(ActionEvent event) throws IOException {
     	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewLot.fxml"));
 		setNode(lots);
 		

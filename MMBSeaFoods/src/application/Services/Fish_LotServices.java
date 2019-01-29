@@ -18,8 +18,8 @@ public class Fish_LotServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO Fish_Lot (Added_Date, Lorry_Number, Ice_fee,Lorry_fee,other_fees,buying_price)" + 
-							"VALUES (?,?,?,?,?,?)";
+		String insertQuery= "INSERT INTO Fish_Lot (Added_Date, Lorry_Number, Ice_fee,Lorry_fee,other_fees,buying_price,Buying_Weight)" + 
+							"VALUES (?,?,?,?,?,?,?)";
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setString(1, lot.getAdded_Date());
@@ -27,7 +27,9 @@ public class Fish_LotServices {
 			preparedStatement.setDouble(3, lot.getIce_fee());
 			preparedStatement.setDouble(4, lot.getLorry_fee());
 			preparedStatement.setDouble(5, lot.getOther_fees());
-			preparedStatement.setDouble(6, 0);
+			double buying_Price=lot.getIce_fee()+lot.getLorry_fee()+lot.getOther_fees();
+			preparedStatement.setDouble(6,buying_Price);
+			preparedStatement.setDouble(7, 0);
 			resultSet=preparedStatement.executeUpdate();
 			
 			if(resultSet != 0) {
@@ -66,8 +68,8 @@ public class Fish_LotServices {
 				lot.setBuying_Weight(Integer.parseInt(resultSet.getString("Buying_Weight")));
 				lot.setLorry_Number(resultSet.getString("Lorry_Number"));
 				lot.setBuying_price(Double.parseDouble(resultSet.getString("Buying_price")));
-				list.add(lot);
 				
+				list.add(lot);
 			}
 			return list;
 			
