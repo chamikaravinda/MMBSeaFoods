@@ -70,5 +70,32 @@ public class Third_Party_AccountServices {
 		
 		
 	}
+	
+	//Clear all records
+	
+	
+	public boolean clearAcconts() throws SQLException {
 
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		
+		
+		String deleteQuery="delete * from Third_Party_Acc_Uncleared ";
+		
+		try {
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			resultSet=preparedStatement.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			
+			connection.close();
+		}
+	
+		return true;
+}
+
+	
 }
