@@ -1,13 +1,12 @@
 package application.Models;
 
-public class Boat_Account {
+public class F_Fish_Buyers_Account_Uncleard {
 
 	private int ID;
 	private String Date;
 	private String Reason;
 	private double To_Pay;
 	private double Paid;
-	private int Boat_ID;
 	public int getID() {
 		return ID;
 	}
@@ -38,13 +37,8 @@ public class Boat_Account {
 	public void setPaid(double paid) {
 		Paid = paid;
 	}
-	public int getBoat_ID() {
-		return Boat_ID;
-	}
-	public void setBoat_ID(int boat_ID) {
-		Boat_ID = boat_ID;
-	}
 	
 	
 	
+
 }
