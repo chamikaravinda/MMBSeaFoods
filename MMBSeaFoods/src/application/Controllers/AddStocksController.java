@@ -16,6 +16,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 
 import application.Models.Boat;
 import application.Models.Boat_Account;
+import application.Models.Boat_Account_UnCleared;
 import application.Models.Fish_Lot;
 import application.Models.Fish_stock;
 import application.Models.Foreign_Fish_types;
@@ -23,6 +24,7 @@ import application.Models.Stock_Fish;
 import application.Models.Third_Party_Account;
 import application.Models.Vehicles;
 import application.Services.BoatService;
+import application.Services.Boat_AccountServices;
 import application.Services.Fish_LotServices;
 import application.Services.Fish_stockService;
 import application.Services.Foreign_Fish_typesServices;
@@ -109,6 +111,7 @@ public class AddStocksController implements Initializable{
 	stock_FishService serviceE = new stock_FishService();
 	Third_Party_AccountServices serviceF=new Third_Party_AccountServices();
 	ProfiteAndLossService serviceG =new ProfiteAndLossService();
+	Boat_AccountServices serviceH=new Boat_AccountServices();
 	
 	ArrayList<Fish_Lot> lots=null;
 	ArrayList<Boat> boats=null;
@@ -242,6 +245,7 @@ public class AddStocksController implements Initializable{
 				stock.setFishprice(currentTotalPrice);
 				stock.setCommition_price(currentTotalWeigth*20);
 				stock.setTotalBuying_price(stock.getFishprice()+stock.getCommition_price());
+				System.out.println(lot.getID());
 				stock.setLot_ID(lot.getID());
 				
 				long stockID=serviceD.addFish_Stock(stock);
@@ -263,7 +267,7 @@ public class AddStocksController implements Initializable{
 					lot.setBuying_Weight(lot.getBuying_Weight()+stock.getTotal_Weight());
 					lot.setBrokerFee(stock.getCommition_price());
 					lot.setBuying_price(lot.getBuying_price()+stock.getTotalBuying_price());
-					service.UpdateFish_Lot(lot);
+					if(service.UpdateFish_Lot(lot)) {
 					
 					Boat_Account boatEntry =new Boat_Account();
 					boatEntry.setDate(date.toString());
@@ -272,9 +276,30 @@ public class AddStocksController implements Initializable{
 					boatEntry.setTo_Pay(stock.getFishprice());
 					boatEntry.setPaid(0);
 					
+					Boat_Account_UnCleared boatEntryU =new Boat_Account_UnCleared();
+					boatEntry.setDate(date.toString());
+					boatEntry.setBoat_ID(stock.getBoat_ID());
+					boatEntry.setReason("Fish Puchase");
+					boatEntry.setTo_Pay(stock.getFishprice());
+					boatEntry.setPaid(0);
 					
 					
+					serviceH.addEntries(boatEntry);
+					if(serviceH.addEntries_Uncleard(boatEntryU)) {
+						
+						Notifications notifications = Notifications.create();
+						notifications.title("Succesfull");
+						notifications.text("Stock added succesfully");
+						notifications.graphic(null);
+						notifications.hideAfter(Duration.seconds(2));
+						notifications.position(Pos.CENTER);
+						notifications.showConfirm();
+						
+						
+					}
 					
+					}
+										
 				}
 				
 				

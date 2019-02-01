@@ -98,9 +98,9 @@ public class AddBoatController implements Initializable {
 	public void AddBoat(ActionEvent event) throws SQLException, IOException {
 
 		Boat boat=new Boat();
-		boat.setBoatNo(txtBoatName.getText());
+		boat.setBoatNameorNumber(txtBoatName.getText());
 		
-		boat.setMobile_No(txtMobile.getText());
+		boat.setMobile(txtMobile.getText());
 		
 		if(service.addBoat(boat)) {
 			

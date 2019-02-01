@@ -69,13 +69,14 @@ public class FtradeController implements Initializable {
     	ArrayList<Fish_Lot> lots=null;
     	try {
 		 lots =service.getUnslodLots();
+		 for(Fish_Lot lot : lots) {
+				list.add(lot);
+			}
 		 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	for(Fish_Lot lot : lots) {
-			list.add(lot);
-		}
+    	
     	
     	clmDate.setCellValueFactory(new PropertyValueFactory<>("Added_Date"));
     	clmWeight.setCellValueFactory(new PropertyValueFactory<>("Buying_Weight"));

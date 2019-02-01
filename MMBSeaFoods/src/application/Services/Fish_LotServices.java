@@ -66,10 +66,11 @@ public class Fish_LotServices {
 				Fish_Lot lot =new Fish_Lot();
 				lot.setID(Integer.parseInt(resultSet.getString("ID")));
 				lot.setAdded_Date(resultSet.getString("Added_Date"));
-				lot.setBuying_Weight(Integer.parseInt(resultSet.getString("Buying_Weight")));
+				lot.setBuying_Weight(Double.parseDouble(resultSet.getString("Buying_Weight")));
 				lot.setLorry_Number(resultSet.getString("Lorry_Number"));
 				lot.setBuying_price(Double.parseDouble(resultSet.getString("Buying_price")));
 				lot.setDisplay_Name(resultSet.getString("display_Name"));
+				
 				list.add(lot);
 			}
 			return list;
@@ -98,7 +99,7 @@ public class Fish_LotServices {
 			preparedStatement.setString(1, DisplayName);
 
 			resultSet = preparedStatement.executeQuery();
-			while(resultSet.next()) {
+			if(resultSet.next()) {
 				lot.setID(Integer.parseInt(resultSet.getString("ID")));
 				lot.setAdded_Date(resultSet.getString("Added_Date"));
 				lot.setBuying_Weight(Integer.parseInt(resultSet.getString("Buying_Weight")));

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import application.Models.Boat_Account;
+import application.Models.Boat_Account_UnCleared;
 import application.Models.F_Fish_Buyers_Account;
 import application.Models.F_Fish_Buyers_Account_Uncleard;
 import application.Models.User;
@@ -51,7 +52,7 @@ public class Boat_AccountServices {
     }
 	
 	// add entries
-	public boolean addEntries(F_Fish_Buyers_Account entry)throws SQLException {
+	public boolean addEntries(Boat_Account entry)throws SQLException {
 		
 
     	connection=DBConnection.Connector();
@@ -59,7 +60,7 @@ public class Boat_AccountServices {
 		int resultSet;
 		
 		
-		String addEntryQuery="INSERT INTO F_Fish_Buyers_Account(Date,Reason,To_Pay,Paid)"+" VALUES(?,?,?,?)";
+		String addEntryQuery="INSERT INTO Boat_Account(Date,Reason,To_Pay,Paid,Boat_ID)"+" VALUES(?,?,?,?,?)";
 		
 		
 		try {
@@ -69,6 +70,7 @@ public class Boat_AccountServices {
 			preparedStatement.setString(2,entry.getReason());
 			preparedStatement.setDouble(3, entry.getTo_Pay());
 			preparedStatement.setDouble(4, entry.getPaid());
+			preparedStatement.setDouble(5, entry.getBoat_ID());
 			resultSet= preparedStatement.executeUpdate();
 			
 			if (resultSet != 0) {
@@ -91,7 +93,7 @@ public class Boat_AccountServices {
 	
 	//add uncleard entries
 	
-	public boolean addUnclearEntries(F_Fish_Buyers_Account_Uncleard Unentry)throws SQLException {
+	public boolean addEntries_Uncleard(Boat_Account_UnCleared entry)throws SQLException {
 		
 
     	connection=DBConnection.Connector();
@@ -99,16 +101,17 @@ public class Boat_AccountServices {
 		int resultSet;
 		
 		
-		String addEntryQuery="INSERT INTO F_Fish_Buyers_Account(Date,Reason,To_Pay,Paid)"+" VALUES(?,?,?,?)";
+		String addEntryQuery="INSERT INTO Boat_Account_UnCleared(Date,Reason,To_Pay,Paid,Boat_ID)"+" VALUES(?,?,?,?,?)";
 		
 		
 		try {
 			  
 			preparedStatement=connection.prepareStatement(addEntryQuery);
-			preparedStatement.setString(1, Unentry.getDate());
-			preparedStatement.setString(2,Unentry.getReason());
-			preparedStatement.setDouble(3, Unentry.getTo_Pay());
-			preparedStatement.setDouble(4, Unentry.getPaid());
+			preparedStatement.setString(1, entry.getDate());
+			preparedStatement.setString(2,entry.getReason());
+			preparedStatement.setDouble(3, entry.getTo_Pay());
+			preparedStatement.setDouble(4, entry.getPaid());
+			preparedStatement.setDouble(5, entry.getBoat_ID());
 			resultSet= preparedStatement.executeUpdate();
 			
 			if (resultSet != 0) {
