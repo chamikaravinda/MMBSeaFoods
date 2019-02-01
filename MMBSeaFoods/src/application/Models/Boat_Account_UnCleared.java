@@ -6,7 +6,14 @@ public class Boat_Account_UnCleared {
 	private String Date;
 	private String Reason;
 	private double To_Pay;
+	private double Paid;
 	private int Boat_ID ;
+	public double getPaid() {
+		return Paid;
+	}
+	public void setPaid(double paid) {
+		Paid = paid;
+	}
 	public int getID() {
 		return ID;
 	}

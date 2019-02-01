@@ -111,7 +111,7 @@ public class StocksController implements Initializable {
 	}
     
     public void AddStoks(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewLot.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewStock.fxml"));
 		setNode(lots);
 		
 	}
