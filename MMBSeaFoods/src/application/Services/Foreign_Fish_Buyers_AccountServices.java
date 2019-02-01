@@ -17,12 +17,14 @@ public class Foreign_Fish_Buyers_AccountServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO F_Fish_Buyers_Account (BoatNameorNumber, Mobile)" + 
-							"VALUES (?,?)";
+		String insertQuery= "INSERT INTO F_Fish_Buyers_Account (Date, Reason,To_Pay,Paid)" + 
+							"VALUES (?,?,?,?)";
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
-			preparedStatement.setString(1,entry.getBoatNameorNumber());
-			preparedStatement.setString(2, entry.getMobile());
+			preparedStatement.setString(1,entry.getDate());
+			preparedStatement.setString(2, entry.getReason());
+			preparedStatement.setDouble(3, entry.getTo_Pay());
+			preparedStatement.setDouble(4, entry.getPaid());
 		
 			resultSet=preparedStatement.executeUpdate();
 			
@@ -46,14 +48,15 @@ public class Foreign_Fish_Buyers_AccountServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO F_Fish_Buyers_Account_Uncleared(BoatNameorNumber, Mobile)" + 
-							"VALUES (?,?)";
+		String insertQuery=  "INSERT INTO F_Fish_Buyers_Account (Date, Reason,To_Pay,Paid)" + 
+				"VALUES (?,?,?,?)";
 		
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
-			preparedStatement.setString(1,unclearEntry.getBoatNameorNumber());
-			preparedStatement.setString(2, unclearEntry.getMobile());
-		
+			preparedStatement.setString(1,unclearEntry.getDate());
+			preparedStatement.setString(2, unclearEntry.getReason());
+			preparedStatement.setDouble(3, unclearEntry.getTo_Pay());
+			preparedStatement.setDouble(4, unclearEntry.getPaid());
 			resultSet=preparedStatement.executeUpdate();
 			
 			if(resultSet != 0) {
