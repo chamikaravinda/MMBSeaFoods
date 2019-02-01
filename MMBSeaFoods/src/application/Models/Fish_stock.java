@@ -2,18 +2,16 @@ package application.Models;
 
 public class Fish_stock {
 	
-	private int  ID;
-    private String Added_Date;     
-    private String Lorry_Number;   
-    private int Buying_Weight;  
-    private double Ice_fee;
-    private double Lorry_fee;  
-    private double other_fees; 
-    private double brokerFee;  
-    private double buying_price;
-    private int Sold_Weight;
-    private double Sold_price;
-    private int Sold_To;
+    private int ID;
+	private String Added_Date;
+	private int Boat_ID;
+	private String Harbour;
+	private int NoofFishes;
+	private Double total_Weight;
+	private Double fishprice;
+	private Double commition_price;
+	private Double totalBuying_price;
+	private int Lot_ID;
 	public int getID() {
 		return ID;
 	}
@@ -26,67 +24,56 @@ public class Fish_stock {
 	public void setAdded_Date(String added_Date) {
 		Added_Date = added_Date;
 	}
-	public String getLorry_Number() {
-		return Lorry_Number;
+	public int getBoat_ID() {
+		return Boat_ID;
 	}
-	public void setLorry_Number(String lorry_Number) {
-		Lorry_Number = lorry_Number;
+	public void setBoat_ID(int boat_ID) {
+		Boat_ID = boat_ID;
 	}
-	public int getBuying_Weight() {
-		return Buying_Weight;
+	public String getHarbour() {
+		return Harbour;
 	}
-	public void setBuying_Weight(int buying_Weight) {
-		Buying_Weight = buying_Weight;
+	public void setHarbour(String harbour) {
+		Harbour = harbour;
 	}
-	public double getIce_fee() {
-		return Ice_fee;
+	public int getNoofFishes() {
+		return NoofFishes;
 	}
-	public void setIce_fee(double ice_fee) {
-		Ice_fee = ice_fee;
+	public void setNoofFishes(int noofFishes) {
+		NoofFishes = noofFishes;
 	}
-	public double getLorry_fee() {
-		return Lorry_fee;
+	public Double getTotal_Weight() {
+		return total_Weight;
 	}
-	public void setLorry_fee(double lorry_fee) {
-		Lorry_fee = lorry_fee;
+	public void setTotal_Weight(Double total_Weight) {
+		this.total_Weight = total_Weight;
 	}
-	public double getOther_fees() {
-		return other_fees;
+	public Double getFishprice() {
+		return fishprice;
 	}
-	public void setOther_fees(double other_fees) {
-		this.other_fees = other_fees;
+	public void setFishprice(Double fishprice) {
+		this.fishprice = fishprice;
 	}
-	public double getBrokerFee() {
-		return brokerFee;
+	public Double getCommition_price() {
+		return commition_price;
 	}
-	public void setBrokerFee(double brokerFee) {
-		this.brokerFee = brokerFee;
+	public void setCommition_price(Double commition_price) {
+		this.commition_price = commition_price;
 	}
-	public double getBuying_price() {
-		return buying_price;
+	public Double getTotalBuying_price() {
+		return totalBuying_price;
 	}
-	public void setBuying_price(double buying_price) {
-		this.buying_price = buying_price;
+	public void setTotalBuying_price(Double totalBuying_price) {
+		this.totalBuying_price = totalBuying_price;
 	}
-	public int getSold_Weight() {
-		return Sold_Weight;
+	public int getLot_ID() {
+		return Lot_ID;
 	}
-	public void setSold_Weight(int sold_Weight) {
-		Sold_Weight = sold_Weight;
+	public void setLot_ID(int lot_ID) {
+		Lot_ID = lot_ID;
 	}
-	public double getSold_price() {
-		return Sold_price;
-	}
-	public void setSold_price(double sold_price) {
-		Sold_price = sold_price;
-	}
-	public int getSold_To() {
-		return Sold_To;
-	}
-	public void setSold_To(int sold_To) {
-		Sold_To = sold_To;
-	}  
-    
-    
-
+	
+	
+	
+	
 }
