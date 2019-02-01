@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="D:/SLIIT STUDIES/extra/JavaFX/External Libries/fontawesomefx-8.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/SLIIT STUDIES/extra/JavaFX/External Libries/jfoenix.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/SLIIT STUDIES/extra/JavaFX/External Libries/sqlite-jdbc-3.23.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_181"/>
-	<classpathentry kind="lib" path="D:/SLIIT STUDIES/extra/JavaFX/External Libries/controlsfx-8.40.12.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/External Libries/controlsfx-9.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/External Libries/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="C:/External Libries/jfoenix.jar"/>
+	<classpathentry kind="lib" path="C:/External Libries/sqlite-jdbc-3.23.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

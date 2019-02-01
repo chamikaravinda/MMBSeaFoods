@@ -1,6 +1,6 @@
 package application.Models;
 
-public class Fish_stock {
+public class stock_fishes {
 	
 	private int  ID;
     private String Added_Date;     

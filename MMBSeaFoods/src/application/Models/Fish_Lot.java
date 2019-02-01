@@ -5,7 +5,7 @@ public class Fish_Lot {
 	private int  ID;
     private String Added_Date;     
     private String Lorry_Number;   
-    private double Buying_Weight;  
+    private int Buying_Weight;  
     private double Ice_fee;
     private double Lorry_fee;  
     private double other_fees; 
@@ -14,13 +14,6 @@ public class Fish_Lot {
     private int Sold_Weight;
     private double Sold_price;
     private int Sold_To;
-    private String display_Name;
-	public String getDisplay_Name() {
-		return display_Name;
-	}
-	public void setDisplay_Name(String display_Name) {
-		this.display_Name = display_Name;
-	}
 	public int getID() {
 		return ID;
 	}
@@ -39,10 +32,10 @@ public class Fish_Lot {
 	public void setLorry_Number(String lorry_Number) {
 		Lorry_Number = lorry_Number;
 	}
-	public double getBuying_Weight() {
+	public int getBuying_Weight() {
 		return Buying_Weight;
 	}
-	public void setBuying_Weight(double buying_Weight) {
+	public void setBuying_Weight(int buying_Weight) {
 		Buying_Weight = buying_Weight;
 	}
 	public double getIce_fee() {

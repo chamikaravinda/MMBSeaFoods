@@ -62,8 +62,7 @@ public class DBConnection {
 		                        "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT," +
 		                        "  Date     	  DATE      NOT NULL," + 		                         		                        
 		                        "  Reason         TEXT      NOT NULL," +
-		                        "  To_Pay		  DOUBLE   			," +
-		                        "  Paid           DOUBLE            ," +
+		                        "  To_Pay		  DOUBLE    NOT NULL," +
 		                        "  Boat_ID        INTEGER   REFERENCES  Boats (ID))";
 			         
 			         String Foreign_Fish_Buyers = "CREATE TABLE IF NOT EXISTS Foreign_Fish_Buyers" +
@@ -89,7 +88,7 @@ public class DBConnection {
 		                        "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT," +
 		                        "  Added_Date     DATE      NOT NULL," + 		                         		                        
 		                        "  Lorry_Number   TEXT      NOT NULL," +
-		                        "  Buying_Weight  DOUBLE    ,"+
+		                        "  Buying_Weight  INTEGER    ,"+
 		                        "  Ice_fee        DOUBLE     ,"+
 		                        "  Lorry_fee      DOUBLE     ,"+
 		                        "  other_fees     DOUBLE     ,"+
@@ -97,7 +96,6 @@ public class DBConnection {
 		                        "  buying_price   DOUBLE     ,"+
 		                        "  Sold_Weight    INTEGER    ,"+
 		                        "  Sold_price     DOUBLE     ,"+
-		                        "  display_Name   TEXT     ,"+
 		                        "  Sold_To        INTEGER   REFERENCES  Foreign_Fish_Buyers (ID))";
 			         
 			         String Fish_stock = "CREATE TABLE IF NOT EXISTS Fish_stock" +
@@ -105,11 +103,10 @@ public class DBConnection {
 		                        "  Added_Date     DATE      NOT NULL," + 		                         		                        
 		                        "  Boat_ID        INTEGER   REFERENCES  Boats (ID)," +
 		                        "  Harbour        TEXT      NOT NULL,"+
+		                        "  sapparu        INTEGER   NOT NULL,"+
 		                        "  NoofFishes     INTEGER     ,"+
-		                        "  Total_Weight   DOUBLE    ,"+
-		                        "  fishprice      DOUBLE     ,"+
-		                        "  commitionprice DOUBLE     ,"+
-		                        "  totalprice     DOUBLE     ,"+
+		                        "  Total_Weight   INTEGER    ,"+
+		                        "  buying_price   DOUBLE     ,"+
 		                        "  Lot_ID         INTEGER   REFERENCES  Fish_Lot (ID))";
 		                        
 		             String Foreign_Fish_types = "CREATE TABLE IF NOT EXISTS Foreign_Fish_types" +
