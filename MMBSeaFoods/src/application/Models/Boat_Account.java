@@ -14,7 +14,6 @@ public class Boat_Account {
 	public void setPaid(double paid) {
 		Paid = paid;
 	}
-
 	public int getID() {
 		return ID;
 	}
@@ -23,7 +22,7 @@ public class Boat_Account {
 	}
 	public String getDate() {
 		return Date;
-	}
+    
 	public void setDate(String date) {
 		Date = date;
 	}
@@ -39,12 +38,16 @@ public class Boat_Account {
 	public void setTo_Pay(double to_Pay) {
 		To_Pay = to_Pay;
 	}
+	public void setPaid(double paid) {
+		Paid = paid;
+	}
 	public int getBoat_ID() {
 		return Boat_ID;
 	}
 	public void setBoat_ID(int boat_ID) {
 		Boat_ID = boat_ID;
 	}
+	
 	
 	
 }

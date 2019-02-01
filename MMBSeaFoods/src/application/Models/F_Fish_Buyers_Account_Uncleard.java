@@ -1,6 +1,7 @@
 package application.Models;
 
-public class F_Fish_Buyers_Account {
+public class F_Fish_Buyers_Account_Uncleard {
+
 	private int ID;
 	private String Date;
 	private String Reason;
@@ -39,4 +40,5 @@ public class F_Fish_Buyers_Account {
 	
 	
 	
+
 }

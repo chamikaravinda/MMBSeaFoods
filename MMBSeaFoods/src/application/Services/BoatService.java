@@ -24,8 +24,8 @@ public class BoatService {
 		try {
 			
 			preparedStatement = connection.prepareStatement(insertQuery);
-			preparedStatement.setString(1, boat.getBoatNameorNumber());
-			preparedStatement.setString(2, boat.getMobile());
+			preparedStatement.setString(1, boat.getBoatNo());
+			preparedStatement.setString(2, boat.getMobile_No());
 			resultSet=preparedStatement.executeUpdate();
 			if(resultSet!=0)
 				return true;
