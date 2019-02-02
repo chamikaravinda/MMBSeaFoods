@@ -6,17 +6,30 @@
 package application.Controllers;
 
 import com.jfoenix.controls.JFXButton;
+
+import application.Models.Boat;
+import application.Models.Vehicles;
+import application.Services.BoatService;
+import application.Services.VehiclesServices;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
@@ -25,14 +38,46 @@ public class BoatsController implements Initializable {
 
     @FXML
     private AnchorPane ftrade;
-    @FXML
     
+    @FXML
+	private TableView<Boat> tblboats;
+    
+    @FXML
+	private TableColumn<?,?> clmName;
+	
+	@FXML
+	private TableColumn<?,?> clmMobile;
+	
+	@FXML
+	private TableColumn<?,?> clmOwner;
+	
+	 ObservableList<Boat> list = FXCollections.observableArrayList();
+
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-   
-
+     
+	    list.clear();
+		BoatService service = new BoatService();
+		
+		ArrayList<Boat> Blist = null;
+		try {
+			Blist  = service.getBoat();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(Boat sup : Blist) {
+			list.add(sup);
+		}	
+		
+		clmName.setCellValueFactory(new PropertyValueFactory<>("BoatNameorNumber"));
+		clmMobile.setCellValueFactory(new PropertyValueFactory<>("Mobile"));
+		clmOwner.setCellValueFactory(new PropertyValueFactory<>("Owner"));
+		
+		tblboats.setItems(list);
     }
     
 	//Set selected node to a content holder

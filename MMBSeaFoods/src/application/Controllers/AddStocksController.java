@@ -234,8 +234,7 @@ public class AddStocksController implements Initializable{
 				Fish_stock stock = new Fish_stock();
 				Date date=new Date();
 				Boat stockboat=serviceB.getBoat(cmbBoat.getValue());
-				Fish_Lot lot=new Fish_Lot();
-				lot=service.getTheLot(cmbLot.getValue());
+				Fish_Lot lot=service.getTheLot(cmbLot.getValue());
 				
 				stock.setAdded_Date(date.toString());
 				stock.setBoat_ID(stockboat.getID());
@@ -245,7 +244,6 @@ public class AddStocksController implements Initializable{
 				stock.setFishprice(currentTotalPrice);
 				stock.setCommition_price(currentTotalWeigth*20);
 				stock.setTotalBuying_price(stock.getFishprice()+stock.getCommition_price());
-				System.out.println(lot.getID());
 				stock.setLot_ID(lot.getID());
 				
 				long stockID=serviceD.addFish_Stock(stock);
@@ -277,11 +275,11 @@ public class AddStocksController implements Initializable{
 					boatEntry.setPaid(0);
 					
 					Boat_Account_UnCleared boatEntryU =new Boat_Account_UnCleared();
-					boatEntry.setDate(date.toString());
-					boatEntry.setBoat_ID(stock.getBoat_ID());
-					boatEntry.setReason("Fish Puchase");
-					boatEntry.setTo_Pay(stock.getFishprice());
-					boatEntry.setPaid(0);
+					boatEntryU.setDate(date.toString());
+					boatEntryU.setBoat_ID(stock.getBoat_ID());
+					boatEntryU.setReason("Fish Puchase");
+					boatEntryU.setTo_Pay(stock.getFishprice());
+					boatEntryU.setPaid(0);
 					
 					
 					serviceH.addEntries(boatEntry);

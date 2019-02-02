@@ -48,6 +48,7 @@ public class DBConnection {
 			         String Boats = "CREATE TABLE IF NOT EXISTS Boats" +
 		                        "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT," +
 		                        "  BoatNo     	  TEXT      NOT NULL," + 		                         
+		                        "  Owner     	  TEXT      ," + 		                         
 		                        "  Mobile_No      TEXT      NOT NULL)";
 			         
 			         String Boat_Account = "CREATE TABLE IF NOT EXISTS Boat_Account" +
@@ -110,6 +111,7 @@ public class DBConnection {
 		                        "  fishprice      DOUBLE     ,"+
 		                        "  commitionprice DOUBLE     ,"+
 		                        "  totalprice     DOUBLE     ,"+
+		                        "  Status     	  TEXT     ,"+
 		                        "  Lot_ID         INTEGER   REFERENCES  Fish_Lot (ID))";
 		                        
 		             String Foreign_Fish_types = "CREATE TABLE IF NOT EXISTS Foreign_Fish_types" +

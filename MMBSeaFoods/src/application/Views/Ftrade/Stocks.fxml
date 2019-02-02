@@ -20,13 +20,13 @@
             <Separator prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
             <AnchorPane layoutY="172.0" prefHeight="541.0" prefWidth="1219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="172.0">
                <children>
-                  <TableView fx:id="tableLots" layoutX="53.0" layoutY="124.0" prefHeight="361.0" prefWidth="1114.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="124.0">
+                  <TableView fx:id="Fish_Stock" layoutX="53.0" layoutY="124.0" prefHeight="361.0" prefWidth="1114.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="124.0">
                     <columns>
                       <TableColumn fx:id="clmDate" prefWidth="75.0" text="Added Date" />
-                      <TableColumn fx:id="clmWeight" prefWidth="75.0" text="Buying Weight" />
-                        <TableColumn fx:id="clmLorry" prefWidth="75.0" text="Lorry Number" />
-                        <TableColumn fx:id="clmBprice" prefWidth="75.0" text="Total Buying Price" />
-                        <TableColumn fx:id="clmsell" prefWidth="75.0" text="Sell" />
+                      <TableColumn fx:id="clmLorry" prefWidth="75.0" text="Lorry Number" />
+                        <TableColumn fx:id="clmWeight" prefWidth="75.0" text="Buying Weight" />
+                        <TableColumn fx:id="clmBprice" prefWidth="75.0" text="Buying Price" />
+                        <TableColumn fx:id="clmBoat" prefWidth="75.0" text="Boat Name" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

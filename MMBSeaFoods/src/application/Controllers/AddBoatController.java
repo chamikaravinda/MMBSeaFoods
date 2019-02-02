@@ -47,7 +47,8 @@ public class AddBoatController implements Initializable {
 	@FXML
 	private JFXTextField txtMobile;
 	
-
+	@FXML
+	private JFXTextField txtOwner;
 	
 	AnchorPane back;
 	
@@ -61,7 +62,7 @@ public class AddBoatController implements Initializable {
 
 		
 		txtBoatName.getValidators().add(boatName);
-		boatName.setMessage("Please input the Lorry Number");
+		boatName.setMessage("Please input the Boat Name");
 		
 		txtBoatName.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
@@ -98,9 +99,9 @@ public class AddBoatController implements Initializable {
 	public void AddBoat(ActionEvent event) throws SQLException, IOException {
 
 		Boat boat=new Boat();
-		boat.setBoatNameorNumber(txtBoatName.getText());
-		
+		boat.setBoatNameorNumber(txtBoatName.getText());	
 		boat.setMobile(txtMobile.getText());
+		boat.setOwner(txtOwner.getText());
 		
 		if(service.addBoat(boat)) {
 			
