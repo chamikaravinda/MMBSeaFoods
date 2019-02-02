@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.xml.crypto.Data;
+
 import application.Models.Vehicles;
 import application.Services.VehiclesServices;
 import javafx.animation.FadeTransition;
@@ -62,19 +64,27 @@ public class VehiclesController implements Initializable{
 			try {
 				Vlist = service.getVehicles();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			
 			for(Vehicles sup : Vlist) {
+				sup.setSTotal_Lease(String.format ("%2.0f", sup.getTotal_Lease()));
+				sup.setSPaid_Amount(String.format ("%2.0f", sup.getPaid_Amount()));
+				sup.setSTo_Pay(String.format ("%2.0f", sup.getTo_Pay()));
+				sup.setSPremium_Amount(String.format("%2.0f", sup.getPremium_Amount()));
+				sup.setLast_Payment(sup.getLast_Payment());
+			
+				
+				
 				list.add(sup);
 			}
 			
 			clmVno.setCellValueFactory(new PropertyValueFactory<>("Vehicle_No"));
-			clmTotalLease.setCellValueFactory(new PropertyValueFactory<>("Total_Lease"));
-			clmPaidAmt.setCellValueFactory(new PropertyValueFactory<>("Paid_Amount"));
-			clmRemainAmt.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
-			clmPremiumAmt.setCellValueFactory(new PropertyValueFactory<>("Premium_Amount"));
+			clmTotalLease.setCellValueFactory(new PropertyValueFactory<>("STotal_Lease"));
+			clmPaidAmt.setCellValueFactory(new PropertyValueFactory<>("SPaid_Amount"));
+			clmRemainAmt.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
+			clmPremiumAmt.setCellValueFactory(new PropertyValueFactory<>("SPremium_Amount"));
 			clmLastPayment.setCellValueFactory(new PropertyValueFactory<>("Last_Payment"));
 			
 			vehicles.setItems(list);
