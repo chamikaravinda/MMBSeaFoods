@@ -184,7 +184,7 @@ public class AddFishTypeController implements Initializable {
 		
 	
 	public void back(ActionEvent event) throws IOException {
-		back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+		back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/FishTypes.fxml"));
 		setNode(back);
 		
 	}

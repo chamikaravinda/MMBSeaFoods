@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.controlsfx.control.Notifications;
+
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +28,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -103,6 +107,36 @@ public class FtradeController implements Initializable {
         ft.setCycleCount(1);
         ft.setAutoReverse(false);
         ft.play();
+    }
+    
+    public void SellALot() throws IOException {
+    	
+    	Fish_Lot lot = tableLots.getSelectionModel().getSelectedItem();
+    	if(lot != null) {
+	    	if(lot.getBuying_Weight() != 0 ) {
+	    		
+	    		lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Vehicles.fxml"));
+				setNode(lots);
+	    		
+	    	}else {
+	    		Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("No stocks in Lot to sell");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+	    	}
+    	
+    	}else {
+    		Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select a Lot to sell");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+    	}
     }
 
     public void switchStock(ActionEvent event) throws IOException {

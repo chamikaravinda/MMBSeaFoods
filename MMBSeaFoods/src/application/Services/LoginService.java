@@ -17,10 +17,11 @@ Connection connection;
 		connection=DBConnection.LoginConnector();
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
-		String query= "select * from Users where USERNAME= ? and PASSWORD = ?"; 
+		String query= "SELECT * FROM Users where USERNAME = ? and PASSWORD = ?"; 
 		try { 
 			
 			preparedStatement =connection.prepareStatement(query);
+			
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
 			
@@ -36,8 +37,8 @@ Connection connection;
 		}catch(Exception e) {
 			return null;
 		}finally {
-			preparedStatement.close();
 			resultSet.close();
+			preparedStatement.close();
 			connection.close();
 		}
 		

@@ -130,70 +130,71 @@ public class DBConnection {
 
 				String Third_Party_Account = "CREATE TABLE IF NOT EXISTS Third_Party_Account"
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT,"
-						+ "  Date     	  DATE      NOT NULL,"
+						+ "  Date     	   DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," 
-						+ "  To_Pay		  DOUBLE            ,"
+						+ "  To_Pay		   DOUBLE            ,"
 						+ "  Paid          DOUBLE            )";
 
 				String Third_Party_Acc_Uncleared = "CREATE TABLE IF NOT EXISTS Third_Party_Acc_Uncleared"
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," 
-						+ "  Date     	  DATE      NOT NULL,"
+						+ "  Date     	   DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," 
-						+ "  To_Pay		  DOUBLE            ,"
+						+ "  To_Pay		   DOUBLE            ,"
 						+ "  Paid          DOUBLE            )";
 
 				String ProfiteAndLose = "CREATE TABLE IF NOT EXISTS ProfiteAndLose "
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT,"
-						+ "  Date     	  DATE      NOT NULL,"
+						+ "  Date     	   DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," 
-						+ "  To_Pay		  DOUBLE            ,"
+						+ "  To_Pay		   DOUBLE            ,"
 						+ "  Paid          DOUBLE            )";
 
 				// Local Trades added
 
 				String Local_Fish_Buyers = "CREATE TABLE IF NOT EXISTS Local_Fish_Buyers"
-						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT,"
+						+ "( ID            INTEGER 	 PRIMARY KEY AUTOINCREMENT,"
 						+ "  Name          TEXT      NOT NULL,"
-						+ "  Mobile_No	  TEXT            )";
+						+ "  Mobile_No	   TEXT            )";
+				
 				String Local_Fish_types = "CREATE TABLE IF NOT EXISTS Local_Fish_types"
-						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
+						+ "( ID             INTEGER   PRIMARY KEY AUTOINCREMENT,"
 						+ "  Name           TEXT      NOT NULL,"
 						+ "  price          DOUBLE    NOT NULL )";
 
 				String Local_Boats = "CREATE TABLE IF NOT EXISTS Local_Boats"
-						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
+						+ "( ID             INTEGER   PRIMARY KEY AUTOINCREMENT,"
 						+ "  BoatNo     	TEXT      NOT NULL,"
-						+ "  Owner     	  TEXT      ,"
+						+ "  Owner     	  	TEXT      ,"
 						+ "  Mobile_No      TEXT      NOT NULL)";
 
 				String Local_Fish_stock = "CREATE TABLE IF NOT EXISTS Local_Fish_stock"
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
-						+ "  Fish_Type      INTEGER   REFERENCES  Local_Fish_types(ID)     ,"
+						+ "  Fish_Type      INTEGER     REFERENCES  Local_Fish_types(ID),"
 						+ "  Total_Weight   DOUBLE       )";
 
 				String Local_Purchases = "CREATE TABLE IF NOT EXISTS Local_Purchases"
-						+ "(ID          INTEGER PRIMARY KEY AUTOINCREMENT," 
-						+ " Date     	DATE      NOT NULL,"
-						+ " Boat_ID     INTEGER   REFERENCES  Boats (ID),"
-						+ " Fish_Type   INTEGER   REFERENCES  Local_Fish_types(ID) ," 
-						+ " Weight      DOUBLE  ," 
-						+ " Price       DOUBLE )";
+						+ "( ID          INTEGER   PRIMARY KEY AUTOINCREMENT," 
+						+ "  Date     	 DATE      NOT NULL,"
+						+ "  Boat_ID     INTEGER   REFERENCES  Local_Boats (ID),"
+						+ "  Fish_Type   INTEGER   REFERENCES  Local_Fish_types(ID) ," 
+						+ "  Weight      DOUBLE  ," 
+						+ "  Price       DOUBLE )";
 				
 				String Local_Boat_Account = "CREATE TABLE IF NOT EXISTS Local_Boat_Account"
 						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT,"
 						+ "  Date     	  DATE      NOT NULL," 
-						+ "  Reason         TEXT      NOT NULL,"
+						+ "  Reason       TEXT      NOT NULL,"
 						+ "  To_Pay		  DOUBLE            ," 
-						+ "  Paid           DOUBLE            ,"
-						+ "  Boat_ID      INTEGER   REFERENCES  Boats (ID) )";
+						+ "  Paid         DOUBLE            ,"
+						+ "  Boat_ID      INTEGER   REFERENCES  Local_Boats (ID))";
 				
 				String Local_Boat_Account_UnCleared = "CREATE TABLE IF NOT EXISTS Local_Boat_Account_UnCleared"
 						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT,"
 						+ "  Date     	  DATE      NOT NULL," 
-						+ "  Reason         TEXT      NOT NULL,"
+						+ "  Reason       TEXT      NOT NULL,"
 						+ "  To_Pay		  DOUBLE   			," 
-						+ "  Paid           DOUBLE            ,"
-						+ "  Boat_ID      INTEGER   REFERENCES  Boats (ID))";
+						+ "  Paid         DOUBLE            ,"
+						+ "  Boat_ID      INTEGER   REFERENCES  Local_Boats (ID))";
 
 				
 						stmt.executeUpdate(UserTB);
@@ -216,9 +217,9 @@ public class DBConnection {
 						stmt.executeUpdate(Local_Fish_types);
 						stmt.executeUpdate(Local_Boats);
 						stmt.executeUpdate(Local_Fish_stock);
-						stmt.executeQuery(Local_Purchases);
-						stmt.executeQuery(Local_Boat_Account);
-						stmt.executeQuery(Local_Boat_Account_UnCleared);
+						stmt.executeUpdate(Local_Purchases);
+						stmt.executeUpdate(Local_Boat_Account);
+						stmt.executeUpdate(Local_Boat_Account_UnCleared);
 						
 						stmt.close();
 

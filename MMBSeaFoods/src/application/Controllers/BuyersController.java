@@ -6,17 +6,29 @@
 package application.Controllers;
 
 import com.jfoenix.controls.JFXButton;
+
+import application.Models.Boat;
+import application.Models.Buyers;
+import application.Services.BuyerService;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
@@ -25,14 +37,42 @@ public class BuyersController implements Initializable {
 
     @FXML
     private AnchorPane Buyers;
-    @FXML
     
+    @FXML
+	private TableView<Buyers> tblBuyers;
+    
+    @FXML
+	private TableColumn<?,?> clmName;
+	
+	@FXML
+	private TableColumn<?,?> clmMobile;
+	
+	ObservableList<Buyers> list = FXCollections.observableArrayList();
+
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
    
-
+    	list.clear();
+    	BuyerService service =new BuyerService();
+    	ArrayList<Buyers> Blist = null;
+    	
+    	try {
+			Blist=service.getBoat();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    
+    	for (Buyers  buyer :Blist) {
+    		list.add(buyer);
+    	}
+    	
+    	clmName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+    	clmMobile.setCellValueFactory(new PropertyValueFactory<>("Mobile_No"));
+    	
+    	tblBuyers.setItems(list);
     }
     
 	//Set selected node to a content holder
