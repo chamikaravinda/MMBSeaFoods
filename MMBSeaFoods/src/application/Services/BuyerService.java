@@ -2,7 +2,9 @@ package application.Services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import application.Models.Boat;
 import application.Models.Buyers;
@@ -38,4 +40,40 @@ public class BuyerService {
 		}
 		
 	}
+	
+	
+	public ArrayList<Buyers> getBoat() throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		String query= "select * from Foreign_Fish_Buyers";
+		ArrayList<Buyers> list =new ArrayList<>();
+		
+		try {
+			preparedStatement =connection.prepareStatement(query);
+
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				Buyers buyers=new Buyers();
+				buyers.setID(Integer.parseInt(resultSet.getString("ID")));
+				buyers.setMobile_No(resultSet.getString("Mobile_No"));
+				buyers.setName(resultSet.getString("Name"));
+				list.add(buyers);
+				
+			}
+			return list;
+			
+		}catch(Exception e) {
+			return null;
+		}finally {
+			preparedStatement.close();
+			resultSet.close();
+			connection.close();
+		}
+		
+		
+	}
+	
 }
