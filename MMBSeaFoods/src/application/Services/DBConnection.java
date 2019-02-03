@@ -151,13 +151,13 @@ public class DBConnection {
 						+ "  Paid         DOUBLE            ," + "  Boat_ID      INTEGER   REFERENCES  Boats (ID))";
 				
 				
-				String Local_Sales ="CREATE TABLE IF NOT EXISTS Local_Sales "
-						+"(ID INTEGER PRIMRY KEY AUTOINCREMENT,"
-						+"DATE DATE NOT NULL,"
-						+"BuyerID INTEGER REFERENCES Local_Fish_Buyers(ID)"
-						+"FishType TEXT REFERENCES Local_Fish_types(Name)"
-						+"Price DOUBLE ,"
-						+"Total_Weight DOUBLE )";
+				String Local_Sales =   "CREATE TABLE IF NOT EXISTS Local_Sales"
+						+"( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT,"
+						+" Date 		 DATE		 NOT NULL,"
+						+" BuyerID 		 INTEGER REFERENCES Local_Fish_Buyers(ID),"
+						+" Fish_type 	 INTEGER REFERENCES Local_Fish_types(ID),"
+						+" Price          DOUBLE ,"
+						+" Total_Weight   DOUBLE )"; 
 
 				stmt.executeUpdate(UserTB);
 				stmt.executeUpdate(Vehicles);
@@ -182,7 +182,7 @@ public class DBConnection {
 				stmt.executeUpdate(Local_Purchases);
 				stmt.executeUpdate(Local_Boat_Account);
 				stmt.executeUpdate(Local_Boat_Account_UnCleared);
-				stmt.executeUpdate(Local_Sales);
+			    stmt.executeUpdate(Local_Sales);
 
 
 				stmt.close();
