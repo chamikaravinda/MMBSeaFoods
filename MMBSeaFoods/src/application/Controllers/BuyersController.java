@@ -59,7 +59,7 @@ public class BuyersController implements Initializable {
     	ArrayList<Buyers> Blist = null;
     	
     	try {
-			Blist=service.getBoat();
+			Blist=service.getBuyers();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

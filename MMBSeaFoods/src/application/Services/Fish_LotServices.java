@@ -166,6 +166,35 @@ public class Fish_LotServices {
 		}		
 	}
 	
-	
+
+	public boolean SellFishLot(Fish_Lot lot ) throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String Updatequery = "UPDATE Fish_Lot set Sold_Weight=?,Sold_price=?,Sold_To=?"
+						+ " where ID= '"+lot.getID()+"' ";
+
+		try {
+
+				preparedStatement = connection.prepareStatement(Updatequery);
+				preparedStatement.setDouble(1, lot.getSold_Weight());
+				preparedStatement.setDouble(2,lot.getSold_price());
+				preparedStatement.setDouble(3,lot.getSold_To());
+				resultSet=preparedStatement.executeUpdate();
+				
+				if(resultSet != 0) {
+					return true;
+				}
+				else 
+					return false;
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}		
+	}
 
 }
