@@ -8,6 +8,7 @@ package application.Controllers;
 import com.jfoenix.controls.JFXButton;
 
 import application.Models.Boat;
+import application.Models.Buyers;
 import application.Models.Vehicles;
 import application.Services.BoatService;
 import application.Services.VehiclesServices;

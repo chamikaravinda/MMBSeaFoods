@@ -20,12 +20,12 @@
             <Separator prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
             <AnchorPane layoutY="172.0" prefHeight="541.0" prefWidth="1219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="172.0">
                <children>
-                  <TableView layoutX="53.0" layoutY="124.0" prefHeight="361.0" prefWidth="1114.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="124.0">
+                  <TableView fx:id="tblFishType" layoutX="53.0" layoutY="124.0" prefHeight="361.0" prefWidth="1114.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="124.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Name" />
-                      <TableColumn prefWidth="75.0" text="1kg Price Below 15kg" />
-                        <TableColumn prefWidth="75.0" text="1kg Price Between 15kg - 20kg" />
-                        <TableColumn prefWidth="75.0" text="1kg Price Above 20kg" />
+                      <TableColumn fx:id="clmName" prefWidth="75.0" text="Name" />
+                      <TableColumn fx:id="clmB15" prefWidth="75.0" text="1kg Price Below 15kg" />
+                        <TableColumn fx:id="clm15B20" prefWidth="75.0" text="1kg Price Between 15kg - 20kg" />
+                        <TableColumn fx:id="clmA20" prefWidth="75.0" text="1kg Price Above 20kg" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
