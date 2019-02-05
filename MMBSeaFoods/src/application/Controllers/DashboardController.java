@@ -40,7 +40,7 @@ public class DashboardController implements Initializable {
     private JFXButton btnLogout;
     
     
-    AnchorPane Home,Ftrade,Ltrade,Vehicles,Settings;
+    AnchorPane Home,Ftrade,Ltrade,Vehicles,Settings,Accounts;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -51,6 +51,7 @@ public class DashboardController implements Initializable {
              Ltrade = FXMLLoader.load(getClass().getResource("../Views/Pricing.fxml"));
              Vehicles = FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
              Settings = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
+             Accounts = FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
             setNode(Home);
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,6 +100,11 @@ public class DashboardController implements Initializable {
     @FXML
     private void switchSettings(ActionEvent event) {
         setNode(Settings);
+    }
+    
+    @FXML
+    private void switchAccounts(ActionEvent event) {
+        setNode(Accounts);
     }
     
     @FXML

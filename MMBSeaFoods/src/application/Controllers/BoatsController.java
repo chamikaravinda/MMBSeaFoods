@@ -51,7 +51,7 @@ public class BoatsController implements Initializable {
 	@FXML
 	private TableColumn<?,?> clmOwner;
 	
-	 ObservableList<Boat> list = FXCollections.observableArrayList();
+	ObservableList<Boat> list = FXCollections.observableArrayList();
 
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
