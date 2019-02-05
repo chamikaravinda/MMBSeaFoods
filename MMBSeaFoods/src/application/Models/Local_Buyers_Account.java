@@ -1,6 +1,7 @@
 package application.Models;
 
-public class F_Fish_Buyers_Account {
+public class Local_Buyers_Account {
+	
 
 	private int ID;
 	private String Date;
@@ -50,5 +51,5 @@ public class F_Fish_Buyers_Account {
 	
 	
 	
-	
+
 }

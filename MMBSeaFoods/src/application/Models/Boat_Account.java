@@ -8,6 +8,8 @@ public class Boat_Account {
 	private double To_Pay;
 	private double Paid;
 	private int Boat_ID ;
+	
+	
 	public double getPaid() {
 		return Paid;
 	}
