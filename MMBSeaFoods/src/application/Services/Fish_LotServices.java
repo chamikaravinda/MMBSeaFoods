@@ -184,11 +184,13 @@ public class Fish_LotServices {
 				resultSet=preparedStatement.executeUpdate();
 				
 				if(resultSet != 0) {
+					System.out.println("1st method ok");
 					return true;
 				}
 				else 
 					return false;
 			
+				
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return false;

@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="btnSell" alignment="CENTER" maxWidth="175.0" minHeight="45.0" minWidth="140.0" prefHeight="45.0" prefWidth="175.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sell" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <JFXButton alignment="CENTER" maxWidth="175.0" minHeight="45.0" minWidth="140.0" onAction="#SellLot" prefHeight="45.0" prefWidth="175.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sell" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -43,7 +43,7 @@
                   <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15.0" />
                </graphic>
             </JFXButton>
-            <AnchorPane layoutX="361.0" layoutY="9.0" prefHeight="569.0" prefWidth="477.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="361.0" AnchorPane.rightAnchor="361.0" AnchorPane.topAnchor="9.0">
+            <AnchorPane layoutX="361.0" layoutY="9.0" prefHeight="554.0" prefWidth="485.0" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="361.0" AnchorPane.rightAnchor="361.0" AnchorPane.topAnchor="9.0">
                <children>
                   <JFXComboBox fx:id="cmbBuyer" layoutX="54.0" layoutY="280.0" prefHeight="45.0" prefWidth="406.0" promptText="Buyer" styleClass="font" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="280.0" />
                   <JFXTextField fx:id="txtWeight" labelFloat="true" layoutX="54.0" layoutY="360.0" prefHeight="45.0" prefWidth="438.0" promptText="Weight" unFocusColor="#0d00ff" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="360.0">
