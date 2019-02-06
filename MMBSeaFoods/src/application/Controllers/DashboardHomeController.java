@@ -3,6 +3,8 @@ package application.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -62,6 +64,8 @@ public class DashboardHomeController implements Initializable {
     
     DashboardHomeService service = new DashboardHomeService();
     ObservableList<Foreign_Fish_types> list = FXCollections.observableArrayList();
+	NumberFormat formatter = new DecimalFormat("#0.00"); 
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
 		try {
