@@ -48,7 +48,7 @@ public class DashboardController implements Initializable {
         try {
              Home = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));            
              Ftrade = FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
-             Ltrade = FXMLLoader.load(getClass().getResource("../Views/Pricing.fxml"));
+             Ltrade = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
              Vehicles = FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
              Settings = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
             setNode(Home);
@@ -103,10 +103,15 @@ public class DashboardController implements Initializable {
     
     @FXML
     private void LogOut(ActionEvent event) {
-       //
+       
     }
-    
-    
+    @FXML
+    private JFXButton btnVehicles1;
+
+   
+
+
+   
 
     
 
