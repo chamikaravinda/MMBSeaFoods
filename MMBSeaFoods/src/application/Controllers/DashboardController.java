@@ -50,7 +50,7 @@ public class DashboardController implements Initializable {
              Ftrade = FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
              Ltrade = FXMLLoader.load(getClass().getResource("../Views/Pricing.fxml"));
              Vehicles = FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
-             Settings = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
+             Settings = FXMLLoader.load(getClass().getResource("../Views/Settings/settings.fxml"));
              Accounts = FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
             setNode(Home);
         } catch (IOException ex) {

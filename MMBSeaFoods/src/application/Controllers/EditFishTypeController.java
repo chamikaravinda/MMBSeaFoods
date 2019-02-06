@@ -3,6 +3,8 @@ package application.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.Notifications;
@@ -59,7 +61,8 @@ public class EditFishTypeController  implements Initializable{
     
     Foreign_Fish_types type =null;
     Foreign_Fish_typesServices service = new Foreign_Fish_typesServices();
-    
+	NumberFormat formatter = new DecimalFormat("#0.00"); 
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -68,9 +71,9 @@ public class EditFishTypeController  implements Initializable{
 			try {
 				type = service.getfishTypes(Integer.parseInt(lblID.getText()));
 				txtName.setText(type.getName());
-				txtU15.setText(Double.toString(type.getPrice_15B()));
-				txt15B20.setText(Double.toString(type.getPrice20_15()));
-				txtA20.setText(Double.toString(type.getPrice_20P()));
+				txtU15.setText(formatter.format(type.getPrice_15B()));
+				txt15B20.setText(formatter.format(type.getPrice20_15()));
+				txtA20.setText(formatter.format(type.getPrice_20P()));
 				
 
 			} catch (NumberFormatException e) {
@@ -164,7 +167,7 @@ public class EditFishTypeController  implements Initializable{
 		if(service.UpdateForeign_Fish_Type(type)) {
 			Notifications notifications = Notifications.create();
 			notifications.title("Succesfull");
-			notifications.text("Fish Type added succesfully");
+			notifications.text("Fish Type updated succesfully");
 			notifications.graphic(null);
 			notifications.hideAfter(Duration.seconds(2));
 			notifications.position(Pos.CENTER);
@@ -173,7 +176,7 @@ public class EditFishTypeController  implements Initializable{
 		}else {
 			Notifications notifications = Notifications.create();
 			notifications.title("Error");
-			notifications.text("Fish Type unsuccesfull");
+			notifications.text("Fish Type update unsuccesfull");
 			notifications.graphic(null);
 			notifications.hideAfter(Duration.seconds(2));
 			notifications.position(Pos.CENTER);
