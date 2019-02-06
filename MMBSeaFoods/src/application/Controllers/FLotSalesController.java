@@ -173,11 +173,8 @@ public class FLotSalesController implements Initializable{
 				buyerAccount.setTo_Pay(lot.getSold_price());
 				buyerAccount.setPaid(0);
 				buyerAccount.setReason("Selling Lot purchased form lorry "+lot.getLorry_Number()+" on "+lot.getAdded_Date());
+				buyerAccount.setBuyer_ID(buyers.getID());
 					if(serviceE.addEntry(buyerAccount))	{	
-						buyerAccountU.setDate(date.toString());
-						buyerAccountU.setTo_Pay(lot.getSold_price());
-						buyerAccountU.setPaid(0);
-						buyerAccountU.setReason("Selling Lot purchased form lorry "+lot.getLorry_Number()+" on "+lot.getAdded_Date());
 							if(serviceE.addEntryUncleared(buyerAccount)){
 							
 								Notifications notifications = Notifications.create();
@@ -187,6 +184,7 @@ public class FLotSalesController implements Initializable{
 								notifications.hideAfter(Duration.seconds(2));
 								notifications.position(Pos.CENTER);
 								notifications.showConfirm();
+								
 						}
 					}
 
