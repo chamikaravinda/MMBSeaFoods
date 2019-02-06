@@ -226,7 +226,7 @@ public class FLotSalesController implements Initializable{
 		
 	
 	public void back(ActionEvent event) throws IOException {
-		sell=FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
+		sell=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
 		setNode(sell);
 		
 	}

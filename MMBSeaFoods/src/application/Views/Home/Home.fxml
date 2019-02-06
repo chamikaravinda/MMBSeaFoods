@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.DashboardHomeController">
+<AnchorPane id="AnchorPane" fx:id="home" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.DashboardHomeController">
      <children>
       <Label layoutX="19.0" layoutY="17.0" prefHeight="29.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Dashboard" />
       <Separator layoutX="3.0" layoutY="55.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
@@ -34,51 +34,51 @@
          <children>
             <Pane maxWidth="300.0" prefHeight="115.0" prefWidth="300.0" style="-fx-background-color: #00C0EF; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
                <children>
-                  <VBox layoutY="12.0" prefHeight="66.0" prefWidth="155.0">
+                  <VBox layoutY="12.0" prefHeight="66.0" prefWidth="207.0">
                      <children>
-                        <Label fx:id="orders" prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" />
+                        <Label fx:id="lblLots" prefHeight="42.0" prefWidth="205.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" />
                         <Label prefHeight="25.0" prefWidth="145.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="New Lots" />
                      </children>
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </VBox>
-                  <FontAwesomeIconView fill="#eeecec" glyphName="SHOPPING_BASKET" layoutX="174.0" layoutY="88.0" size="70" />
+                  <FontAwesomeIconView fill="#eeecec" glyphName="SHOPPING_BASKET" layoutX="206.0" layoutY="102.0" size="70" />
                </children>
             </Pane>
             <Pane maxWidth="300.0" prefHeight="128.0" prefWidth="300.0" style="-fx-background-color: #00A65A; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" GridPane.columnIndex="1">
                <children>
-                  <VBox layoutY="12.0" prefHeight="66.0" prefWidth="179.0">
+                  <VBox layoutY="12.0" prefHeight="66.0" prefWidth="291.0">
                      <children>
-                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
+                        <Label fx:id="lblcommition" prefHeight="42.0" prefWidth="280.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" />
                         <Label prefHeight="25.0" prefWidth="154.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="Commitions To Pay" />
                      </children>
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </VBox>
-                  <FontAwesomeIconView fill="#eeecec" glyphName="CHILD" layoutX="198.0" layoutY="88.0" size="70" />
+                  <FontAwesomeIconView fill="#eeecec" glyphName="CHILD" layoutX="247.0" layoutY="114.0" size="70" />
                </children>
             </Pane>
             <Pane maxWidth="300.0" prefHeight="128.0" prefWidth="300.0" style="-fx-background-color: #F39C12; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" GridPane.columnIndex="2">
                <children>
-                  <VBox layoutY="12.0" prefHeight="101.0" prefWidth="217.0">
+                  <VBox layoutY="12.0" prefHeight="101.0" prefWidth="299.0">
                      <children>
-                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
+                        <Label fx:id="lblboatpay" prefHeight="43.0" prefWidth="283.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" />
                         <Label prefHeight="29.0" prefWidth="196.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text=" Payments for Boats " />
                      </children>
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </VBox>
-                  <FontAwesomeIconView fill="#eeecec" glyphName="SHIP" layoutX="177.0" layoutY="87.0" size="70" />
+                  <FontAwesomeIconView fill="#eeecec" glyphName="SHIP" layoutX="216.0" layoutY="114.0" size="60" wrappingWidth="80.0" />
                </children>
             </Pane>
             <Pane maxWidth="300.0" prefHeight="128.0" prefWidth="300.0" style="-fx-background-color: #DD4B39; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" GridPane.columnIndex="3">
                <children>
-                  <VBox layoutY="12.0" prefHeight="101.0" prefWidth="217.0">
+                  <VBox layoutY="12.0" prefHeight="101.0" prefWidth="291.0">
                      <children>
-                        <Label prefHeight="43.0" prefWidth="64.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="150" />
+                        <Label fx:id="lblbuyerpay" prefHeight="43.0" prefWidth="281.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" />
                         <Label prefHeight="25.0" prefWidth="170.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="To recive" />
                         <Label layoutX="20.0" layoutY="53.0" prefHeight="25.0" prefWidth="203.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="From Foriegn Fish Buyers" />
                      </children>
@@ -86,7 +86,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </VBox>
-                  <FontAwesomeIconView fill="#eeecec" glyphName="TRUCK" layoutX="205.0" layoutY="88.0" size="70" />
+                  <FontAwesomeIconView fill="#eeecec" glyphName="TRUCK" layoutX="222.0" layoutY="116.0" size="60" text="" />
                </children>
             </Pane>
          </children>
@@ -119,7 +119,7 @@
           </Tab>
         </tabs>
       </TabPane>
-      <JFXButton alignment="CENTER" layoutX="1028.0" layoutY="646.0" maxWidth="253.0" onAction="#editType" prefHeight="39.0" prefWidth="171.0" text="Edit Fish Prices" textAlignment="RIGHT" textFill="#3b2f63">
+      <JFXButton alignment="CENTER" layoutX="1028.0" layoutY="660.0" maxWidth="253.0" onAction="#editType" prefHeight="39.0" prefWidth="171.0" text="Edit Fish Prices" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font size="18.0" />
          </font>
