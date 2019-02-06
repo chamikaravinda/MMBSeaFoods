@@ -15,6 +15,7 @@ public class F_Fish_Buyers_Account_Uncleard {
 	public void setBuyer_ID(int buyer_ID) {
 		Buyer_ID = buyer_ID;
 	}
+
 	public int getID() {
 		return ID;
 	}
@@ -44,6 +45,12 @@ public class F_Fish_Buyers_Account_Uncleard {
 	}
 	public void setPaid(double paid) {
 		Paid = paid;
+	}
+	public int getBuyer_ID() {
+		return Buyer_ID;
+	}
+	public void setBuyer_ID(int buyer_ID) {
+		Buyer_ID = buyer_ID;
 	}
 	
 	
