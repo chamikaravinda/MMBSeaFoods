@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <JFXButton alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" onAction="#addLFishType" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -47,7 +47,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXTextField focusColor="#ff0101" labelFloat="true" prefHeight="45.0" prefWidth="508.0" promptText="Fish Type" unFocusColor="#0d00ff" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <JFXTextField fx:id="txtFishtype" focusColor="#ff0101" labelFloat="true" prefHeight="45.0" prefWidth="508.0" promptText="Fish Type" unFocusColor="#0d00ff" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -55,7 +55,7 @@
                         <Insets left="200.0" right="200.0" />
                      </padding>
                   </JFXTextField>
-                  <JFXTextField focusColor="#ff0101" labelFloat="true" layoutX="550.0" layoutY="51.0" prefHeight="45.0" prefWidth="303.0" promptText="Unit Price" unFocusColor="#0d00ff" GridPane.rowIndex="1">
+                  <JFXTextField fx:id="txtUnitPrice" focusColor="#ff0101" labelFloat="true" layoutX="550.0" layoutY="51.0" prefHeight="45.0" prefWidth="303.0" promptText="Unit Price" unFocusColor="#0d00ff" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>

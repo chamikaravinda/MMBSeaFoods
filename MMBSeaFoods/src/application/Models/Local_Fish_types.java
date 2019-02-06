@@ -5,6 +5,8 @@ public class Local_Fish_types {
 	private int ID;
 	private String Name;
 	private double Price;
+	
+	
 	public int getID() {
 		return ID;
 	}

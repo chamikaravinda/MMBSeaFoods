@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <JFXButton fx:id="btnAdd" alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" onAction="#AddBoat" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -48,7 +48,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXTextField focusColor="#da0000" labelFloat="true" maxWidth="1033.0" minWidth="759.0" prefHeight="45.0" prefWidth="1033.0" promptText="Boat Name Or Number" unFocusColor="#052aff">
+                  <JFXTextField fx:id="txtBoatName" focusColor="#da0000" labelFloat="true" maxWidth="1033.0" minWidth="759.0" prefHeight="45.0" prefWidth="1033.0" promptText="Boat Name Or Number" unFocusColor="#052aff">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -62,7 +62,7 @@
                         <Insets left="50.0" right="50.0" />
                      </padding>
                   </JFXTextField>
-                  <JFXTextField focusColor="#ad262b" labelFloat="true" promptText="Owner Name" unFocusColor="#052aff" GridPane.rowIndex="1">
+                  <JFXTextField fx:id="txtOwner" focusColor="#ad262b" labelFloat="true" promptText="Owner Name" unFocusColor="#052aff" GridPane.rowIndex="1">
                      <opaqueInsets>
                         <Insets left="200.0" right="200.0" />
                      </opaqueInsets>
@@ -73,7 +73,7 @@
                         <Insets left="240.0" right="200.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXTextField focusColor="#ad262b" labelFloat="true" promptText="Mobile Number" unFocusColor="#052aff" GridPane.rowIndex="2">
+                  <JFXTextField fx:id="txtMobile" focusColor="#ad262b" labelFloat="true" promptText="Mobile Number" unFocusColor="#052aff" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="240.0" right="200.0" />
                      </GridPane.margin>

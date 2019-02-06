@@ -1,22 +1,70 @@
 package application.Controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
+import application.Models.Buyers;
+import application.Models.LocalBuyers;
+import application.Services.LocalBuyerService;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class LocalBuyerController {
+public class LocalBuyerController implements Initializable {
 
     @FXML
     private AnchorPane Buyers;
+    
+    @FXML
+    private TableView<LocalBuyers> tblBuyers;
 
-   
-    AnchorPane add;
+    @FXML
+    private TableColumn<?, ?> clmName;
+
+    @FXML
+    private TableColumn<?, ?> clmMobile;
+
+
+    ObservableList<LocalBuyers> list = FXCollections.observableArrayList();
+    AnchorPane add,lots,stoks,boats,buyers,fishtypes,newLots;
+    
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+    	list.clear();
+    	LocalBuyerService service= new LocalBuyerService();
+    	ArrayList<LocalBuyers> LByrList=null;
+    	
+    	try {
+    		LByrList=service.getLocalBuyer();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    
+    	for (LocalBuyers  Lbuyer : LByrList) {
+    		list.add(Lbuyer);
+    	}
+    	
+    	clmName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+    	clmMobile.setCellValueFactory(new PropertyValueFactory<>("Mobile_No"));
+    	
+    	tblBuyers.setItems(list);
+		
+	}
     
     void setNode(Node node) {
     	Buyers.getChildren().clear();
@@ -62,6 +110,9 @@ public class LocalBuyerController {
     	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
         setNode(add);
     }
+
+
+	
 
     
     
