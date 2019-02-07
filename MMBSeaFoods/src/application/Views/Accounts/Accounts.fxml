@@ -38,7 +38,7 @@
                         <Insets />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="486.0" layoutY="6.0" maxWidth="208.0" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sales" textFill="#fefeff" GridPane.columnIndex="2">
+                  <JFXButton alignment="CENTER" layoutX="486.0" layoutY="6.0" maxWidth="208.0" onAction="#switchLocalSales" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sales" textFill="#fefeff" GridPane.columnIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -82,7 +82,7 @@
                         <Insets />
                      </opaqueInsets>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" maxWidth="208.0" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Commission  Account" textFill="#fefeff" GridPane.columnIndex="2">
+                  <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#switchCommissionAccount" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Commission  Account" textFill="#fefeff" GridPane.columnIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -93,7 +93,7 @@
                         <Insets left="75.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" maxWidth="208.0" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sales" textFill="#fefeff" GridPane.columnIndex="3">
+                  <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#switchForiegnSales" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sales" textFill="#fefeff" GridPane.columnIndex="3">
                      <font>
                         <Font size="18.0" />
                      </font>

@@ -80,6 +80,31 @@ public class AccountsController implements Initializable {
 
 	    }
 
+	 
+
+	    @FXML
+	    void switchLocalSales(ActionEvent event)throws IOException {
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LocalSales.fxml"));
+			setNode(add);
+	    }
+	    
+
+	    @FXML
+	    void switchCommissionAccount(ActionEvent event) throws IOException {
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/Commission Account.fxml"));
+			setNode(add);
+	    }
+	    
+	    
+	    @FXML
+	    void switchForiegnSales(ActionEvent event)throws IOException {
+
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/ForiegnSales.fxml"));
+			setNode(add);
+	    }
+	    
+	   
+
    
 
 }
