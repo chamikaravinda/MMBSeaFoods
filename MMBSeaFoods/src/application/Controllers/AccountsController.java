@@ -73,5 +73,22 @@ public class AccountsController implements Initializable {
 		setNode(add);
 
 	}
+	
+	
+	public void commition(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/3rdPartyAccount.fxml"));
+		setNode(add);
+
+	}
+	
+	public void fSales(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/forignSales.fxml"));
+		setNode(add);
+
+	}
+	
+	
+	
+	
 
 }

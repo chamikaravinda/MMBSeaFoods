@@ -1,16 +1,18 @@
 package application.Controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import application.Models.Boat_Account;
-import application.Models.LocalSales;
+import application.Models.Commition;
 import application.Services.AccountServices;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
@@ -19,25 +21,27 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class AccountLocalSalesController implements Initializable{
+public class AccountCommitionUnclearedController implements Initializable{
+	
 	
 	@FXML
 	private AnchorPane Accounts;
 	
 	AnchorPane add;
 	
-	@FXML private TableView<LocalSales> tblvSales;
+	@FXML private TableView<Commition> tblvSales;
 	
 	@FXML private TableColumn<?, ?> tblcDate;
-	@FXML private TableColumn<?, ?> tblcBuyerName;
-	@FXML private TableColumn<?, ?> FishType;
-	@FXML private TableColumn<?, ?> TotalWeight;
+	@FXML private TableColumn<?, ?> tblcReason;
+	@FXML private TableColumn<?, ?> tblcToPay;
 	
 	
-	private ObservableList<LocalSales> boatDetailsList = FXCollections.observableArrayList();
+	private ObservableList<Commition> boatDetailsList = FXCollections.observableArrayList();
 	
 	AccountServices accountServices=new AccountServices();
-
+	
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -45,22 +49,21 @@ public class AccountLocalSalesController implements Initializable{
 		boatDetailsList.clear();
 		
 		
-		ArrayList<LocalSales> boat_list = accountServices.getAllSaleList();
+		ArrayList<Commition> boat_list = accountServices.getAllCommitionListUncleared();
 		
-		for( LocalSales boat : boat_list ) {
-			boat.setBuyerName(accountServices.getBuyerNameByID(boat.getBuyerID()));
+		for( Commition boat : boat_list ) {
 			boatDetailsList.add(boat);
 		} 
 		
 		
 		tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-		tblcBuyerName.setCellValueFactory(new PropertyValueFactory<>("BuyerName"));
-		FishType.setCellValueFactory(new PropertyValueFactory<>("FishType"));
-		TotalWeight.setCellValueFactory(new PropertyValueFactory<>("TotalWeight"));
+		tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
+		tblcToPay.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
 
 		tblvSales.setItems(boatDetailsList);
 		
 	}
+	
 	
 	
 	
@@ -83,5 +86,9 @@ public class AccountLocalSalesController implements Initializable{
         
 	
     }
+
+	
+	
+	
 
 }

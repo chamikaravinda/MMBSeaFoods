@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import application.Models.Boat_Account;
+import application.Models.Commition;
 import application.Models.F_Fish_Buyers_Account;
 import application.Models.F_Fish_Buyers_Account_Uncleard;
+import application.Models.Fish_Lot;
+import application.Models.LocalSales;
 import application.Models.Local_Buyers_Account;
 import application.Models.Locl_Buyers_Account_Uncleared;
 import javafx.collections.FXCollections;
@@ -869,6 +872,307 @@ public class AccountServices {
 	return boatList;
 	
 	}
+
+
+
+
+
+	public ArrayList<LocalSales> getAllSaleList() {
+
+
+		ArrayList<LocalSales> boatList=new ArrayList<LocalSales>();
+		
+		try {
+			
+			connection=DBConnection.Connector();
+			
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+			
+			String query = "SELECT * FROM Local_Sales";
+			
+			preparedStatement=connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				LocalSales boat = new LocalSales();
+				
+				
+				boat.setID(Integer.parseInt(resultSet.getString(1)));
+				boat.setDate(resultSet.getString(2));
+				boat.setBuyerID(Integer.parseInt(resultSet.getString(3)));
+				boat.setFishType(Integer.parseInt(resultSet.getString(4)));
+				boat.setPrice(Double.parseDouble(resultSet.getString(5)));
+				boat.setTotalWeight(Double.parseDouble(resultSet.getString(6)));
+				
+				
+				
+				
+				
+				boatList.add(boat);
+			}
+			
+			System.out.println(query);
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at  get All Sales List :" + e.getLocalizedMessage());	
+			
+		} catch (Exception e) {
+			System.out.println("Exception In get All Sales List : " + e);	
+		}finally {
+			try {
+				preparedStatement.close();
+				resultSet.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In get All Sales List : " + e);
+			}
+			
+			
+		}
+		
+	return boatList;
+	
+	
+	
+	}
+
+
+
+
+
+	public String getBuyerNameByID(int buyerID) {
+
+
+
+		String name="";
+
+		try {
+
+			connection=DBConnection.Connector();
+
+			preparedStatement =connection.prepareStatement("SELECT * FROM Local_Fish_Buyers WHERE ID=?");
+			preparedStatement.setString(1, String.valueOf(buyerID));
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				name = resultSet.getString(2);
+			}
+
+			
+
+		} catch (Exception e) {
+			System.out.println("Exception : " + e);
+		}
+
+		return name;
+		
+		
+	}
+
+
+
+
+
+	public ArrayList<Commition> getAllCommitionList() {
+		
+		
+		ArrayList<Commition> boatList=new ArrayList<Commition>();
+		
+		try {
+			
+			connection=DBConnection.Connector();
+			
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+			
+			String query = "SELECT * FROM Third_Party_Account";
+			
+			preparedStatement=connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				Commition boat = new Commition();
+				
+				
+				boat.setID(Integer.parseInt(resultSet.getString(1)));
+				boat.setDate(resultSet.getString(2));
+				boat.setReason(resultSet.getString(3));
+				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
+				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
+				
+				
+				
+				
+				boatList.add(boat);
+			}
+			
+			System.out.println(query);
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at  get All Commition List :" + e.getLocalizedMessage());	
+			
+		} catch (Exception e) {
+			System.out.println("Exception In get All Commition List : " + e);	
+		}finally {
+			try {
+				preparedStatement.close();
+				resultSet.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In get All Commition List : " + e);
+			}
+			
+			
+		}
+		
+	return boatList;
+	}
+
+
+
+
+
+	public ArrayList<Commition> getAllCommitionListUncleared() {
+
+
+		ArrayList<Commition> boatList=new ArrayList<Commition>();
+		
+		try {
+			
+			connection=DBConnection.Connector();
+			
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+			
+			String query = "SELECT * FROM Third_Party_Acc_Uncleared";
+			
+			preparedStatement=connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				Commition boat = new Commition();
+				
+				
+				boat.setID(Integer.parseInt(resultSet.getString(1)));
+				boat.setDate(resultSet.getString(2));
+				boat.setReason(resultSet.getString(3));
+				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
+				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
+				
+				
+				
+				
+				boatList.add(boat);
+			}
+			
+			System.out.println(query);
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at  get All Commition List Uncleared :" + e.getLocalizedMessage());	
+			
+		} catch (Exception e) {
+			System.out.println("Exception In get All Commition List Uncleared  : " + e);	
+		}finally {
+			try {
+				preparedStatement.close();
+				resultSet.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In get All Commition List Uncleared : " + e);
+			}
+			
+			
+		}
+		
+	return boatList;
+	
+	
+	}
+
+
+
+
+
+	public ArrayList<Fish_Lot> getAllSaleListForeign() {
+
+
+		
+		
+		ArrayList<Fish_Lot> boatList=new ArrayList<Fish_Lot>();
+		
+		try {
+			
+			connection=DBConnection.Connector();
+			
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+			
+			String query = "SELECT * FROM Fish_Lot";
+			
+			preparedStatement=connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				Fish_Lot boat = new Fish_Lot();
+				
+		    
+				
+				
+				boat.setID(Integer.parseInt(resultSet.getString(1)));
+				boat.setAdded_Date(resultSet.getString(2));
+				boat.setLorry_Number(resultSet.getString(3));
+				boat.setBuying_Weight(Double.parseDouble(resultSet.getString(4)));
+				boat.setIce_fee(Double.parseDouble(resultSet.getString(5)));
+				boat.setLorry_fee(Double.parseDouble(resultSet.getString(6)));
+				
+				boat.setOther_fees(Double.parseDouble(resultSet.getString(7)));
+				boat.setBrokerFee(Double.parseDouble(resultSet.getString(8)));
+				boat.setBuying_price(Double.parseDouble(resultSet.getString(9)));
+				
+				boat.setSold_Weight(Double.parseDouble(resultSet.getString(10)));
+				boat.setSold_price(Double.parseDouble(resultSet.getString(11)));
+				boat.setDisplay_Name(resultSet.getString(12));
+				boat.setSold_To(Integer.parseInt(resultSet.getString(13)));
+				
+				
+				
+				
+				
+				boatList.add(boat);
+			}
+			
+			System.out.println(query);
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at  get All Sales List Foreign :" + e.getLocalizedMessage());	
+			
+		} catch (Exception e) {
+			System.out.println("Exception In get All Sales List Foreign : " + e);	
+		}finally {
+			try {
+				preparedStatement.close();
+				resultSet.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In get All Sales List Foreign : " + e);
+			}
+			
+			
+		}
+		
+	return boatList;
+	}
+	
+	
 	
 	
 	
