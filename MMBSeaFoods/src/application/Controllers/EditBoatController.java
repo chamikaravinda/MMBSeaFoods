@@ -47,7 +47,7 @@ public class EditBoatController implements Initializable {
     @FXML
     private JFXTextField txtOwner;
     
-    AnchorPane boat;
+    AnchorPane Vboat;
     
     BoatService service =new BoatService();
 
@@ -112,7 +112,7 @@ public class EditBoatController implements Initializable {
     
     
     @FXML
-    void UpdateBoat(ActionEvent event) throws SQLException{
+    void UpdateBoat(ActionEvent event) throws SQLException, IOException{
     	
     	
     	Boat boat=new Boat();
@@ -121,33 +121,38 @@ public class EditBoatController implements Initializable {
 		boat.setOwner(txtOwner.getText());
 		boat.setID(Integer.parseInt(lblID.getText()));
 		
-		if(service.UpdateBoat(boat)) {
-			
-			Notifications notifications = Notifications.create();
-			notifications.title("Succesfull");
-			notifications.text("Boat added succesfully");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showConfirm();
-			
-		}else {
-			Notifications notifications = Notifications.create();
-			notifications.title("Error");
-			notifications.text("Boat adding unsuccesfull");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showError();
-
+		if(!boat.getBoatNameorNumber().isEmpty() && !boat.getMobile().isEmpty()) {
+			if(service.UpdateBoat(boat)) {
+				
+				Notifications notifications = Notifications.create();
+				notifications.title("Succesfull");
+				notifications.text("Boat Updated succesfully");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showConfirm();
+				
+				Vboat=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+				setNode(Vboat);
+				
+			}else {
+				Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("Boat Updating unsuccesfull");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+	
+			}
 		}
     }
 
     @FXML
     void back(ActionEvent event) throws IOException {
     	
-    	boat=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
-		setNode(boat);
+    	Vboat=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+		setNode(Vboat);
 
     }
 

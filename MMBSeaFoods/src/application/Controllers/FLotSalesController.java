@@ -154,7 +154,7 @@ public class FLotSalesController implements Initializable{
 	}
 	
 	
-	public void SellLot(ActionEvent event) throws SQLException {
+	public void SellLot(ActionEvent event) throws SQLException, IOException {
 		
 		//get the buyer id
 		Buyers buyers = serviceB.getBuyers(cmbBuyer.getValue());
@@ -166,42 +166,52 @@ public class FLotSalesController implements Initializable{
 		Date date =new Date();
 		F_Fish_Buyers_Account buyerAccount =new F_Fish_Buyers_Account();
 		F_Fish_Buyers_Account_Uncleard buyerAccountU =new F_Fish_Buyers_Account_Uncleard();
-		
-		if(service.SellFishLot(lot)){
-			if(seriveD.sellStock(lot.getID())) {
-				buyerAccount.setDate(date.toString());
-				buyerAccount.setTo_Pay(lot.getSold_price());
-				buyerAccount.setPaid(0);
-				buyerAccount.setReason("Selling Lot purchased form lorry "+lot.getLorry_Number()+" on "+lot.getAdded_Date());
-				buyerAccount.setBuyer_ID(buyers.getID());
-					if(serviceE.addEntry(buyerAccount))	{	
-							if(serviceE.addEntryUncleared(buyerAccount)){
-							
-								Notifications notifications = Notifications.create();
-								notifications.title("Succesfull");
-								notifications.text("Lot Sold succesfully");
-								notifications.graphic(null);
-								notifications.hideAfter(Duration.seconds(2));
-								notifications.position(Pos.CENTER);
-								notifications.showConfirm();
+		if(!txtSellingPrice.getText().isEmpty() && !txtWeight.getText().isEmpty()) {
+			if(service.SellFishLot(lot)){
+				if(seriveD.sellStock(lot.getID())) {
+					buyerAccount.setDate(date.toString());
+					buyerAccount.setTo_Pay(lot.getSold_price());
+					buyerAccount.setPaid(0);
+					buyerAccount.setReason("Selling Lot purchased form lorry "+lot.getLorry_Number()+" on "+lot.getAdded_Date());
+					buyerAccount.setBuyer_ID(buyers.getID());
+						if(serviceE.addEntry(buyerAccount))	{	
+								if(serviceE.addEntryUncleared(buyerAccount)){
 								
+									Notifications notifications = Notifications.create();
+									notifications.title("Succesfull");
+									notifications.text("Lot Sold succesfully");
+									notifications.graphic(null);
+									notifications.hideAfter(Duration.seconds(2));
+									notifications.position(Pos.CENTER);
+									notifications.showConfirm();
+									
+									sell=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+									setNode(sell);
+							}
 						}
-					}
 
-				}		
-			}else {
-				Notifications notifications = Notifications.create();
-				notifications.title("Error");
-				notifications.text("Selling Lot unsuccesfull.");
-				notifications.graphic(null);
-				notifications.hideAfter(Duration.seconds(2));
-				notifications.position(Pos.CENTER);
-				notifications.showError();
-			}
-			
+					}		
+				}else {
+					Notifications notifications = Notifications.create();
+					notifications.title("Error");
+					notifications.text("Selling Lot unsuccesfull.");
+					notifications.graphic(null);
+					notifications.hideAfter(Duration.seconds(2));
+					notifications.position(Pos.CENTER);
+					notifications.showError();
+				}
+				
+		}else {
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Some fields are empty.");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
 		}
 	
-		
+	}	
 
 	
 	 void setNode(Node node) {

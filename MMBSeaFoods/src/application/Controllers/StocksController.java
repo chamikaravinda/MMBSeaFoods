@@ -96,15 +96,15 @@ public class StocksController implements Initializable {
     		
     		lot.setLorry_Number(Stocklot.getLorry_Number());
     		lot.setBoatName(boat.getBoatNameorNumber());
-    		
-    		
+    		lot.setStotal_Weight("Kg "+lot.getTotal_Weight()+"0");
+    		lot.setStotalBuying_price("Rs."+lot.getTotalBuying_price()+"0");
     		list.add(lot);
 		}
     	
     	clmDate.setCellValueFactory(new PropertyValueFactory<>("Added_Date"));
-    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("total_Weight"));
+    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("Stotal_Weight"));
     	clmLorry.setCellValueFactory(new PropertyValueFactory<>("Lorry_Number"));
-    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("totalBuying_price"));
+    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("StotalBuying_price"));
     	clmBoat.setCellValueFactory(new PropertyValueFactory<>("BoatName"));
     	Fish_Stock.setItems(list);
 

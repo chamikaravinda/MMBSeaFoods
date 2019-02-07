@@ -103,27 +103,29 @@ public class AddBuyerController implements Initializable {
 		buyer.setName(txtName.getText());
 		buyer.setMobile_No(txtMobile.getText());
 		
-		if(service.addBuyer(buyer)) {
+		if( !txtName.getText().isEmpty() && !txtMobile.getText().isEmpty() ) {	
 			
-			Notifications notifications = Notifications.create();
-			notifications.title("Succesfull");
-			notifications.text("Buyer added succesfully");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showConfirm();
+			if(service.addBuyer(buyer)) {
+				
+				Notifications notifications = Notifications.create();
+				notifications.title("Succesfull");
+				notifications.text("Buyer added succesfully");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showConfirm();
+				
+			}else {
+				Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("Buyer adding unsuccesfull");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+			}
 			
-		}else {
-			Notifications notifications = Notifications.create();
-			notifications.title("Error");
-			notifications.text("Buyer adding unsuccesfull");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showError();
-		}
-		
-		
+		}	
 	}
 
 	
