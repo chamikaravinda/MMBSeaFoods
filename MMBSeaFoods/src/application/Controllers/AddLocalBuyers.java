@@ -72,7 +72,8 @@ public class AddLocalBuyers {
     	Lbuyers.setName(txtName.getText());
     	Lbuyers.setMobile_No(txtMobile.getText());
 		
-		if(service.addLocalBuyer(Lbuyers)) {
+		if(!txtName.getText().isEmpty() && !txtMobile.getText().isEmpty()) {
+			service.addLocalBuyer(Lbuyers);
 			
 			Notifications notifications = Notifications.create();
 			notifications.title("Succesfull");

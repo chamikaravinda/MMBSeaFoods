@@ -46,7 +46,9 @@ public class AddLocalFishTypeController {
     	Lftype.setPrice(Double.parseDouble(txtUnitPrice.getText()));
     	
 		
-		if(service.addLocal_Fish_Type(Lftype)) {
+	if(!txtFishtype.getText().isEmpty() && !txtUnitPrice.getText().isEmpty() ) {
+		
+		service.addLocal_Fish_Type(Lftype);
 		Notifications notifications = Notifications.create();
 		notifications.title("Succesfull");
 		notifications.text("Fish Type added succesfully");
@@ -55,7 +57,13 @@ public class AddLocalFishTypeController {
 		notifications.position(Pos.CENTER);
 		notifications.showConfirm();
 		
+		
+		add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+		setNode(add);
+		
 	}else {
+		
+		
 		Notifications notifications = Notifications.create();
 		notifications.title("Error");
 		notifications.text("Fish Type unsuccesfull");

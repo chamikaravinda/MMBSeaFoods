@@ -1,4 +1,4 @@
-package application.Controllers;
+ package application.Controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -107,13 +107,13 @@ public class AddLocalStockController implements Initializable  {  //
 		
 		Local_Fish_types local_Fish_type=serviceC.getLocalfishTypes(Local_Fish_Type);
 		
-		local_Fish.setFish_Type(local_Fish_type.getID());
-		local_Fish.setTotal_Weight(Double.parseDouble(Lfweight.getText()));
+		local_Fish.setFish_Type(local_Fish_type.getID());//set Fish type 
+		local_Fish.setTotal_Weight(Double.parseDouble(Lfweight.getText())); //set Total weight
 
 		
 		serviceB.addFish_Stock(local_Fish);
 		
-		System.out.println(local_Fish);
+		
 		}
 		
 		

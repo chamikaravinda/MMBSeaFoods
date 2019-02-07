@@ -31,7 +31,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="1018.0" layoutY="268.0" prefHeight="56.0" prefWidth="168.0" style="-fx-background-color: #1d0b96;" text="Pay" textFill="WHITE" AnchorPane.bottomAnchor="157.0" AnchorPane.rightAnchor="33.0">
+                  <JFXButton fx:id="pay" layoutX="1018.0" layoutY="268.0" prefHeight="56.0" prefWidth="168.0" style="-fx-background-color: #1d0b96;" text="Pay" textFill="WHITE" AnchorPane.bottomAnchor="157.0" AnchorPane.rightAnchor="33.0">
                      <font>
                         <Font size="26.0" />
                      </font>

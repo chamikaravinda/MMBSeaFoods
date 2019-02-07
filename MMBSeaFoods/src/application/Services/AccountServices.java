@@ -144,9 +144,6 @@ public class AccountServices {
 	}
 
 
-
-
-
 	public int getBoatIDByName(String name) {
 
 
@@ -165,7 +162,6 @@ public class AccountServices {
 			}
 
 			
-
 		} catch (Exception e) {
 			System.out.println("Exception : " + e);
 		}
@@ -173,8 +169,63 @@ public class AccountServices {
 		return Integer.parseInt(id);
 	}
 
+	/*----------------- Add Local Account Data------------------*/
+	public boolean addLocalAccountData(int id ){
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String insertQuery= "INSERT INTO Boats (BoatNo, Mobile_No,Owner)" + 
+							"VALUES (?,?,?)";
+		try {
+			
+			preparedStatement = connection.prepareStatement(insertQuery);
 
+			resultSet=preparedStatement.executeUpdate();
+			if(resultSet!=0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return false;// new added kalana 
+		
+	}
+	
+	
+	
+	/*--------------- Clear Local Account Uncleared Data---------------*/
+	public void clearLocalAccountUnclearedByID( int id ){
+		
+	try {
+			
+			connection=DBConnection.Connector();
+			
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+			
+			String query = "DELETE FROM Local_Boat_Account_UnCleared WHERE Boat_ID=?";
+			
+			preparedStatement=connection.prepareStatement(query);
+			preparedStatement.setString(1, String.valueOf(id));
+			resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
 
+			}
+			
+			System.out.println(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 	public ArrayList<Boat_Account> getAllBOQListUncleared(int id) {

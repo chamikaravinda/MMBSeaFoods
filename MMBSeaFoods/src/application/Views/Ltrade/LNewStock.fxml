@@ -53,8 +53,9 @@
                      <children>
                         <TableView layoutX="3.0" layoutY="188.0" prefHeight="345.0" prefWidth="682.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="507.0" AnchorPane.topAnchor="188.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" />
-                            <TableColumn prefWidth="75.0" />
+                            <TableColumn prefWidth="75.0" text="Fish Type" />
+                            <TableColumn prefWidth="75.0" text="Total Weight" />
+                              <TableColumn prefWidth="75.0" text="Total Price" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

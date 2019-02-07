@@ -111,6 +111,10 @@ public class AccountsLocalMakePaymentController implements Initializable {
 		generateAccountsLocalInvoice();
 	}
 	
+	
+	public void removeLocalBoatAccountUnclearedData(){
+		
+	}
 
 	/*-------------------Generate Current Date -----------------*/
 	public static String getCurrentDate() {
@@ -144,10 +148,10 @@ public class AccountsLocalMakePaymentController implements Initializable {
 
 			Connection con = application.Services.DBConnection.LoginConnector();
 
-			JasperDesign jasperDesign = JRXmlLoader.load("E:\\SLIIT\\Java\\MALU\\Java\\MMBSeaFoods\\src\\application\\Reports\\Simple_Blue.jrxml");
+			JasperDesign jasperDesign = JRXmlLoader.load("E:\\PLPro\\MMBSeaFoods\\MMBSeaFoods\\src\\application\\Reports\\LocalAccountInvoice.jrxml");
 
 			// get the query
-			String query = "SELECT * FROM Local_Boat_Account WHERE Boat_ID = " + id;
+			String query = "SELECT * FROM Local_Boat_Account_UnCleared WHERE Boat_ID = " + id;
 			JRDesignQuery jrQuery = new JRDesignQuery();
 			jrQuery.setText(query);
 			jasperDesign.setQuery(jrQuery);

@@ -17,14 +17,20 @@ public class LFish_stockService {
 	public long addFish_Stock(LFish_stock lstock) throws SQLException {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;		
+		    
+			String GetCurrentWeight= "select * from Local_Fish_stock";
 		
+		
+		  
 	
-			String getQuery = "select * from Local_Fish_stock where Fish_Type=?";
-			preparedStatement=connection.prepareStatement(getQuery);
+		    String insertQuery = "INSERT INTO Local_Fish_stock(Fish_Type, Total_Weight,)" + 
+				"VALUES (?,?)";
+			preparedStatement=connection.prepareStatement(insertQuery);
 			preparedStatement.setInt(1, lstock.getFish_Type());
+			preparedStatement.setDouble(2,lstock.getTotal_Weight());
 			ResultSet resultSet=preparedStatement.executeQuery();
 			
-	    	
+	    	/*
 			
 			if(resultSet.next()) {
 				
@@ -46,7 +52,7 @@ public class LFish_stockService {
 				preparedStatement.setDouble(2, lstock.getTotal_Weight());
 				ResultSet resultSet1=preparedStatement.executeQuery();
 				
-			} 
+			}   */
 			return 0;
 				
 			

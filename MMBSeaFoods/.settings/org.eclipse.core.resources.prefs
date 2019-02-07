@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/application/Reports/CommissionInvoice.jrxml=UTF-8
+encoding//src/application/Reports/ForeignAccountInvoice.jrxml=UTF-8
+encoding//src/application/Reports/LocalAccountInvoice.jrxml=UTF-8
 encoding//src/application/Reports/Simple_Blue.jrxml=UTF-8
