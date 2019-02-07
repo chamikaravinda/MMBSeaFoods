@@ -30,6 +30,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -115,9 +116,17 @@ public class FtradeController implements Initializable {
     	if(lot != null) {
 	    	if(lot.getBuying_Weight() != 0 ) {
 	    		
-	    		lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Vehicles.fxml"));
-				setNode(lots);
+	    		/*lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewSales.fxml"));
+				setNode(lots);*/
 	    		
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ftrade/NewSales.fxml"));
+				Parent root = loader.load();
+				FLotSalesController controller = loader.<FLotSalesController>getController();
+				String id=Integer.toString(lot.getID());
+				controller.setID(id); 
+				
+				setNode(root);
+				
 	    	}else {
 	    		Notifications notifications = Notifications.create();
 				notifications.title("Error");

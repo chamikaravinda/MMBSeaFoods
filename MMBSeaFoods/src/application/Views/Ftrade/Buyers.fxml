@@ -45,6 +45,14 @@
                         <FontAwesomeIconView fill="#3b2f63" glyphName="PLUS" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
+                  <JFXButton alignment="CENTER" layoutX="836.0" layoutY="63.0" maxWidth="253.0" onAction="#editType" prefHeight="39.0" prefWidth="139.0" text="Edit Buyers" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="63.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#3b2f63" glyphName="EDIT" size="17.0" wrappingWidth="21.0" />
+                     </graphic>
+                  </JFXButton>
                </children>
             </AnchorPane>
             <GridPane layoutY="59.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">

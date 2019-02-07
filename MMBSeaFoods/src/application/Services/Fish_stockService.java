@@ -91,4 +91,34 @@ public class Fish_stockService {
 		
 	}
 
+	public boolean sellStock(int ID) throws SQLException {
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String Updatequery = "UPDATE Fish_stock set Status=?"
+						+ " where Lot_ID= '"+ID+"' ";
+
+		try {
+
+				preparedStatement = connection.prepareStatement(Updatequery);
+				preparedStatement.setString(1, "SOLD");
+				resultSet=preparedStatement.executeUpdate();
+				
+				if(resultSet != 0) {
+					System.out.println("2nd method ok");
+
+					return true;
+				}
+				else 
+					return false;
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}
+		
+	}
 }
