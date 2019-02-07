@@ -116,7 +116,7 @@ public class AddStocksController implements Initializable{
 	
 	ArrayList<Fish_Lot> lots=null;
 	ArrayList<Boat> boats=null;
-	ArrayList<Foreign_Fish_types> fishtype=null;
+	ArrayList<Foreign_Fish_types> fishtype=null;//
 	
 	AnchorPane add;
 	
@@ -230,7 +230,9 @@ public class AddStocksController implements Initializable{
 		
 	}
 	
+
 	public void FinaliseStock(ActionEvent event) throws SQLException, IOException {
+
 		
 		if(cmbBoat.getSelectionModel().getSelectedItem() !=null && cmbLot.getSelectionModel().getSelectedItem() !=null ) {
 			if(!txtHabour.getText().isEmpty()){

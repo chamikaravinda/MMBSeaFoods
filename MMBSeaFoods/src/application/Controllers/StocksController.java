@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+/MMBSeaFoods/src/application/Views/Ltrade/LStocks.fxml * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -61,7 +61,7 @@ public class StocksController implements Initializable {
 	private TableColumn<?,?> clmBoat;
 	
 	
-	public ObservableList<Fish_stock> list = FXCollections.observableArrayList();
+	public ObservableList<Fish_stock> list = FXCollections.observableArrayList();//if you want to load to date to table use that method
    
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 

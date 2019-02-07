@@ -52,7 +52,7 @@ public class DashboardController implements Initializable {
         try {
              Home = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));            
              Ftrade = FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
-             Ltrade = FXMLLoader.load(getClass().getResource("../Views/Pricing.fxml"));
+             Ltrade = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
              Vehicles = FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
              Settings = FXMLLoader.load(getClass().getResource("../Views/Settings/settings.fxml"));
              Accounts = FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
@@ -128,10 +128,14 @@ public class DashboardController implements Initializable {
 		window.setScene(scene);
 		window.show();
 		window.centerOnScreen();
-    
     }
-    
-    
+    @FXML
+    private JFXButton btnVehicles1;
+
+   
+
+
+   
 
     
 

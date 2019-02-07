@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="Boats" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.AddBoatController">
+<AnchorPane id="AnchorPane" fx:id="Boats" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.AddLocalBoatController">
      <children>
-      <Label layoutX="19.0" layoutY="17.0" prefHeight="29.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="New Boat" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="17.0" />
+      <Label layoutX="19.0" layoutY="17.0" prefHeight="29.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="New Local Boat" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="17.0" />
       <Separator layoutX="3.0" layoutY="55.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
       <AnchorPane layoutX="35.0" layoutY="98.0" prefHeight="535.0" prefWidth="1134.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="98.0">
          <children>
@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="btnAdd" alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" onAction="#AddBoat" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <JFXButton alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
