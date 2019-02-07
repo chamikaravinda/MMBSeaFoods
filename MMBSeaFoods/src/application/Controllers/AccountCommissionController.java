@@ -7,18 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class AccountLocalSalesController {
-	
-	
-    @FXML
-    private AnchorPane Stocks;
+public class AccountCommissionController {
 
     @FXML
-    private Label BoatName;
+    private AnchorPane CommissionAccount;
+    
     
     AnchorPane add;
     
@@ -26,12 +22,12 @@ public class AccountLocalSalesController {
     
     void setNode(Node node) {
 
-		Stocks.getChildren().clear();
-		Stocks.setTopAnchor(node, 0.0);
-		Stocks.setRightAnchor(node, 0.0);
-		Stocks.setLeftAnchor(node, 0.0);
-		Stocks.setBottomAnchor(node, 0.0);
-		Stocks.getChildren().addAll((Node) node);
+    	CommissionAccount.getChildren().clear();
+    	CommissionAccount.setTopAnchor(node, 0.0);
+    	CommissionAccount.setRightAnchor(node, 0.0);
+    	CommissionAccount.setLeftAnchor(node, 0.0);
+    	CommissionAccount.setBottomAnchor(node, 0.0);
+    	CommissionAccount.getChildren().addAll((Node) node);
 
 		FadeTransition ft = new FadeTransition(Duration.millis(1500));
 		ft.setNode(node);
@@ -45,8 +41,8 @@ public class AccountLocalSalesController {
 
     @FXML
     void back(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
-		setNode(add);
+   add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+   setNode(add);
     }
 
 }

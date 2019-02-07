@@ -2,7 +2,7 @@ package application.Services;
 
 
 
-/*
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,18 +15,18 @@ public class LocalBuyerService {
 	Connection connection;
 	
 
-	public boolean addBuyer(Buyers buyer) throws SQLException {
+	public boolean addLocalBuyer(LocalBuyers Lbuyer) throws SQLException {
 		
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO Foreign_Fish_Buyers (Name, Mobile_No)" + 
+		String insertQuery= "INSERT INTO Local_Fish_Buyers (Name, Mobile_No)" + 
 							"VALUES (?,?)";
 		try {
 			
 			preparedStatement = connection.prepareStatement(insertQuery);
-			preparedStatement.setString(1, buyer.getName());
-			preparedStatement.setString(2, buyer.getMobile_No());
+			preparedStatement.setString(1, Lbuyer.getName());
+			preparedStatement.setString(2, Lbuyer.getMobile_No());
 			resultSet=preparedStatement.executeUpdate();
 			if(resultSet!=0)
 				return true;
@@ -43,13 +43,13 @@ public class LocalBuyerService {
 	}
 	
 	
-	public ArrayList<Buyers> getBoat() throws SQLException{
+	public ArrayList<LocalBuyers> getLocalBuyer() throws SQLException{
 		
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
-		String query= "select * from Foreign_Fish_Buyers";
-		ArrayList<Buyers> list =new ArrayList<>();
+		String query= "select * from Local_Fish_Buyers";
+		ArrayList<LocalBuyers> list =new ArrayList<>();
 		
 		try {
 			preparedStatement =connection.prepareStatement(query);
@@ -57,11 +57,11 @@ public class LocalBuyerService {
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
-				Buyers buyers=new Buyers();
-				buyers.setID(Integer.parseInt(resultSet.getString("ID")));
-				buyers.setMobile_No(resultSet.getString("Mobile_No"));
-				buyers.setName(resultSet.getString("Name"));
-				list.add(buyers);
+				LocalBuyers Lbuyers=new LocalBuyers();
+				Lbuyers.setID(Integer.parseInt(resultSet.getString("ID")));
+				Lbuyers.setMobile_No(resultSet.getString("Mobile_No"));
+				Lbuyers.setName(resultSet.getString("Name"));
+				list.add(Lbuyers);
 				
 			}
 			return list;
@@ -82,4 +82,3 @@ public class LocalBuyerService {
 
 
 
-*/

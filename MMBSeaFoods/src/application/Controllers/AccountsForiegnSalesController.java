@@ -2,6 +2,8 @@ package application.Controllers;
 
 import java.io.IOException;
 
+import org.apache.log4j.net.SocketNode;
+
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,16 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class AccountLocalSalesController {
-	
-	
+public class AccountsForiegnSalesController {
+
     @FXML
     private AnchorPane Stocks;
+    
+    
+    AnchorPane add;
 
     @FXML
     private Label BoatName;
-    
-    AnchorPane add;
     
     
     
@@ -43,10 +45,13 @@ public class AccountLocalSalesController {
 
 	}
 
+
     @FXML
     void back(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
-		setNode(add);
+    	
+    	add= FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+    	setNode(add);
+
     }
 
 }

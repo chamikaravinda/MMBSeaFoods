@@ -1,21 +1,89 @@
 package application.Controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
+import application.Models.Boat;
+import application.Models.LocalBoat;
+import application.Services.LocalBoatService;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class LocalBoatController {
+public class LocalBoatController implements Initializable {
 
     @FXML
     private AnchorPane ftrade;
     
+    
+    
+    @FXML
+    private TableView<LocalBoat> tblboats;
+
+    @FXML
+    private TableColumn<?, ?> clmName;
+
+    @FXML
+    private TableColumn<?, ?> clmMobile;
+
+    @FXML
+    private TableColumn<?, ?> clmOwner;
+    
     AnchorPane add;
+    
+    ObservableList<LocalBoat> list = FXCollections.observableArrayList();
+    
+    AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
+
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    	list.clear();
+    	
+    	LocalBoatService service= new LocalBoatService();
+    	ArrayList<LocalBoat> LBlist = null;
+    	
+    	try {
+			LBlist  = service.getLocalBoat();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(LocalBoat sup : LBlist) {
+			list.add(sup);
+		}	
+		
+		clmName.setCellValueFactory(new PropertyValueFactory<>("BoatNameorNumber"));
+		clmMobile.setCellValueFactory(new PropertyValueFactory<>("Mobile"));
+		clmOwner.setCellValueFactory(new PropertyValueFactory<>("Owner"));
+		
+		tblboats.setItems(list);
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     void setNode(Node node) {
     	ftrade.getChildren().clear();

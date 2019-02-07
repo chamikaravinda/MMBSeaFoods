@@ -16,7 +16,7 @@ import javafx.util.Duration;
 public class AccountsController implements Initializable {
 
 	@FXML
-	private AnchorPane Accounts;
+	private AnchorPane Stocks;
 
 	AnchorPane add;
 
@@ -27,12 +27,12 @@ public class AccountsController implements Initializable {
 
 	void setNode(Node node) {
 
-		Accounts.getChildren().clear();
-		Accounts.setTopAnchor(node, 0.0);
-		Accounts.setRightAnchor(node, 0.0);
-		Accounts.setLeftAnchor(node, 0.0);
-		Accounts.setBottomAnchor(node, 0.0);
-		Accounts.getChildren().addAll((Node) node);
+		Stocks.getChildren().clear();
+		Stocks.setTopAnchor(node, 0.0);
+		Stocks.setRightAnchor(node, 0.0);
+		Stocks.setLeftAnchor(node, 0.0);
+		Stocks.setBottomAnchor(node, 0.0);
+		Stocks.getChildren().addAll((Node) node);
 
 		FadeTransition ft = new FadeTransition(Duration.millis(1500));
 		ft.setNode(node);
@@ -44,34 +44,67 @@ public class AccountsController implements Initializable {
 
 	}
 
-	public void LocalBoats(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LBoatAccount.fxml"));
-		setNode(add);
-
-	}
-
-	public void ForeignBoats(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/FBoatAccount.fxml"));
-		setNode(add);
-
-	}
 	
-	public void LocalBuyers(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LBuyerAccount.fxml"));
-		setNode(add);
 
-	}
 	
-	public void ForeignBuyers(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/FBuyerAccount.fxml"));
-		setNode(add);
-
-	}
 	
-	public void LocalSales(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/Sales.fxml"));
-		setNode(add);
+	
+	  @FXML
+	    public void switchForiegnBoats(ActionEvent event) throws IOException {
+		  
+		  	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/FBoatAccount.fxml"));
+			setNode(add);
 
-	}
+	    }
+
+	    @FXML
+	    public void switchForiegnBuyers(ActionEvent event) throws IOException {
+
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/FBuyerAccount.fxml"));
+			setNode(add);
+
+	    }
+
+	    @FXML
+	    public void switchLocalBuyers(ActionEvent event) throws IOException {
+	    	
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LBuyerAccount.fxml"));
+			setNode(add);
+	    }
+
+	    @FXML
+	    public void switchLocalBoats(ActionEvent event) throws IOException {
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LBoatAccount.fxml"));
+			setNode(add);
+
+
+	    }
+
+	 
+
+	    @FXML
+	    void switchLocalSales(ActionEvent event)throws IOException {
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LocalSales.fxml"));
+			setNode(add);
+	    }
+	    
+
+	    @FXML
+	    void switchCommissionAccount(ActionEvent event) throws IOException {
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/Commission Account.fxml"));
+			setNode(add);
+	    }
+	    
+	    
+	    @FXML
+	    void switchForiegnSales(ActionEvent event)throws IOException {
+
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/ForiegnSales.fxml"));
+			setNode(add);
+	    }
+	    
+	   
+
+   
 
 }

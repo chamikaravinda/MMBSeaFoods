@@ -24,9 +24,11 @@ public class LFish_stockService {
 			preparedStatement.setInt(1, lstock.getFish_Type());
 			ResultSet resultSet=preparedStatement.executeQuery();
 			
+	    	
+			
 			if(resultSet.next()) {
 				
-			String UpdatQuery="Update Local_Fish_stock set Total_Weight = Total_Weight + ?"+" Where Fish_Type=?";
+			   String UpdatQuery="Update Local_Fish_stock set Total_Weight = Total_Weight + ?"+" Where Fish_Type=?";
 				preparedStatement = connection.prepareStatement(UpdatQuery);
 				preparedStatement.setDouble(1, lstock.getTotal_Weight());
 				preparedStatement.setInt(2, lstock.getFish_Type());
@@ -44,10 +46,12 @@ public class LFish_stockService {
 				preparedStatement.setDouble(2, lstock.getTotal_Weight());
 				ResultSet resultSet1=preparedStatement.executeQuery();
 				
-			}
+			} 
 			return 0;
 				
-			}
+			
+	
+	}
 			
 			
 			
@@ -68,7 +72,7 @@ public class LFish_stockService {
 			preparedStatement =connection.prepareStatement(query);
 
 			resultSet = preparedStatement.executeQuery();
-			System.out.println(resultSet);
+			
 			while(resultSet.next()) {
 				LFish_stock local_fishStock=new LFish_stock();
 				
@@ -93,4 +97,6 @@ public class LFish_stockService {
 		
 	}
 
+	
+	
 }

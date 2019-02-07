@@ -162,6 +162,16 @@ public class AccountsForeignBoatController implements Initializable{
 		
 	}
 	
+
+    @FXML
+    void back(ActionEvent event) throws IOException {
+        add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+		setNode(add);
+    	
+    }
+	
+    
+  
 	
 	
 	void setNode(Node node) {

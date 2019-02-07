@@ -109,8 +109,11 @@ public class AddLocalStockController implements Initializable  {  //
 		
 		local_Fish.setFish_Type(local_Fish_type.getID());
 		local_Fish.setTotal_Weight(Double.parseDouble(Lfweight.getText()));
-			
+
+		
 		serviceB.addFish_Stock(local_Fish);
+		
+		System.out.println(local_Fish);
 		}
 		
 		

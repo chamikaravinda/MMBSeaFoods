@@ -66,6 +66,11 @@
                   <FontAwesomeIconView fill="#f7f8f8" glyphName="USERS" size="17.0" wrappingWidth="21.0" />
                </graphic>
             </JFXButton>
+            <JFXButton layoutX="30.0" layoutY="66.0" onAction="#back" text="Back">
+               <graphic>
+                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15" />
+               </graphic>
+            </JFXButton>
          </children>
       </AnchorPane>
       
