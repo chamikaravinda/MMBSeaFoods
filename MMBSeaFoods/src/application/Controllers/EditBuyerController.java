@@ -116,26 +116,27 @@ public class EditBuyerController implements Initializable{
 		buyer.setName(txtName.getText());
 		buyer.setMobile_No(txtMobile.getText());
 		buyer.setID(Integer.parseInt(lblID.getText()));
-		if(service.UpdateBuyer(buyer)) {
-			
-			Notifications notifications = Notifications.create();
-			notifications.title("Succesfull");
-			notifications.text("Buyer Updated succesfully");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showConfirm();
-			
-		}else {
-			Notifications notifications = Notifications.create();
-			notifications.title("Error");
-			notifications.text("Buyer Updating unsuccesfull");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showError();
-		}	
-    	
+		if(!txtName.getText().isEmpty() && !txtMobile.getText().isEmpty()) {
+			if(service.UpdateBuyer(buyer)) {
+				
+				Notifications notifications = Notifications.create();
+				notifications.title("Succesfull");
+				notifications.text("Buyer Updated succesfully");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showConfirm();
+				
+			}else {
+				Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("Buyer Updating unsuccesfull");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+			}	
+		}
     }
 
     @FXML

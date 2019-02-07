@@ -12,13 +12,17 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class DashboardController implements Initializable {
@@ -109,8 +113,22 @@ public class DashboardController implements Initializable {
     }
     
     @FXML
-    private void LogOut(ActionEvent event) {
-       //
+    private void LogOut(ActionEvent event) throws IOException {
+    	
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("../Views/Login.fxml"));
+		Parent parent = loader.load();
+		
+		Scene scene =  new Scene(parent);
+		scene.getStylesheets().add(getClass().getResource("../Views/custom.css").toExternalForm());
+
+		
+		Stage window  = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		
+		window.setScene(scene);
+		window.show();
+		window.centerOnScreen();
+    
     }
     
     

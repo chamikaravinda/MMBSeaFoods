@@ -96,7 +96,25 @@ public class Fish_stock {
 		Lot_ID = lot_ID;
 	}
 	
+	//Strings Views
 	
-	
+		private String Stotal_Weight ;
+		private String StotalBuying_price;
+
+
+		public String getStotal_Weight() {
+			return Stotal_Weight;
+		}
+		public void setStotal_Weight(String stotal_Weight) {
+			Stotal_Weight = stotal_Weight;
+		}
+		public String getStotalBuying_price() {
+			return StotalBuying_price;
+		}
+		public void setStotalBuying_price(String stotalBuying_price) {
+			StotalBuying_price = stotalBuying_price;
+		}
+
+		
 	
 }

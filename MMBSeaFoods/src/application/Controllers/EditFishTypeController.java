@@ -155,7 +155,7 @@ public class EditFishTypeController  implements Initializable{
 	}
 
     @FXML
-    void UpdateFishType(ActionEvent event) throws SQLException {
+    void UpdateFishType(ActionEvent event) throws SQLException, IOException {
     	
     	Foreign_Fish_types type =new Foreign_Fish_types();
 		type.setName(txtName.getText());
@@ -163,26 +163,41 @@ public class EditFishTypeController  implements Initializable{
 		type.setPrice20_15(Double.parseDouble(txt15B20.getText()));
 		type.setPrice_20P(Double.parseDouble(txtA20.getText()));
 		type.setID(Integer.parseInt(lblID.getText()));
-		
-		if(service.UpdateForeign_Fish_Type(type)) {
-			Notifications notifications = Notifications.create();
-			notifications.title("Succesfull");
-			notifications.text("Fish Type updated succesfully");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showConfirm();
+		if( type.getName().isEmpty() || txtU15.getText().isEmpty() || txt15B20.getText().isEmpty() || txtA20.getText().isEmpty()) {	
 			
-		}else {
+			
 			Notifications notifications = Notifications.create();
 			notifications.title("Error");
-			notifications.text("Fish Type update unsuccesfull");
+			notifications.text("One more filed is empty");
 			notifications.graphic(null);
 			notifications.hideAfter(Duration.seconds(2));
 			notifications.position(Pos.CENTER);
 			notifications.showError();
+			
+			
+		}else {		
+			if(service.UpdateForeign_Fish_Type(type)) {
+				Notifications notifications = Notifications.create();
+				notifications.title("Succesfull");
+				notifications.text("Fish Type updated succesfully");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showConfirm();
+				
+				types=FXMLLoader.load(getClass().getResource("../Views/Ftrade/FishTypes.fxml"));
+				setNode(types);
+				
+			}else {
+				Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("Fish Type update unsuccesfull");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+			}
 		}
-
     }
 
     @FXML

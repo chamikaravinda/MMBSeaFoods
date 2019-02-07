@@ -87,13 +87,16 @@ public class DashboardHomeController implements Initializable {
 			}
 
 	    	for(Foreign_Fish_types sup : ftypes) {
+	    		sup.setSprice_15B("Rs."+String.format ("%2.0f",sup.getPrice_15B())+".00");
+	    		sup.setSprice20_15("Rs."+String.format ("%2.0f",sup.getPrice20_15())+".00");
+	    		sup.setSprice_20P("Rs."+String.format ("%2.0f",sup.getPrice_20P())+".00");
 				list.add(sup);
 			}	
 	    	
 	    	clmName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-	    	clmB15.setCellValueFactory(new PropertyValueFactory<>("price_15B"));
-	    	clm15B20.setCellValueFactory(new PropertyValueFactory<>("price20_15"));
-	    	clmA20.setCellValueFactory(new PropertyValueFactory<>("price_20P"));
+	    	clmB15.setCellValueFactory(new PropertyValueFactory<>("Sprice_15B"));
+	    	clm15B20.setCellValueFactory(new PropertyValueFactory<>("Sprice20_15"));
+	    	clmA20.setCellValueFactory(new PropertyValueFactory<>("Sprice_20P"));
 	    	
 	    	tblFishType.setItems(list);
 		} catch (SQLException e) {

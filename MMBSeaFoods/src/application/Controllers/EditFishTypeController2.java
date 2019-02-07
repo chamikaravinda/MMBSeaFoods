@@ -68,9 +68,9 @@ public class EditFishTypeController2  implements Initializable{
 			try {
 				type = service.getfishTypes(Integer.parseInt(lblID.getText()));
 				txtName.setText(type.getName());
-				txtU15.setText(Double.toString(type.getPrice_15B()));
-				txt15B20.setText(Double.toString(type.getPrice20_15()));
-				txtA20.setText(Double.toString(type.getPrice_20P()));
+				txtU15.setText(Double.toString(type.getPrice_15B())+"0");
+				txt15B20.setText(Double.toString(type.getPrice20_15())+"0");
+				txtA20.setText(Double.toString(type.getPrice_20P())+"0");
 				
 
 			} catch (NumberFormatException e) {
@@ -161,25 +161,38 @@ public class EditFishTypeController2  implements Initializable{
 		type.setPrice_20P(Double.parseDouble(txtA20.getText()));
 		type.setID(Integer.parseInt(lblID.getText()));
 		
-		if(service.UpdateForeign_Fish_Type(type)) {
-			Notifications notifications = Notifications.create();
-			notifications.title("Succesfull");
-			notifications.text("Fish Type added succesfully");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showConfirm();
+		if( type.getName().isEmpty() || txtU15.getText().isEmpty() || txt15B20.getText().isEmpty() || txtA20.getText().isEmpty()) {	
 			
-		}else {
+			
 			Notifications notifications = Notifications.create();
 			notifications.title("Error");
-			notifications.text("Fish Type unsuccesfull");
+			notifications.text("One more filed is empty");
 			notifications.graphic(null);
 			notifications.hideAfter(Duration.seconds(2));
 			notifications.position(Pos.CENTER);
 			notifications.showError();
+			
+			
+		}else {
+			if(service.UpdateForeign_Fish_Type(type)) {
+				Notifications notifications = Notifications.create();
+				notifications.title("Succesfull");
+				notifications.text("Fish Type updated succesfully");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showConfirm();
+				
+			}else {
+				Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("Fish Type updat unsuccesfull");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+			}
 		}
-
     }
 
     @FXML
