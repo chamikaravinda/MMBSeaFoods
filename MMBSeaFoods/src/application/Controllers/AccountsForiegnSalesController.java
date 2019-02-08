@@ -1,8 +1,8 @@
 package application.Controllers;
 
-import java.io.IOException;
+import java.io.IOException; 
 
-import org.apache.log4j.net.SocketNode;
+//import org.apache.log4j.net.SocketNode;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;

@@ -48,7 +48,7 @@ public class Foreign_Fish_Buyers_AccountServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery=  "INSERT INTO F_Fish_Buyers_Account (Date, Reason,To_Pay,Paid)" + 
+		String insertQuery=  "INSERT INTO F_Fish_Uncleared (Date, Reason,To_Pay,Paid)" + 
 				"VALUES (?,?,?,?)";
 		
 		try {

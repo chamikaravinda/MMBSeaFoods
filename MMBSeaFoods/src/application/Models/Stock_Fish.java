@@ -6,7 +6,14 @@ public class Stock_Fish {
 	private double Total_weight ;
 	private double buying_Price;
 	private int Fish_stock_ID;
+	private String fish_type_name;
 	
+	public String getFish_type_name() {
+		return fish_type_name;
+	}
+	public void setFish_type_name(String fish_type_name) {
+		this.fish_type_name = fish_type_name;
+	}
 	public double getWeight() {
 		return Total_weight;
 	}

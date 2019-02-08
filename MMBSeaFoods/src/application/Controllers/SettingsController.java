@@ -34,11 +34,13 @@ public class SettingsController implements Initializable{
     
     SettingService service=new SettingService(); 
 
+    User user =null;
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		try {
-			User user =service.getUser();
+			user =service.getUser();
 			txtusername.setText(user.getUsername());
 			txtpass.setText(user.getUsername());
 		} catch (SQLException e) {
@@ -53,8 +55,6 @@ public class SettingsController implements Initializable{
 
     @FXML
     void updateUser(ActionEvent event) throws SQLException {
-    	
-    	User user=new User();
     	
     	user.setUsername(txtusername.getText());
     	user.setPassword(txtpass.getText());

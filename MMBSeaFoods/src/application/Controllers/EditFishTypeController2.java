@@ -152,7 +152,7 @@ public class EditFishTypeController2  implements Initializable{
 	}
 
     @FXML
-    void UpdateFishType(ActionEvent event) throws SQLException {
+    void UpdateFishType(ActionEvent event) throws SQLException, IOException {
     	
     	Foreign_Fish_types type =new Foreign_Fish_types();
 		type.setName(txtName.getText());
@@ -183,6 +183,8 @@ public class EditFishTypeController2  implements Initializable{
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
+				types=FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
+				setNode(types);
 			}else {
 				Notifications notifications = Notifications.create();
 				notifications.title("Error");

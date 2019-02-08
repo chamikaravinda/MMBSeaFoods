@@ -89,12 +89,13 @@ public class DashboardHomeService {
 		
 		result = preparedStatement.executeQuery();
 		
-		while(result.next()) {
-			
-			total=total+result.getDouble("To_Pay");			
+		while(result.next()) {			
+			total = total+ result.getDouble("To_Pay");			
 		}
-		String Stotal =formatter.format(total);
+		
+		String Stotal = formatter.format(total);
 		connection.close();
+		
 		return "Rs."+Stotal;
 		
 	}

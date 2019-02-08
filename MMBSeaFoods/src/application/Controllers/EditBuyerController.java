@@ -110,7 +110,7 @@ public class EditBuyerController implements Initializable{
 	}
 	
     @FXML
-    void updateBuyer(ActionEvent event) throws SQLException {
+    void updateBuyer(ActionEvent event) throws SQLException, IOException {
     	
     	Buyers buyer=new Buyers();
 		buyer.setName(txtName.getText());
@@ -126,6 +126,9 @@ public class EditBuyerController implements Initializable{
 				notifications.hideAfter(Duration.seconds(2));
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
+				
+				back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Buyers.fxml"));
+				setNode(back);
 				
 			}else {
 				Notifications notifications = Notifications.create();

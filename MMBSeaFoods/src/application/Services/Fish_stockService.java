@@ -17,8 +17,8 @@ public class Fish_stockService {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO Local_Fish_stock(Fish_Type, Total_Weight,)" + 
-							"VALUES (?,?)";
+		String insertQuery= "INSERT INTO Fish_stock (Added_Date, Boat_ID, Harbour,NoofFishes,Total_Weight,"
+				+ "fishprice,commitionprice,totalprice,Lot_ID,Status) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		
 		
 		try {

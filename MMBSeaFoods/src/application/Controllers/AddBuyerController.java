@@ -115,6 +115,9 @@ public class AddBuyerController implements Initializable {
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
+				back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Buyers.fxml"));
+				setNode(back);
+				
 			}else {
 				Notifications notifications = Notifications.create();
 				notifications.title("Error");

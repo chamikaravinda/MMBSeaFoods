@@ -148,7 +148,7 @@ public class AccountsLocalMakePaymentController implements Initializable {
 
 			Connection con = application.Services.DBConnection.LoginConnector();
 
-			JasperDesign jasperDesign = JRXmlLoader.load("E:\\PLPro\\MMBSeaFoods\\MMBSeaFoods\\src\\application\\Reports\\LocalAccountInvoice.jrxml");
+			JasperDesign jasperDesign = JRXmlLoader.load("D:\\\\SLIIT STUDIES\\\\extra\\\\JavaFX\\\\MMBSeaFoods\\\\MMBSeaFoods\\\\MMBSeaFoods\\\\src\\\\application\\\\Reports\\\\LocalAccountInvoice.jrxml");
 
 			// get the query
 			String query = "SELECT * FROM Local_Boat_Account_UnCleared WHERE Boat_ID = " + id;

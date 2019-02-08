@@ -18,6 +18,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import application.Models.Boat;
 import application.Models.Boat_Account;
 import application.Models.Boat_Account_UnCleared;
+import application.Models.F_BoatEntryCatogries;
 import application.Models.Fish_Lot;
 import application.Models.Fish_stock;
 import application.Models.Foreign_Fish_types;
@@ -100,6 +101,9 @@ public class AddStocksController implements Initializable{
 	@FXML
 	private TableColumn<?,?> clmPrice;
 	
+	@FXML
+	private TableColumn<?,?> clmtype;
+	
 	public ObservableList<Stock_Fish> list = FXCollections.observableArrayList();
 	
 	@FXML
@@ -113,6 +117,7 @@ public class AddStocksController implements Initializable{
 	Third_Party_AccountServices serviceF=new Third_Party_AccountServices();
 	ProfiteAndLossService serviceG =new ProfiteAndLossService();
 	Boat_AccountServices serviceH=new Boat_AccountServices();
+	Foreign_Fish_typesServices serviceI =new Foreign_Fish_typesServices();
 	
 	ArrayList<Fish_Lot> lots=null;
 	ArrayList<Boat> boats=null;
@@ -121,6 +126,9 @@ public class AddStocksController implements Initializable{
 	AnchorPane add;
 	
 	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+	
+	//catagory list to boat account entries
+	ArrayList<F_BoatEntryCatogries> catList=new ArrayList<F_BoatEntryCatogries>();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -136,7 +144,9 @@ public class AddStocksController implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if(!newValue) {
+					if(!txtFishweigth.getText().isEmpty()) {
 					txtFishweigth.validate();
+					}
 				}
 				
 			}
@@ -188,11 +198,50 @@ public class AddStocksController implements Initializable{
 		
 		clmWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
 		clmPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-		
+		clmtype.setCellValueFactory(new PropertyValueFactory<>("fish_type_name"));
 		
 		tblFish.setItems(list);
 		
-		
+		//set cat list 
+		try {
+			ArrayList<Foreign_Fish_types> ftype = serviceI.getfishTypes();
+			for(Foreign_Fish_types type :ftype) {
+				
+				F_BoatEntryCatogries type1=new F_BoatEntryCatogries();
+				F_BoatEntryCatogries type2=new F_BoatEntryCatogries();
+				F_BoatEntryCatogries type3=new F_BoatEntryCatogries();
+				
+				type1.setNoOfFishes(0);
+				type1.setTotalPrice(0);
+				type1.setTypeID(type.getID());
+				type1.setTypeName(type.getName());
+				type1.setWeightGroup(1);
+				type1.setWeight(0);
+				
+				type2.setNoOfFishes(0);
+				type2.setTotalPrice(0);
+				type2.setTypeID(type.getID());
+				type2.setTypeName(type.getName());
+				type2.setWeightGroup(2);
+				type2.setWeight(0);
+				
+				type3.setNoOfFishes(0);
+				type3.setTotalPrice(0);
+				type3.setTypeID(type.getID());
+				type3.setTypeName(type.getName());
+				type3.setWeightGroup(3);
+				type3.setWeight(0);
+				
+				catList.add(type1);
+				catList.add(type2);
+				catList.add(type3);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -213,9 +262,34 @@ public class AddStocksController implements Initializable{
 		}else {
 			fish.setPrice(fish.getWeight()*fishtype.getPrice_15B());
 		}
-		
+		fish.setFish_type_name(fishtype.getName());
 		list.add(fish);
 		
+		for(F_BoatEntryCatogries cat : catList) {
+		
+			if(fish.getType()==cat.getTypeID()) {
+				if(fish.getWeight() < 15 && cat.getWeightGroup()==1 ) {
+					
+					cat.setNoOfFishes(cat.getNoOfFishes()+1);
+					cat.setTotalPrice(cat.getTotalPrice()+fish.getPrice());
+					cat.setWeight(cat.getWeight()+fish.getWeight());
+					
+				}else if(fish.getWeight() < 20 && cat.getWeightGroup()==2 ) {
+					
+					cat.setNoOfFishes(cat.getNoOfFishes()+1);
+					cat.setTotalPrice(cat.getTotalPrice()+fish.getPrice());
+					cat.setWeight(cat.getWeight()+fish.getWeight());
+					
+				}else if(fish.getWeight() > 20 && cat.getWeightGroup()==3 ) {
+					
+					cat.setNoOfFishes(cat.getNoOfFishes()+1);
+					cat.setTotalPrice(cat.getTotalPrice()+fish.getPrice());
+					cat.setWeight(cat.getWeight()+fish.getWeight());
+					
+				}
+				
+			}
+		}
 		
 		totalNoofFish++;
 		currentTotalWeigth += fish.getWeight();
@@ -272,24 +346,61 @@ public class AddStocksController implements Initializable{
 						lot.setBrokerFee(stock.getCommition_price());
 						lot.setBuying_price(lot.getBuying_price()+stock.getTotalBuying_price());
 							if(service.UpdateFish_Lot(lot)) {
+								
+								for(F_BoatEntryCatogries cat :catList) {
+									
+									Boat_Account boatEntry =new Boat_Account();
+									boatEntry.setDate(format1.format( new Date()   ));
+									boatEntry.setBoat_ID(stock.getBoat_ID());
+									if(cat.getWeightGroup()==1) {
+									boatEntry.setReason(cat.getNoOfFishes()+" "+cat.getTypeName()+" under 15kg :Total Weight "+cat.getWeight());
+									}
+									if(cat.getWeightGroup()==2) {
+										boatEntry.setReason(cat.getNoOfFishes()+" "+cat.getTypeName()+" between 15kg-20kg:Total Weight "+cat.getWeight());
+									}
+									if(cat.getWeightGroup()==3) {
+										boatEntry.setReason(cat.getNoOfFishes()+" "+cat.getTypeName()+" above 20kg :Total Weight "+cat.getWeight());
+									}
+									boatEntry.setTo_Pay(cat.getTotalPrice());
+									boatEntry.setPaid(0);
+									
+									serviceH.addEntries(boatEntry);
+									
+									Boat_Account_UnCleared boatEntryU =new Boat_Account_UnCleared();
+									boatEntryU.setDate(format1.format( new Date()   ));
+									boatEntryU.setBoat_ID(stock.getBoat_ID());
+									if(cat.getWeightGroup()==1) {
+										boatEntryU.setReason(cat.getNoOfFishes()+" "+cat.getTypeName()+" under 15kg :Total Weight "+cat.getWeight());
+									}
+									if(cat.getWeightGroup()==2) {
+										boatEntryU.setReason(cat.getNoOfFishes()+" "+cat.getTypeName()+" between 15kg-20kg:Total Weight "+cat.getWeight());
+									}
+									if(cat.getWeightGroup()==3) {
+										boatEntryU.setReason(cat.getNoOfFishes()+" "+cat.getTypeName()+" above 20kg :Total Weight "+cat.getWeight());
+									}
+									boatEntryU.setTo_Pay(cat.getTotalPrice());
+									boatEntryU.setPaid(0);
+									
+									serviceH.addEntries_Uncleard(boatEntryU);
+								}
 							
-								Boat_Account boatEntry =new Boat_Account();
+								/*Boat_Account boatEntry =new Boat_Account();
 								boatEntry.setDate(format1.format( new Date()   ));
 								boatEntry.setBoat_ID(stock.getBoat_ID());
-								boatEntry.setReason("Fish Puchase");
+								boatEntry.setReason("Fish Purchase");
 								boatEntry.setTo_Pay(stock.getFishprice());
 								boatEntry.setPaid(0);
 								
 								Boat_Account_UnCleared boatEntryU =new Boat_Account_UnCleared();
 								boatEntryU.setDate(format1.format( new Date()   ));
 								boatEntryU.setBoat_ID(stock.getBoat_ID());
-								boatEntryU.setReason("Fish Puchase");
+								boatEntryU.setReason("Fish Purchase");
 								boatEntryU.setTo_Pay(stock.getFishprice());
 								boatEntryU.setPaid(0);
+								*/
 								
 								
-								serviceH.addEntries(boatEntry);
-								if(serviceH.addEntries_Uncleard(boatEntryU)) {
+								//if(serviceH.addEntries_Uncleard(boatEntryU)) {
 									
 									Notifications notifications = Notifications.create();
 									notifications.title("Succesfull");
@@ -301,7 +412,7 @@ public class AddStocksController implements Initializable{
 									
 									add=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Stocks.fxml"));
 									setNode(add);
-								}
+								//}
 						
 						}
 											

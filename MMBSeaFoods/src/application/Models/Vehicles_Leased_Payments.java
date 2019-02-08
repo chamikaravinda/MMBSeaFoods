@@ -7,7 +7,7 @@ public class Vehicles_Leased_Payments {
 	private int ID;
 	private int Vehicle_ID;
 	private double Paid_Amount;
-	private Date Payment_Date;
+	private String Payment_Date;
 	
 	public int getID() {
 		return ID;
@@ -27,10 +27,10 @@ public class Vehicles_Leased_Payments {
 	public void setPaid_Amount(double paid_Amount) {
 		Paid_Amount = paid_Amount;
 	}
-	public Date getPayment_Date() {
+	public String getPayment_Date() {
 		return Payment_Date;
 	}
-	public void setPayment_Date(Date payment_Date) {
+	public void setPayment_Date(String payment_Date) {
 		Payment_Date = payment_Date;
 	}
     

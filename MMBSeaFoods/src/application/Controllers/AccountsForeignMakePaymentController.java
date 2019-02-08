@@ -130,7 +130,7 @@ public class AccountsForeignMakePaymentController implements Initializable{
 
 	/*---------------generate the jasper report--------------------*/
 	public void generateAccountsLocalInvoice() {
-		int id = accountServices.getBoatIDByName(lblBoatName.getText());
+		int id=accountServices.getBoatIDByNameForeign(lblBoatName.getText());
 
 
 		String invoiceName = "FAI_"+getCurrentDate()+"_"+getCurrentTime()+".pdf";
@@ -139,10 +139,10 @@ public class AccountsForeignMakePaymentController implements Initializable{
 
 			Connection con = application.Services.DBConnection.LoginConnector();
 
-			JasperDesign jasperDesign = JRXmlLoader.load("E:\\PLPro\\MMBSeaFoods\\MMBSeaFoods\\src\\application\\Reports\\ForeignAccountInvoice.jrxml");
+			JasperDesign jasperDesign = JRXmlLoader.load("D:\\SLIIT STUDIES\\extra\\JavaFX\\MMBSeaFoods\\MMBSeaFoods\\MMBSeaFoods\\src\\application\\Reports\\ForeignAccountInvoice.jrxml");
 
 			// get the query
-			String query = "SELECT * FROM Boat_Account_UnCleared WHERE Boat_ID = " + id;
+			String query = "SELECT * FROM Boat_Account_UnCleared WHERE Boat_ID = " + id; 
 			JRDesignQuery jrQuery = new JRDesignQuery();
 			jrQuery.setText(query);
 			jasperDesign.setQuery(jrQuery);

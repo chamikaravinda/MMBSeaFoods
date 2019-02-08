@@ -88,7 +88,7 @@ public class SettingService {
 		PreparedStatement preparedStatement=null;
 		int resultSet;
 		
-		String upadateQuery="update Users set username=?,passworrd=?"+"where ID= '"+user.getId()+"' ";
+		String upadateQuery="update Users set USERNAME=?,PASSWORD=?"+"where ID= '"+user.getId()+"' ";
 		try {
 			
 			preparedStatement= connection.prepareStatement(upadateQuery);
