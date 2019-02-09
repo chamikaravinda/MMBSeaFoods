@@ -4,7 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import application.Models.Boat_Account;
+import application.Models.Commition;
+import application.Models.Fish_Lot;
 import application.Models.LocalSales;
 import application.Services.AccountServices;
 import javafx.animation.FadeTransition;
@@ -19,50 +20,60 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class AccountLocalSalesController implements Initializable{
+public class AccountFSalesController implements Initializable{
+	
 	
 	@FXML
 	private AnchorPane Accounts;
 	
 	AnchorPane add;
 	
-	@FXML private TableView<LocalSales> tblvSales;
+	@FXML private TableView<Fish_Lot> tblcFSales;
 	
-	@FXML private TableColumn<?, ?> tblcDate;
-	@FXML private TableColumn<?, ?> tblcBuyerName;
-	@FXML private TableColumn<?, ?> FishType;
-	@FXML private TableColumn<?, ?> TotalWeight;
+	@FXML private TableColumn<?, ?> tblcAddedDate;
+	@FXML private TableColumn<?, ?> tblcLorry;
+	@FXML private TableColumn<?, ?> tblcBuyPrice;
+	@FXML private TableColumn<?, ?> tblcSellWeight;
+	@FXML private TableColumn<?, ?> tblcSellPrice;
 	
 	
-	private ObservableList<LocalSales> boatDetailsList = FXCollections.observableArrayList();
+	private ObservableList<Fish_Lot> boatDetailsList = FXCollections.observableArrayList();
 	
 	AccountServices accountServices=new AccountServices();
+	
+	
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 
+
 		boatDetailsList.clear();
 		
 		
-		ArrayList<LocalSales> boat_list = accountServices.getAllSaleList();
+		ArrayList<Fish_Lot> boat_list = accountServices.getAllSaleListForeign();
 		
-		for( LocalSales boat : boat_list ) {
-			boat.setBuyerName(accountServices.getBuyerNameByID(boat.getBuyerID()));
+		for( Fish_Lot boat : boat_list ) {
 			boatDetailsList.add(boat);
 		} 
 		
 		
-		tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-		tblcBuyerName.setCellValueFactory(new PropertyValueFactory<>("BuyerName"));
-		FishType.setCellValueFactory(new PropertyValueFactory<>("FishType"));
-		TotalWeight.setCellValueFactory(new PropertyValueFactory<>("TotalWeight"));
+		
+	    
+	    
+		
+		tblcAddedDate.setCellValueFactory(new PropertyValueFactory<>("Added_Date"));
+		tblcLorry.setCellValueFactory(new PropertyValueFactory<>("Lorry_Number"));
+		tblcBuyPrice.setCellValueFactory(new PropertyValueFactory<>("Buying_Weight"));
+		tblcSellWeight.setCellValueFactory(new PropertyValueFactory<>("Sold_Weight"));
+		tblcSellPrice.setCellValueFactory(new PropertyValueFactory<>("Sold_price"));
 
-		tblvSales.setItems(boatDetailsList);
+		
+		tblcFSales.setItems(boatDetailsList);
 		
 	}
-	
-	
+
 	
 	void setNode(Node node) {
 		
@@ -83,5 +94,4 @@ public class AccountLocalSalesController implements Initializable{
         
 	
     }
-
 }

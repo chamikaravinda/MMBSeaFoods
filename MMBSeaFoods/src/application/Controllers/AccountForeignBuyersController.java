@@ -63,13 +63,8 @@ public class AccountForeignBuyersController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 
-		try {
-			buyersNameList=accountServices.getAllBuyersNamesForeign();
-			cmbBuyersNames.setItems(buyersNameList);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		buyersNameList=accountServices.getAllBuyersNamesForeign();
+		cmbBuyersNames.setItems(buyersNameList);
 		
 		
 		
