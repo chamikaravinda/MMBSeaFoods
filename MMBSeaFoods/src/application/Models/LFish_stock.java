@@ -6,7 +6,14 @@ public class LFish_stock {
     private int Fish_Type;
 	private Double Total_Weight;
 	private String FishName;
+	private double Price;
 	
+	public double getPrice() {
+		return Price;
+	}
+	public void setPrice(double price) {
+		Price = price;
+	}
 	public String getFishName() {
 		return FishName;
 	}
