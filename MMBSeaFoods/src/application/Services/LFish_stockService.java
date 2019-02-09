@@ -16,7 +16,8 @@ public class LFish_stockService {
 	
 	public long addFish_Stock(LFish_stock lstock) throws SQLException {
 		connection=DBConnection.Connector();
-		PreparedStatement preparedStatement=null;	
+		PreparedStatement preparedStatement=null;		
+		    
 			String avalibility= "SELECT * FROM Local_Fish_stock where Fish_Type=?";
 			preparedStatement=connection.prepareStatement(avalibility);
 			ResultSet resultSet=preparedStatement.executeQuery();
@@ -24,9 +25,8 @@ public class LFish_stockService {
 			
 			
 			if(lstock.getFish_Type()==resultSet.getInt("Fish_Type")) {
-
 				
-				String UpdateExsitedType=" UPDATE Local_Fish_stock"+" SET Total_Weight=?"+"WHERE Fish_Type="+"lstock.getFish_Type()+ ";
+				String UpdateExsitedType=" UPDATE Local_Fish_stock"+" SET Total_Weight=?"+"WHERE Fish_Type="+"lstock.getFish_Type()";
 				preparedStatement=connection.prepareStatement(UpdateExsitedType);
 				preparedStatement.setDouble(1, lstock.getTotal_Weight());
 				ResultSet resultSet1=preparedStatement.executeQuery();

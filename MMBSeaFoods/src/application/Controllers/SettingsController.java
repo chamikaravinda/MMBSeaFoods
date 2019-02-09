@@ -1,6 +1,6 @@
 package application.Controllers;
 
-import java.net.URL; 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -42,7 +42,7 @@ public class SettingsController implements Initializable{
 		try {
 			user =service.getUser();
 			txtusername.setText(user.getUsername());
-			txtpass.setText(user.getUsername());
+			txtpass.setText(user.getPassword());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,3 +82,4 @@ public class SettingsController implements Initializable{
     }
 
 }
+

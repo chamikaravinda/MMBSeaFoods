@@ -1,3 +1,4 @@
+
 package application.Controllers;
 
 import java.io.IOException;
@@ -65,16 +66,23 @@ public class AccountCommitionController implements Initializable{
 		
 	}
 	
-	public void makePayment(ActionEvent event) throws IOException {
+	public void back(ActionEvent event) throws IOException {
 		
 		
 	
 		
-		add=FXMLLoader.load(getClass().getResource("../Views/Accounts/FCommitionPayment.fxml"));
+		add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
 		setNode(add);
 		
 		
 		
+	}
+	
+	public void makePayment(ActionEvent event) throws IOException {
+	
+		add=FXMLLoader.load(getClass().getResource("../Views/Accounts/FCommitionPayment.fxml"));
+		setNode(add);
+
 	}
 	
 	
@@ -98,4 +106,5 @@ public class AccountCommitionController implements Initializable{
 	
     }
 
+}
 
