@@ -36,7 +36,7 @@ public class AccountCommitionUnclearedController implements Initializable{
 	@FXML private TableColumn<?, ?> tblcToPay;
 	
 	
-	private ObservableList<Commition> boatDetailsList = FXCollections.observableArrayList();
+	private ObservableList<Commition> commitionAccountEntries = FXCollections.observableArrayList();
 	
 	AccountServices accountServices=new AccountServices();
 	
@@ -46,21 +46,27 @@ public class AccountCommitionUnclearedController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 
 
-		boatDetailsList.clear();
+		commitionAccountEntries.clear();
 		
 		
-		ArrayList<Commition> boat_list = accountServices.getAllCommitionListUncleared();
+		ArrayList<Commition> entryList = accountServices.getAllCommitionListUncleared();
 		
-		for( Commition boat : boat_list ) {
-			boatDetailsList.add(boat);
+		for( Commition entry : entryList ) {
+			if(entry.getTo_Pay()!=0) {
+				entry.setSTo_Pay("Rs."+String.format ("%2.0f", entry.getTo_Pay())+".00");
+			}else {
+				entry.setSTo_Pay("Rs 0.00");
+			}
+	
+			commitionAccountEntries.add(entry);
 		} 
 		
 		
 		tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
-		tblcToPay.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
+		tblcToPay.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
 
-		tblvSales.setItems(boatDetailsList);
+		tblvSales.setItems(commitionAccountEntries);
 		
 	}
 	
