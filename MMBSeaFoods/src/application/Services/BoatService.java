@@ -139,4 +139,34 @@ public class BoatService {
 		
 		
 	}
+	
+	public boolean UpdateBoat(Boat boat) throws SQLException {
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String insertQuery= "UPDATE Boats set BoatNo =? , Mobile_No =? , Owner =? " + 
+							" where ID = ? ";
+		try {
+			
+			preparedStatement = connection.prepareStatement(insertQuery);
+			preparedStatement.setString(1, boat.getBoatNameorNumber());
+			preparedStatement.setString(2, boat.getMobile());
+			preparedStatement.setString(3, boat.getOwner());
+			preparedStatement.setInt(4, boat.getID());
+			resultSet=preparedStatement.executeUpdate();
+			if(resultSet!=0)
+				return true;
+			else 
+				return false;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}
+		
+	}
+	
 }

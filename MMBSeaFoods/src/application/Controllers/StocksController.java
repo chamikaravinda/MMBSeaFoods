@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+/MMBSeaFoods/src/application/Views/Ltrade/LStocks.fxml * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -61,7 +61,7 @@ public class StocksController implements Initializable {
 	private TableColumn<?,?> clmBoat;
 	
 	
-	public ObservableList<Fish_stock> list = FXCollections.observableArrayList();
+	public ObservableList<Fish_stock> list = FXCollections.observableArrayList();//if you want to load to date to table use that method
    
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
@@ -96,15 +96,15 @@ public class StocksController implements Initializable {
     		
     		lot.setLorry_Number(Stocklot.getLorry_Number());
     		lot.setBoatName(boat.getBoatNameorNumber());
-    		
-    		
+    		lot.setStotal_Weight("Kg "+lot.getTotal_Weight()+"0");
+    		lot.setStotalBuying_price("Rs."+lot.getTotalBuying_price()+"0");
     		list.add(lot);
 		}
     	
     	clmDate.setCellValueFactory(new PropertyValueFactory<>("Added_Date"));
-    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("total_Weight"));
+    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("Stotal_Weight"));
     	clmLorry.setCellValueFactory(new PropertyValueFactory<>("Lorry_Number"));
-    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("totalBuying_price"));
+    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("StotalBuying_price"));
     	clmBoat.setCellValueFactory(new PropertyValueFactory<>("BoatName"));
     	Fish_Stock.setItems(list);
 

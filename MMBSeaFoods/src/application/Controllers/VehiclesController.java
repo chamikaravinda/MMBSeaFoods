@@ -69,14 +69,12 @@ public class VehiclesController implements Initializable{
 			}
 			
 			for(Vehicles sup : Vlist) {
-				sup.setSTotal_Lease(String.format ("%2.0f", sup.getTotal_Lease()));
-				sup.setSPaid_Amount(String.format ("%2.0f", sup.getPaid_Amount()));
-				sup.setSTo_Pay(String.format ("%2.0f", sup.getTo_Pay()));
-				sup.setSPremium_Amount(String.format("%2.0f", sup.getPremium_Amount()));
+				sup.setSTotal_Lease("Rs. "+String.format ("%2.0f", sup.getTotal_Lease())+".00");
+				sup.setSPaid_Amount("Rs. "+String.format ("%2.0f", sup.getPaid_Amount())+".00");
+				sup.setSTo_Pay("Rs. "+String.format ("%2.0f", sup.getTo_Pay())+".00");
+				sup.setSPremium_Amount("Rs. "+String.format("%2.0f", sup.getPremium_Amount())+".00");
 				sup.setLast_Payment(sup.getLast_Payment());
-			
-				
-				
+
 				list.add(sup);
 			}
 			

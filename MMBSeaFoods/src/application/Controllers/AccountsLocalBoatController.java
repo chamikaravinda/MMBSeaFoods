@@ -158,11 +158,17 @@ public class AccountsLocalBoatController implements Initializable{
 		
 		/*add=FXMLLoader.load(getClass().getResource("../Views/Accounts/LMakePayment.fxml"));
 		setNode(add);*/
-		
-		
-		
 	}
 	
+	
+	
+
+    @FXML
+    void back(ActionEvent event)throws IOException {
+    	add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+		setNode(add);
+    	
+    }
 	
 	
 	void setNode(Node node) {

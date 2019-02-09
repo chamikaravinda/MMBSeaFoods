@@ -49,11 +49,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton layoutX="254.0" layoutY="6.0" maxWidth="208.0" prefHeight="39.0" prefWidth="134.0" style="-fx-alignment: left;" text="Refresh" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
                   <JFXComboBox fx:id="cmbBoatNames" prefHeight="30.0" prefWidth="256.0" promptText="Boat Names" />
                </children>
             </GridPane>
@@ -64,6 +59,11 @@
                </font>
                <graphic>
                   <FontAwesomeIconView fill="#f7f8f8" glyphName="USERS" size="17.0" wrappingWidth="21.0" />
+               </graphic>
+            </JFXButton>
+            <JFXButton layoutX="50.0" layoutY="59.0" onAction="#back" text="Back">
+               <graphic>
+                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15" />
                </graphic>
             </JFXButton>
          </children>

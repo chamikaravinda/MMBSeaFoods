@@ -8,6 +8,7 @@ package application.Controllers;
 import com.jfoenix.controls.JFXButton;
 
 import application.Models.Boat;
+import application.Models.Buyers;
 import application.Models.Vehicles;
 import application.Services.BoatService;
 import application.Services.VehiclesServices;
@@ -27,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -134,7 +136,21 @@ public class BoatsController implements Initializable {
 		
 	}
     
-    
+    public void editNewBoat(ActionEvent event) throws IOException {
+    	
+    	Boat boat=tblboats.getSelectionModel().getSelectedItem();
+    	
+    	if(boat != null) {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ftrade/EditBoat.fxml"));
+			Parent root = loader.load();
+    		EditBoatController controller = loader.<EditBoatController>getController();
+    		String id=Integer.toString(boat.getID());
+			controller.setID(id); 
+			
+			setNode(root);
+    	}
+    	
+    }
 
     
 

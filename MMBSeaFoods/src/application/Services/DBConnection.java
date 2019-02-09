@@ -1,3 +1,4 @@
+
 package application.Services;
 
 import java.sql.*;
@@ -81,7 +82,7 @@ public class DBConnection {
 						+ "  Buying_Weight  DOUBLE    ," + "  Ice_fee        DOUBLE     ,"
 						+ "  Lorry_fee      DOUBLE     ," + "  other_fees     DOUBLE     ,"
 						+ "  brokerFee      DOUBLE     ," + "  buying_price   DOUBLE     ,"
-						+ "  Sold_Weight    INTEGER    ," + "  Sold_price     DOUBLE     ,"
+						+ "  Sold_Weight    DOUBLE    ," + "  Sold_price     DOUBLE     ,"
 						+ "  display_Name   TEXT     ,"
 						+ "  Sold_To        INTEGER   REFERENCES  Foreign_Fish_Buyers (ID))";
 

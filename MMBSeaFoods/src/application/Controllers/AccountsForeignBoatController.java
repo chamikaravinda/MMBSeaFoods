@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXComboBox;
 
 import application.Models.Boat_Account;
 import application.Services.AccountServices;
+import application.Services.Foreign_Fish_Buyers_AccountServices;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -51,6 +52,8 @@ public class AccountsForeignBoatController implements Initializable{
 	@FXML private TableColumn<?, ?> tblcTopay;
 	@FXML private TableColumn<?, ?> tblcPaid;
 
+	Foreign_Fish_Buyers_AccountServices service =new Foreign_Fish_Buyers_AccountServices();
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -70,7 +73,6 @@ public class AccountsForeignBoatController implements Initializable{
 					
 					int id=accountServices.getBoatIDByNameForeign(name);
 					
-					System.out.println(id);
 					
 					boatDetailsList.clear();
 					
@@ -78,12 +80,14 @@ public class AccountsForeignBoatController implements Initializable{
 					ArrayList<Boat_Account> boat_list = accountServices.getAllBOATListForeign(id);
 					
 					for( Boat_Account boat : boat_list ) {
+						boat.setSTo_Pay("Rs. "+String.format ("%2.0f", boat.getTo_Pay())+".00");
+						boat.setSPaid("Rs. "+String.format ("%2.0f", boat.getSPaid())+".00");
 						boatDetailsList.add(boat);
 					} 
 					tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 					tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
-					tblcTopay.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
-					tblcPaid.setCellValueFactory(new PropertyValueFactory<>("Paid"));
+					tblcTopay.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
+					tblcPaid.setCellValueFactory(new PropertyValueFactory<>("SPaid"));
 
 					tblvBoatDetails.setItems(boatDetailsList);
 					
@@ -127,16 +131,17 @@ public class AccountsForeignBoatController implements Initializable{
 		ArrayList<Boat_Account> boat_list = accountServices.getAllBOATList(id);
 		
 		for( Boat_Account boat : boat_list ) {
+			boat.setSTo_Pay("Rs. "+String.format ("%2.0f", boat.getTo_Pay())+".00");
+			boat.setSPaid("Rs. "+String.format ("%2.0f", boat.getSPaid())+".00");
 			boatDetailsList.add(boat);
 		} 
 		tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
-		tblcTopay.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
-		tblcPaid.setCellValueFactory(new PropertyValueFactory<>("Paid"));
+		tblcTopay.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
+		tblcPaid.setCellValueFactory(new PropertyValueFactory<>("SPaid"));
 
 		tblvBoatDetails.setItems(boatDetailsList);
 		
-		//tblvBoatDetails.setItems(boatDetailsList);
 		
 		
 	}
@@ -145,23 +150,28 @@ public class AccountsForeignBoatController implements Initializable{
 	public void makePayment(ActionEvent event) throws IOException {
 		
 		String name=lblBoat.getText();
-		System.out.println(name);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/MakePayment.fxml"));
 		Parent root = loader.load();
 		AccountsForeignMakePaymentController controller = loader.<AccountsForeignMakePaymentController>getController();
 		controller.getBoatName(name);
-		System.out.println("makd"+name);
-		//controller.getBoatDetails(name);
 		setNode(root);
 		
-		/*add=FXMLLoader.load(getClass().getResource("../Views/Accounts/LMakePayment.fxml"));
-		setNode(add);*/
 		
 		
 		
 	}
 	
+
+    @FXML
+    void back(ActionEvent event) throws IOException {
+        add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+		setNode(add);
+    	
+    }
+	
+    
+  
 	
 	
 	void setNode(Node node) {

@@ -1,7 +1,12 @@
 package application.Controllers;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import application.Models.Boat_Account;
@@ -20,6 +25,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.swing.JRViewer;
 
 public class AccountsForeignMakePaymentController implements Initializable{
 
@@ -82,6 +96,72 @@ public class AccountsForeignMakePaymentController implements Initializable{
 		
 	}
 	
+	
+	public void pay() {
+		
+		generateAccountsLocalInvoice();
+	}
+	
+	
+	public void removeForeignBoatAccountUnclearedData(){
+		
+	}
+
+	/*-------------------Generate Current Date -----------------*/
+	public static String getCurrentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String newDate = dateFormat.format(date);
+		
+		return newDate;
+	}
+	
+	/*-------------------Generate Current Time -----------------*/
+	public static String getCurrentTime() {
+		
+		Calendar cal = Calendar.getInstance();
+	    SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-ss");
+	    
+	     return (sdf.format(cal.getTime()));
+	}
+
+
+	
+
+	/*---------------generate the jasper report--------------------*/
+	public void generateAccountsLocalInvoice() {
+		int id=accountServices.getBoatIDByNameForeign(lblBoatName.getText());
+
+
+		String invoiceName = "FAI_"+getCurrentDate()+"_"+getCurrentTime()+".pdf";
+		
+		try {
+
+			Connection con = application.Services.DBConnection.LoginConnector();
+
+			JasperDesign jasperDesign = JRXmlLoader.load("D:\\SLIIT STUDIES\\extra\\JavaFX\\MMBSeaFoods\\MMBSeaFoods\\MMBSeaFoods\\src\\application\\Reports\\ForeignAccountInvoice.jrxml");
+
+			// get the query
+			String query = "SELECT * FROM Boat_Account_UnCleared WHERE Boat_ID = " + id; 
+			JRDesignQuery jrQuery = new JRDesignQuery();
+			jrQuery.setText(query);
+			jasperDesign.setQuery(jrQuery);
+
+			JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, con);
+			JRViewer viewer = new JRViewer(jasperPrint);
+
+			viewer.setOpaque(true);
+			viewer.setVisible(true);
+
+			JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\"+invoiceName);
+
+		} catch (Exception e) {
+			System.out.println("Exception  " + e);
+			
+
+		}
+	}
 	
 	public void getBoatDetails(String name) {
 		try {
