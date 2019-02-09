@@ -15,12 +15,8 @@ public class Fish_Lot {
     private double Sold_price;
     private int Sold_To;
     private String display_Name;
-	public String getDisplay_Name() {
-		return display_Name;
-	}
-	public void setDisplay_Name(String display_Name) {
-		this.display_Name = display_Name;
-	}
+    
+    
 	public int getID() {
 		return ID;
 	}
@@ -92,7 +88,17 @@ public class Fish_Lot {
 	}
 	public void setSold_To(int sold_To) {
 		Sold_To = sold_To;
-	}  
+	}
+	public String getDisplay_Name() {
+		return display_Name;
+	}
+	public void setDisplay_Name(String display_Name) {
+		this.display_Name = display_Name;
+	}
+    
+    
+    
+	
     
     //display Strings
 	private String Sbuying_price;

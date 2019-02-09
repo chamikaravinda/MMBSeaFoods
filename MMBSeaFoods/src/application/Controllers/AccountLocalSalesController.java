@@ -3,7 +3,6 @@ package application.Controllers;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import application.Models.Boat_Account;
 import application.Models.LocalSales;
 import application.Services.AccountServices;
@@ -61,6 +60,10 @@ public class AccountLocalSalesController implements Initializable{
 		tblvSales.setItems(boatDetailsList);
 		
 	}
+	
+	
+	
+
 	
 	
 	

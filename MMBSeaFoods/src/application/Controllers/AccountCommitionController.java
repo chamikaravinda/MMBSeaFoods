@@ -1,3 +1,4 @@
+
 package application.Controllers;
 
 import java.io.IOException;
@@ -106,3 +107,4 @@ public class AccountCommitionController implements Initializable{
     }
 
 }
+

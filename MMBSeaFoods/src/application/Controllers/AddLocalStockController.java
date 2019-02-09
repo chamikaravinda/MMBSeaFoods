@@ -1,4 +1,4 @@
- package application.Controllers;
+package application.Controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -203,3 +203,4 @@ public class AddLocalStockController implements Initializable  {  //
  
 
 }
+
