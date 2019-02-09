@@ -94,30 +94,46 @@ public class Fish_LotServices {
 		String query= "select * from Fish_Lot where display_Name= ?";
 		Fish_Lot lot=new Fish_Lot();
 		
-		try {
 			preparedStatement =connection.prepareStatement(query);
 			preparedStatement.setString(1, DisplayName);
 
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				lot.setID(Integer.parseInt(resultSet.getString("ID")));
+				
 				lot.setAdded_Date(resultSet.getString("Added_Date"));
-				lot.setBuying_Weight(Integer.parseInt(resultSet.getString("Buying_Weight")));
+				lot.setBuying_Weight(Double.parseDouble(resultSet.getString("Buying_Weight")));
 				lot.setLorry_Number(resultSet.getString("Lorry_Number"));
 				lot.setBuying_price(Double.parseDouble(resultSet.getString("Buying_price")));
 				lot.setDisplay_Name(resultSet.getString("display_Name"));
-				
+				lot.setID(Integer.parseInt(resultSet.getString("ID")));
 			}
-			return lot;
-			
-		}catch(Exception e) {
-			return null;
-		}finally {
-			preparedStatement.close();
-			resultSet.close();
-			connection.close();
-		}
+				connection.close();
+				return lot;		
+	}
+	
+	public Fish_Lot getTheLot(int ID) throws SQLException {
 		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		String query= "select * from Fish_Lot where ID= ?";
+		Fish_Lot lot=new Fish_Lot();
+		
+			preparedStatement =connection.prepareStatement(query);
+			preparedStatement.setInt(1,ID);
+
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				
+				lot.setAdded_Date(resultSet.getString("Added_Date"));
+				lot.setBuying_Weight(Double.parseDouble(resultSet.getString("Buying_Weight")));
+				lot.setLorry_Number(resultSet.getString("Lorry_Number"));
+				lot.setBuying_price(Double.parseDouble(resultSet.getString("Buying_price")));
+				lot.setDisplay_Name(resultSet.getString("display_Name"));
+				lot.setID(Integer.parseInt(resultSet.getString("ID")));
+			}
+				connection.close();
+				return lot;		
 	}
 	
 	public boolean UpdateFish_Lot(Fish_Lot lot ) throws SQLException{
@@ -150,6 +166,37 @@ public class Fish_LotServices {
 		}		
 	}
 	
-	
+
+	public boolean SellFishLot(Fish_Lot lot ) throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String Updatequery = "UPDATE Fish_Lot set Sold_Weight=?,Sold_price=?,Sold_To=?"
+						+ " where ID= '"+lot.getID()+"' ";
+
+		try {
+
+				preparedStatement = connection.prepareStatement(Updatequery);
+				preparedStatement.setDouble(1, lot.getSold_Weight());
+				preparedStatement.setDouble(2,lot.getSold_price());
+				preparedStatement.setDouble(3,lot.getSold_To());
+				resultSet=preparedStatement.executeUpdate();
+				
+				if(resultSet != 0) {
+					System.out.println("1st method ok");
+					return true;
+				}
+				else 
+					return false;
+			
+				
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}		
+	}
 
 }

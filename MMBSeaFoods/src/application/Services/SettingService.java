@@ -89,7 +89,7 @@ public class SettingService {
 		PreparedStatement preparedStatement=null;
 		int resultSet;
 		
-		String upadateQuery="update User set username=?,passworrd=?"+"where ID= '"+user.getId()+"' ";
+		String upadateQuery="update Users set USERNAME=?,PASSWORD=?"+"where ID= '"+user.getId()+"' ";
 		try {
 			
 			preparedStatement= connection.prepareStatement(upadateQuery);
@@ -200,7 +200,7 @@ public class SettingService {
 	    connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
-		String getUsersquery= "select * from User";
+		String getUsersquery= "select * from Users";
 		
 		ArrayList<User> list =new ArrayList<>(); //new object created to use below
 	   
@@ -233,5 +233,35 @@ public class SettingService {
 	   
    }
 
+   public User getUser() throws SQLException {
+   	
+   	connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		
+		String getUserQuery= "select * from Users";
+		User user= new User();
+		
+		try {
+			preparedStatement= connection.prepareStatement(getUserQuery);
+			resultSet=preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+			user.setId(resultSet.getInt("id"));
+			user.setPassword(resultSet.getString("password"));
+			user.setUsername(resultSet.getString("username"));
+			}
+			return user;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			connection.close();
+		}
+		
+
+		
+		
+   }
 
 }

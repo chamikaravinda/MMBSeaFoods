@@ -100,7 +100,7 @@ public class Boat_AccountServices {
 		PreparedStatement preparedStatement=null;
 		int resultSet;
 		
-		
+		System.out.println(entry.getDate());
 		String addEntryQuery="INSERT INTO Boat_Account_UnCleared(Date,Reason,To_Pay,Paid,Boat_ID)"+" VALUES(?,?,?,?,?)";
 		
 		

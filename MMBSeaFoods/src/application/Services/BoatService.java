@@ -19,13 +19,14 @@ public class BoatService {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO Boats (BoatNo, Mobile_No)" + 
-							"VALUES (?,?)";
+		String insertQuery= "INSERT INTO Boats (BoatNo, Mobile_No,Owner)" + 
+							"VALUES (?,?,?)";
 		try {
 			
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setString(1, boat.getBoatNameorNumber());
 			preparedStatement.setString(2, boat.getMobile());
+			preparedStatement.setString(3, boat.getOwner());
 			resultSet=preparedStatement.executeUpdate();
 			if(resultSet!=0)
 				return true;
@@ -53,11 +54,13 @@ public class BoatService {
 			preparedStatement =connection.prepareStatement(query);
 
 			resultSet = preparedStatement.executeQuery();
+			
 			while(resultSet.next()) {
 				Boat boat=new Boat();
 				boat.setID(Integer.parseInt(resultSet.getString("ID")));
 				boat.setBoatNameorNumber(resultSet.getString("BoatNo"));
 				boat.setMobile(resultSet.getString("Mobile_No"));
+				boat.setOwner(resultSet.getString("Owner"));
 				list.add(boat);
 				
 			}
@@ -90,7 +93,7 @@ public class BoatService {
 				boat.setID(Integer.parseInt(resultSet.getString("ID")));
 				boat.setBoatNameorNumber(resultSet.getString("BoatNo"));
 				boat.setMobile(resultSet.getString("Mobile_No"));
-					
+				boat.setOwner(resultSet.getString("Owner"));	
 				
 			}
 			return boat;
@@ -105,4 +108,65 @@ public class BoatService {
 		
 		
 	}
+	
+	public Boat getBoat(int ID) throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		String query= "select * from Boats where ID=?";
+		Boat boat =new Boat();
+		try {
+			preparedStatement =connection.prepareStatement(query);
+			preparedStatement.setInt(1, ID);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				boat.setID(Integer.parseInt(resultSet.getString("ID")));
+				boat.setBoatNameorNumber(resultSet.getString("BoatNo"));
+				boat.setMobile(resultSet.getString("Mobile_No"));
+				boat.setOwner(resultSet.getString("Owner"));	
+				
+			}
+			return boat;
+			
+		}catch(Exception e) {
+			return null;
+		}finally {
+			preparedStatement.close();
+			resultSet.close();
+			connection.close();
+		}
+		
+		
+	}
+	
+	public boolean UpdateBoat(Boat boat) throws SQLException {
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String insertQuery= "UPDATE Boats set BoatNo =? , Mobile_No =? , Owner =? " + 
+							" where ID = ? ";
+		try {
+			
+			preparedStatement = connection.prepareStatement(insertQuery);
+			preparedStatement.setString(1, boat.getBoatNameorNumber());
+			preparedStatement.setString(2, boat.getMobile());
+			preparedStatement.setString(3, boat.getOwner());
+			preparedStatement.setInt(4, boat.getID());
+			resultSet=preparedStatement.executeUpdate();
+			if(resultSet!=0)
+				return true;
+			else 
+				return false;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}
+		
+	}
+	
 }

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>MMBSeaFoodsAdapter</name><driver>org.sqlite.JDBC</driver><username></username><password></password><savePassword>true</savePassword><url>jdbc:sqlite:D:\SLIIT STUDIES\extra\JavaFX\MMBSeaFoods\MMBSeaFoods\MMBSeaFoods\applicationDB.db</url><database></database><serverAddress></serverAddress><classpath>D:\SLIIT STUDIES\extra\JavaFX\MMBSeaFoods\MMBSeaFoods\MMBSeaFoods\lib\sqlite-jdbc-3.23.1.jar</classpath></jdbcDataAdapter>

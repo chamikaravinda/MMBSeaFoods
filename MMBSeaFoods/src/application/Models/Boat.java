@@ -5,6 +5,15 @@ public class Boat {
 	private int ID;
 	private String BoatNameorNumber;
 	private String Mobile;
+	private String Owner;
+	
+	
+	public String getOwner() {
+		return Owner;
+	}
+	public void setOwner(String owner) {
+		Owner = owner;
+	}
 	public int getID() {
 		return ID;
 	}

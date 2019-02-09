@@ -12,8 +12,31 @@ public class Fish_stock {
 	private Double commition_price;
 	private Double totalBuying_price;
 	private int Lot_ID;
+	private String Status;
+	private String BoatName;
+	private String Lorry_Number;
+	
+	
+	public String getLorry_Number() {
+		return Lorry_Number;
+	}
+	public void setLorry_Number(String lorry_Number) {
+		Lorry_Number = lorry_Number;
+	}
 	public int getID() {
 		return ID;
+	}
+	public String getBoatName() {
+		return BoatName;
+	}
+	public void setBoatName(String boatName) {
+		BoatName = boatName;
+	}
+	public String getStatus() {
+		return Status;
+	}
+	public void setStatus(String status) {
+		Status = status;
 	}
 	public void setID(int iD) {
 		ID = iD;
@@ -73,7 +96,25 @@ public class Fish_stock {
 		Lot_ID = lot_ID;
 	}
 	
+	//Strings Views
 	
-	
+		private String Stotal_Weight ;
+		private String StotalBuying_price;
+
+
+		public String getStotal_Weight() {
+			return Stotal_Weight;
+		}
+		public void setStotal_Weight(String stotal_Weight) {
+			Stotal_Weight = stotal_Weight;
+		}
+		public String getStotalBuying_price() {
+			return StotalBuying_price;
+		}
+		public void setStotalBuying_price(String stotalBuying_price) {
+			StotalBuying_price = stotalBuying_price;
+		}
+
+		
 	
 }

@@ -47,7 +47,8 @@ public class AddBoatController implements Initializable {
 	@FXML
 	private JFXTextField txtMobile;
 	
-
+	@FXML
+	private JFXTextField txtOwner;
 	
 	AnchorPane back;
 	
@@ -61,7 +62,7 @@ public class AddBoatController implements Initializable {
 
 		
 		txtBoatName.getValidators().add(boatName);
-		boatName.setMessage("Please input the Lorry Number");
+		boatName.setMessage("Please input the Boat Name");
 		
 		txtBoatName.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
@@ -96,32 +97,39 @@ public class AddBoatController implements Initializable {
 }
 	
 	public void AddBoat(ActionEvent event) throws SQLException, IOException {
+		
+		
+			Boat boat=new Boat();
+			boat.setBoatNameorNumber(txtBoatName.getText());	
+			boat.setMobile(txtMobile.getText());
+			boat.setOwner(txtOwner.getText());
+			
+		if(!boat.getBoatNameorNumber().isEmpty() && !boat.getMobile().isEmpty()) {
 
-		Boat boat=new Boat();
-		boat.setBoatNameorNumber(txtBoatName.getText());
+			if(service.addBoat(boat)) {
+				
+				Notifications notifications = Notifications.create();
+				notifications.title("Succesfull");
+				notifications.text("Boat added succesfully");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showConfirm();
+				
+				back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+				setNode(back);
+				
+			}else {
+				Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("Boat adding unsuccesfull");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+			}
 		
-		boat.setMobile(txtMobile.getText());
-		
-		if(service.addBoat(boat)) {
-			
-			Notifications notifications = Notifications.create();
-			notifications.title("Succesfull");
-			notifications.text("Boat added succesfully");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showConfirm();
-			
-		}else {
-			Notifications notifications = Notifications.create();
-			notifications.title("Error");
-			notifications.text("Boat adding unsuccesfull");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showError();
 		}
-		
 		
 	}
 

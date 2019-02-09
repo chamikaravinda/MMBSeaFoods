@@ -12,7 +12,36 @@ public class Vehicles {
     private double Premium_Amount;
     private String Last_Payment;
     
+    private String STotal_Lease;     
+    private String SPaid_Amount;   
+    private String STo_Pay;
+    private String SPremium_Amount;
     
+    
+	public String getSTotal_Lease() {
+		return STotal_Lease;
+	}
+	public void setSTotal_Lease(String sTotal_Lease) {
+		STotal_Lease = sTotal_Lease;
+	}
+	public String getSPaid_Amount() {
+		return SPaid_Amount;
+	}
+	public void setSPaid_Amount(String sPaid_Amount) {
+		SPaid_Amount = sPaid_Amount;
+	}
+	public String getSTo_Pay() {
+		return STo_Pay;
+	}
+	public void setSTo_Pay(String sTo_Pay) {
+		STo_Pay = sTo_Pay;
+	}
+	public String getSPremium_Amount() {
+		return SPremium_Amount;
+	}
+	public void setSPremium_Amount(String sPremium_Amount) {
+		SPremium_Amount = sPremium_Amount;
+	}
 	public int getID() {
 		return ID;
 	}

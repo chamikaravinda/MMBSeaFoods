@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+/MMBSeaFoods/src/application/Views/Ltrade/LStocks.fxml * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -7,9 +7,13 @@ package application.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 
+import application.Models.Boat;
 import application.Models.Fish_Lot;
+import application.Models.Fish_stock;
 import application.Models.Vehicles;
+import application.Services.BoatService;
 import application.Services.Fish_LotServices;
+import application.Services.Fish_stockService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,52 +41,72 @@ public class StocksController implements Initializable {
 
     @FXML
     private AnchorPane Stocks;
-    /*
+    
     @FXML
-	private TableView<Fish_Lot> tableLots;
+	private TableView<Fish_stock> Fish_Stock;
 	
 	@FXML
 	private TableColumn<?,?> clmDate;
 	
 	@FXML
-	private TableColumn<?,?> clmWeight;
+	private TableColumn<?,?> clmLorry;
 	
 	@FXML
-	private TableColumn<?,?> clmLorry;
+	private TableColumn<?,?> clmWeight;
 	
 	@FXML
 	private TableColumn<?,?> clmBprice;
 	
 	@FXML
-	private TableColumn<?,?> clmsell;
+	private TableColumn<?,?> clmBoat;
 	
 	
-	public ObservableList<Fish_Lot> list = FXCollections.observableArrayList();
-    */
+	public ObservableList<Fish_stock> list = FXCollections.observableArrayList();//if you want to load to date to table use that method
+   
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
+	Fish_stockService service =new Fish_stockService();
+	Fish_LotServices serviceB =new Fish_LotServices();
+	BoatService serviceC =new BoatService();
+	
     @Override
     public void initialize(URL url, ResourceBundle rb) {
    
-    	/*list.clear();
-    	Fish_LotServices service =new Fish_LotServices();
-    	ArrayList<Fish_Lot> lots=null;
+    	list.clear();
+    	ArrayList<Fish_stock> lots=null;
     	try {
-		 lots =service.getUnslodLots();
+		 lots =service.getUnsoldStocks();
 		 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	for(Fish_Lot lot : lots) {
-			list.add(lot);
+    	for(Fish_stock lot : lots) {
+    		
+			Fish_Lot Stocklot = null;
+			Boat boat = null;
+			
+			try {
+				Stocklot = serviceB.getTheLot(lot.getLot_ID());
+				boat=serviceC.getBoat(lot.getBoat_ID());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+    		
+    		lot.setLorry_Number(Stocklot.getLorry_Number());
+    		lot.setBoatName(boat.getBoatNameorNumber());
+    		lot.setStotal_Weight("Kg "+lot.getTotal_Weight()+"0");
+    		lot.setStotalBuying_price("Rs."+lot.getTotalBuying_price()+"0");
+    		list.add(lot);
 		}
     	
     	clmDate.setCellValueFactory(new PropertyValueFactory<>("Added_Date"));
-    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("Buying_Weight"));
+    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("Stotal_Weight"));
     	clmLorry.setCellValueFactory(new PropertyValueFactory<>("Lorry_Number"));
-    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("buying_price"));
-		
-    	tableLots.setItems(list);*/
+    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("StotalBuying_price"));
+    	clmBoat.setCellValueFactory(new PropertyValueFactory<>("BoatName"));
+    	Fish_Stock.setItems(list);
 
     }
     

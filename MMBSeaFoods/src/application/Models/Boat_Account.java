@@ -8,6 +8,8 @@ public class Boat_Account {
 	private double To_Pay;
 	private double Paid;
 	private int Boat_ID ;
+	
+	
 	public double getPaid() {
 		return Paid;
 	}
@@ -45,6 +47,22 @@ public class Boat_Account {
 		Boat_ID = boat_ID;
 	}
 	
-	
+	//String views 
+	private String STo_Pay;
+	private String SPaid;
+
+
+	public String getSTo_Pay() {
+		return STo_Pay;
+	}
+	public void setSTo_Pay(String string) {
+		STo_Pay = string;
+	}
+	public String getSPaid() {
+		return SPaid;
+	}
+	public void setSPaid(String sPaid) {
+		SPaid = sPaid;
+	}
 	
 }
