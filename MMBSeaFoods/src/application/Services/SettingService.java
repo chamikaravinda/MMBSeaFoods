@@ -10,6 +10,7 @@ import javax.print.DocFlavor.READER;
 
 import application.Models.User;
 import application.Models.Vehicles;
+import javafx.scene.control.Alert;
 
 public class SettingService {
 
@@ -147,6 +148,51 @@ public class SettingService {
 		
 		
     }
+    
+    
+    public void updatePassword(String username,String password) throws SQLException {
+    	
+    	connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		
+		
+		String QUERY_UPDATE_PASSWORD="UPDATE Users "
+				+ "SET PASSWORD = ? "
+				+ "WHERE USERNAME = ?";
+		
+		
+		
+		
+		try {
+			preparedStatement= connection.prepareStatement(QUERY_UPDATE_PASSWORD);
+			preparedStatement.setString(1, password);
+			preparedStatement.setString(2, username);
+
+
+			preparedStatement.executeUpdate();
+			
+			
+			
+			Alert alert=new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText(null);
+			alert.setContentText("Password Updated Successfully");
+			alert.showAndWait();
+			
+			
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			connection.close();
+		}
+		
+
+		
+		
+    }
+
+
     
     //get All users
    public ArrayList<User> getUsers() throws SQLException{
