@@ -18,28 +18,18 @@ public class LFish_stockService {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;		
 		    
-			String GetCurrentWeight= "select * from Local_Fish_stock";
-		
-		
-		  
-	
-		    String insertQuery = "INSERT INTO Local_Fish_stock(Fish_Type, Total_Weight,)" + 
-				"VALUES (?,?)";
-			preparedStatement=connection.prepareStatement(insertQuery);
-			preparedStatement.setInt(1, lstock.getFish_Type());
-			preparedStatement.setDouble(2,lstock.getTotal_Weight());
+			String avalibility= "SELECT * FROM Local_Fish_stock where Fish_Type=?";
+			preparedStatement=connection.prepareStatement(avalibility);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			
-	    	/*
 			
-			if(resultSet.next()) {
+			
+			if(lstock.getFish_Type()==resultSet.getInt("Fish_Type")) {
 				
-			   String UpdatQuery="Update Local_Fish_stock set Total_Weight = Total_Weight + ?"+" Where Fish_Type=?";
-				preparedStatement = connection.prepareStatement(UpdatQuery);
+				String UpdateExsitedType=" UPDATE Local_Fish_stock"+" SET Total_Weight=?"+"WHERE Fish_Type="+"lstock.getFish_Type()";
+				preparedStatement=connection.prepareStatement(UpdateExsitedType);
 				preparedStatement.setDouble(1, lstock.getTotal_Weight());
-				preparedStatement.setInt(2, lstock.getFish_Type());
 				ResultSet resultSet1=preparedStatement.executeQuery();
-				
 			}
 			else {
 				
@@ -52,11 +42,14 @@ public class LFish_stockService {
 				preparedStatement.setDouble(2, lstock.getTotal_Weight());
 				ResultSet resultSet1=preparedStatement.executeQuery();
 				
-			}   */
-			return 0;
 				
-			
+				
+			}
+		  
 	
+			
+			
+		return 0;
 	}
 			
 			

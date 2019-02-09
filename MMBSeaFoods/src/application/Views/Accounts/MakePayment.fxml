@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -39,7 +40,11 @@
                   </JFXButton>
                </children>
             </AnchorPane>
-            <Separator layoutX="10.0" layoutY="65.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
+            <JFXButton layoutX="40.0" layoutY="76.0" onAction="#back" text="Back">
+               <graphic>
+                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15" />
+               </graphic>
+            </JFXButton>
          </children>
       </AnchorPane>
       

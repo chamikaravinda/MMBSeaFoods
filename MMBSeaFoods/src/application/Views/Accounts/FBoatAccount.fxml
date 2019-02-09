@@ -52,7 +52,6 @@
                   <JFXComboBox fx:id="cmbBoatNames" prefHeight="30.0" prefWidth="256.0" promptText="Boat Names" />
                </children>
             </GridPane>
-            <Separator layoutX="10.0" layoutY="65.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
             <JFXButton alignment="CENTER" layoutX="981.0" layoutY="611.0" maxWidth="208.0" onAction="#makePayment" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Make Payment" textFill="#fefeff" AnchorPane.bottomAnchor="63.0" AnchorPane.rightAnchor="54.0">
                <font>
                   <Font size="18.0" />

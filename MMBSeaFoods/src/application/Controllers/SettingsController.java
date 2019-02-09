@@ -42,7 +42,7 @@ public class SettingsController implements Initializable{
 		try {
 			user =service.getUser();
 			txtusername.setText(user.getUsername());
-			txtpass.setText(user.getUsername());
+			txtpass.setText(user.getPassword());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
