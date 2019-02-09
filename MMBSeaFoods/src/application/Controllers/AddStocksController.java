@@ -384,24 +384,6 @@ public class AddStocksController implements Initializable{
 									serviceH.addEntries_Uncleard(boatEntryU);
 								}
 							
-								/*Boat_Account boatEntry =new Boat_Account();
-								boatEntry.setDate(format1.format( new Date()   ));
-								boatEntry.setBoat_ID(stock.getBoat_ID());
-								boatEntry.setReason("Fish Purchase");
-								boatEntry.setTo_Pay(stock.getFishprice());
-								boatEntry.setPaid(0);
-								
-								Boat_Account_UnCleared boatEntryU =new Boat_Account_UnCleared();
-								boatEntryU.setDate(format1.format( new Date()   ));
-								boatEntryU.setBoat_ID(stock.getBoat_ID());
-								boatEntryU.setReason("Fish Purchase");
-								boatEntryU.setTo_Pay(stock.getFishprice());
-								boatEntryU.setPaid(0);
-								*/
-								
-								
-								//if(serviceH.addEntries_Uncleard(boatEntryU)) {
-									
 									Notifications notifications = Notifications.create();
 									notifications.title("Succesfull");
 									notifications.text("Stock added succesfully");

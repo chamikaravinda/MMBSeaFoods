@@ -2,14 +2,19 @@ package application.Controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
 
+import application.Models.Buyers;
 import application.Models.F_Fish_Buyers_Account;
+import application.Models.Foreign_Fish_Buyers;
 import application.Models.Local_Buyers_Account;
 import application.Services.AccountServices;
+import application.Services.BuyerService;
+import application.Services.Foreign_Fish_Buyers_AccountServices;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -40,6 +45,8 @@ public class AccountForeignBuyersController implements Initializable {
 	@FXML private Label  lblBuyer;
 	
 	AccountServices accountServices=new AccountServices();
+	Foreign_Fish_Buyers_AccountServices service= new Foreign_Fish_Buyers_AccountServices();
+	BuyerService serviceB =new BuyerService();
 	
 	private ObservableList<String> buyersNameList = FXCollections.observableArrayList();
 	private ObservableList<F_Fish_Buyers_Account> buyersDetailsList = FXCollections.observableArrayList();
@@ -56,39 +63,50 @@ public class AccountForeignBuyersController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 
-		buyersNameList=accountServices.getAllBuyersNamesForeign();
-		cmbBuyersNames.setItems(buyersNameList);
+		try {
+			buyersNameList=accountServices.getAllBuyersNamesForeign();
+			cmbBuyersNames.setItems(buyersNameList);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		
 		
 		cmbBuyersNames.valueProperty().addListener(new ChangeListener<String>() {
 		        @Override public void changed(ObservableValue<? extends String> ov, String t, String t1) {
-		          
-		            System.out.println(t1);
 		            
 		            String name= t1;
 					
 					lblBuyer.setText(name);
+					try {
+						
+						Buyers id=serviceB.getBuyers(name);
+						
+						System.out.println(id.getID());
+						buyersDetailsList.clear();
+						
+						
+						ArrayList<F_Fish_Buyers_Account> buyersAccountDetials=service.getFBuyerAccountRecords(id.getID());
+						
+						System.out.println(buyersAccountDetials.isEmpty());
+						
+						for( F_Fish_Buyers_Account entry : buyersAccountDetials) {
+							
+							System.out.println(entry.getDate());
+							buyersDetailsList.add(entry);
+						} 
+						tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+						tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
+						tblcTopay.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
+						tblcPaid.setCellValueFactory(new PropertyValueFactory<>("Paid"));
+	
+						tblvBuyersDetails.setItems(buyersDetailsList);
 					
-					int id=accountServices.getBuyerIDByNameForeign(name);
-					
-					System.out.println(id);
-					
-					buyersDetailsList.clear();
-					
-					
-					ArrayList<F_Fish_Buyers_Account> boat_list = accountServices.getAllBuyersListForeign(id);
-					
-					for( F_Fish_Buyers_Account boat : boat_list ) {
-						buyersDetailsList.add(boat);
-					} 
-					tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-					tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
-					tblcTopay.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
-					tblcPaid.setCellValueFactory(new PropertyValueFactory<>("Paid"));
-
-					tblvBuyersDetails.setItems(buyersDetailsList);
-					
-					
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 		        }    
 		    });
@@ -101,19 +119,12 @@ public class AccountForeignBuyersController implements Initializable {
 	public void addRecieved(ActionEvent event) throws IOException {
 		
 		String name=lblBuyer.getText();
-		System.out.println(name);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/FAddBuyerReceived.fxml"));
 		Parent root = loader.load();
 		ForeignAddBuyerRecievedController controller = loader.<ForeignAddBuyerRecievedController>getController();
 		controller.getBuyerName(name); 
-		//controller.getBoatDetails(name);
-		setNode(root);
-		
-		/*add=FXMLLoader.load(getClass().getResource("../Views/Accounts/LMakePayment.fxml"));
-		setNode(add);*/
-		
-		
+		setNode(root);	
 		
 	}
 

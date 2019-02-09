@@ -2,7 +2,9 @@ package application.Services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import application.Models.F_Fish_Buyers_Account;
 
@@ -75,5 +77,45 @@ public class Foreign_Fish_Buyers_AccountServices {
 		}
 		
 	}
+	
+	
+	public ArrayList<F_Fish_Buyers_Account> getFBuyerAccountRecords(int id) throws SQLException {
+			
+			
+			connection=DBConnection.Connector();
+			PreparedStatement preparedStatement=null;
+			ResultSet resultSet=null;
+			String query = "select * from F_Fish_Buyers_Account where Buyer_ID=?";
+			ArrayList<F_Fish_Buyers_Account> accountDetails=new ArrayList<>();
+			
+			try {
+				preparedStatement =connection.prepareStatement(query);
+				preparedStatement.setInt(1, id);
+				
+				resultSet = preparedStatement.executeQuery();
+				while (resultSet.next()) {
+					F_Fish_Buyers_Account entries = new F_Fish_Buyers_Account();
+	
+					entries.setID(Integer.parseInt(resultSet.getString("ID")));
+					entries.setDate(resultSet.getString("Date"));
+					entries.setReason(resultSet.getString("Reason"));
+					entries.setTo_Pay(Double.parseDouble(resultSet.getString("To_Pay")));
+					entries.setPaid(Double.parseDouble(resultSet.getString("Paid")));
+					entries.setBuyer_ID(Integer.parseInt(resultSet.getString("Buyer_ID")));
+					System.out.println(resultSet.getString("Buyer_ID"));
+					accountDetails.add(entries);				
+				}
+				
+				return accountDetails;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}finally {
+				connection.close();
+	
+			}
+		}
+	
 
 }

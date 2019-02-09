@@ -103,8 +103,7 @@ public class BuyerService {
 		}catch(Exception e) {
 			return null;
 		}finally {
-			preparedStatement.close();
-			resultSet.close();
+
 			connection.close();
 		}
 		

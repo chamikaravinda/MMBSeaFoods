@@ -712,7 +712,7 @@ public class AccountServices {
 
 
 
-	public ObservableList<String> getAllBuyersNamesForeign() {
+	public ObservableList<String> getAllBuyersNamesForeign() throws SQLException {
 
 
 		ObservableList<String> buyersNameList=FXCollections.observableArrayList();
@@ -734,34 +734,25 @@ public class AccountServices {
 			while (resultSet.next()) {	
 				
 				String n=resultSet.getString("Name");
-				buyersNameList.add(n);
-				System.out.println(n);
-	
+				buyersNameList.add(n);	
 			}
-				
-			System.out.println(query);
+			
+			return buyersNameList;	
+			
 			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 			System.out.println("Exception at  Get Buyers Names Foreign :" + e.getLocalizedMessage());	
+			return null;
 			
 		} catch (Exception e) {
 			System.out.println("Exception In Get Buyers Names Foreign : " + e);	
 			System.out.println("Exception In at  Get Buyers Names Foreign :" + e.getLocalizedMessage());	
+			return null;
+
 		}finally {
-			try {
-				preparedStatement.close();
-				resultSet.close();
-				connection.close();
-			} catch (SQLException e) {
-				System.out.println("Finally Exception In Get Buyers Names Foreign : " + e);
-			}
-						
-		}
-		
-		return buyersNameList;	
-		
-		
+				connection.close();	
+		}		
 	}
 
 
@@ -799,65 +790,31 @@ public class AccountServices {
 
 
 
-	public ArrayList<F_Fish_Buyers_Account> getAllBuyersListForeign(int id) {
-
-
+	public ArrayList<F_Fish_Buyers_Account> getBuyerAccountRecords(int id) throws SQLException {
+		
 		ArrayList<F_Fish_Buyers_Account> boatList=new ArrayList<F_Fish_Buyers_Account>();
+		connection=DBConnection.Connector();
 		
-		try {
-			
-			connection=DBConnection.Connector();
-			
-			if(connection==null) {
-				System.out.println("Connection not successful");
-			}
-			
-			String query = "SELECT * FROM F_Fish_Buyers_Account WHERE Buyer_ID=?";
-			
-			preparedStatement=connection.prepareStatement(query);
-			preparedStatement.setString(1, String.valueOf(id));
-			resultSet = preparedStatement.executeQuery();
-			
+		String query = "select * from F_Fish_Buyers_Account where Buyer_ID=?";
+		preparedStatement=connection.prepareStatement(query);
+		preparedStatement.setInt(1, id);
+		resultSet = preparedStatement.executeQuery();
+		
 			while (resultSet.next()) {
-				F_Fish_Buyers_Account boat = new F_Fish_Buyers_Account();
+				F_Fish_Buyers_Account entries = new F_Fish_Buyers_Account();
 				
 				
-				boat.setID(Integer.parseInt(resultSet.getString(1)));
-				boat.setDate(resultSet.getString(2));
-				boat.setReason(resultSet.getString(3));
-				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
-				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
-				boat.setBuyer_ID(Integer.parseInt(resultSet.getString(6)));
+				entries.setID(Integer.parseInt(resultSet.getString(1)));
+				entries.setDate(resultSet.getString(2));
+				entries.setReason(resultSet.getString(3));
+				entries.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
+				entries.setPaid(Double.parseDouble(resultSet.getString(5)));
+				entries.setBuyer_ID(Integer.parseInt(resultSet.getString(6)));
 				
-				
-				
-				
-				boatList.add(boat);
+				boatList.add(entries);				
 			}
-			
-			System.out.println(query);
-			
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
-			System.out.println("Exception at  get All Buyers List :" + e.getLocalizedMessage());	
-			
-		} catch (Exception e) {
-			System.out.println("Exception In get All Buyers List : " + e);	
-		}finally {
-			try {
-				preparedStatement.close();
-				resultSet.close();
-				connection.close();
-			} catch (SQLException e) {
-				System.out.println("Finally Exception In get All Buyers List : " + e);
-			}
-			
-			
-		}
-		
-	return boatList;
-	
-	
+			connection.close();
+			return boatList;
 	}
 
 
