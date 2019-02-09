@@ -8,6 +8,7 @@ package application.Controllers;
 import com.jfoenix.controls.JFXButton;
 
 import application.Models.Boat;
+import application.Models.Fish_Lot;
 import application.Models.Foreign_Fish_types;
 import application.Services.Foreign_Fish_typesServices;
 import application.Services.ProfiteAndLossService;
@@ -22,6 +23,8 @@ import java.util.logging.Logger;
 
 import javax.swing.text.TabableView;
 
+import org.controlsfx.control.Notifications;
+
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +32,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -142,6 +147,34 @@ public class FishTypeController implements Initializable {
 		setNode(lots);
 		
 	}
+    
+    public void editType(ActionEvent event) throws IOException {
+    	
+    	Foreign_Fish_types type = tblFishType.getSelectionModel().getSelectedItem();
+    	
+    	if(type != null) {
+    		
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ftrade/EditFishType.fxml"));
+			Parent root = loader.load();
+    		EditFishTypeController controller = loader.<EditFishTypeController>getController();
+    		String id=Integer.toString(type.getID());
+			controller.setID(id); 
+			
+			setNode(root);
+    	}else {
+    		
+    		Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select a Fish type to edit");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+    		
+    	}
+    	
+    }
+    
     
     
 

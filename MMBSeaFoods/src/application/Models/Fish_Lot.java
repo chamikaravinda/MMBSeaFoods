@@ -11,16 +11,12 @@ public class Fish_Lot {
     private double other_fees; 
     private double brokerFee;  
     private double buying_price;
-    private int Sold_Weight;
+    private double Sold_Weight;
     private double Sold_price;
     private int Sold_To;
     private String display_Name;
-	public String getDisplay_Name() {
-		return display_Name;
-	}
-	public void setDisplay_Name(String display_Name) {
-		this.display_Name = display_Name;
-	}
+    
+    
 	public int getID() {
 		return ID;
 	}
@@ -75,10 +71,10 @@ public class Fish_Lot {
 	public void setBuying_price(double buying_price) {
 		this.buying_price = buying_price;
 	}
-	public int getSold_Weight() {
+	public double getSold_Weight() {
 		return Sold_Weight;
 	}
-	public void setSold_Weight(int sold_Weight) {
+	public void setSold_Weight(double sold_Weight) {
 		Sold_Weight = sold_Weight;
 	}
 	public double getSold_price() {
@@ -92,8 +88,35 @@ public class Fish_Lot {
 	}
 	public void setSold_To(int sold_To) {
 		Sold_To = sold_To;
-	}  
+	}
+	public String getDisplay_Name() {
+		return display_Name;
+	}
+	public void setDisplay_Name(String display_Name) {
+		this.display_Name = display_Name;
+	}
     
     
+    
+	
+    
+    //display Strings
+	private String Sbuying_price;
+	private String SBuying_Weight;
+	public String getSbuying_price() {
+		return Sbuying_price;
+	}
+	public void setSbuying_price(String sbuying_price) {
+		Sbuying_price = sbuying_price;
+	}
+	public String getSBuying_Weight() {
+		return SBuying_Weight;
+	}
+	public void setSBuying_Weight(String sBuying_Weight) {
+		SBuying_Weight = sBuying_Weight;
+	}
+
+	
+	
 
 }

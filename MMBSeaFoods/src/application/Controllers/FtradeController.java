@@ -14,6 +14,8 @@ import application.Services.Fish_LotServices;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,6 +32,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -65,6 +68,7 @@ public class FtradeController implements Initializable {
     
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
    
@@ -74,6 +78,8 @@ public class FtradeController implements Initializable {
     	try {
 		 lots =service.getUnslodLots();
 		 for(Fish_Lot lot : lots) {
+			 	lot.setSbuying_price("Rs."+lot.getBuying_price()+"0");
+			 	lot.setSBuying_Weight("Kg "+lot.getBuying_Weight()+"0");
 				list.add(lot);
 			}
 		 
@@ -83,9 +89,9 @@ public class FtradeController implements Initializable {
     	
     	
     	clmDate.setCellValueFactory(new PropertyValueFactory<>("Added_Date"));
-    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("Buying_Weight"));
+    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("SBuying_Weight"));
     	clmLorry.setCellValueFactory(new PropertyValueFactory<>("Lorry_Number"));
-    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("buying_price"));
+    	clmBprice.setCellValueFactory(new PropertyValueFactory<>("Sbuying_price"));
 		
     	tableLots.setItems(list);
 
@@ -115,9 +121,17 @@ public class FtradeController implements Initializable {
     	if(lot != null) {
 	    	if(lot.getBuying_Weight() != 0 ) {
 	    		
-	    		lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Vehicles.fxml"));
-				setNode(lots);
+	    		/*lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewSales.fxml"));
+				setNode(lots);*/
 	    		
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ftrade/NewSales.fxml"));
+				Parent root = loader.load();
+				FLotSalesController controller = loader.<FLotSalesController>getController();
+				String id=Integer.toString(lot.getID());
+				controller.setID(id); 
+				
+				setNode(root);
+				
 	    	}else {
 	    		Notifications notifications = Notifications.create();
 				notifications.title("Error");

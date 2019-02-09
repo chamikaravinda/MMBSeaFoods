@@ -163,9 +163,9 @@ public class AddLocalStockController implements Initializable  {  //
 			local_Fish.setFishName(cmbLftype.getValue());
 			local_Fish.setTotal_Weight(Double.parseDouble(Lfweight.getText()));
 			local_Fish.setPrice(local_Fish.getTotal_Weight()*types.getPrice());
-		
 			local_fishStock.add(local_Fish);
 			
+
 		}
 		
 		

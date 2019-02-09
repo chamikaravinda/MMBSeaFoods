@@ -3,6 +3,7 @@ package application.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -48,7 +49,7 @@ public class AddLeasePaymentController implements Initializable{
 	VehiclesServices services =new VehiclesServices();
 	ProfiteAndLossService entryService=new ProfiteAndLossService();
 	
-	
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 	
 	AnchorPane add;
 
@@ -89,7 +90,7 @@ public class AddLeasePaymentController implements Initializable{
 		
 	}
 	
-	public void AddPayment(ActionEvent event) throws SQLException{
+	public void AddPayment(ActionEvent event) throws SQLException, IOException{
 		
 		String VNo=cmbVehicles.getValue();
 		String payAmount=txtPaidAmount.getText();
@@ -98,12 +99,11 @@ public class AddLeasePaymentController implements Initializable{
 		Vehicles_Leased_Payments payment =new Vehicles_Leased_Payments();
 		payment.setVehicle_ID(vehicle.getID());
 		payment.setPaid_Amount(Double.parseDouble(payAmount));
-		Date date = new Date();
-		payment.setPayment_Date(date);
+		payment.setPayment_Date(format1.format( new Date()));
 		
 		if(services.Vehicles_Leased_Payment_Add(payment)) {
 		
-			vehicle.setLast_Payment(date.toString());
+			vehicle.setLast_Payment(format1.format( new Date()));
 		
 			Double paidAmt = vehicle.getPaid_Amount()+(Double.parseDouble(payAmount));
 			vehicle.setPaid_Amount(paidAmt);
@@ -116,7 +116,7 @@ public class AddLeasePaymentController implements Initializable{
 			ProfiteAndLose newEntry =new ProfiteAndLose();
 			
 			newEntry.setReason("Leasing Premiume Payment For the Vehicel "+vehicle.getVehicle_No());
-			newEntry.setDate(date.toString());
+			newEntry.setDate(format1.format( new Date()));
 			newEntry.setPaid(payment.getPaid_Amount());
 			newEntry.setTo_Pay(0);
 			entryService.addProfitAndLossEntry(newEntry);
@@ -130,6 +130,9 @@ public class AddLeasePaymentController implements Initializable{
 				notifications.hideAfter(Duration.seconds(2));
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
+				
+				add=FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
+				setNode(add);
 			}
 			
 		

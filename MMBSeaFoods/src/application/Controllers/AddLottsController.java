@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.Notifications;
@@ -69,6 +71,8 @@ public class AddLottsController implements Initializable {
 	Third_Party_AccountServices service2=new Third_Party_AccountServices();
 	
 	ProfiteAndLossService ProfitAndLossService=new ProfiteAndLossService();
+	
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -141,11 +145,10 @@ public class AddLottsController implements Initializable {
 	
 }
 	
-	public void AddLots(ActionEvent event) throws SQLException, IOException {
+	public void AddLots(ActionEvent event) throws SQLException, IOException, ParseException {
 		
 		Fish_Lot newLot =new Fish_Lot();
-		Date date =new Date();
-		newLot.setAdded_Date(date.toString());
+		newLot.setAdded_Date(format1.format( new Date()   ));
 		newLot.setLorry_Number(txtLorryNo.getText());
 		newLot.setLorry_fee(Double.parseDouble(txtLorryFee.getText()));
 		newLot.setIce_fee(Double.parseDouble(txtIceFee.getText()));
@@ -155,7 +158,7 @@ public class AddLottsController implements Initializable {
 			if(newLot.getIce_fee() >0.0) {
 				if(chkIce.isSelected()) {
 					Third_Party_Account entry =new Third_Party_Account();
-					entry.setDate(date.toString());
+					entry.setDate(newLot.getAdded_Date());
 					entry.setTo_Pay(newLot.getIce_fee());
 					entry.setPaid(0);
 					entry.setReason("Ice fee for Lot form Lorry "+newLot.getLorry_Number());
@@ -166,7 +169,7 @@ public class AddLottsController implements Initializable {
 				}else {
 					
 					ProfiteAndLose entry=new ProfiteAndLose();
-					entry.setDate(date.toString());
+					entry.setDate(newLot.getAdded_Date());
 					entry.setTo_Pay(0);
 					entry.setPaid(newLot.getIce_fee());
 					entry.setReason("Ice fee for Lot form Lorry "+newLot.getLorry_Number());
@@ -177,7 +180,7 @@ public class AddLottsController implements Initializable {
 			if(newLot.getLorry_fee() > 0.0) {	
 				if(chkLorry.isSelected()) {
 					Third_Party_Account entry =new Third_Party_Account();
-					entry.setDate(date.toString());
+					entry.setDate(newLot.getAdded_Date());
 					entry.setTo_Pay(newLot.getLorry_fee());
 					entry.setPaid(0);
 					entry.setReason("Lorry fee for Lot form  Lorry "+newLot.getLorry_Number());
@@ -186,7 +189,7 @@ public class AddLottsController implements Initializable {
 					service2.addEntry(entry);
 				}else {
 					ProfiteAndLose entry=new ProfiteAndLose();
-					entry.setDate(date.toString());
+					entry.setDate(newLot.getAdded_Date());
 					entry.setTo_Pay(0);
 					entry.setPaid(newLot.getLorry_fee());
 					entry.setReason("Lorry fee for Lot form Lorry "+newLot.getLorry_Number());
@@ -196,7 +199,7 @@ public class AddLottsController implements Initializable {
 			if(newLot.getOther_fees()>0.0) {
 				if(chkOther.isSelected()) {
 					Third_Party_Account entry =new Third_Party_Account();
-					entry.setDate(date.toString());
+					entry.setDate(newLot.getAdded_Date());
 					entry.setTo_Pay(newLot.getLorry_fee());
 					entry.setPaid(0);
 					entry.setReason("Other expences for Lot form  Lorry  "+newLot.getLorry_Number());
@@ -205,13 +208,15 @@ public class AddLottsController implements Initializable {
 					service2.addEntry(entry);
 				}else {
 					ProfiteAndLose entry=new ProfiteAndLose();
-					entry.setDate(date.toString());
+					entry.setDate(newLot.getAdded_Date());
 					entry.setTo_Pay(0);
 					entry.setPaid(newLot.getLorry_fee());
 					entry.setReason("Other expences for Lot form  Lorry "+newLot.getLorry_Number());
 					ProfitAndLossService.addProfitAndLossEntry(entry);
 				}
 			}
+			
+			
 			
 			Notifications notifications = Notifications.create();
 			notifications.title("Succesfull");
@@ -220,6 +225,9 @@ public class AddLottsController implements Initializable {
 			notifications.hideAfter(Duration.seconds(2));
 			notifications.position(Pos.CENTER);
 			notifications.showConfirm();
+			
+			back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+			setNode(back);
 			
 		}else {
 			Notifications notifications = Notifications.create();

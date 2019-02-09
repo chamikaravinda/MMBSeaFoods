@@ -28,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -52,7 +53,7 @@ public class BoatsController implements Initializable {
 	@FXML
 	private TableColumn<?,?> clmOwner;
 	
-	 ObservableList<Boat> list = FXCollections.observableArrayList();
+	ObservableList<Boat> list = FXCollections.observableArrayList();
 
     AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
 
@@ -135,7 +136,21 @@ public class BoatsController implements Initializable {
 		
 	}
     
-    
+    public void editNewBoat(ActionEvent event) throws IOException {
+    	
+    	Boat boat=tblboats.getSelectionModel().getSelectedItem();
+    	
+    	if(boat != null) {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ftrade/EditBoat.fxml"));
+			Parent root = loader.load();
+    		EditBoatController controller = loader.<EditBoatController>getController();
+    		String id=Integer.toString(boat.getID());
+			controller.setID(id); 
+			
+			setNode(root);
+    	}
+    	
+    }
 
     
 

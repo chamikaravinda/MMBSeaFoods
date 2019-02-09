@@ -48,8 +48,8 @@
             </JFXButton>
             <GridPane layoutX="2.0" layoutY="30.0" prefHeight="537.0" prefWidth="1192.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="591.0" minWidth="10.0" prefWidth="476.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="721.0" minWidth="10.0" prefWidth="716.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -59,14 +59,15 @@
                      <children>
                         <TableView fx:id="tblFish" layoutX="3.0" layoutY="188.0" prefHeight="341.0" prefWidth="583.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="188.0">
                           <columns>
+                            <TableColumn fx:id="clmtype" prefWidth="75.0" text="Type" />
                             <TableColumn fx:id="clmWeight" prefWidth="75.0" text="Weight" />
-                            <TableColumn fx:id="clmPrice" prefWidth="75.0" text="Price" />
+                              <TableColumn fx:id="clmPrice" prefWidth="75.0" text="Price" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXTextField fx:id="txtFishweigth" labelFloat="true" layoutX="321.0" layoutY="58.0" prefHeight="45.0" prefWidth="265.0" promptText="Weight" unFocusColor="#0d00ff" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="58.0">
+                        <JFXTextField fx:id="txtFishweigth" labelFloat="true" layoutX="321.0" layoutY="58.0" onAction="#FishListAdd" prefHeight="45.0" prefWidth="265.0" promptText="Weight" unFocusColor="#0d00ff" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="58.0">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -99,7 +100,7 @@
                         </GridPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="537.0" prefWidth="525.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                  <AnchorPane prefHeight="541.0" prefWidth="462.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                      <children>
                         <JFXComboBox fx:id="cmbLot" layoutX="14.0" layoutY="28.0" prefHeight="45.0" prefWidth="406.0" promptText="Select the lot" styleClass="font" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="28.0" />
                         <JFXComboBox fx:id="cmbBoat" layoutX="14.0" layoutY="94.0" prefHeight="45.0" prefWidth="406.0" promptText="Select the Boat" styleClass="font" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="94.0" />

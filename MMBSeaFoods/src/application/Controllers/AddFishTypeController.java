@@ -148,6 +148,9 @@ public class AddFishTypeController implements Initializable {
 		notifications.position(Pos.CENTER);
 		notifications.showConfirm();
 		
+		back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/FishTypes.fxml"));
+		setNode(back);
+		
 	}else {
 		Notifications notifications = Notifications.create();
 		notifications.title("Error");

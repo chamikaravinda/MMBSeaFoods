@@ -17,8 +17,8 @@ public class Fish_stockService {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO Local_Fish_stock(Fish_Type, Total_Weight,)" + 
-							"VALUES (?,?)";
+		String insertQuery= "INSERT INTO Fish_stock (Added_Date, Boat_ID, Harbour,NoofFishes,Total_Weight,"
+				+ "fishprice,commitionprice,totalprice,Lot_ID,Status) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		
 		
 		try {
@@ -91,4 +91,34 @@ public class Fish_stockService {
 		
 	}
 
+	public boolean sellStock(int ID) throws SQLException {
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String Updatequery = "UPDATE Fish_stock set Status=?"
+						+ " where Lot_ID= '"+ID+"' ";
+
+		try {
+
+				preparedStatement = connection.prepareStatement(Updatequery);
+				preparedStatement.setString(1, "SOLD");
+				resultSet=preparedStatement.executeUpdate();
+				
+				if(resultSet != 0) {
+					System.out.println("2nd method ok");
+
+					return true;
+				}
+				else 
+					return false;
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}
+		
+	}
 }

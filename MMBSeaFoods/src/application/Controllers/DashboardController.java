@@ -12,13 +12,17 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class DashboardController implements Initializable {
@@ -40,7 +44,7 @@ public class DashboardController implements Initializable {
     private JFXButton btnLogout;
     
     
-    AnchorPane Home,Ftrade,Ltrade,Vehicles,Settings;
+    AnchorPane Home,Ftrade,Ltrade,Vehicles,Settings,Accounts;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,7 +54,8 @@ public class DashboardController implements Initializable {
              Ftrade = FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
              Ltrade = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
              Vehicles = FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
-             Settings = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
+             Settings = FXMLLoader.load(getClass().getResource("../Views/Settings/settings.fxml"));
+             Accounts = FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
             setNode(Home);
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,7 +82,8 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void switchHome(ActionEvent event) {
+    private void switchHome(ActionEvent event) throws IOException {
+    	Home=FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
         setNode(Home);
     }
 
@@ -102,8 +108,26 @@ public class DashboardController implements Initializable {
     }
     
     @FXML
-    private void LogOut(ActionEvent event) {
-       
+    private void switchAccounts(ActionEvent event) {
+        setNode(Accounts);
+    }
+    
+    @FXML
+    private void LogOut(ActionEvent event) throws IOException {
+    	
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("../Views/Login.fxml"));
+		Parent parent = loader.load();
+		
+		Scene scene =  new Scene(parent);
+		scene.getStylesheets().add(getClass().getResource("../Views/custom.css").toExternalForm());
+
+		
+		Stage window  = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		
+		window.setScene(scene);
+		window.show();
+		window.centerOnScreen();
     }
     @FXML
     private JFXButton btnVehicles1;

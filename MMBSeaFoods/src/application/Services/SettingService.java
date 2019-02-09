@@ -10,6 +10,7 @@ import javax.print.DocFlavor.READER;
 
 import application.Models.User;
 import application.Models.Vehicles;
+import javafx.scene.control.Alert;
 
 public class SettingService {
 
@@ -88,7 +89,7 @@ public class SettingService {
 		PreparedStatement preparedStatement=null;
 		int resultSet;
 		
-		String upadateQuery="update User set username=?,passworrd=?"+"where ID= '"+user.getId()+"' ";
+		String upadateQuery="update Users set USERNAME=?,PASSWORD=?"+"where ID= '"+user.getId()+"' ";
 		try {
 			
 			preparedStatement= connection.prepareStatement(upadateQuery);
@@ -148,13 +149,58 @@ public class SettingService {
 		
     }
     
+    
+    public void updatePassword(String username,String password) throws SQLException {
+    	
+    	connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		
+		
+		String QUERY_UPDATE_PASSWORD="UPDATE Users "
+				+ "SET PASSWORD = ? "
+				+ "WHERE USERNAME = ?";
+		
+		
+		
+		
+		try {
+			preparedStatement= connection.prepareStatement(QUERY_UPDATE_PASSWORD);
+			preparedStatement.setString(1, password);
+			preparedStatement.setString(2, username);
+
+
+			preparedStatement.executeUpdate();
+			
+			
+			
+			Alert alert=new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText(null);
+			alert.setContentText("Password Updated Successfully");
+			alert.showAndWait();
+			
+			
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			connection.close();
+		}
+		
+
+		
+		
+    }
+
+
+    
     //get All users
    public ArrayList<User> getUsers() throws SQLException{
 	    
 	    connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
-		String getUsersquery= "select * from User";
+		String getUsersquery= "select * from Users";
 		
 		ArrayList<User> list =new ArrayList<>(); //new object created to use below
 	   
@@ -187,5 +233,35 @@ public class SettingService {
 	   
    }
 
+   public User getUser() throws SQLException {
+   	
+   	connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		
+		String getUserQuery= "select * from Users";
+		User user= new User();
+		
+		try {
+			preparedStatement= connection.prepareStatement(getUserQuery);
+			resultSet=preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+			user.setId(resultSet.getInt("id"));
+			user.setPassword(resultSet.getString("password"));
+			user.setUsername(resultSet.getString("username"));
+			}
+			return user;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			connection.close();
+		}
+		
+
+		
+		
+   }
 
 }
