@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.Notifications;
+
 import com.jfoenix.controls.JFXComboBox;
 
 import application.Models.Boat_Account;
@@ -19,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -80,8 +83,17 @@ public class AccountsForeignBoatController implements Initializable{
 					ArrayList<Boat_Account> boat_list = accountServices.getAllBOATListForeign(id);
 					
 					for( Boat_Account boat : boat_list ) {
-						boat.setSTo_Pay("Rs. "+String.format ("%2.0f", boat.getTo_Pay())+".00");
-						boat.setSPaid("Rs. "+String.format ("%2.0f", boat.getSPaid())+".00");
+						if(boat.getTo_Pay()!=0) {
+							boat.setSTo_Pay("Rs."+String.format ("%2.0f", boat.getTo_Pay())+".00");
+						}else {
+							boat.setSTo_Pay("Rs 0.00");
+						}
+						if(boat.getPaid()!=0) {
+							boat.setSPaid("Rs. "+String.format ("%2.0f", boat.getSPaid())+".00");
+						}else {
+							boat.setSPaid("Rs 0.00");
+						}
+						
 						boatDetailsList.add(boat);
 					} 
 					tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
@@ -149,6 +161,7 @@ public class AccountsForeignBoatController implements Initializable{
 	
 	public void makePayment(ActionEvent event) throws IOException {
 		
+		if(cmbBoatNames.getValue() !=null) {
 		String name=lblBoat.getText();
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/MakePayment.fxml"));
@@ -156,7 +169,15 @@ public class AccountsForeignBoatController implements Initializable{
 		AccountsForeignMakePaymentController controller = loader.<AccountsForeignMakePaymentController>getController();
 		controller.getBoatName(name);
 		setNode(root);
-		
+		}else {
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select a boat to make payments");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+		}
 		
 		
 		

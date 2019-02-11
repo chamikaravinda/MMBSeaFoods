@@ -83,12 +83,23 @@ public class AccountsForeignMakePaymentController implements Initializable{
 		ArrayList<Boat_Account> boat_list = accountServices.getAllBOQListUnclearedForeign(id);
 		
 		for( Boat_Account boat : boat_list ) {
+			if(boat.getTo_Pay()!=0) {
+				boat.setSTo_Pay("Rs."+String.format ("%2.0f", boat.getTo_Pay())+".00");
+			}else {
+				boat.setSTo_Pay("Rs 0.00");
+			}
+			if(boat.getPaid()!=0) {
+				boat.setSPaid("Rs. "+String.format ("%2.0f", boat.getSPaid())+".00");
+			}else {
+				boat.setSPaid("Rs 0.00");
+			}
+			
 			boatDetailsList.add(boat);
 		} 
 		tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
-		tblcTopay.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
-		tblcPaid.setCellValueFactory(new PropertyValueFactory<>("Paid"));
+		tblcTopay.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
+		tblcPaid.setCellValueFactory(new PropertyValueFactory<>("SPaid"));
 
 		tblvBoatDetails.setItems(boatDetailsList);
 	

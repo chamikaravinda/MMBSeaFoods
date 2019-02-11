@@ -1,3 +1,4 @@
+
 package application.Models;
 
 public class Commition {
@@ -47,5 +48,24 @@ public class Commition {
 		Boat_ID = boat_ID;
 	}
 	
+	//String views
+	
+	private String STo_Pay;
+	private String SPaid;
+
+	public String getSTo_Pay() {
+		return STo_Pay;
+	}
+	public void setSTo_Pay(String sTo_Pay) {
+		STo_Pay = sTo_Pay;
+	}
+	public String getSPaid() {
+		return SPaid;
+	}
+	public void setSPaid(String sPaid) {
+		SPaid = sPaid;
+	}
+	
 	
 }
+

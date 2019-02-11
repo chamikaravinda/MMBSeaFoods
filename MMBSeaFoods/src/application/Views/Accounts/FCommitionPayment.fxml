@@ -38,11 +38,9 @@
                   </JFXButton>
                </children>
             </AnchorPane>
-            <Separator layoutX="10.0" layoutY="65.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
          </children>
       </AnchorPane>
       
    </children>
-
 </AnchorPane>
 

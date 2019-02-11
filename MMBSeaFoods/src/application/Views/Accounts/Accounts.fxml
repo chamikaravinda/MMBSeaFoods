@@ -15,8 +15,8 @@
      <children>
       <AnchorPane fx:id="Accounts" layoutX="7.0" prefHeight="713.0" prefWidth="1226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Separator layoutX="-14.0" layoutY="133.0" prefHeight="4.0" prefWidth="1219.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="133.0" />
-            <GridPane layoutX="30.0" layoutY="84.0" prefHeight="78.0" prefWidth="1165.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="300.0">
+            <Separator layoutX="-14.0" layoutY="133.0" prefHeight="4.0" prefWidth="1219.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="133.0" />
+            <GridPane layoutX="23.0" layoutY="226.0" prefHeight="78.0" prefWidth="1165.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="226.0">
               <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -56,13 +56,13 @@
                   </JFXButton>
                </children>
             </GridPane>
-            <Label layoutX="30.0" layoutY="414.0" prefHeight="30.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Forign Trade" />
-            <GridPane layoutX="33.0" layoutY="488.0" prefHeight="90.0" prefWidth="1219.0" AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+            <Label layoutX="30.0" layoutY="414.0" prefHeight="30.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Forign Trade" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="414.0" />
+            <GridPane layoutX="33.0" layoutY="488.0" prefHeight="90.0" prefWidth="1219.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="475.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -76,7 +76,7 @@
                         <FontAwesomeIconView fill="#f7f8f8" glyphName="SHOPPING_CART" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                      <GridPane.margin>
-                        <Insets left="60.0" />
+                        <Insets />
                      </GridPane.margin>
                      <opaqueInsets>
                         <Insets />
@@ -90,7 +90,7 @@
                         <FontAwesomeIconView fill="#f7f8f8" glyphName="SHOPPING_CART" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                      <GridPane.margin>
-                        <Insets left="75.0" />
+                        <Insets />
                      </GridPane.margin>
                   </JFXButton>
                   <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#fSales" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sales" textFill="#fefeff" GridPane.columnIndex="3">
@@ -101,7 +101,7 @@
                         <FontAwesomeIconView fill="#f7f8f8" glyphName="SHOPPING_CART" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                      <GridPane.margin>
-                        <Insets left="50.0" />
+                        <Insets />
                      </GridPane.margin>
                   </JFXButton>
                   <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#ForeignBuyers" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Buyers" textFill="#fefeff" GridPane.columnIndex="1">
@@ -112,14 +112,13 @@
                         <FontAwesomeIconView fill="#f7f8f8" glyphName="USERS" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                      <GridPane.margin>
-                        <Insets left="65.0" />
+                        <Insets />
                      </GridPane.margin>
                   </JFXButton>
                </children>
             </GridPane>
-            <Label layoutX="30.0" layoutY="209.0" prefHeight="30.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Local Trade" />
-            <Separator layoutX="-4.0" layoutY="402.0" prefHeight="4.0" prefWidth="1219.0" />
-            <Separator layoutX="-4.0" layoutY="670.0" prefHeight="4.0" prefWidth="1219.0" />
+            <Label layoutX="30.0" layoutY="170.0" prefHeight="30.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Local Trade" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="170.0" />
+            <Separator layoutX="-4.0" layoutY="402.0" prefHeight="4.0" prefWidth="1219.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="402.0" />
             <Label layoutX="23.0" layoutY="36.0" prefHeight="39.0" prefWidth="247.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="All Accounts" />
          </children>
       </AnchorPane>
