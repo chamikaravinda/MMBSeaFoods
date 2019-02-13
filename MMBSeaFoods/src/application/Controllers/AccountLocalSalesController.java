@@ -1,5 +1,6 @@
 package application.Controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -9,9 +10,12 @@ import application.Services.AccountServices;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,18 +24,15 @@ import javafx.util.Duration;
 
 public class AccountLocalSalesController implements Initializable{
 	
-	@FXML
-	private AnchorPane Accounts;
-	
-	AnchorPane add;
-	
-	@FXML private TableView<LocalSales> tblvSales;
-	
-	@FXML private TableColumn<?, ?> tblcDate;
-	@FXML private TableColumn<?, ?> tblcBuyerName;
-	@FXML private TableColumn<?, ?> FishType;
-	@FXML private TableColumn<?, ?> TotalWeight;
-	
+    @FXML
+    private AnchorPane Accounts;
+
+    @FXML
+    private Label BoatName;
+    
+    AnchorPane add;
+
+	/*
 	
 	private ObservableList<LocalSales> boatDetailsList = FXCollections.observableArrayList();
 	
@@ -61,7 +62,7 @@ public class AccountLocalSalesController implements Initializable{
 		
 	}
 	
-	
+	*/
 	
 
 	
@@ -86,5 +87,19 @@ public class AccountLocalSalesController implements Initializable{
         
 	
     }
+	
+	 @FXML
+	    void back(ActionEvent event)throws IOException {
+	    	
+	    	add= FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+	    	setNode(add);
+
+	    }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		
+	}
 
 }
