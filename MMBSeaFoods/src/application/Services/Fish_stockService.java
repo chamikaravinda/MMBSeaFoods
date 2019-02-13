@@ -121,4 +121,40 @@ public class Fish_stockService {
 		}
 		
 	}
+	
+	public ArrayList<Fish_stock> getLotStocks(int id) throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		String query= "select * from Fish_stock where Lot_ID = ? ";
+		ArrayList<Fish_stock> list =new ArrayList<>();
+		
+		try {
+			preparedStatement =connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			System.out.println(resultSet);
+			while(resultSet.next()) {
+				Fish_stock fishStock=new Fish_stock();
+				fishStock.setID(Integer.parseInt(resultSet.getString("ID")));
+				fishStock.setAdded_Date(resultSet.getString("Added_Date"));
+				fishStock.setLot_ID(Integer.parseInt(resultSet.getString("Lot_ID")));
+				fishStock.setTotal_Weight(Double.parseDouble(resultSet.getString("Total_Weight")));
+				fishStock.setTotalBuying_price(Double.parseDouble(resultSet.getString("totalprice")));
+				fishStock.setBoat_ID(Integer.parseInt(resultSet.getString("Boat_ID")));
+				list.add(fishStock);
+				
+				
+			}
+			return list;
+			
+		}catch(Exception e) {
+			return null;
+		}finally {
+			connection.close();
+		}
+		
+		
+	}
 }

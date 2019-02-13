@@ -11,8 +11,10 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.Notifications;
 
 import application.Models.Foreign_Fish_types;
+import application.Models.Local_Fish_types;
 import application.Services.DashboardHomeService;
 import application.Services.Foreign_Fish_typesServices;
+import application.Services.Local_Fish_typesServices;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,11 +62,19 @@ public class DashboardHomeController implements Initializable {
     private TableColumn<?, ?> clmA20;
     
     @FXML
+    private TableView<Local_Fish_types> tblvLocalFishType;
+    @FXML
+    private TableColumn<?, ?> tblcNameLocal;
+    @FXML
+    private TableColumn<?, ?> tblcPriceLocal;
+    
+    @FXML
     private AnchorPane home;
     
     DashboardHomeService service = new DashboardHomeService();
     ObservableList<Foreign_Fish_types> list = FXCollections.observableArrayList();
-	NumberFormat formatter = new DecimalFormat("#0.00"); 
+    ObservableList<Local_Fish_types> listLocal = FXCollections.observableArrayList();
+    NumberFormat formatter = new DecimalFormat("#0.00"); 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
@@ -75,12 +85,17 @@ public class DashboardHomeController implements Initializable {
 			lblboatpay.setText(service.TotalBoat());
 			
 			list.clear();
+			listLocal.clear();
 	    	Foreign_Fish_typesServices service =new Foreign_Fish_typesServices();
-	    	
+	    	Local_Fish_typesServices serviceLocal=new Local_Fish_typesServices();
+
 	    	ArrayList<Foreign_Fish_types> ftypes =null;
+	    	ArrayList<Local_Fish_types> ftypesLocal =null;
 	    	
 	    	try {
 				ftypes=service.getfishTypes();
+				ftypesLocal=serviceLocal.getLocalfishTypes();
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -93,12 +108,26 @@ public class DashboardHomeController implements Initializable {
 				list.add(sup);
 			}	
 	    	
+
+	    	for(Local_Fish_types sup1 : ftypesLocal) {
+	    		
+				listLocal.add(sup1);
+			}
+	    	
+	    	
 	    	clmName.setCellValueFactory(new PropertyValueFactory<>("Name"));
 	    	clmB15.setCellValueFactory(new PropertyValueFactory<>("Sprice_15B"));
 	    	clm15B20.setCellValueFactory(new PropertyValueFactory<>("Sprice20_15"));
 	    	clmA20.setCellValueFactory(new PropertyValueFactory<>("Sprice_20P"));
 	    	
 	    	tblFishType.setItems(list);
+	    	
+	    	
+	    	tblcNameLocal.setCellValueFactory(new PropertyValueFactory<>("Name"));
+	    	tblcPriceLocal.setCellValueFactory(new PropertyValueFactory<>("Price"));
+	    	
+	    	tblvLocalFishType.setItems(listLocal);
+	    	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,6 +144,34 @@ public class DashboardHomeController implements Initializable {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Home/EditFishType.fxml"));
 			Parent root = loader.load();
     		EditFishTypeController2 controller = loader.<EditFishTypeController2>getController();
+    		String id=Integer.toString(type.getID());
+			controller.setID(id); 
+			
+			setNode(root);
+    	}else {
+    		
+    		Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select a Fish type to edit");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+    		
+    	}
+
+    }
+    
+    @FXML
+    void editTypeLocal(ActionEvent event) throws IOException {
+    	
+    	Local_Fish_types type = tblvLocalFishType.getSelectionModel().getSelectedItem();
+    	
+    	if(type != null) {
+    		
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Home/EditFishTypeLocal.fxml"));
+			Parent root = loader.load();
+			EditFishTypeController2Local controller = loader.<EditFishTypeController2Local>getController();
     		String id=Integer.toString(type.getID());
 			controller.setID(id); 
 			

@@ -136,4 +136,33 @@ public class Local_Fish_typesServices {
 		}
 
 	}
+	
+	public boolean UpdateLocal_Fish_Type(Local_Fish_types type) throws SQLException {
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String insertQuery= "UPDATE Local_Fish_types set Name =?, price =? where ID=?";
+		try {
+			preparedStatement = connection.prepareStatement(insertQuery);
+			preparedStatement.setString(1,type.getName());
+			preparedStatement.setDouble(2,type.getPrice());
+			preparedStatement.setDouble(3,type.getID());
+			resultSet=preparedStatement.executeUpdate();
+			
+			if(resultSet != 0) {
+				return true;
+			}
+			else 
+				return false;
+	
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}
+	}
 }

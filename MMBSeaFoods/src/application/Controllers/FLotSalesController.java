@@ -19,6 +19,7 @@ import application.Models.Buyers;
 import application.Models.F_Fish_Buyers_Account;
 import application.Models.F_Fish_Buyers_Account_Uncleard;
 import application.Models.Fish_Lot;
+import application.Models.Fish_stock;
 import application.Models.Foreign_Fish_Buyers;
 import application.Services.BuyerService;
 import application.Services.Fish_LotServices;
@@ -150,6 +151,24 @@ public class FLotSalesController implements Initializable{
 			});
 			
 	    });
+		
+		//Items in the table 
+		ArrayList<Fish_stock> stockList=new ArrayList<>();
+		try {
+			stockList=seriveD.getLotStocks(Integer.parseInt(lblLotID.getText()));
+			for(Fish_stock stocklist : stockList) {
+				
+				
+				
+			}
+			
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
