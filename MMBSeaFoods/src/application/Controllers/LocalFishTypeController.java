@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -119,6 +120,25 @@ public class LocalFishTypeController implements Initializable {
         setNode(add);
     }
 
+    @FXML
+    void switchEditLFishType(ActionEvent event) throws IOException {
+    	
+    	Local_Fish_types lFtype = tblFishType.getSelectionModel().getSelectedItem();
+    	
+    	System.out.println(lFtype.getName());
+    	System.out.println(lFtype.getPrice());
+
+    	if (lFtype != null) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ltrade/LEditFishType.fxml"));
+			Parent root = loader.load();
+			EditLocalFishTypeController LFishcontroller = loader.<EditLocalFishTypeController>getController();
+			String id = Integer.toString(lFtype.getID());
+			LFishcontroller.setID(id);
+
+			setNode(root);
+		}
+
+    }
 
 	
 

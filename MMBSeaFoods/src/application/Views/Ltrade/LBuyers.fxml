@@ -37,12 +37,20 @@
                         <FontAwesomeIconView fill="#3b2f63" glyphName="SHIP" size="17.0" wrappingWidth="29.0" />
                      </graphic>
                   </Label>
-                  <JFXButton alignment="CENTER" layoutX="1007.0" layoutY="63.0" maxWidth="208.0" onAction="#switchAddLbuyer" prefHeight="39.0" prefWidth="184.0" text="Add New Buyers" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="63.0">
+                  <JFXButton alignment="CENTER" layoutX="824.0" layoutY="62.0" maxWidth="208.0" onAction="#switchAddLbuyer" prefHeight="39.0" prefWidth="186.0" text="Add New Buyers" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="209.0" AnchorPane.topAnchor="62.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#3b2f63" glyphName="PLUS" size="17.0" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#3b2f63" glyphName="PLUS" size="20" wrappingWidth="21.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton layoutX="1030.0" layoutY="62.0" onAction="#switchEditLocalBoats" prefHeight="39.0" prefWidth="137.0" text="Edit Buyers" textFill="#3b2f63" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="62.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="EDIT" size="20" text="" />
                      </graphic>
                   </JFXButton>
                </children>

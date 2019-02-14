@@ -148,9 +148,6 @@ public class AddLocalStockController implements Initializable  {  //
 		
 	    }
 
-
-	
-	
 	public void AddLocalFishActions(ActionEvent event)throws SQLException {
 		
 		

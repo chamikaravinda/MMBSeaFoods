@@ -1,16 +1,15 @@
 package application.Services;
-
-
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import application.Models.LocalBuyers;
-public class LocalBuyerService {
+
+
+
+
+public class LocalBuyerService{
 	
 	Connection connection;
 	
@@ -42,6 +41,36 @@ public class LocalBuyerService {
 		
 	}
 	
+	
+	public LocalBuyers getLocalBoat(int ID) throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		
+		String query= "select * from Local_Fish_Buyers where ID=?";
+		LocalBuyers local_buyer =new LocalBuyers();
+		try {
+			preparedStatement =connection.prepareStatement(query);
+			preparedStatement.setInt(1, ID);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				local_buyer.setID(Integer.parseInt(resultSet.getString("ID")));
+				local_buyer.setName(resultSet.getString("Name"));
+				local_buyer.setMobile_No(resultSet.getString("Mobile_No"));
+				
+			}
+			return local_buyer;
+			
+		}catch(Exception e) {
+			return null;
+		}finally {
+			preparedStatement.close();
+			resultSet.close();
+			connection.close();
+		}
+		
+	}
 	
 	public ArrayList<LocalBuyers> getLocalBuyer() throws SQLException{
 		
@@ -76,6 +105,40 @@ public class LocalBuyerService {
 		
 		
 	}
+	
+	
+	/// update Query to Local boat------------------------------------------------------------
+		public boolean UpdateLocalBuyer(LocalBuyers LBuyer) throws SQLException {
+			
+			connection=DBConnection.Connector();
+			PreparedStatement preparedStatement=null;
+			int resultSet;
+			String insertQuery= "UPDATE Local_Fish_Buyers set Name =? , Mobile_No =? " + 
+								" where ID = ? ";
+			try {
+				
+				preparedStatement = connection.prepareStatement(insertQuery);
+				preparedStatement.setString(1, LBuyer.getName());
+				preparedStatement.setString(2, LBuyer.getMobile_No());
+				preparedStatement.setInt(3, LBuyer.getID());
+				resultSet=preparedStatement.executeUpdate();
+				if(resultSet!=0)
+					return true;
+				else 
+					return false;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}finally {
+				connection.close();
+			}
+			
+		}
+		
+		//////End of the Local Boat Query
+	
+	
 	
 }
 

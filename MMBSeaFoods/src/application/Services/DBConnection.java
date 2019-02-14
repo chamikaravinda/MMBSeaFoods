@@ -125,7 +125,8 @@ public class DBConnection {
 				// Local Trades added
 
 				String Local_Fish_Buyers = "CREATE TABLE IF NOT EXISTS Local_Fish_Buyers"
-						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Name          TEXT      NOT NULL,"
+						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," 
+						+ "  Name          TEXT      NOT NULL,"
 						+ "  Mobile_No	  TEXT            )";
 				String Local_Fish_types = "CREATE TABLE IF NOT EXISTS Local_Fish_types"
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"

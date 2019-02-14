@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import application.Models.Boat;
 import application.Models.LocalBoat;
 
 
@@ -138,4 +140,38 @@ public class LocalBoatService {
 		
 		
 	}
+	
+/// update Query to Local boat------------------------------------------------------------
+	public boolean UpdateLocalBoat(LocalBoat Lboat) throws SQLException {
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		String insertQuery= "UPDATE Local_Boats set BoatNo =? , Mobile_No =? , Owner =? " + 
+							" where ID = ? ";
+		try {
+			
+			preparedStatement = connection.prepareStatement(insertQuery);
+			preparedStatement.setString(1, Lboat.getBoatNameorNumber());
+			preparedStatement.setString(2, Lboat.getMobile());
+			preparedStatement.setString(3, Lboat.getOwner());
+			preparedStatement.setInt(4, Lboat.getID());
+			resultSet=preparedStatement.executeUpdate();
+			if(resultSet!=0)
+				return true;
+			else 
+				return false;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}
+		
+	}
+	
+	//////End of the Local Boat Query
+	
+	
 }

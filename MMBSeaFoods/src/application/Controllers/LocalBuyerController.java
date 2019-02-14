@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Models.Buyers;
+import application.Models.LocalBoat;
 import application.Models.LocalBuyers;
 import application.Services.LocalBuyerService;
 import javafx.animation.FadeTransition;
@@ -17,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -110,6 +112,24 @@ public class LocalBuyerController implements Initializable {
     	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
         setNode(add);
     }
+    
+
+    @FXML
+    void switchEditLocalBoats(ActionEvent event)throws IOException {
+    	LocalBuyers LfBuyer = tblBuyers.getSelectionModel().getSelectedItem();
+
+    	if (LfBuyer != null) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ltrade/LEditBuyer.fxml"));
+			Parent root = loader.load();
+			EditLocalBuyerController LByercontroller = loader.<EditLocalBuyerController>getController();
+			String id = Integer.toString(LfBuyer.getID());
+			LByercontroller.setID(id);
+
+			setNode(root);
+		}
+
+    }
+    
 
 
 	
