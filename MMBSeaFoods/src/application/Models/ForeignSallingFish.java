@@ -58,7 +58,26 @@ public class ForeignSallingFish {
 	public void setTotalSellingPrice(double totalSellingPrice) {
 		this.totalSellingPrice = totalSellingPrice;
 	} 
+	
+	//For the view
+	private String SunitePrice;
+	private String StotalSellingPrice;
 
+	public String getSunitePrice() {
+		return SunitePrice;
+	}
+	public void setSunitePrice(String sunitePrice) {
+		SunitePrice = sunitePrice;
+	}
+	public String getStotalSellingPrice() {
+		return StotalSellingPrice;
+	}
+	public void setStotalSellingPrice(String stotalSellingPrice) {
+		StotalSellingPrice = stotalSellingPrice;
+	}
+	
+	
+	
 	
 
 }

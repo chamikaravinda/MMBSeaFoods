@@ -107,6 +107,11 @@ public class FLotSalesController implements Initializable{
     @FXML
     private TableColumn<?, ?> clmSellprice;
     
+    @FXML
+    private Label lbltotalsellingPrice;
+    
+    private double totalItemPrice=0;
+    
     Fish_LotServices service =new Fish_LotServices();
     BuyerService serviceB =new BuyerService();
     Fish_LotServices serviceC=new Fish_LotServices();
@@ -132,7 +137,7 @@ public class FLotSalesController implements Initializable{
 				lot=service.getTheLot(iD);
 				lblAddedDate.setText(lot.getAdded_Date());
 				String price =Double.toString(lot.getBuying_price());
-				lblbuyingprice.setText(price);
+				lblbuyingprice.setText(price+"0");
 				lblLorryNumber.setText(lot.getLorry_Number());
 				Blist=serviceB.getBuyers();
 				
@@ -146,44 +151,7 @@ public class FLotSalesController implements Initializable{
 			}
 			
 			cmbBuyer.setItems(BuyersList);
-			
-			NumberValidator weightValidator =new NumberValidator();
-			
-			txtWeight.getValidators().add(weightValidator);
-			weightValidator.setMessage("Please input Fish Weight Correctly");
-			
-			txtWeight.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
-				@Override
-				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-					if(!newValue) {
-						txtWeight.validate();
-					}
-					
-				}
-				
-			});
-			
-			
-			
-			NumberValidator priceValidator =new NumberValidator();
-			
-			txtSellingPrice.getValidators().add(priceValidator);
-			priceValidator.setMessage("Please input Fish Price Correctly");
-			
-			txtSellingPrice.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
-				@Override
-				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-					if(!newValue) {
-						txtSellingPrice.validate();
-					}
-					
-				}
-				
-			});
-			
-			
+						
 			//Items in the table
 			
 			//initialize the item list
@@ -261,78 +229,127 @@ public class FLotSalesController implements Initializable{
 			clmtype.setCellValueFactory(new PropertyValueFactory<>("name"));
 			clmweight.setCellValueFactory(new PropertyValueFactory<>("totalWeigth"));
 			clmprice.setCellValueFactory(new PropertyValueFactory<>("price"));
-			clmSellprice.setCellValueFactory(new PropertyValueFactory<>("unitePrice"));
 
 			for(ForeignSallingFish item :LotFishItems) {
 				if(item.getTotalWeigth() !=0) {
 					LotFishItemsDisplayList.add(item);
 				}
 			}
-			tblLotFishes.setItems(LotFishItemsDisplayList);
-			
+			tblLotFishes.setEditable(true);
+		    
+	        TableColumn<ForeignSallingFish, String> clmSellprice = 
+	            new TableColumn<>("Selling Price(1 Kg)");
+	        clmSellprice.setCellValueFactory(
+	            new PropertyValueFactory<>("SunitePrice"));
+	        
+	        clmSellprice.setCellFactory(TextFieldTableCell.<ForeignSallingFish>forTableColumn());
+	        clmSellprice.setOnEditCommit(event -> {
+	        		ForeignSallingFish fish = event.getRowValue();
+	        		fish.setSunitePrice(event.getNewValue());
+	        		fish.setUnitePrice(Double.parseDouble(fish.getSunitePrice()));
+	        		fish.setTotalSellingPrice(fish.getTotalWeigth()*fish.getUnitePrice());
+	        		fish.setStotalSellingPrice(Double.toString(fish.getTotalSellingPrice()));
+	        		fish.setSunitePrice(Double.toString(fish.getUnitePrice()));
+	        		
+	        		tblLotFishes.refresh();
+	        		totalItemPrice=0;
+	        		for(ForeignSallingFish fishprice :LotFishItemsDisplayList) {
+	        			totalItemPrice=totalItemPrice +fishprice.getTotalSellingPrice(); 
+	        		}
+	        		lbltotalsellingPrice.setText(Double.toString(totalItemPrice)+"0");
+	        		
+	        });
+	        
+	        
+	        TableColumn<ForeignSallingFish, String> clmTotalPrice= 
+		            new TableColumn<>("Total Price");
+	        clmTotalPrice.setCellValueFactory(
+		            new PropertyValueFactory<>("StotalSellingPrice"));
+		        
+		        
+	      
+	        tblLotFishes.getColumns().addAll(clmSellprice,clmTotalPrice);
+	        tblLotFishes.setItems(LotFishItemsDisplayList);
 	    });
 		
 		
 	}
-	
-	
+		
 	public void SellLot(ActionEvent event) throws SQLException, IOException {
 		
-		//get the buyer id
-		Buyers buyers = serviceB.getBuyers(cmbBuyer.getValue());
-		Fish_Lot lot=new Fish_Lot();
-		lot.setSold_price(Double.parseDouble(txtSellingPrice.getText()));
-		lot.setSold_Weight(Double.parseDouble(txtWeight.getText()));
-		lot.setSold_To(buyers.getID());
-		lot.setID(Integer.parseInt(lblLotID.getText()));
-		Date date =new Date();
-		F_Fish_Buyers_Account buyerAccount =new F_Fish_Buyers_Account();
-		F_Fish_Buyers_Account_Uncleard buyerAccountU =new F_Fish_Buyers_Account_Uncleard();
-		if(!txtSellingPrice.getText().isEmpty() && !txtWeight.getText().isEmpty()) {
-			if(service.SellFishLot(lot)){
-				if(seriveD.sellStock(lot.getID())) {
-					buyerAccount.setDate(date.toString());
-					buyerAccount.setTo_Pay(lot.getSold_price());
-					buyerAccount.setPaid(0);
-					buyerAccount.setReason("Selling Lot purchased form lorry "+lot.getLorry_Number()+" on "+lot.getAdded_Date());
-					buyerAccount.setBuyer_ID(buyers.getID());
-						if(serviceE.addEntry(buyerAccount))	{	
-								if(serviceE.addEntryUncleared(buyerAccount)){
-								
-									Notifications notifications = Notifications.create();
-									notifications.title("Succesfull");
-									notifications.text("Lot Sold succesfully");
-									notifications.graphic(null);
-									notifications.hideAfter(Duration.seconds(2));
-									notifications.position(Pos.CENTER);
-									notifications.showConfirm();
+		if(cmbBuyer.getValue()!=null) {
+			//get the buyer id
+			Buyers buyers = serviceB.getBuyers(cmbBuyer.getValue());
+			Fish_Lot lot=new Fish_Lot();
+			
+			totalItemPrice=0;
+			double totalWeight=0;
+			for(ForeignSallingFish fishprice :LotFishItemsDisplayList) {
+				totalItemPrice=totalItemPrice +fishprice.getTotalSellingPrice();
+				totalWeight=totalWeight+fishprice.getTotalWeigth();
+			}
+	
+			
+			lot.setSold_price(totalItemPrice);
+			lot.setSold_Weight(totalWeight);
+			lot.setSold_To(buyers.getID());
+			lot.setID(Integer.parseInt(lblLotID.getText()));
+			Date date =new Date();
+			F_Fish_Buyers_Account buyerAccount =new F_Fish_Buyers_Account();
+			if(isPricesSet()) {
+				if(service.SellFishLot(lot)){
+					if(seriveD.sellStock(lot.getID())) {
+						buyerAccount.setDate(date.toString());
+						buyerAccount.setTo_Pay(lot.getSold_price());
+						buyerAccount.setPaid(0);
+						buyerAccount.setReason("Selling Lot purchased form lorry "+lot.getLorry_Number()+" on "+lot.getAdded_Date());
+						buyerAccount.setBuyer_ID(buyers.getID());
+							if(serviceE.addEntry(buyerAccount))	{	
+									if(serviceE.addEntryUncleared(buyerAccount)){
 									
-									sell=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
-									setNode(sell);
+										Notifications notifications = Notifications.create();
+										notifications.title("Succesfull");
+										notifications.text("Lot Sold succesfully");
+										notifications.graphic(null);
+										notifications.hideAfter(Duration.seconds(2));
+										notifications.position(Pos.CENTER);
+										notifications.showConfirm();
+										
+										sell=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+										setNode(sell);
+								}
 							}
-						}
-
-					}		
-				}else {
-					Notifications notifications = Notifications.create();
-					notifications.title("Error");
-					notifications.text("Selling Lot unsuccesfull.");
-					notifications.graphic(null);
-					notifications.hideAfter(Duration.seconds(2));
-					notifications.position(Pos.CENTER);
-					notifications.showError();
-				}
-				
+	
+						}		
+					}else {
+						Notifications notifications = Notifications.create();
+						notifications.title("Error");
+						notifications.text("Selling Lot unsuccesfull.");
+						notifications.graphic(null);
+						notifications.hideAfter(Duration.seconds(2));
+						notifications.position(Pos.CENTER);
+						notifications.showError();
+					}
+					
+			}else {
+				Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("Set all the selling prices.");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+			}
+	
 		}else {
 			Notifications notifications = Notifications.create();
 			notifications.title("Error");
-			notifications.text("Some fields are empty.");
+			notifications.text("Select the buyer");
 			notifications.graphic(null);
 			notifications.hideAfter(Duration.seconds(2));
 			notifications.position(Pos.CENTER);
 			notifications.showError();
 		}
-	
 	}	
 		
 	 void setNode(Node node) {
@@ -362,7 +379,16 @@ public class FLotSalesController implements Initializable{
 		
 	}
 
+	private boolean isPricesSet() {
+		
+		for(ForeignSallingFish fishprice :LotFishItemsDisplayList) {
+			if(fishprice.getTotalSellingPrice() == 0 || fishprice.getStotalSellingPrice() == null ) {
+				return false;
+			} 
+		}
 
+		return true;
+	}
 
 
 }
