@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,116 +26,114 @@ import javafx.util.Duration;
 
 public class LocalBoatController implements Initializable {
 
-    @FXML
-    private AnchorPane ftrade;
-    
-    
-    
-    @FXML
-    private TableView<LocalBoat> tblboats;
+	@FXML
+	private AnchorPane ftrade;
 
-    @FXML
-    private TableColumn<?, ?> clmName;
+	@FXML
+	private TableView<LocalBoat> tblboats;
 
-    @FXML
-    private TableColumn<?, ?> clmMobile;
+	@FXML
+	private TableColumn<?, ?> clmName;
 
-    @FXML
-    private TableColumn<?, ?> clmOwner;
-    
-    AnchorPane add;
-    
-    ObservableList<LocalBoat> list = FXCollections.observableArrayList();
-    
-    AnchorPane lots,stoks,boats,buyers,fishtypes,newLots;
+	@FXML
+	private TableColumn<?, ?> clmMobile;
 
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    	list.clear();
-    	
-    	LocalBoatService service= new LocalBoatService();
-    	ArrayList<LocalBoat> LBlist = null;
-    	
-    	try {
-			LBlist  = service.getLocalBoat();
+	@FXML
+	private TableColumn<?, ?> clmOwner;
+
+	AnchorPane add;
+
+	ObservableList<LocalBoat> list = FXCollections.observableArrayList();
+
+	AnchorPane lots, stoks, boats, buyers, fishtypes, newLots;
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		list.clear();
+
+		LocalBoatService service = new LocalBoatService();
+		ArrayList<LocalBoat> LBlist = null;
+
+		try {
+			LBlist = service.getLocalBoat();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		for(LocalBoat sup : LBlist) {
+
+		for (LocalBoat sup : LBlist) {
 			list.add(sup);
-		}	
-		
+		}
+
 		clmName.setCellValueFactory(new PropertyValueFactory<>("BoatNameorNumber"));
 		clmMobile.setCellValueFactory(new PropertyValueFactory<>("Mobile"));
 		clmOwner.setCellValueFactory(new PropertyValueFactory<>("Owner"));
-		
+
 		tblboats.setItems(list);
-    	
-    	
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    void setNode(Node node) {
-    	ftrade.getChildren().clear();
-    	ftrade.setTopAnchor(node,0.0);
-    	ftrade.setRightAnchor(node, 0.0);
-    	ftrade.setLeftAnchor(node, 0.0);
-    	ftrade.setBottomAnchor(node, 0.0);
-    	ftrade.getChildren().addAll((Node) node);
 
-        FadeTransition ft = new FadeTransition(Duration.millis(1500));
-        ft.setNode(node);
-        ft.setFromValue(0.1);
-        ft.setToValue(1);
-        ft.setCycleCount(1);
-        ft.setAutoReverse(false);
-        ft.play();
-    }
-    
+	}
 
-    @FXML
-    void back(ActionEvent event) throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
-        setNode(add);
+	void setNode(Node node) {
+		ftrade.getChildren().clear();
+		ftrade.setTopAnchor(node, 0.0);
+		ftrade.setRightAnchor(node, 0.0);
+		ftrade.setLeftAnchor(node, 0.0);
+		ftrade.setBottomAnchor(node, 0.0);
+		ftrade.getChildren().addAll((Node) node);
 
-    }
-     
-    @FXML
-    void switchAddLBoat(ActionEvent event) throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LNewBoats.fxml"));
-        setNode(add);
-    }
-    
+		FadeTransition ft = new FadeTransition(Duration.millis(1500));
+		ft.setNode(node);
+		ft.setFromValue(0.1);
+		ft.setToValue(1);
+		ft.setCycleCount(1);
+		ft.setAutoReverse(false);
+		ft.play();
+	}
 
-    @FXML
-    void switchBuyers(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
-        setNode(add);
-    }
+	@FXML
+	void back(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+		setNode(add);
 
-    @FXML
-    void switchFishTypes(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
-        setNode(add);
-    }
+	}
 
-    @FXML
-    void switchStoks(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
-        setNode(add);
-    }
-    
-    
+	@FXML
+	void switchAddLBoat(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LNewBoats.fxml"));
+		setNode(add);
+	}
+
+	@FXML
+	void switchBuyers(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
+		setNode(add);
+	}
+
+	@FXML
+	void switchFishTypes(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+		setNode(add);
+	}
+
+	@FXML
+	void switchStoks(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+		setNode(add);
+	}
+
+	public void switchEditLocalBoats(ActionEvent event) throws IOException {
+		LocalBoat Lboat = tblboats.getSelectionModel().getSelectedItem();
+
+		
+		if (Lboat != null) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ltrade/EditLocalBoat.fxml"));
+			Parent root = loader.load();
+			EditLocalBoatController LBcontroller = loader.<EditLocalBoatController>getController();
+			String id = Integer.toString(Lboat.getID());
+			LBcontroller.setID(id);
+
+			setNode(root);
+		}
+	}
 
 }

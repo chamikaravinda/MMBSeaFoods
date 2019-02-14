@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import org.controlsfx.control.Notifications;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -12,6 +15,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import application.Models.LFish_stock;
 import application.Models.LocalBoat;
+import application.Models.LocalPurchase;
 import application.Models.Local_Fish_types;
 import application.Services.LFish_stockService;
 import application.Services.LocalBoatService;
@@ -23,6 +27,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,7 +36,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import javafx.fxml.Initializable;
 
-public class AddLocalStockController implements Initializable  {  //
+public class AddLocalStockController implements Initializable  {  
 
 	 @FXML
 	    private AnchorPane NewStocks;
@@ -77,6 +82,7 @@ public class AddLocalStockController implements Initializable  {  //
     
     ArrayList<Local_Fish_types> local_fishtype=null;
     ArrayList<LocalBoat> local_boat=null;
+    
     
     ObservableList<LFish_stock> local_fishStock = FXCollections.observableArrayList();
     
@@ -148,9 +154,6 @@ public class AddLocalStockController implements Initializable  {  //
 		
 	    }
 
-
-	
-	
 	public void AddLocalFishActions(ActionEvent event)throws SQLException {
 		
 		
@@ -174,7 +177,7 @@ public class AddLocalStockController implements Initializable  {  //
 	
 	public void AddFinalizeStock(ActionEvent event)throws SQLException {
 		
-		LFish_stock localFStock= new LFish_stock();
+		/* LFish_stock localFStock= new LFish_stock();
 		
 		localFStock.getFish_Type();
 		localFStock.getPrice();
@@ -186,10 +189,67 @@ public class AddLocalStockController implements Initializable  {  //
 		serviceB.addFish_Stock(localFStock);
 		
 		
+		if(serviceB.addFish_Stock(local_fishStock)) {
+			
+			if(serviceD.addLocalBoat(local_fishStock)) {
+				
+				
+			}
+			
+			
+			
+		}
+		  */
+				List<LFish_stock> fishList = new ArrayList<>();
+	   
+	
+			
+			
+			
+			
+		
+			
+			for (LFish_stock item : clmFishTable.getItems()) {
+				fishList.add(item);
+				
+				LocalPurchase localSale=new LocalPurchase();
+				
+				localSale.setDate(cmbDate.getValue().toString());
+				localSale.setBoatID(serviceD.getBoatIDByName(cmbLsBoat.getSelectionModel().getSelectedItem().toString()));
+				localSale.setFishType(serviceC.getFishIDByName(item.getFishName()));
+				localSale.setPrice(item.getPrice());
+				localSale.setTotalWeight(item.getTotal_Weight());
+				
+				
+				
+				System.out.println(localSale.getBoatID());
+				System.out.println(localSale.getDate());
+				System.out.println(localSale.getFishType());
+				System.out.println(localSale.getPrice());
+				System.out.println(localSale.getTotalWeight());
+				
+				
+				double newWeight=localSale.getTotalWeight();
+				double stockWeight=serviceB.getWeightByID(localSale.getFishType());
+				double updateWeight=stockWeight-newWeight;
+				
+				
+				
+			/*	serviceB.addStock(localSale.getFishType(),updateWeight);
+				serviceB.addNewPurchase(localSale);
+				serviceB.addLocalFishBoatAccount(localSale,item.getFishName());
+				serviceB.addLocalFishBoatAccountUnCleared(localSale,item.getFishName());*/
+			}
+					
+					
+
+
+
 		
 		
 		
-	}
+		
+	
 	
 	
 	  @FXML

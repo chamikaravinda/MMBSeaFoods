@@ -89,9 +89,9 @@ public class Local_Fish_typesServices {
 			resultSet = preparedStatement.executeQuery();
 			
 			if (resultSet.next()) {
-				local_fish.setID(resultSet.getInt(1));
-				local_fish.setName(resultSet.getString(2));
-				local_fish.setPrice(Double.parseDouble(resultSet.getString(3)));
+				local_fish.setID(resultSet.getInt("ID"));
+				local_fish.setName(resultSet.getString("Name"));
+				local_fish.setPrice(resultSet.getDouble("price"));
 				
 			}
 			

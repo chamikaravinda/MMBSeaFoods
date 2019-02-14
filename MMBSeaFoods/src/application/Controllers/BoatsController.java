@@ -140,6 +140,8 @@ public class BoatsController implements Initializable {
     	
     	Boat boat=tblboats.getSelectionModel().getSelectedItem();
     	
+    
+        
     	if(boat != null) {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ftrade/EditBoat.fxml"));
 			Parent root = loader.load();

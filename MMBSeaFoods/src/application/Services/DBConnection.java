@@ -125,7 +125,8 @@ public class DBConnection {
 				// Local Trades added
 
 				String Local_Fish_Buyers = "CREATE TABLE IF NOT EXISTS Local_Fish_Buyers"
-						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Name          TEXT      NOT NULL,"
+						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," 
+						+ "  Name          TEXT      NOT NULL,"
 						+ "  Mobile_No	  TEXT            )";
 				String Local_Fish_types = "CREATE TABLE IF NOT EXISTS Local_Fish_types"
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
@@ -149,13 +150,17 @@ public class DBConnection {
 
 				String Local_Boat_Account = "CREATE TABLE IF NOT EXISTS Local_Boat_Account"
 						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
-						+ "  Reason       TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"
-						+ "  Paid         DOUBLE            ," + "  Boat_ID      INTEGER   REFERENCES  Boats (ID) )";
+						+ "  Reason       TEXT      NOT NULL," 
+						+ "  To_Pay		  DOUBLE            ,"
+						+ "  Paid         DOUBLE            ,"
+						+ "  Boat_ID      INTEGER   REFERENCES  Boats (ID) )";
 
 				String Local_Boat_Account_UnCleared = "CREATE TABLE IF NOT EXISTS Local_Boat_Account_UnCleared"
 						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
-						+ "  Reason       TEXT      NOT NULL," + "  To_Pay		  DOUBLE   			,"
-						+ "  Paid         DOUBLE            ," + "  Boat_ID      INTEGER   REFERENCES  Boats (ID))";
+						+ "  Reason       TEXT      NOT NULL," 
+						+ "  To_Pay		  DOUBLE   			,"
+						+ "  Paid         DOUBLE            ,"
+						+ "  Boat_ID      INTEGER   REFERENCES  Boats (ID))";
 				
 				
 				String Local_Sales =   "CREATE TABLE IF NOT EXISTS Local_Sales"
