@@ -14,52 +14,7 @@ import javafx.collections.ObservableList;
 public class LFish_stockService {
 	
 	Connection connection;
-	
-	public long addFish_Stock(List<LFish_stock> local_fishStock) throws SQLException {
-		connection=DBConnection.Connector();
-		PreparedStatement preparedStatement=null;		
-		    
-			String avalibility= "SELECT * FROM Local_Fish_stock where Fish_Type=?";
-			preparedStatement=connection.prepareStatement(avalibility);
-			ResultSet resultSet=preparedStatement.executeQuery();
-			
-			
-			
-			if(((LFish_stock) local_fishStock).getFish_Type()==resultSet.getInt("Fish_Type")) {
-				
-				String UpdateExsitedType=" UPDATE Local_Fish_stock"+" SET Total_Weight=?"+"WHERE Fish_Type="+"lstock.getFish_Type()";
-				preparedStatement=connection.prepareStatement(UpdateExsitedType);
-				preparedStatement.setDouble(1, ((LFish_stock) local_fishStock).getTotal_Weight());
-				ResultSet resultSet1=preparedStatement.executeQuery();
-			}
-			else {
-				
-				String insertQuery= "INSERT INTO Local_Fish_stock (Fish_Type,Total_Weight)" + 
-						"VALUES (?,?)";
-				
-				
-				preparedStatement = connection.prepareStatement(insertQuery);
-				preparedStatement.setString(1, ((LFish_stock) local_fishStock).getFishName());
-				preparedStatement.setDouble(2, ((LFish_stock) local_fishStock).getTotal_Weight());
-				ResultSet resultSet1=preparedStatement.executeQuery();
-				
-				
-				
-			}
-		  
-	
-			
-			
-		return 0;
-	}
-			
-			
-			
-			
-				
-			
-	
-	
+
 	public ArrayList<LFish_stock> getUnsoldLocalStocks() throws SQLException{
 		
 		connection=DBConnection.Connector();
@@ -97,7 +52,52 @@ public class LFish_stockService {
 		
 	}
 
-
+	public boolean newStock(ObservableList<LFish_stock> list) throws SQLException {
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		String query= "select * from Local_Fish_stock where Fish_Type =? ";
+		
+		try {
+		for(LFish_stock item :list) {
+			
+			
+				preparedStatement =connection.prepareStatement(query);
+				preparedStatement.setInt(1, item.getFish_Type());
+				resultSet = preparedStatement.executeQuery();
+				
+				if(resultSet.next()) {
+					
+					PreparedStatement preparedStatement2=null;
+					int resultSet2;
+					String updateQuery= "UPDATE Local_Fish_stock set Total_Weight =?  where Fish_Type= ? ";
+					preparedStatement2 =connection.prepareStatement(updateQuery);
+					preparedStatement2.setDouble(1, item.getTotal_Weight()+resultSet.getDouble("Total_Weight"));
+					preparedStatement2.setInt(2, item.getFish_Type());
+					resultSet2 = preparedStatement2.executeUpdate();
+					
+				}else {
+					
+					PreparedStatement preparedStatement3=null;
+					ResultSet resultSet3;
+					String insertQuery= "INSERT INTO Local_Fish_stock (Fish_Type,Total_Weight) VALUES (?,?)";
+					preparedStatement3 =connection.prepareStatement(insertQuery);
+					preparedStatement3.setInt(1, item.getFish_Type());
+					preparedStatement3.setDouble(2, item.getTotal_Weight());
+					
+					resultSet3 = preparedStatement3.executeQuery();
+					
+				}
+			
+	
+			}
+		return true;
+		}catch(Exception e) {
+			return false;
+		}finally {
+			connection.close();
+		}
+	}
 
 
 

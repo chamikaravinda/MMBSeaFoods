@@ -18,6 +18,7 @@ import application.Models.LocalBoat;
 import application.Models.LocalPurchase;
 import application.Models.Local_Fish_types;
 import application.Services.LFish_stockService;
+import application.Services.LocalBoatAccountService;
 import application.Services.LocalBoatService;
 import application.Services.Local_Fish_typesServices;
 import javafx.animation.FadeTransition;
@@ -78,8 +79,8 @@ public class AddLocalStockController implements Initializable  {
     
     Local_Fish_typesServices serviceC= new Local_Fish_typesServices();
     LFish_stockService serviceB= new LFish_stockService();
-    LocalBoatService serviceD = new LocalBoatService();
-    
+    LocalBoatAccountService serviceD = new LocalBoatAccountService();
+    LocalBoatService serviceE=new LocalBoatService();
     ArrayList<Local_Fish_types> local_fishtype=null;
     ArrayList<LocalBoat> local_boat=null;
     
@@ -107,7 +108,7 @@ public class AddLocalStockController implements Initializable  {
 		
 		
 		try {
-			local_boat= serviceD.getLocalBoat();
+			local_boat= serviceE.getLocalBoat();
 			
 			for(LocalBoat lboat:local_boat) {
 				
@@ -175,71 +176,41 @@ public class AddLocalStockController implements Initializable  {
 
     }
 	
-	public void AddFinalizeStock(ActionEvent event)throws SQLException {
+	public void AddFinalizeStock(ActionEvent event)throws SQLException, IOException {
 		
-		/* LFish_stock localFStock= new LFish_stock();
-		
-		localFStock.getFish_Type();
-		localFStock.getPrice();
-		localFStock.getTotal_Weight();
-		System.out.println(localFStock.getFish_Type());
-		System.out.println(localFStock.getPrice());
-		System.out.println(	localFStock.getTotal_Weight());
-		
-		serviceB.addFish_Stock(localFStock);
-		
-		
-		if(serviceB.addFish_Stock(local_fishStock)) {
+			String boatname =cmbLsBoat.getValue();
+			LocalBoat boat=serviceE.getLocalBoat(boatname);
 			
-			if(serviceD.addLocalBoat(local_fishStock)) {
+			if(serviceB.newStock(local_fishStock)) {
+				if(serviceD.addEntries(local_fishStock, boat.getID())) {
+					if(serviceD.addEntriesUncleard(local_fishStock, boat.getID())) {
+					
+						Notifications notifications = Notifications.create();
+						notifications.title("Succesfull");
+						notifications.text("Fish stock added succesfully");
+						notifications.graphic(null);
+						notifications.hideAfter(Duration.seconds(2));
+						notifications.position(Pos.CENTER);
+						notifications.showConfirm();
+						
+						add=FXMLLoader.load(getClass().getResource("../Views/Ftrade/FishTypes.fxml"));
+						setNode(add);
+						
+					}
+				}
 				
-				
-			}
-			
-			
-			
-		}
-		  */
-				List<LFish_stock> fishList = new ArrayList<>();
+			}else {
+				Notifications notifications = Notifications.create();
+				notifications.title("Error");
+				notifications.text("Fish stock adding  unsuccesfull");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showError();
+		
 	   
-	
-			
-			
-			
-			
-		
-			
-			for (LFish_stock item : clmFishTable.getItems()) {
-				fishList.add(item);
-				
-				LocalPurchase localSale=new LocalPurchase();
-				
-				localSale.setDate(cmbDate.getValue().toString());
-				localSale.setBoatID(serviceD.getBoatIDByName(cmbLsBoat.getSelectionModel().getSelectedItem().toString()));
-				localSale.setFishType(serviceC.getFishIDByName(item.getFishName()));
-				localSale.setPrice(item.getPrice());
-				localSale.setTotalWeight(item.getTotal_Weight());
-				
-				
-				
-				System.out.println(localSale.getBoatID());
-				System.out.println(localSale.getDate());
-				System.out.println(localSale.getFishType());
-				System.out.println(localSale.getPrice());
-				System.out.println(localSale.getTotalWeight());
-				
-				
-				double newWeight=localSale.getTotalWeight();
-				double stockWeight=serviceB.getWeightByID(localSale.getFishType());
-				double updateWeight=stockWeight-newWeight;
-				
-				
-				
-			/*	serviceB.addStock(localSale.getFishType(),updateWeight);
-				serviceB.addNewPurchase(localSale);
-				serviceB.addLocalFishBoatAccount(localSale,item.getFishName());
-				serviceB.addLocalFishBoatAccountUnCleared(localSale,item.getFishName());*/
 			}
+	}
 					
 					
 
