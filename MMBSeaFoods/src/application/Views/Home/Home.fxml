@@ -91,13 +91,21 @@
             </Pane>
          </children>
       </GridPane>
-      <TabPane layoutX="20.0" layoutY="243.0" prefHeight="462.0" prefWidth="1188.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="243.0">
+      <TabPane layoutX="20.0" layoutY="266.0" prefHeight="434.0" prefWidth="1179.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="266.0">
         <tabs>
           <Tab text="Foriegn Fish Prices">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="1188.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="1179.0">
                      <children>
-                        <TableView fx:id="tblFishType" layoutX="13.0" layoutY="13.0" prefHeight="305.0" prefWidth="1162.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                        <JFXButton alignment="CENTER" layoutX="1000.0" layoutY="348.0" maxWidth="253.0" onAction="#editType" prefHeight="39.0" prefWidth="171.0" text="Edit Fish Prices" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="#3b2f63" glyphName="EDIT" size="17.0" wrappingWidth="21.0" />
+                           </graphic>
+                        </JFXButton>
+                        <TableView fx:id="tblFishType" layoutX="13.0" layoutY="13.0" prefHeight="331.0" prefWidth="1157.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
                            <columns>
                               <TableColumn fx:id="clmName" prefWidth="75.0" text="Name" />
                               <TableColumn fx:id="clmB15" prefWidth="75.0" text="1kg Price Below 15kg" />
@@ -108,23 +116,23 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXButton alignment="CENTER" layoutX="968.0" layoutY="370.0" maxWidth="253.0" onAction="#editType" prefHeight="40.0" prefWidth="239.0" text="Edit Foriegn Fish Prices" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="13.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIconView fill="#3b2f63" glyphName="EDIT" size="25" text="" wrappingWidth="21.0" />
-                           </graphic>
-                        </JFXButton>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="Local Fish Prices">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="361.0" prefWidth="1164.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tblvLocalFishType" layoutX="10.0" layoutY="11.0" prefHeight="266.0" prefWidth="1162.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                        <JFXButton alignment="CENTER" layoutX="1006.0" layoutY="354.0" maxWidth="253.0" onAction="#editTypeLocal" prefHeight="39.0" prefWidth="171.0" text="Edit Fish Prices" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="#3b2f63" glyphName="EDIT" size="17.0" wrappingWidth="21.0" />
+                           </graphic>
+                        </JFXButton>
+                        <TableView fx:id="tblvLocalFishType" layoutX="10.0" layoutY="11.0" prefHeight="334.0" prefWidth="1156.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
                           <columns>
                             <TableColumn fx:id="tblcNameLocal" prefWidth="578.0" text="Name" />
                             <TableColumn fx:id="tblcPriceLocal" prefWidth="599.0" text="Price" />
@@ -133,14 +141,6 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXButton layoutX="906.0" layoutY="304.0" onAction="#editTypeLocal" prefHeight="40.0" prefWidth="269.0" text="Edit Local Fish Type" textFill="#3b2f63" AnchorPane.bottomAnchor="89.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="304.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIconView glyphName="EDIT" size="25" wrappingWidth="22.0" />
-                           </graphic>
-                        </JFXButton>
                      </children></AnchorPane>
             </content>
           </Tab>
