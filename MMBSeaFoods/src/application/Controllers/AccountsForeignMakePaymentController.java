@@ -28,15 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JRDesignQuery;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.swing.JRViewer;
+
 
 public class AccountsForeignMakePaymentController implements Initializable{
 
@@ -110,13 +102,13 @@ public class AccountsForeignMakePaymentController implements Initializable{
 		
 	}
 	
-	
+	/*
 	public void pay() {
 		
 		generateAccountsLocalInvoice();
 	}
 	
-	
+	*/
 	public void removeForeignBoatAccountUnclearedData(){
 		
 	}
@@ -142,7 +134,7 @@ public class AccountsForeignMakePaymentController implements Initializable{
 
 	
 
-	/*---------------generate the jasper report--------------------*/
+	/*---------------generate the jasper report--------------------
 	public void generateAccountsLocalInvoice() {
 		int id=accountServices.getBoatIDByNameForeign(lblBoatName.getText());
 
@@ -177,6 +169,7 @@ public class AccountsForeignMakePaymentController implements Initializable{
 		}
 	}
 	
+	*/
 	public void getBoatDetails(String name) {
 		try {
 			
