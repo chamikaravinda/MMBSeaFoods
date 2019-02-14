@@ -38,20 +38,20 @@
                         <FontAwesomeIconView fill="#3b2f63" glyphName="SHIP" size="17.0" wrappingWidth="29.0" />
                      </graphic>
                   </Label>
-                  <JFXButton alignment="CENTER" layoutX="871.0" layoutY="53.0" maxWidth="208.0" onAction="#AddNewBoat" prefHeight="39.0" prefWidth="167.0" text="Add New Boat" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="181.0" AnchorPane.topAnchor="53.0">
+                  <JFXButton alignment="CENTER" layoutX="1007.0" layoutY="53.0" maxWidth="208.0" onAction="#AddNewBoat" prefHeight="39.0" prefWidth="184.0" text="Add New Boat" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="53.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#3b2f63" glyphName="PLUS" size="20" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#3b2f63" glyphName="PLUS" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="1038.0" layoutY="53.0" maxWidth="208.0" onAction="#editNewBoat" prefHeight="39.0" prefWidth="128.0" text="Edit Boats" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="53.0">
+                  <JFXButton alignment="CENTER" layoutX="887.0" layoutY="53.0" maxWidth="208.0" onAction="#editNewBoat" prefHeight="39.0" prefWidth="138.0" text="Edit Boats" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="194.0" AnchorPane.topAnchor="53.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#3b2f63" glyphName="EDIT" size="20" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#3b2f63" glyphName="EDIT" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
                </children>
