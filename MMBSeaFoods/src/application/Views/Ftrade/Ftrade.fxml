@@ -39,20 +39,20 @@
                         <FontAwesomeIconView fill="#3b2f63" glyphName="CUBES" size="17.0" wrappingWidth="29.0" />
                      </graphic>
                   </Label>
-                  <JFXButton alignment="CENTER" layoutX="963.0" layoutY="30.0" maxWidth="208.0" onAction="#AddNewLot" prefHeight="87.0" prefWidth="196.0" text="   Add" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="30.0">
+                  <JFXButton alignment="CENTER" layoutX="1007.0" layoutY="53.0" maxWidth="208.0" onAction="#AddNewLot" prefHeight="39.0" prefWidth="184.0" text="Add New Lot" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="53.0">
                      <font>
-                        <Font size="41.0" />
+                        <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#3b2f63" glyphName="PLUS" size="40" text="" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#3b2f63" glyphName="PLUS" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="735.0" layoutY="26.0" maxWidth="426.0" onAction="#SellALot" prefHeight="94.0" prefWidth="223.0" text="     Sell " textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="26.0">
+                  <JFXButton alignment="CENTER" layoutX="835.0" layoutY="53.0" maxWidth="208.0" onAction="#SellALot" prefHeight="39.0" prefWidth="184.0" text="Sell A Lot" textAlignment="RIGHT" textFill="#3b2f63" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="53.0">
                      <font>
-                        <Font size="41.0" />
+                        <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#3b2f63" glyphName="TRUCK" size="45" text="" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#3b2f63" glyphName="TRUCK" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
                </children>
