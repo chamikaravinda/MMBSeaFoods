@@ -69,14 +69,14 @@ public class AccountsController implements Initializable {
 	}
 	
 	public void LocalSales(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/Sales.fxml"));
+		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LocalSales.fxml"));
 		setNode(add);
 
 	}
 	
 	
 	public void commition(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/3rdPartyAccount.fxml"));
+		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/CommissionAccount.fxml"));
 		setNode(add);
 
 	}
