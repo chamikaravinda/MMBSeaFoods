@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.Notifications;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
@@ -108,6 +109,9 @@ public class AddStocksController implements Initializable{
 	
 	@FXML
 	private JFXTextField txtHabour; 
+	
+	@FXML
+	private JFXButton btnremove;
 	
 	Fish_LotServices service=new Fish_LotServices();
 	BoatService serviceB =new BoatService();
@@ -238,6 +242,48 @@ public class AddStocksController implements Initializable{
 				
 			}
 			
+			btnremove.setOnAction(e -> {
+				Stock_Fish fish = tblFish.getSelectionModel().getSelectedItem();
+				
+				for(F_BoatEntryCatogries cat : catList) {
+					
+					if(fish.getType()==cat.getTypeID()) {
+						if(fish.getWeight() <=15 && cat.getWeightGroup()==1 ) {
+							
+							cat.setNoOfFishes(cat.getNoOfFishes()-1);
+							cat.setTotalPrice(cat.getTotalPrice()-fish.getPrice());
+							cat.setWeight(cat.getWeight()-fish.getWeight());
+							
+						}else if(fish.getWeight() >15 && fish.getWeight() <=20 && cat.getWeightGroup()==2 ) {
+							
+							cat.setNoOfFishes(cat.getNoOfFishes()-1);
+							cat.setTotalPrice(cat.getTotalPrice()-fish.getPrice());
+							cat.setWeight(cat.getWeight()-fish.getWeight());
+							
+						}else if(fish.getWeight() > 20 && cat.getWeightGroup()==3 ) {
+							
+							cat.setNoOfFishes(cat.getNoOfFishes()-1);
+							cat.setTotalPrice(cat.getTotalPrice()-fish.getPrice());
+							cat.setWeight(cat.getWeight()-fish.getWeight());
+							
+						}
+						
+					}
+				}
+				tblFish.getItems().remove(fish);
+				tblFish.refresh();
+				
+				
+				totalNoofFish--;
+				currentTotalWeigth -= fish.getWeight();
+				currentTotalPrice  -= fish.getPrice();
+				
+				lblNoOfFish.setText(Integer.toString(totalNoofFish));
+				lbltotalPrice.setText(Double.toString(currentTotalPrice)+"0");
+				lbltotalWeight.setText(Double.toString(currentTotalWeigth)+"0 Kg");
+				
+			});
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -268,13 +314,13 @@ public class AddStocksController implements Initializable{
 		for(F_BoatEntryCatogries cat : catList) {
 		
 			if(fish.getType()==cat.getTypeID()) {
-				if(fish.getWeight() < 15 && cat.getWeightGroup()==1 ) {
+				if(fish.getWeight() <=15 && cat.getWeightGroup()==1 ) {
 					
 					cat.setNoOfFishes(cat.getNoOfFishes()+1);
 					cat.setTotalPrice(cat.getTotalPrice()+fish.getPrice());
 					cat.setWeight(cat.getWeight()+fish.getWeight());
 					
-				}else if(fish.getWeight() >15 && fish.getWeight() < 20 && cat.getWeightGroup()==2 ) {
+				}else if(fish.getWeight() >15 && fish.getWeight() <=20 && cat.getWeightGroup()==2 ) {
 					
 					cat.setNoOfFishes(cat.getNoOfFishes()+1);
 					cat.setTotalPrice(cat.getTotalPrice()+fish.getPrice());
@@ -349,7 +395,7 @@ public class AddStocksController implements Initializable{
 							if(service.UpdateFish_Lot(lot)) {
 								
 								for(F_BoatEntryCatogries cat :catList) {
-								  if(cat.getWeight() == 0) {	
+								  if(cat.getWeight() != 0) {	
 									Boat_Account boatEntry =new Boat_Account();
 									boatEntry.setDate(format1.format( new Date()   ));
 									boatEntry.setBoat_ID(stock.getBoat_ID());

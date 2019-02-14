@@ -94,8 +94,8 @@
                   <TableView fx:id="tblLotFishes" prefHeight="422.0" prefWidth="724.0" GridPane.columnIndex="1">
                     <columns>
                       <TableColumn fx:id="clmtype" prefWidth="75.0" text="Fish Type" />
-                      <TableColumn fx:id="clmweight" prefWidth="75.0" text="Weight" />
-                        <TableColumn fx:id="clmprice" prefWidth="75.0" text="Buying Price " />
+                      <TableColumn fx:id="clmweight" prefWidth="142.0" text="Weight" />
+                        <TableColumn fx:id="clmprice" prefWidth="256.0" text="Buying Price " />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

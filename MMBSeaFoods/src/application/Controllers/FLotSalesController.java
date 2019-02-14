@@ -4,6 +4,7 @@ import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -195,10 +196,10 @@ public class FLotSalesController implements Initializable{
 						for(Stock_Fish fish:fishes) {
 							if(items.getId()==fish.getType()) {
 								
-								if( fish.getWeight()<15.0 && items.getWeightclass() == 1 ) {
+								if( fish.getWeight()<=15.0 && items.getWeightclass() == 1 ) {
 								items.setPrice(items.getPrice()+fish.getPrice());
 								items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
-								}else if(fish.getWeight()>15.0 && fish.getWeight()<20.0 && items.getWeightclass()==2) {
+								}else if(fish.getWeight()>15.0 && fish.getWeight()<=20.0 && items.getWeightclass()==2) {
 									items.setPrice(items.getPrice()+fish.getPrice());
 									items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
 									}else if(fish.getWeight()>20.0 && items.getWeightclass()==3) {
@@ -280,7 +281,7 @@ public class FLotSalesController implements Initializable{
 		if(cmbBuyer.getValue()!=null) {
 			//get the buyer id
 			Buyers buyers = serviceB.getBuyers(cmbBuyer.getValue());
-			Fish_Lot lot=new Fish_Lot();
+			Fish_Lot lot=service.getTheLot(Integer.parseInt(lblLotID.getText()));
 			
 			totalItemPrice=0;
 			double totalWeight=0;
@@ -293,13 +294,12 @@ public class FLotSalesController implements Initializable{
 			lot.setSold_price(totalItemPrice);
 			lot.setSold_Weight(totalWeight);
 			lot.setSold_To(buyers.getID());
-			lot.setID(Integer.parseInt(lblLotID.getText()));
-			Date date =new Date();
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			F_Fish_Buyers_Account buyerAccount =new F_Fish_Buyers_Account();
 			if(isPricesSet()) {
 				if(service.SellFishLot(lot)){
 					if(seriveD.sellStock(lot.getID())) {
-						buyerAccount.setDate(date.toString());
+						buyerAccount.setDate(format1.format( new Date()));
 						buyerAccount.setTo_Pay(lot.getSold_price());
 						buyerAccount.setPaid(0);
 						buyerAccount.setReason("Selling Lot purchased form lorry "+lot.getLorry_Number()+" on "+lot.getAdded_Date());
