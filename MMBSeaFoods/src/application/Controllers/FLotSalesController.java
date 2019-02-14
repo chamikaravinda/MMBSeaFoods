@@ -1,5 +1,6 @@
 package application.Controllers;
 
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,12 +21,18 @@ import application.Models.F_Fish_Buyers_Account;
 import application.Models.F_Fish_Buyers_Account_Uncleard;
 import application.Models.Fish_Lot;
 import application.Models.Fish_stock;
+import application.Models.ForeignSallingFish;
 import application.Models.Foreign_Fish_Buyers;
+import application.Models.Foreign_Fish_types;
+import application.Models.Stock_Fish;
 import application.Services.BuyerService;
 import application.Services.Fish_LotServices;
 import application.Services.Fish_stockService;
 import application.Services.Foreign_Fish_Buyers_AccountServices;
+import application.Services.Foreign_Fish_typesServices;
+import application.Services.stock_FishService;
 import javafx.animation.FadeTransition;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -39,8 +46,16 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.NumberStringConverter;
 
 public class FLotSalesController implements Initializable{
 	
@@ -77,15 +92,33 @@ public class FLotSalesController implements Initializable{
     @FXML
     private Label lblLotID;
 
+    @FXML
+    private TableView<ForeignSallingFish> tblLotFishes;
+
+    @FXML
+    private TableColumn<?, ?> clmtype;
+
+    @FXML
+    private TableColumn<?, ?> clmweight;
+
+    @FXML
+    private TableColumn<?, ?> clmprice;
+    
+    @FXML
+    private TableColumn<?, ?> clmSellprice;
+    
     Fish_LotServices service =new Fish_LotServices();
     BuyerService serviceB =new BuyerService();
     Fish_LotServices serviceC=new Fish_LotServices();
     Fish_stockService seriveD=new Fish_stockService();
     Foreign_Fish_Buyers_AccountServices serviceE =new Foreign_Fish_Buyers_AccountServices();
-    
+    Foreign_Fish_typesServices serviceF=new Foreign_Fish_typesServices();
+    stock_FishService serviceG =new stock_FishService();
     Fish_Lot lot = null;
     
 	ObservableList<String> BuyersList =FXCollections.observableArrayList();
+	ObservableList<ForeignSallingFish> LotFishItemsDisplayList =FXCollections.observableArrayList();
+	ArrayList<ForeignSallingFish> LotFishItems =new ArrayList<ForeignSallingFish>();
 	ArrayList<Buyers> Blist=null; 
 	
 	AnchorPane sell;
@@ -150,25 +183,95 @@ public class FLotSalesController implements Initializable{
 				
 			});
 			
-	    });
-		
-		//Items in the table 
-		ArrayList<Fish_stock> stockList=new ArrayList<>();
-		try {
-			stockList=seriveD.getLotStocks(Integer.parseInt(lblLotID.getText()));
-			for(Fish_stock stocklist : stockList) {
+			
+			//Items in the table
+			
+			//initialize the item list
+			try {
+				ArrayList<Foreign_Fish_types> typelist = serviceF.getfishTypes();
+				LotFishItems.clear();
+				for(Foreign_Fish_types type : typelist) {
+					
+					ForeignSallingFish item = new ForeignSallingFish();
+					item.setId(type.getID());
+					item.setName(type.getName()+" Under 15kg");
+					item.setPrice(0);
+					item.setTotalWeigth(0);
+					item.setWeightclass(1);
+					LotFishItems.add(item);
+					
+					ForeignSallingFish item2 = new ForeignSallingFish();
+					item2.setId(type.getID());
+					item2.setName(type.getName()+" Between 15kg to 20kg");
+					item2.setPrice(0);
+					item2.setTotalWeigth(0);
+					item2.setWeightclass(2);
+					LotFishItems.add(item2);
+					
+					ForeignSallingFish item3 = new ForeignSallingFish();
+					item3.setId(type.getID());
+					item3.setName(type.getName()+ " above 20kg");
+					item3.setPrice(0);
+					item3.setTotalWeigth(0);
+					item3.setWeightclass(3);
+					LotFishItems.add(item3);
+				}	
 				
+				ArrayList<Fish_stock> stockList=new ArrayList<>();
+				stockList=seriveD.getLotStocks(Integer.parseInt(lblLotID.getText()));
 				
+				for(Fish_stock stocks : stockList) {
+					
+					ArrayList<Stock_Fish> fishes = serviceG.getStocksFish(stocks.getID());
+					for(ForeignSallingFish items:LotFishItems) {
+						for(Stock_Fish fish:fishes) {
+							if(items.getId()==fish.getType()) {
+								
+								if( fish.getWeight()<15.0 && items.getWeightclass() == 1 ) {
+								items.setPrice(items.getPrice()+fish.getPrice());
+								items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
+								}else if(fish.getWeight()>15.0 && fish.getWeight()<20.0 && items.getWeightclass()==2) {
+									items.setPrice(items.getPrice()+fish.getPrice());
+									items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
+									}else if(fish.getWeight()>20.0 && items.getWeightclass()==3) {
+									items.setPrice(items.getPrice()+fish.getPrice());
+									items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
+									}else {
+										System.out.println("Error");
+									}
+								
+							}
+							
+						}
+						
+					}
+					
+				}
 				
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			LotFishItemsDisplayList.clear();
+			
+			clmtype.setCellValueFactory(new PropertyValueFactory<>("name"));
+			clmweight.setCellValueFactory(new PropertyValueFactory<>("totalWeigth"));
+			clmprice.setCellValueFactory(new PropertyValueFactory<>("price"));
+			clmSellprice.setCellValueFactory(new PropertyValueFactory<>("unitePrice"));
+
+			for(ForeignSallingFish item :LotFishItems) {
+				if(item.getTotalWeigth() !=0) {
+					LotFishItemsDisplayList.add(item);
+				}
+			}
+			tblLotFishes.setItems(LotFishItemsDisplayList);
+			
+	    });
+		
 		
 	}
 	
@@ -231,8 +334,7 @@ public class FLotSalesController implements Initializable{
 		}
 	
 	}	
-
-	
+		
 	 void setNode(Node node) {
 			
 		 sellStock.getChildren().clear();
@@ -259,6 +361,8 @@ public class FLotSalesController implements Initializable{
 		setNode(sell);
 		
 	}
-	
+
+
+
 
 }

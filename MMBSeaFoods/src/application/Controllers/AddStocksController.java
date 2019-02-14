@@ -274,7 +274,7 @@ public class AddStocksController implements Initializable{
 					cat.setTotalPrice(cat.getTotalPrice()+fish.getPrice());
 					cat.setWeight(cat.getWeight()+fish.getWeight());
 					
-				}else if(fish.getWeight() < 20 && cat.getWeightGroup()==2 ) {
+				}else if(fish.getWeight() >15 && fish.getWeight() < 20 && cat.getWeightGroup()==2 ) {
 					
 					cat.setNoOfFishes(cat.getNoOfFishes()+1);
 					cat.setTotalPrice(cat.getTotalPrice()+fish.getPrice());
@@ -330,6 +330,7 @@ public class AddStocksController implements Initializable{
 					if(stockID != 0) {
 						
 						for(Stock_Fish entry : list) {
+							entry.setFish_stock_ID((int)stockID);
 							serviceE.addFish(entry);						
 						}
 						
@@ -348,7 +349,7 @@ public class AddStocksController implements Initializable{
 							if(service.UpdateFish_Lot(lot)) {
 								
 								for(F_BoatEntryCatogries cat :catList) {
-									
+								  if(cat.getWeight() == 0) {	
 									Boat_Account boatEntry =new Boat_Account();
 									boatEntry.setDate(format1.format( new Date()   ));
 									boatEntry.setBoat_ID(stock.getBoat_ID());
@@ -382,8 +383,8 @@ public class AddStocksController implements Initializable{
 									boatEntryU.setPaid(0);
 									
 									serviceH.addEntries_Uncleard(boatEntryU);
+								  }
 								}
-							
 									Notifications notifications = Notifications.create();
 									notifications.title("Succesfull");
 									notifications.text("Stock added succesfully");
@@ -394,8 +395,6 @@ public class AddStocksController implements Initializable{
 									
 									add=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Stocks.fxml"));
 									setNode(add);
-								//}
-						
 						}
 											
 					}

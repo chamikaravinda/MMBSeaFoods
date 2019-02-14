@@ -2,8 +2,11 @@ package application.Services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import application.Models.Fish_stock;
 import application.Models.Stock_Fish;
 
 public class stock_FishService {
@@ -35,6 +38,36 @@ public class stock_FishService {
 			
 			e.printStackTrace();
 			return false;
+		}finally {
+			connection.close();
+		}		
+	}
+	
+	public ArrayList<Stock_Fish> getStocksFish(int stockID) throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		String query= "select * from stock_fishes where Fish_stock_ID = ? ";
+		ArrayList<Stock_Fish> list =new ArrayList<>();
+		
+		try {
+			preparedStatement =connection.prepareStatement(query);
+			preparedStatement.setInt(1, stockID);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				Stock_Fish fish=new Stock_Fish();
+				fish.setID(Integer.parseInt(resultSet.getString("ID")));
+				fish.setType(resultSet.getInt("Type"));
+				fish.setWeight(resultSet.getDouble("Total_Weight"));
+				fish.setPrice(resultSet.getDouble("buying_Price"));
+				fish.setFish_stock_ID(resultSet.getInt("Fish_stock_ID"));
+				list.add(fish);
+			}
+			return list;
+			
+		}catch(Exception e) {
+			return null;
 		}finally {
 			connection.close();
 		}		

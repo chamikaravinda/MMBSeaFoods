@@ -2,15 +2,24 @@ package application.Models;
 
 public class ForeignSallingFish {
 	
-	private String id;
+	private int id;
 	private String name;
 	private double totalWeigth;
 	private double price;
+	private int weightclass;
+	private double unitePrice;
+	private double totalSellingPrice;
 	
-	public String getId() {
+	/* weight class
+	 * 1= below 15kg
+	 * 2= between 15-20kg
+	 * 3=above 20
+	 */
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -30,6 +39,24 @@ public class ForeignSallingFish {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public int getWeightclass() {
+		return weightclass;
+	}
+	public void setWeightclass(int weightclass) {
+		this.weightclass = weightclass;
+	}
+	public double getUnitePrice() {
+		return unitePrice;
+	}
+	public void setUnitePrice(double unitePrice) {
+		this.unitePrice = unitePrice;
+	}
+	public double getTotalSellingPrice() {
+		return totalSellingPrice;
+	}
+	public void setTotalSellingPrice(double totalSellingPrice) {
+		this.totalSellingPrice = totalSellingPrice;
 	} 
 
 	
