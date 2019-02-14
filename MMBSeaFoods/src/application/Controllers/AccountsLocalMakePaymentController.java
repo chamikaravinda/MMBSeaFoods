@@ -1,14 +1,16 @@
 package application.Controllers;
+
+import java.awt.Dimension;
 import java.net.URL;
 import java.sql.Connection;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+
+import javax.swing.JFrame;
 
 import application.Models.Boat_Account;
 import application.Services.AccountServices;
@@ -19,16 +21,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
 import javafx.util.Duration;
-/*
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -38,7 +37,6 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.swing.JRViewer;
-*/
 
 public class AccountsLocalMakePaymentController implements Initializable {
 
@@ -107,15 +105,12 @@ public class AccountsLocalMakePaymentController implements Initializable {
 			e.printStackTrace();
 		}
 	}
- 
-	/*
+
 	public void pay() {
 			
 		generateAccountsLocalInvoice();
 	}
 	
-	
-	*/
 	
 	public void removeLocalBoatAccountUnclearedData(){
 		
@@ -142,7 +137,7 @@ public class AccountsLocalMakePaymentController implements Initializable {
 
 	
 
-	/*---------------generate the jasper report--------------------
+	/*---------------generate the jasper report--------------------*/
 	public void generateAccountsLocalInvoice() {
 		int id = accountServices.getBoatIDByName(lblBoatName.getText());
 
@@ -177,7 +172,6 @@ public class AccountsLocalMakePaymentController implements Initializable {
 		}
 	}
 
-*/
 	public void showBoatDetailsTableList(int id) {
 
 		boatDetailsList.clear();
@@ -194,7 +188,7 @@ public class AccountsLocalMakePaymentController implements Initializable {
 
 		tblvBoatDetails.setItems(boatDetailsList);
 
-		
+		// tblvBoatDetails.setItems(boatDetailsList);
 
 	}
 
