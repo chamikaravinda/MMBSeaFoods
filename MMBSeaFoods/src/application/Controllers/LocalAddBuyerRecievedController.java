@@ -1,5 +1,6 @@
 package application.Controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -13,7 +14,9 @@ import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -106,5 +109,10 @@ public class LocalAddBuyerRecievedController implements Initializable {
 		
 	}
 	
-
+	@FXML
+    void back(ActionEvent event)throws IOException {
+    	add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+		setNode(add);
+    	
+    }
 }

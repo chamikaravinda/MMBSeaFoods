@@ -49,15 +49,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton layoutX="254.0" layoutY="6.0" maxWidth="208.0" prefHeight="39.0" prefWidth="134.0" style="-fx-alignment: left;" text="Refresh" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXComboBox fx:id="cmbBuyersNames" prefHeight="30.0" prefWidth="256.0" promptText="Buyer Names" />
+                  <JFXComboBox fx:id="cmbBuyersNames" prefHeight="30.0" prefWidth="256.0" promptText="Buyer Names" styleClass="font" />
                </children>
             </GridPane>
-            <Separator layoutX="10.0" layoutY="65.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
             <JFXButton alignment="CENTER" layoutX="981.0" layoutY="611.0" maxWidth="208.0" onAction="#addRecieved" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add Received" textFill="#fefeff" AnchorPane.bottomAnchor="63.0" AnchorPane.rightAnchor="54.0">
                <font>
                   <Font size="18.0" />

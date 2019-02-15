@@ -1,6 +1,7 @@
 package application.Controllers;
 
 import java.awt.Dimension;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.text.DateFormat;
@@ -19,7 +20,9 @@ import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -211,6 +214,13 @@ public class AccountsLocalMakePaymentController implements Initializable {
 
 	}
 
+	 @FXML
+	    void back(ActionEvent event)throws IOException {
+	    	
+	    	add= FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+	    	setNode(add);
+
+	    }
 	public void getBoatName(String text) {
 
 		lblBoatName.setText(text);

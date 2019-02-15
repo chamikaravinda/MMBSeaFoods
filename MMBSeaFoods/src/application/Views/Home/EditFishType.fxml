@@ -28,12 +28,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="btnAdd" alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" onAction="#UpdateFishType" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <JFXButton fx:id="btnAdd" alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" onAction="#UpdateFishType" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Update" textFill="#fefeff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#f7f8f8" glyphName="PLUS" size="17.0" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#f7f8f8" glyphName="ARROW_UP" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
                </children>

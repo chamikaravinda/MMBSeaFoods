@@ -9,7 +9,7 @@ public class LocalSales {
 	private int FishType;
 	private double Price;
 	private double TotalWeight;
-	
+	private String SFishType;
 	
 	public int getID() {
 		return ID;
@@ -52,6 +52,12 @@ public class LocalSales {
 	}
 	public void setTotalWeight(double totalWeight) {
 		TotalWeight = totalWeight;
+	}
+	public String getSFishType() {
+		return SFishType;
+	}
+	public void setSFishType(String sFishType) {
+		SFishType = sFishType;
 	}
 	
 	

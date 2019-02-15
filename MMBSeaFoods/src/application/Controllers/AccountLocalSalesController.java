@@ -2,11 +2,14 @@ package application.Controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import application.Models.Boat_Account;
 import application.Models.LocalSales;
+import application.Models.Local_Fish_types;
 import application.Services.AccountServices;
+import application.Services.Local_Fish_typesServices;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,42 +30,59 @@ public class AccountLocalSalesController implements Initializable{
     @FXML
     private AnchorPane Accounts;
 
+
     @FXML
-    private Label BoatName;
+    private TableView<LocalSales> tblLsales;
+
+    @FXML
+    private TableColumn<?, ?> clmDate;
+
+    @FXML
+    private TableColumn<?, ?> clmBname;
+
+    @FXML
+    private TableColumn<?, ?> clmFtype;
+
+    @FXML
+    private TableColumn<?, ?> clmWeight;
     
     AnchorPane add;
 
-	/*
+
 	
-	private ObservableList<LocalSales> boatDetailsList = FXCollections.observableArrayList();
+	private ObservableList<LocalSales> localSalesEntries = FXCollections.observableArrayList();
 	
 	AccountServices accountServices=new AccountServices();
-
+	Local_Fish_typesServices service = new Local_Fish_typesServices(); 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 
-		boatDetailsList.clear();
+		localSalesEntries.clear();
 		
 		
-		ArrayList<LocalSales> boat_list = accountServices.getAllSaleList();
-		
-		for( LocalSales boat : boat_list ) {
-			boat.setBuyerName(accountServices.getBuyerNameByID(boat.getBuyerID()));
-			boatDetailsList.add(boat);
-		} 
-		
-		
-		tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-		tblcBuyerName.setCellValueFactory(new PropertyValueFactory<>("BuyerName"));
-		FishType.setCellValueFactory(new PropertyValueFactory<>("FishType"));
-		TotalWeight.setCellValueFactory(new PropertyValueFactory<>("TotalWeight"));
+		ArrayList<LocalSales> saleList;
+		try {
+			saleList = accountServices.getAllForienSales();
+			for( LocalSales sales : saleList ) {
+				sales.setBuyerName(accountServices.getBuyerNameByID(sales.getBuyerID()));getClass();	
+				Local_Fish_types type =service.getLocalfishTypes(sales.getFishType());
+				sales.setSFishType(type.getName());
+				localSalesEntries.add(sales);
+			} 
+			clmDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+			clmBname.setCellValueFactory(new PropertyValueFactory<>("BuyerName"));
+			clmFtype.setCellValueFactory(new PropertyValueFactory<>("SFishType"));
+			clmWeight.setCellValueFactory(new PropertyValueFactory<>("TotalWeight"));
 
-		tblvSales.setItems(boatDetailsList);
-		
+			tblLsales.setItems(localSalesEntries);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	*/
+	
 	
 
 	
@@ -96,10 +116,5 @@ public class AccountLocalSalesController implements Initializable{
 
 	    }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-		
-	}
 
 }

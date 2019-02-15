@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.Notifications;
+
 import com.jfoenix.controls.JFXComboBox;
 
 import application.Models.Boat_Account;
@@ -16,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -147,17 +150,26 @@ public class AccountsLocalBoatController implements Initializable{
 	public void makePayment(ActionEvent event) throws IOException {
 		
 		String name=lblBoat.getText();
-		System.out.println(name);
+
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/LMakePayment.fxml"));
-		Parent root = loader.load();
-		AccountsLocalMakePaymentController controller = loader.<AccountsLocalMakePaymentController>getController();
-		controller.getBoatName(name); 
-		//controller.getBoatDetails(name);
-		setNode(root);
+		if(!lblBoat.getText().isEmpty()) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/LMakePayment.fxml"));
+			Parent root = loader.load();
+			AccountsLocalMakePaymentController controller = loader.<AccountsLocalMakePaymentController>getController();
+			controller.getBoatName(name); 
+			
+			setNode(root);
+		}else {
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select a Boat to continue");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+		}
 		
-		/*add=FXMLLoader.load(getClass().getResource("../Views/Accounts/LMakePayment.fxml"));
-		setNode(add);*/
+
 	}
 	
 	

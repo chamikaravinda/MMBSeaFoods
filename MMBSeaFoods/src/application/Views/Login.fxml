@@ -37,17 +37,20 @@
       <AnchorPane layoutX="39.0" layoutY="68.0" prefHeight="335.0" prefWidth="262.0">
          <children>
             <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutX="50.0" layoutY="171.0" size="200" wrappingWidth="161.42857360839844" />
-            <Label contentDisplay="CENTER" layoutX="55.0" layoutY="227.0" prefHeight="70.0" prefWidth="153.0" text="M M B" textAlignment="CENTER" textFill="WHITE">
+            <Label contentDisplay="CENTER" layoutX="54.0" layoutY="195.0" prefHeight="70.0" prefWidth="153.0" text="M M B" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <Label layoutX="63.0" layoutY="297.0" text="SEA FOOD" textFill="WHITE">
+            <Label layoutX="63.0" layoutY="250.0" text="SEA FOOD" textFill="WHITE">
                <font>
                   <Font size="29.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
+      <Label layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="282.0" />
+      <Label layoutX="396.0" layoutY="9.0" prefHeight="27.0" prefWidth="282.0" />
+      <Label layoutX="257.0" layoutY="439.0" prefHeight="21.0" prefWidth="179.0" text="Powerd By Nova Solutions " textAlignment="CENTER" textFill="#f5f4f4" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="257.0" AnchorPane.rightAnchor="256.0" />
    </children>
 </AnchorPane>

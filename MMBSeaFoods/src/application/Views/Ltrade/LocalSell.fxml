@@ -81,7 +81,7 @@
                         </AnchorPane>
                      </children>
                   </GridPane>
-                  <JFXComboBox fx:id="cmbLBuyers" layoutX="14.0" layoutY="71.0" prefHeight="45.0" prefWidth="237.0" promptText="Select the Buyer" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="71.0" />
+                  <JFXComboBox fx:id="cmbLBuyers" layoutX="14.0" layoutY="71.0" prefHeight="45.0" prefWidth="237.0" promptText="Select the Buyer" styleClass="font" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="71.0" />
                   <JFXButton fx:id="btnremove" alignment="CENTER" layoutX="148.0" layoutY="476.0" maxWidth="175.0" minHeight="31.0" minWidth="120.0" prefHeight="44.0" prefWidth="147.0" text="Remove" textFill="#0d0d0d" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="148.0">
                      <font>
                         <Font size="18.0" />

@@ -877,19 +877,14 @@ public class AccountServices {
 
 
 
-	public ArrayList<LocalSales> getAllSaleList() {
+	public ArrayList<LocalSales> getAllForienSales() throws SQLException {
 
 
 		ArrayList<LocalSales> boatList=new ArrayList<LocalSales>();
 		
 		try {
 			
-			connection=DBConnection.Connector();
-			
-			if(connection==null) {
-				System.out.println("Connection not successful");
-			}
-			
+			connection=DBConnection.Connector();			
 			String query = "SELECT * FROM Local_Sales";
 			
 			preparedStatement=connection.prepareStatement(query);
@@ -905,38 +900,23 @@ public class AccountServices {
 				boat.setFishType(Integer.parseInt(resultSet.getString(4)));
 				boat.setPrice(Double.parseDouble(resultSet.getString(5)));
 				boat.setTotalWeight(Double.parseDouble(resultSet.getString(6)));
-				
-				
-				
-				
-				
+				System.out.println(boat.getBuyerName() +boat.getDate() +boat.getPrice());
 				boatList.add(boat);
 			}
 			
-			System.out.println(query);
-			
+			return boatList;
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 			System.out.println("Exception at  get All Sales List :" + e.getLocalizedMessage());	
-			
+			return null;
+
 		} catch (Exception e) {
 			System.out.println("Exception In get All Sales List : " + e);	
-		}finally {
-			try {
-				preparedStatement.close();
-				resultSet.close();
+			return null;
+		}finally {	
 				connection.close();
-			} catch (SQLException e) {
-				System.out.println("Finally Exception In get All Sales List : " + e);
-			}
-			
-			
+
 		}
-		
-	return boatList;
-	
-	
-	
 	}
 
 

@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.Notifications;
+
 import com.jfoenix.controls.JFXComboBox;
 
 import application.Models.Boat_Account;
@@ -19,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -128,20 +131,23 @@ public class AccountLocalBuyersController implements Initializable {
 	public void addRecieved(ActionEvent event) throws IOException {
 		
 		String name=lblBoat.getText();
-		System.out.println(name);
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/LAddBuyerReceived.fxml"));
-		Parent root = loader.load();
-		LocalAddBuyerRecievedController controller = loader.<LocalAddBuyerRecievedController>getController();
-		controller.getBuyerName(name); 
-		//controller.getBoatDetails(name);
-		setNode(root);
-		
-		/*add=FXMLLoader.load(getClass().getResource("../Views/Accounts/LMakePayment.fxml"));
-		setNode(add);*/
-		
-		
-		
+		if(!lblBoat.getText().isEmpty()) {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/LAddBuyerReceived.fxml"));
+			Parent root = loader.load();
+			LocalAddBuyerRecievedController controller = loader.<LocalAddBuyerRecievedController>getController();
+			controller.getBuyerName(name); 
+			setNode(root);
+			
+		}else {
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select a Buyer to continue");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+		}
 	}
 	
 	

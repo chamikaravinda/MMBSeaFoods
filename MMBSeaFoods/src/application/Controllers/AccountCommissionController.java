@@ -1,24 +1,52 @@
 package application.Controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
+import application.Models.Commition;
+import application.Services.AccountServices;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class AccountCommissionController {
+public class AccountCommissionController implements Initializable {
 
-	    @FXML
-	    private AnchorPane CommissionAccounts;
-	    
-	    AnchorPane add;
-	    
-	    
-	    
+    @FXML
+    private AnchorPane CommissionAccounts;
+
+    @FXML
+    private TableView<Commition> tblCommision;
+
+    @FXML
+    private TableColumn<?, ?> clmDate;
+
+    @FXML
+    private TableColumn<?, ?> clmReason;
+
+    @FXML
+    private TableColumn<?, ?> clmTopay;
+
+    @FXML
+    private TableColumn<?, ?> clmPaid;
+
+    AnchorPane add;
+
+	private ObservableList<Commition> commitionAccountEntries = FXCollections.observableArrayList();
+	  
+	AccountServices accountServices=new AccountServices();
+	
 	    void setNode(Node node) {
 
 	    	CommissionAccounts.getChildren().clear();
@@ -44,5 +72,38 @@ public class AccountCommissionController {
 	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
 			setNode(add);
 	    }
+	    
+	    @FXML
+	    void makePayment(ActionEvent event) throws IOException {
+	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/FCommitionPayment.fxml"));
+			setNode(add);
+	    }
+
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+
+			commitionAccountEntries.clear();
+			
+			ArrayList<Commition> entryList = accountServices.getAllCommitionList();
+			
+			for( Commition entry : entryList ) {
+				if(entry.getTo_Pay()!=0) {
+					entry.setSTo_Pay("Rs."+String.format ("%2.0f", entry.getTo_Pay())+".00");
+				}else {
+					entry.setSTo_Pay("Rs 0.00");
+				}
+		
+				commitionAccountEntries.add(entry);
+			}
+			
+			
+			clmDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+			clmReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
+			clmTopay.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
+			clmPaid.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
+			
+			tblCommision.setItems(commitionAccountEntries);
+				
+		}
 
 	}

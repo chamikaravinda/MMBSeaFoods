@@ -111,6 +111,11 @@ public class LocalSellController implements Initializable {
 				
 				btnremove.setOnAction(e -> {
 					LFish_stock local_Fish = clmFishTable.getSelectionModel().getSelectedItem();
+					for(LFish_stock fish:currentStock) {
+						if(fish.getFish_Type()==local_Fish.getFish_Type()) {
+							fish.setTotal_Weight(fish.getTotal_Weight()+local_Fish.getTotal_Weight());
+						}
+					}
 					clmFishTable.getItems().remove(local_Fish);
 					clmFishTable.refresh();
 					
