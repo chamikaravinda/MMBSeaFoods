@@ -72,6 +72,36 @@ public class LocalBuyerService{
 		
 	}
 	
+	public LocalBuyers getLocalBoat(String name) throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		
+		String query= "select * from Local_Fish_Buyers where Name=?";
+		LocalBuyers local_buyer =new LocalBuyers();
+		try {
+			preparedStatement =connection.prepareStatement(query);
+			preparedStatement.setString(1, name);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				local_buyer.setID(Integer.parseInt(resultSet.getString("ID")));
+				local_buyer.setName(resultSet.getString("Name"));
+				local_buyer.setMobile_No(resultSet.getString("Mobile_No"));
+				
+			}
+			return local_buyer;
+			
+		}catch(Exception e) {
+			return null;
+		}finally {
+			preparedStatement.close();
+			resultSet.close();
+			connection.close();
+		}
+		
+	}
+	
 	public ArrayList<LocalBuyers> getLocalBuyer() throws SQLException{
 		
 		connection=DBConnection.Connector();
@@ -96,6 +126,7 @@ public class LocalBuyerService{
 			return list;
 			
 		}catch(Exception e) {
+			e.printStackTrace();
 			return null;
 		}finally {
 			preparedStatement.close();

@@ -65,13 +65,13 @@ public class LFish_stockService {
 				preparedStatement =connection.prepareStatement(query);
 				preparedStatement.setInt(1, item.getFish_Type());
 				resultSet = preparedStatement.executeQuery();
-				double  currentWeight = 0;
+				double  currentWeight = -1;
 				if(resultSet.next()) {
 					
 					currentWeight= resultSet.getDouble("Total_Weight"); 
 				}
 				
-				if(currentWeight !=0) {
+				if(currentWeight !=-1) {
 					PreparedStatement preparedStatement2=null;
 					String updateQuery= "UPDATE Local_Fish_stock set Total_Weight =?  where Fish_Type= ? ";
 					preparedStatement2 =connection.prepareStatement(updateQuery);
@@ -91,6 +91,38 @@ public class LFish_stockService {
 			}
 		return true;
 		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}
+	}
+	
+	public boolean sellStock(ObservableList<LFish_stock> items) throws SQLException {
+		
+		
+		
+		connection=DBConnection.Connector();
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		String query= "select * from Local_Fish_stock where Fish_Type =? ";
+
+		PreparedStatement preparedStatement2=null;
+		String updateQuery= "UPDATE Local_Fish_stock set Total_Weight =?  where Fish_Type= ? ";
+		try {
+		for(LFish_stock item:items) {
+				preparedStatement =connection.prepareStatement(query);
+				preparedStatement.setInt(1, item.getFish_Type());
+				resultSet = preparedStatement.executeQuery();
+				
+				preparedStatement2 =connection.prepareStatement(updateQuery);
+				preparedStatement2.setDouble(1, resultSet.getDouble("Total_Weight")-item.getTotal_Weight());
+				preparedStatement2.setInt(2, item.getFish_Type());
+				preparedStatement2.executeUpdate();
+		}
+		return true;
+		} catch(Exception e) {
 			e.printStackTrace();
 			return false;
 		}finally {
