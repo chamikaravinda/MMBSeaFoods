@@ -65,34 +65,28 @@ public class LFish_stockService {
 				preparedStatement =connection.prepareStatement(query);
 				preparedStatement.setInt(1, item.getFish_Type());
 				resultSet = preparedStatement.executeQuery();
-				
+				preparedStatement.close();
 				if(resultSet.next()) {
-					
 					PreparedStatement preparedStatement2=null;
-					int resultSet2;
 					String updateQuery= "UPDATE Local_Fish_stock set Total_Weight =?  where Fish_Type= ? ";
 					preparedStatement2 =connection.prepareStatement(updateQuery);
 					preparedStatement2.setDouble(1, item.getTotal_Weight()+resultSet.getDouble("Total_Weight"));
 					preparedStatement2.setInt(2, item.getFish_Type());
-					resultSet2 = preparedStatement2.executeUpdate();
-					
+					preparedStatement2.executeUpdate();
 				}else {
-					
 					PreparedStatement preparedStatement3=null;
-					ResultSet resultSet3;
 					String insertQuery= "INSERT INTO Local_Fish_stock (Fish_Type,Total_Weight) VALUES (?,?)";
 					preparedStatement3 =connection.prepareStatement(insertQuery);
 					preparedStatement3.setInt(1, item.getFish_Type());
 					preparedStatement3.setDouble(2, item.getTotal_Weight());
-					
-					resultSet3 = preparedStatement3.executeQuery();
-					
+					preparedStatement3.executeUpdate();
 				}
 			
 	
 			}
 		return true;
 		}catch(Exception e) {
+			e.printStackTrace();
 			return false;
 		}finally {
 			connection.close();
