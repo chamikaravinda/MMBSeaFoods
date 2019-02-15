@@ -1,35 +1,108 @@
 package application.Controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
+
+import application.Models.Local_Fish_types;
+import application.Models.LocalBuyers;
+import application.Services.LocalBuyerService;
+import application.Services.Local_Fish_typesServices;
 import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public class LocalSellController {
+public class LocalSellController implements Initializable {
 
-    @FXML
-    private AnchorPane Stocks;
+	 	@FXML
+	    private AnchorPane Stocks;
 
-    @FXML
-    private Label BoatName;
+	    @FXML
+	    private TableView<?> clmFishTable;
 
-    AnchorPane add;
-    
-    
-    @FXML
-    void back(ActionEvent event) throws IOException {
+	    @FXML
+	    private TableColumn<?, ?> clmfishtype;
 
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
-        setNode(add);
-    	
-    }
+	    @FXML
+	    private TableColumn<?, ?> clmTotalWeight;
+
+	    @FXML
+	    private TableColumn<?, ?> clmTotalPrice;
+
+	    @FXML
+	    private JFXComboBox<String> cmbLftype;
+
+	    @FXML
+	    private JFXTextField Lfweight;
+
+	    @FXML
+	    private JFXComboBox<String> cmbLBuyers;
+
+	    @FXML
+	    private JFXButton btnremove;
+	    
+	    AnchorPane back;
+	    
+	    ObservableList<String> LocalFishTypeList =FXCollections.observableArrayList();
+	    ObservableList<String> LocalBuyersList =FXCollections.observableArrayList();
+	    
+	    ArrayList<Local_Fish_types> local_fishtype=null;
+	    ArrayList<LocalBuyers> LocalBuyers=null;
+	    
+	    Local_Fish_typesServices serviceC= new Local_Fish_typesServices();
+	    LocalBuyerService serviceD =new LocalBuyerService();
+	    
+	    @Override
+		public void initialize(URL location, ResourceBundle resources) {
+			
+	    	try {
+				local_fishtype=serviceC.getLocalfishTypes();
+				LocalBuyers=serviceD.getLocalBuyer();
+
+				for(Local_Fish_types Ltyp:local_fishtype) {
+					LocalFishTypeList.add(Ltyp.getName());
+				}
+				
+				for(LocalBuyers buyer:LocalBuyers) {
+					LocalBuyersList.add(buyer.getName());
+				}
+				
+				cmbLftype.setItems(LocalFishTypeList);
+				cmbLBuyers.setItems(LocalBuyersList);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+
+	    @FXML
+	    void AddLocalFishActions(ActionEvent event) {
+
+	    }
+	    
+	    
+	    @FXML
+	    void AddFinalizeStock(ActionEvent event) {
+
+	    }
+
     
     
     void setNode(Node node) {
@@ -49,5 +122,12 @@ public class LocalSellController {
         ft.play();
     }
 
+	  @FXML
+	   public void back(ActionEvent event)throws IOException {
+		  
+		    back=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+	        setNode(back);
+
+	    }
     
 }

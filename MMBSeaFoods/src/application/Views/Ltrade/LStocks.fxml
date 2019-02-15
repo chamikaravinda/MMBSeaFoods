@@ -91,7 +91,7 @@
                         <FontAwesomeIconView fill="#f7f8f8" glyphName="BALANCE_SCALE" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="switchStocks1" alignment="CENTER" maxWidth="208.0" onAction="#switchLocalSell" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sell" textFill="#fefeff">
+                  <JFXButton fx:id="switchStocks1" alignment="CENTER" maxWidth="208.0" onAction="#switchSell" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sell" textFill="#fefeff">
                      <font>
                         <Font size="18.0" />
                      </font>

@@ -120,6 +120,12 @@ public class LocalBoatController implements Initializable {
 		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
 		setNode(add);
 	}
+	
+	@FXML
+	void switchSell(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+		setNode(add);
+	}
 
 	public void switchEditLocalBoats(ActionEvent event) throws IOException {
 		LocalBoat Lboat = tblboats.getSelectionModel().getSelectedItem();

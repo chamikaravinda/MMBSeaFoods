@@ -119,6 +119,11 @@ public class LocalFishTypeController implements Initializable {
     	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
         setNode(add);
     }
+	@FXML
+	void switchSell(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+		setNode(add);
+	}
 
     @FXML
     void switchEditLFishType(ActionEvent event) throws IOException {

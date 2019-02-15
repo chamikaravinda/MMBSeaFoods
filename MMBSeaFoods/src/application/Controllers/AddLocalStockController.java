@@ -242,18 +242,7 @@ public class AddLocalStockController implements Initializable  {
 				notifications.showError();
 	}
 }
-					
-					
 
-
-
-		
-		
-		
-		
-	
-	
-	
 	  @FXML
 	   public void back(ActionEvent event)throws IOException {
 		  

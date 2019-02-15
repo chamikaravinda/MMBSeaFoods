@@ -68,7 +68,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton alignment="CENTER" maxWidth="208.0" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sell" textFill="#fefeff">
+                  <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#switchSell" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Sell" textFill="#fefeff">
                      <font>
                         <Font size="18.0" />
                      </font>

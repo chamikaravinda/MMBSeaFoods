@@ -113,7 +113,11 @@ public class LocalBuyerController implements Initializable {
         setNode(add);
     }
     
-
+	@FXML
+	void switchSell(ActionEvent event) throws IOException {
+		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+		setNode(add);
+	}
     @FXML
     void switchEditLocalBoats(ActionEvent event)throws IOException {
     	LocalBuyers LfBuyer = tblBuyers.getSelectionModel().getSelectedItem();
