@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Simple_Blue" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4720eed1-9aa3-4546-9e83-4cb5b4dbbd12">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT  * FROM Local_Boat_Account_UnCleared]]>
+	</queryString>
+	<field name="Date" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="Date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Local_Boat_Account_UnCleared"/>
+	</field>
+	<field name="Reason" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="Reason"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Local_Boat_Account_UnCleared"/>
+	</field>
+	<field name="To_Pay" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="To_Pay"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Local_Boat_Account_UnCleared"/>
+	</field>
+	<field name="Paid" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="Paid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Local_Boat_Account_UnCleared"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#3F2B63" uuid="1e874de2-26e3-423e-8bef-9c9a977513ca"/>
+				<staticText>
+					<reportElement x="20" y="20" width="320" height="43" forecolor="#FFFFFF" uuid="c552e44a-dd5c-4c4a-9586-80676fb1eaf7"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[MMB]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="360" y="43" width="215" height="20" forecolor="#FFFFFF" uuid="559e2fbc-337b-477b-9995-570c8444eb7d"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Local Account Invoice]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="20" y="62" width="100" height="30" forecolor="#FFFFFF" uuid="07d894cc-4184-4f9f-b94f-4f5531064d62"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SEA FOOD]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="e915bb9a-cf40-401c-b9b4-e16042ccd033"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a1772ea1-2b8a-4551-916c-62511e5c7391">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0924de3d-d7bf-4f0f-bc9e-5f1cb1466cdc"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="198" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="fe21ac1d-edbc-4d56-b414-91df73ba8010">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b483c18d-d2f2-4a7c-8fdc-8f3b88bfe6a0"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reason]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="336" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="4f7d147f-5ced-4479-b947-f31e14d90769">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fdd368d9-6182-4844-9d05-146c8fe6a725"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To  Pay]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="af372128-e582-4b76-a449-e7026d7460de"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="0" width="138" height="20" uuid="f01a1013-b799-4a35-8119-8b25d6a98734">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0924de3d-d7bf-4f0f-bc9e-5f1cb1466cdc"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="0" width="138" height="20" uuid="61ce492b-d1ca-4c41-a248-f9cbbd75fe35">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b483c18d-d2f2-4a7c-8fdc-8f3b88bfe6a0"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Reason}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="336" y="0" width="138" height="20" uuid="d3493693-7f45-42e1-b60f-fa0765ba758a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fdd368d9-6182-4844-9d05-146c8fe6a725"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{To_Pay}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="9d0ed7cc-70aa-4d2f-b2bc-2f907fe29dd0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="b6eaa8fe-44b2-45ee-8c73-67fe93788495"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="705897c9-6d13-4dfd-b115-4ef82e876c5b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
