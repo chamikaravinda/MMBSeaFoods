@@ -148,6 +148,15 @@ public class LocalStocksController implements Initializable {
 
 	    }
 	    
+	    @FXML
+	    void switchLocalSell(ActionEvent event) throws IOException {
+	    	
+	    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+	        setNode(add);
+
+
+	    }
+	    
 	    
     
 }

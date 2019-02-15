@@ -65,8 +65,13 @@ public class LFish_stockService {
 				preparedStatement =connection.prepareStatement(query);
 				preparedStatement.setInt(1, item.getFish_Type());
 				resultSet = preparedStatement.executeQuery();
-				preparedStatement.close();
+				double  currentWeight = 0;
 				if(resultSet.next()) {
+					
+					currentWeight= resultSet.getDouble("Total_Weight"); 
+				}
+				
+				if(currentWeight !=0) {
 					PreparedStatement preparedStatement2=null;
 					String updateQuery= "UPDATE Local_Fish_stock set Total_Weight =?  where Fish_Type= ? ";
 					preparedStatement2 =connection.prepareStatement(updateQuery);

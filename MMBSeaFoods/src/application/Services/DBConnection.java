@@ -134,7 +134,8 @@ public class DBConnection {
 
 				String Local_Boats = "CREATE TABLE IF NOT EXISTS Local_Boats "
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
-						+ "  BoatNo     	TEXT      NOT NULL," + "  Owner     	  TEXT      ,"
+						+ "  BoatNo     	TEXT      NOT NULL," 
+						+ "  Owner     	  TEXT      ,"
 						+ "  Mobile_No      TEXT      NOT NULL)";
 
 				String Local_Fish_stock = "CREATE TABLE IF NOT EXISTS Local_Fish_stock"

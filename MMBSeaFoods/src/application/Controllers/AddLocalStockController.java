@@ -13,10 +13,12 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Models.F_BoatEntryCatogries;
 import application.Models.LFish_stock;
 import application.Models.LocalBoat;
 import application.Models.LocalPurchase;
 import application.Models.Local_Fish_types;
+import application.Models.Stock_Fish;
 import application.Services.LFish_stockService;
 import application.Services.LocalBoatAccountService;
 import application.Services.LocalBoatService;
@@ -66,7 +68,8 @@ public class AddLocalStockController implements Initializable  {
 	    private TableColumn<?, ?> clmTotalPrice;
 	    
 	    
-	    
+	    @FXML
+		private JFXButton btnremove;
 
 	    @FXML
 	    private JFXButton AddLFish;
@@ -130,6 +133,12 @@ public class AddLocalStockController implements Initializable  {
 		
 		clmFishTable.setItems(local_fishStock);
 		
+		btnremove.setOnAction(e -> {
+			LFish_stock local_Fish = clmFishTable.getSelectionModel().getSelectedItem();
+			clmFishTable.getItems().remove(local_Fish);
+			clmFishTable.refresh();
+			
+		});
 	
 		
 	}
@@ -167,8 +176,10 @@ public class AddLocalStockController implements Initializable  {
 			local_Fish.setFishName(cmbLftype.getValue());
 			local_Fish.setTotal_Weight(Double.parseDouble(Lfweight.getText()));
 			local_Fish.setPrice(local_Fish.getTotal_Weight()*types.getPrice());
-		
+			local_Fish.setFish_Type(types.getID());
 			local_fishStock.add(local_Fish);
+			
+			Lfweight.clear();
 			
 		}
 		
@@ -181,36 +192,56 @@ public class AddLocalStockController implements Initializable  {
 			String boatname =cmbLsBoat.getValue();
 			LocalBoat boat=serviceE.getLocalBoat(boatname);
 			
-			if(serviceB.newStock(local_fishStock)) {
-				if(serviceD.addEntries(local_fishStock, boat.getID())) {
-					if(serviceD.addEntriesUncleard(local_fishStock, boat.getID())) {
+			if(boatname != null) {
+				if(!local_fishStock.isEmpty()) {
+						if(serviceB.newStock(local_fishStock)) {
+							if(serviceD.addEntries(local_fishStock, boat.getID())) {
+								if(serviceD.addEntriesUncleard(local_fishStock, boat.getID())) {
+								
+									Notifications notifications = Notifications.create();
+									notifications.title("Succesfull");
+									notifications.text("Fish stock added succesfully");
+									notifications.graphic(null);
+									notifications.hideAfter(Duration.seconds(2));
+									notifications.position(Pos.CENTER);
+									notifications.showConfirm();
+									
+									add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+									setNode(add);
+									
+								}
+							}
+							
+						}else {
+							Notifications notifications = Notifications.create();
+							notifications.title("Error");
+							notifications.text("Fish stock adding  unsuccesfull");
+							notifications.graphic(null);
+							notifications.hideAfter(Duration.seconds(2));
+							notifications.position(Pos.CENTER);
+							notifications.showError();
 					
+				   
+						}
+					}else {
 						Notifications notifications = Notifications.create();
-						notifications.title("Succesfull");
-						notifications.text("Fish stock added succesfully");
+						notifications.title("Error");
+						notifications.text("Add Fishes to the List");
 						notifications.graphic(null);
 						notifications.hideAfter(Duration.seconds(2));
 						notifications.position(Pos.CENTER);
-						notifications.showConfirm();
-						
-						add=FXMLLoader.load(getClass().getResource("../Views/Ftrade/FishTypes.fxml"));
-						setNode(add);
-						
+						notifications.showError();
 					}
-				}
-				
-			}else {
+				}else {
 				Notifications notifications = Notifications.create();
 				notifications.title("Error");
-				notifications.text("Fish stock adding  unsuccesfull");
+				notifications.text("Select a boat");
 				notifications.graphic(null);
 				notifications.hideAfter(Duration.seconds(2));
 				notifications.position(Pos.CENTER);
 				notifications.showError();
-		
-	   
-			}
 	}
+}
 					
 					
 
