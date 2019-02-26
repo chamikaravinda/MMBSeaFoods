@@ -127,7 +127,7 @@ public class EditBuyerController implements Initializable{
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
-				back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Buyers.fxml"));
+				back=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Buyers.fxml"));
 				setNode(back);
 				
 			}else {
@@ -145,7 +145,7 @@ public class EditBuyerController implements Initializable{
     @FXML
     void back(ActionEvent event) throws IOException {
 
-    	back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Buyers.fxml"));
+    	back=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Buyers.fxml"));
 		setNode(back);
     	
     }

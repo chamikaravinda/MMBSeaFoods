@@ -1,6 +1,7 @@
 package application.Controllers;
 
 import java.awt.Dimension;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -13,6 +14,17 @@ import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 
+import org.controlsfx.control.Notifications;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import application.Models.Boat_Account;
 import application.Services.AccountServices;
 import javafx.animation.FadeTransition;
@@ -24,6 +36,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -111,7 +124,58 @@ public class AccountsLocalMakePaymentController implements Initializable {
 
 	public void pay() {
 			
-		generateAccountsLocalInvoice();
+		
+		
+		try {
+			
+			
+			
+			generateAccountsLocalInvoice();
+			
+			String boatName=lblBoatName.getText();
+			
+			int id = accountServices.getBoatIDByName(boatName);
+			
+			for (Boat_Account item : tblvBoatDetails.getItems()) {
+				
+				Boat_Account boat= new Boat_Account();
+				
+				boat.setID(item.getID());
+				boat.setReason(item.getReason());
+				boat.setDate(item.getDate());
+				boat.setTo_Pay(0);
+				boat.setPaid(item.getTo_Pay());
+				boat.setBoat_ID(id);
+				
+				
+				accountServices.AddNewPaid(boat);
+				System.out.println(boat.getBoat_ID());
+				accountServices.setUncleared(boat.getBoat_ID());
+				
+				
+			}
+			
+			
+			Notifications notifications = Notifications.create();
+			notifications.title("Succesfull");
+			notifications.text("Done");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showConfirm();
+			
+			
+			
+			add=FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
+			setNode(add);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 	
 	
@@ -142,7 +206,7 @@ public class AccountsLocalMakePaymentController implements Initializable {
 
 	/*---------------generate the jasper report--------------------*/
 	public void generateAccountsLocalInvoice() {
-		int id = accountServices.getBoatIDByName(lblBoatName.getText());
+		/*int id = accountServices.getBoatIDByName(lblBoatName.getText());
 
 
 		String invoiceName = "LAI_"+getCurrentDate()+"_"+getCurrentTime()+".pdf";
@@ -172,7 +236,100 @@ public class AccountsLocalMakePaymentController implements Initializable {
 			System.out.println("Exception  " + e);
 			
 
-		}
+		}*/
+		
+		
+		int id = accountServices.getBoatIDByName(lblBoatName.getText());
+		
+		ArrayList<Boat_Account> boat_list = accountServices.getAllBOQListUncleared(id);
+		
+		String invoiceName = "LBAI_"+getCurrentDate()+"_"+getCurrentTime()+".pdf";
+		
+		double totalAmount =  0.0;
+		
+		Document document = new Document();
+        try
+        {
+                @SuppressWarnings("unused")
+                PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\"+invoiceName));
+                document.open();
+
+                Paragraph para = new Paragraph(
+                        "MMB Sea Foods\n\n",new Font(Font.FontFamily.HELVETICA, 18,Font.BOLD));
+                para.setAlignment(para.ALIGN_CENTER);
+                
+                Paragraph paraDesc = new Paragraph(
+                        "Local Account Invoice " +"\n",new Font(Font.FontFamily.HELVETICA, 15,Font.BOLD));
+                paraDesc.setAlignment(paraDesc.ALIGN_CENTER);
+                
+                Paragraph para2 = new Paragraph(
+                        "Date : " + getCurrentDate(),new Font(Font.FontFamily.HELVETICA, 13,Font.BOLD));
+                para2.setAlignment(para2.ALIGN_RIGHT);
+                
+                Paragraph para3 = new Paragraph(
+                        "Time : " + getCurrentTime() +"\n\n",new Font(Font.FontFamily.HELVETICA, 13,Font.BOLD));
+                para2.setAlignment(para3.ALIGN_LEFT);
+               
+               
+                document.add(para);
+                document.add(paraDesc);
+                document.add(para2);
+                document.add(para3);
+
+                
+                PdfPTable pdfPTable =new PdfPTable(4); 
+                PdfPCell pdfCell1 = new PdfPCell(new Phrase("Date")); 
+                PdfPCell pdfCell2 = new PdfPCell(new Phrase("Reason"));
+                PdfPCell pdfCell3 = new PdfPCell(new Phrase("To Pay Amount"));
+                PdfPCell pdfCell4 = new PdfPCell(new Phrase("Boat ID"));
+
+                
+                pdfCell1.setBackgroundColor(BaseColor.BLUE);
+                pdfCell2.setBackgroundColor(BaseColor.BLUE);
+                pdfCell3.setBackgroundColor(BaseColor.BLUE);
+                pdfCell4.setBackgroundColor(BaseColor.BLUE);
+                
+                pdfPTable.addCell(pdfCell1);
+                pdfPTable.addCell(pdfCell2);
+                pdfPTable.addCell(pdfCell3);
+                pdfPTable.addCell(pdfCell4);
+
+                
+                
+                for( Boat_Account boat : boat_list ) {
+                	pdfPTable.addCell(boat.getDate());
+                	pdfPTable.addCell(boat.getReason());
+                	pdfPTable.addCell(Double.toString(boat.getTo_Pay()));
+                	pdfPTable.addCell(Integer.toString(boat.getBoat_ID()));
+                	
+                	totalAmount += boat.getTo_Pay();
+                }
+                
+                pdfPTable.addCell("Total");
+                pdfPTable.addCell("");
+                pdfPTable.addCell(Double.toString(totalAmount));
+                pdfPTable.addCell("");
+                
+                
+                pdfPTable.setWidthPercentage(90);
+                 
+                document.add(pdfPTable);
+                document.close();
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+        }
+        catch (Exception e)
+        {
+        	e.printStackTrace();
+        }
 	}
 
 	public void showBoatDetailsTableList(int id) {
@@ -217,7 +374,7 @@ public class AccountsLocalMakePaymentController implements Initializable {
 	 @FXML
 	    void back(ActionEvent event)throws IOException {
 	    	
-	    	add= FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+	    	add= FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
 	    	setNode(add);
 
 	    }

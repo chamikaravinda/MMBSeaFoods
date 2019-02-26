@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Models.Boat_Account;
+import application.Models.F_Fish_Buyers_Account_Uncleard;
 import application.Models.Local_Buyers_Account;
 import application.Models.Locl_Buyers_Account_Uncleared;
 import application.Services.AccountServices;
@@ -101,6 +102,42 @@ public class LocalAddBuyerRecievedController implements Initializable {
         
 	
     }
+	
+	
+	
+	@FXML
+    void done(ActionEvent event) throws IOException {
+
+
+		String buyerName=lblBuyerName.getText();
+		
+		
+		
+		int id = accountServices.getBuyerIDByName(buyerName);
+		
+		
+		
+		for (Locl_Buyers_Account_Uncleared item : tblvBuyersDetails.getItems()) {
+			
+			Locl_Buyers_Account_Uncleared boat= new Locl_Buyers_Account_Uncleared();
+			
+			boat.setID(item.getID());
+			boat.setReason(item.getReason());
+			boat.setDate(item.getDate());
+			boat.setTo_Pay(0);
+			boat.setPaid(item.getTo_Pay());
+			boat.setBuyer_ID(id);
+			
+			
+			accountServices.AddNewRecieved(boat);
+			System.out.println(boat.getBuyer_ID());
+			accountServices.setUnclearedBuyerRecieved(boat.getBuyer_ID());
+			
+			
+		}
+		
+		
+    }
 
 	public void getBuyerName(String text) {
 
@@ -111,7 +148,7 @@ public class LocalAddBuyerRecievedController implements Initializable {
 	
 	@FXML
     void back(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
 		setNode(add);
     	
     }

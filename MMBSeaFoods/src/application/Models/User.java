@@ -5,8 +5,6 @@ public class User {
 	private int id;
 	private String Username;
 	private String Password;
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -25,7 +23,8 @@ public class User {
 	public void setPassword(String password) {
 		Password = password;
 	}
-
+	
+	
 	
 	
 }

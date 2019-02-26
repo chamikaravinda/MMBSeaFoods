@@ -58,7 +58,7 @@ public class AddLocalFishTypeController {
 		notifications.showConfirm();
 		
 		
-		add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+		add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LFishTypes.fxml"));
 		setNode(add);
 		
 	}else {
@@ -103,7 +103,7 @@ public class AddLocalFishTypeController {
     public void back(ActionEvent event)throws IOException {
 
 
-	    add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+	    add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LFishTypes.fxml"));
         setNode(add);
 
     	

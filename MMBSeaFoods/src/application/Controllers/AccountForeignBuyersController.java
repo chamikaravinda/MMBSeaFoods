@@ -115,7 +115,7 @@ public class AccountForeignBuyersController implements Initializable {
 		
 		String name=lblBuyer.getText();
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/FAddBuyerReceived.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Accounts/FAddBuyerReceived.fxml"));
 		Parent root = loader.load();
 		ForeignAddBuyerRecievedController controller = loader.<ForeignAddBuyerRecievedController>getController();
 		controller.getBuyerName(name); 
@@ -126,7 +126,7 @@ public class AccountForeignBuyersController implements Initializable {
 	  @FXML
 	    void back(ActionEvent event) throws IOException {
 
-		   add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+		   add=FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
 		   setNode(add);
 	    }
 

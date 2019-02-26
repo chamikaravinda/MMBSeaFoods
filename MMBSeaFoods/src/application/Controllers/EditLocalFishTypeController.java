@@ -90,7 +90,7 @@ public class EditLocalFishTypeController implements Initializable {
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
-				add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+				add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LFishTypes.fxml"));
 				setNode(add);
     			
     		}
@@ -134,7 +134,7 @@ public class EditLocalFishTypeController implements Initializable {
     @FXML
     void back(ActionEvent event) throws IOException {
 
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LFishTypes.fxml"));
         setNode(add);
     	
     }

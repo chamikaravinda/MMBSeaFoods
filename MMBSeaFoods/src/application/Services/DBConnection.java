@@ -8,7 +8,15 @@ public class DBConnection {
 	public static Connection Connector() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:applicationDB.db");
+			
+			String path="jdbc:sqlite:\\C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\mmbfishnova.db";
+					
+					
+					
+			
+			Connection conn = DriverManager.getConnection(path);
+			
+			//"jdbc:mysql://localhost:3306/nova?useSSL=false"
 			return conn;
 
 		} catch (Exception e) {
@@ -20,7 +28,12 @@ public class DBConnection {
 	public static Connection LoginConnector() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:applicationDB.db");
+			String path="jdbc:sqlite:\\C:\\Users\\" + System.getProperty("user.name") + "\\AppData\\Local\\mmbfishnova.db";
+					
+					
+					
+			
+			Connection conn = DriverManager.getConnection(path);
 
 			if (conn != null) {
 				// creating the database
@@ -96,8 +109,13 @@ public class DBConnection {
 
 				String Foreign_Fish_types = "CREATE TABLE IF NOT EXISTS Foreign_Fish_types"
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
-						+ "  Name           TEXT      NOT NULL," + "  price_20P      DOUBLE    NOT NULL, "
-						+ "  price_15B      DOUBLE    NOT NULL, " + "  price20_15     DOUBLE    NOT NULL )";
+						+ "  Name           TEXT      NOT NULL," 
+						+ "  price_U10      DOUBLE    NOT NULL, "
+						+ "  price_10T15    DOUBLE    NOT NULL, "
+						+ "  price_15T20    DOUBLE    NOT NULL,"
+						+ "  price_20T25    DOUBLE    NOT NULL,"
+						+ "	 price_25T30    DOUBLE    NOT NULL,"
+						+ "  price_A30      DOUBLE    NOT NULL )";
 
 				// to add each fish separtaly to the stock
 

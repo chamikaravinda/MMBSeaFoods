@@ -111,7 +111,7 @@ public class AccountLocalSalesController implements Initializable{
 	 @FXML
 	    void back(ActionEvent event)throws IOException {
 	    	
-	    	add= FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+	    	add= FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
 	    	setNode(add);
 
 	    }

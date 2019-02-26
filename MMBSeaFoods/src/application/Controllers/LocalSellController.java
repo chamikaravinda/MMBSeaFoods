@@ -184,7 +184,7 @@ public class LocalSellController implements Initializable {
 									notifications.position(Pos.CENTER);
 									notifications.showConfirm();
 									
-									back=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+									back=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 									setNode(back);
 									
 								}
@@ -239,7 +239,7 @@ public class LocalSellController implements Initializable {
 	  @FXML
 	   public void back(ActionEvent event)throws IOException {
 		  
-		    back=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+		    back=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 	        setNode(back);
 
 	    }

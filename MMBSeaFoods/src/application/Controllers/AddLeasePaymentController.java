@@ -131,7 +131,7 @@ public class AddLeasePaymentController implements Initializable{
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
-				add=FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
+				add=FXMLLoader.load(getClass().getResource("/application/Views/Vehicles/Vehicles.fxml"));
 				setNode(add);
 			}
 			
@@ -174,7 +174,7 @@ public class AddLeasePaymentController implements Initializable{
 		
 	
 	public void back(ActionEvent event) throws IOException {
-		add=FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
+		add=FXMLLoader.load(getClass().getResource("/application/Views/Vehicles/Vehicles.fxml"));
 		setNode(add);
 		
 	}

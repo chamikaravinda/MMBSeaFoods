@@ -79,37 +79,37 @@ public class BuyersController implements Initializable {
 	//Set selected node to a content holder
 
     public void switchStock(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Stocks.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Stocks.fxml"));
 		setNode(lots);
 		
 	}
     
     public void AddNewBuyer(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewBuyer.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/NewBuyer.fxml"));
 		setNode(lots);
 		
 	}
     
     public void switchLot(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
 		setNode(lots);
 		
 	}
     
     public void switchBoat(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Boats.fxml"));
 		setNode(lots);
 		
 	}
     
     public void switchBuyers(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Buyers.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Buyers.fxml"));
 		setNode(lots);
 		
 	}
     
     public void switchFishTypes(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/FishTypes.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/FishTypes.fxml"));
 		setNode(lots);
 		
 	}
@@ -120,7 +120,7 @@ public class BuyersController implements Initializable {
     	Buyers buyers =tblBuyers.getSelectionModel().getSelectedItem();
     	
     	if(buyers != null) {
-    		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ftrade/EditBuyer.fxml"));
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Ftrade/EditBuyer.fxml"));
 			Parent root = loader.load();
     		EditBuyerController controller = loader.<EditBuyerController>getController();
     		String id=Integer.toString(buyers.getID());

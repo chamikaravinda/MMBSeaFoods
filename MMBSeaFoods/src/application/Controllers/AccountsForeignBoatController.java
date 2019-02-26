@@ -89,7 +89,7 @@ public class AccountsForeignBoatController implements Initializable{
 							boat.setSTo_Pay("Rs 0.00");
 						}
 						if(boat.getPaid()!=0) {
-							boat.setSPaid("Rs. "+String.format ("%2.0f", boat.getSPaid())+".00");
+							boat.setSPaid("Rs. "+String.format ("%2.0f", boat.getPaid())+".00");
 						}else {
 							boat.setSPaid("Rs 0.00");
 						}
@@ -164,7 +164,7 @@ public class AccountsForeignBoatController implements Initializable{
 		if(cmbBoatNames.getValue() !=null) {
 		String name=lblBoat.getText();
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/MakePayment.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Accounts/MakePayment.fxml"));
 		Parent root = loader.load();
 		AccountsForeignMakePaymentController controller = loader.<AccountsForeignMakePaymentController>getController();
 		controller.getBoatName(name);
@@ -186,7 +186,7 @@ public class AccountsForeignBoatController implements Initializable{
 
     @FXML
     void back(ActionEvent event) throws IOException {
-        add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+        add=FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
 		setNode(add);
     	
     }

@@ -50,12 +50,12 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //Load all fxmls in a cache
         try {
-             Home = FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));            
-             Ftrade = FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
-             Ltrade = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
-             Vehicles = FXMLLoader.load(getClass().getResource("../Views/Vehicles/Vehicles.fxml"));
-             Settings = FXMLLoader.load(getClass().getResource("../Views/Settings/settings.fxml"));
-             Accounts = FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+             Home = FXMLLoader.load(getClass().getResource("/application/Views/Home/Home.fxml"));            
+             Ftrade = FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
+             Ltrade = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
+             Vehicles = FXMLLoader.load(getClass().getResource("/application/Views/Vehicles/Vehicles.fxml"));
+             Settings = FXMLLoader.load(getClass().getResource("/application/Views/Settings/settings.fxml"));
+             Accounts = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
             setNode(Home);
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,7 +83,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void switchHome(ActionEvent event) throws IOException {
-    	Home=FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
+    	Home=FXMLLoader.load(getClass().getResource("/application/Views/Home/Home.fxml"));
         setNode(Home);
     }
 
@@ -116,11 +116,11 @@ public class DashboardController implements Initializable {
     private void LogOut(ActionEvent event) throws IOException {
     	
     	FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("../Views/Login.fxml"));
+		loader.setLocation(getClass().getResource("/application/Views/Welcome.fxml"));
 		Parent parent = loader.load();
 		
 		Scene scene =  new Scene(parent);
-		scene.getStylesheets().add(getClass().getResource("../Views/custom.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/application/Views/custom.css").toExternalForm());
 
 		
 		Stage window  = (Stage) ((Node)event.getSource()).getScene().getWindow();

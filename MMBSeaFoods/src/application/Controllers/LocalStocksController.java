@@ -119,14 +119,14 @@ public class LocalStocksController implements Initializable {
 
 	    @FXML
 	    private void switchNewStocks(ActionEvent event) throws IOException {
-	    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LNewStock.fxml"));
+	    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LNewStock.fxml"));
 	        setNode(add);
 	    }
 	    
 	    
 	    @FXML
 	    public void switchLocalBoats(ActionEvent event)throws IOException {
-	    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBoats.fxml"));
+	    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBoats.fxml"));
 	        setNode(add);
 
 	    }
@@ -134,7 +134,7 @@ public class LocalStocksController implements Initializable {
 	   
 	    @FXML
 	    public void switchLocalBuyers(ActionEvent event) throws IOException {
-	    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
+	    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBuyers.fxml"));
 	        setNode(add);
 
 	    }
@@ -142,7 +142,7 @@ public class LocalStocksController implements Initializable {
 	    @FXML
 	    void switchFishTypes(ActionEvent event) throws IOException {
 	    	
-	    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+	    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LFishTypes.fxml"));
 	        setNode(add);
 
 
@@ -150,14 +150,14 @@ public class LocalStocksController implements Initializable {
 	    
 		@FXML
 		void switchSell(ActionEvent event) throws IOException {
-			add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+			add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LocalSell.fxml"));
 			setNode(add);
 		}
 	    
 	    @FXML
 	    void switchLocalSell(ActionEvent event) throws IOException {
 	    	
-	    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+	    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LocalSell.fxml"));
 	        setNode(add);
 
 

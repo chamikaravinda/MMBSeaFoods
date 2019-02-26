@@ -1,11 +1,13 @@
 package application.Controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
 
+import application.Models.Boat_Account;
 import application.Models.F_Fish_Buyers_Account;
 import application.Models.F_Fish_Buyers_Account_Uncleard;
 import application.Models.Local_Buyers_Account;
@@ -15,7 +17,9 @@ import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -97,6 +101,37 @@ public class ForeignAddBuyerRecievedController implements Initializable{
         
 	
     }
+	
+	
+	@FXML
+    void done(ActionEvent event) throws IOException {
+
+
+		String buyerName=lblBuyerName.getText();
+		
+		int id = accountServices.getBuyerIDByNameForeign(buyerName);
+		
+		for (F_Fish_Buyers_Account_Uncleard item : tblvBuyersDetails.getItems()) {
+			
+			F_Fish_Buyers_Account_Uncleard boat= new F_Fish_Buyers_Account_Uncleard();
+			
+			boat.setID(item.getID());
+			boat.setReason(item.getReason());
+			boat.setDate(item.getDate());
+			boat.setTo_Pay(0);
+			boat.setPaid(item.getTo_Pay());
+			boat.setBuyer_ID(id);
+			
+			
+			accountServices.AddNewRecievedForeign(boat);
+			System.out.println(boat.getBuyer_ID());
+			accountServices.setUnclearedBuyerRecievedForeign(boat.getBuyer_ID());
+			
+			
+		}
+		
+		
+    }
 
 	public void getBuyerName(String text) {
 
@@ -104,5 +139,12 @@ public class ForeignAddBuyerRecievedController implements Initializable{
 		lblBuyerName.setText(text);
 		
 	}
+	
+	@FXML
+    void back(ActionEvent event) throws IOException {
+
+	   add=FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
+	   setNode(add);
+    }
 
 }

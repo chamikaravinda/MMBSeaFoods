@@ -69,13 +69,13 @@ public class AccountCommissionController implements Initializable {
 	    @FXML
 	    void back(ActionEvent event) throws IOException {
 
-	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+	    	add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
 			setNode(add);
 	    }
 	    
 	    @FXML
 	    void makePayment(ActionEvent event) throws IOException {
-	    	add = FXMLLoader.load(getClass().getResource("../Views/Accounts/FCommitionPayment.fxml"));
+	    	add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FCommitionPayment.fxml"));
 			setNode(add);
 	    }
 

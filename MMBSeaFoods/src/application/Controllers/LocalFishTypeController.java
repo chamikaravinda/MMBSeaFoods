@@ -96,7 +96,7 @@ public class LocalFishTypeController implements Initializable {
     @FXML
     void switchAddLFishType(ActionEvent event) throws IOException {
     	
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LNewFishType.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LNewFishType.fxml"));
         setNode(add);
 
 
@@ -104,24 +104,24 @@ public class LocalFishTypeController implements Initializable {
     
     @FXML
     void switchBoats(ActionEvent event) throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBoats.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBoats.fxml"));
         setNode(add);
     }
 
     @FXML
     void switchBuyers(ActionEvent event) throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBuyers.fxml"));
         setNode(add);
     }
 
     @FXML
     void switchStocks(ActionEvent event) throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
         setNode(add);
     }
 	@FXML
 	void switchSell(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LocalSell.fxml"));
 		setNode(add);
 	}
 
@@ -134,7 +134,7 @@ public class LocalFishTypeController implements Initializable {
     	System.out.println(lFtype.getPrice());
 
     	if (lFtype != null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ltrade/LEditFishType.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Ltrade/LEditFishType.fxml"));
 			Parent root = loader.load();
 			EditLocalFishTypeController LFishcontroller = loader.<EditLocalFishTypeController>getController();
 			String id = Integer.toString(lFtype.getID());

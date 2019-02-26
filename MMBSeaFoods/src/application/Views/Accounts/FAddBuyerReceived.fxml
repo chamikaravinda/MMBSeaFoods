@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -26,7 +27,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Label fx:id="lblBuyerName" layoutX="53.0" layoutY="53.0" prefHeight="39.0" prefWidth="196.0" textFill="#3b2f63">
+                  <Label fx:id="lblBuyerName" layoutX="47.0" layoutY="16.0" prefHeight="39.0" prefWidth="196.0" textFill="#3b2f63">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -34,10 +35,15 @@
                </children>
             </AnchorPane>
             <Separator layoutX="10.0" layoutY="65.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
-            <JFXButton layoutX="475.0" layoutY="617.0" prefHeight="56.0" prefWidth="168.0" style="-fx-background-color: #1d0b96;" text="Done" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="576.0">
+            <JFXButton layoutX="475.0" layoutY="617.0" onAction="#done" prefHeight="56.0" prefWidth="168.0" style="-fx-background-color: #1d0b96;" text="Done" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="576.0">
                <font>
                   <Font size="26.0" />
                </font>
+            </JFXButton>
+            <JFXButton layoutX="54.0" layoutY="62.0" onAction="#back" text="Back">
+               <graphic>
+                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15" text="" />
+               </graphic>
             </JFXButton>
          </children>
       </AnchorPane>

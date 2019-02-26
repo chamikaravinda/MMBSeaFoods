@@ -136,7 +136,7 @@ public class EditLocalBoatController implements Initializable {
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
-				Vboat=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBoats.fxml"));
+				Vboat=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBoats.fxml"));
 				setNode(Vboat);
     			
     		}
@@ -162,7 +162,7 @@ public class EditLocalBoatController implements Initializable {
     @FXML
     void back(ActionEvent event) throws IOException {
     	
-    	Vboat=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBoats.fxml"));
+    	Vboat=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBoats.fxml"));
 		setNode(Vboat);
 
     }

@@ -102,7 +102,7 @@ public class AccountLocalBuyersController implements Initializable {
 	
     @FXML
     void back(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
 		setNode(add);
     	
     }
@@ -133,7 +133,7 @@ public class AccountLocalBuyersController implements Initializable {
 		String name=lblBoat.getText();
 		if(!lblBoat.getText().isEmpty()) {
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/LAddBuyerReceived.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Accounts/LAddBuyerReceived.fxml"));
 			Parent root = loader.load();
 			LocalAddBuyerRecievedController controller = loader.<LocalAddBuyerRecievedController>getController();
 			controller.getBuyerName(name); 

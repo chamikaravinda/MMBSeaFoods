@@ -132,7 +132,7 @@ public class EditBoatController implements Initializable {
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
-				Vboat=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+				Vboat=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Boats.fxml"));
 				setNode(Vboat);
 				
 			}else {
@@ -151,7 +151,7 @@ public class EditBoatController implements Initializable {
     @FXML
     void back(ActionEvent event) throws IOException {
     	
-    	Vboat=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+    	Vboat=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Boats.fxml"));
 		setNode(Vboat);
 
     }

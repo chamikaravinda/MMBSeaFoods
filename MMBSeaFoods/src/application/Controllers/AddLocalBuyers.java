@@ -59,7 +59,7 @@ public class AddLocalBuyers {
     @FXML
     void back(ActionEvent event)throws IOException{
     	
-     	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
+     	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBuyers.fxml"));
         setNode(add);
 
     }
@@ -84,7 +84,7 @@ public class AddLocalBuyers {
 			notifications.showConfirm();
 			
 			
-			add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
+			add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBuyers.fxml"));
 	        setNode(add);
 			
 		}else {

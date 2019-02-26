@@ -226,7 +226,7 @@ public class AddLottsController implements Initializable {
 			notifications.position(Pos.CENTER);
 			notifications.showConfirm();
 			
-			back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+			back=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
 			setNode(back);
 			
 		}else {
@@ -265,7 +265,7 @@ public class AddLottsController implements Initializable {
 		
 	
 	public void back(ActionEvent event) throws IOException {
-		back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+		back=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
 		setNode(back);
 		
 	}

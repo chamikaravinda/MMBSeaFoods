@@ -183,7 +183,7 @@ public class EditFishTypeController2  implements Initializable{
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
-				types=FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
+				types=FXMLLoader.load(getClass().getResource("/application/Views/Home/Home.fxml"));
 				setNode(types);
 			}else {
 				Notifications notifications = Notifications.create();
@@ -200,7 +200,7 @@ public class EditFishTypeController2  implements Initializable{
     @FXML
     void back(ActionEvent event) throws IOException {
 
-    	types=FXMLLoader.load(getClass().getResource("../Views/Home/Home.fxml"));
+    	types=FXMLLoader.load(getClass().getResource("/application/Views/Home/Home.fxml"));
 		setNode(types);
 		
     }

@@ -1151,6 +1151,374 @@ public class AccountServices {
 		
 	return boatList;
 	}
+
+
+
+
+
+	public void AddNewPaid(Boat_Account boat) {
+
+
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		
+		
+		String addEntryQuery="INSERT INTO Local_Boat_Account(Date,Reason,To_Pay,Paid,Boat_ID)"+" VALUES(?,?,?,?,?)";
+		
+		
+		try {
+			  
+			preparedStatement=connection.prepareStatement(addEntryQuery);
+			preparedStatement.setString(1, boat.getDate());
+			preparedStatement.setString(2,boat.getReason());
+			preparedStatement.setDouble(3, boat.getTo_Pay());
+			preparedStatement.setDouble(4, boat.getPaid());
+			preparedStatement.setDouble(5, boat.getBoat_ID());
+
+
+			preparedStatement.execute();
+			
+			
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	
+	public void setUncleared(int id) {
+		
+		String i=String.valueOf(id);
+
+
+		try {		
+			
+			connection=DBConnection.Connector();
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+				
+			String query = "DELETE FROM Local_Boat_Account_UnCleared WHERE Boat_ID = ?";
+			
+			preparedStatement = connection.prepareStatement(query);		
+			
+			
+			preparedStatement.setString(1, i);
+			
+			preparedStatement.execute();		
+			
+			System.out.println(query);
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at setUncleared :" + e.getLocalizedMessage());
+			
+		} catch (Exception e) {
+			System.out.println("Exception In setUncleared  : " + e );
+		}finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUncleared : " + e);
+			}		
+			
+		}
+
+		
+	}
+	
+	
+	
+	
+	public void AddNewPaidForeign(Boat_Account boat) {
+
+
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		
+		
+		String addEntryQuery="INSERT INTO Boat_Account(Date,Reason,To_Pay,Paid,Boat_ID)"+" VALUES(?,?,?,?,?)";
+		
+		
+		try {
+			  
+			preparedStatement=connection.prepareStatement(addEntryQuery);
+			preparedStatement.setString(1, boat.getDate());
+			preparedStatement.setString(2,boat.getReason());
+			preparedStatement.setDouble(3, boat.getTo_Pay());
+			preparedStatement.setDouble(4, boat.getPaid());
+			System.out.println("ooooooooooooooo"+boat.getPaid());
+			preparedStatement.setDouble(5, boat.getBoat_ID());
+
+
+			preparedStatement.execute();
+			
+			
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	
+	public void setUnclearedForeign(int id) {
+		
+		String i=String.valueOf(id);
+
+
+		try {		
+			
+			connection=DBConnection.Connector();
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+				
+			String query = "DELETE FROM Boat_Account_UnCleared WHERE Boat_ID = ?";
+			
+			preparedStatement = connection.prepareStatement(query);		
+			
+			
+			preparedStatement.setString(1, i);
+			
+			preparedStatement.execute();		
+			
+			System.out.println(query);
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at setUncleared :" + e.getLocalizedMessage());
+			
+		} catch (Exception e) {
+			System.out.println("Exception In setUncleared  : " + e );
+		}finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUncleared : " + e);
+			}		
+			
+		}
+
+		
+	}
+
+
+
+
+
+	public void AddNewRecievedForeign(F_Fish_Buyers_Account_Uncleard boat) {
+
+
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		
+		
+		String addEntryQuery="INSERT INTO F_Fish_Buyers_Account(Date,Reason,To_Pay,Paid,Buyer_ID)"+" VALUES(?,?,?,?,?)";
+		
+		
+		try {
+			  
+			preparedStatement=connection.prepareStatement(addEntryQuery);
+			preparedStatement.setString(1, boat.getDate());
+			preparedStatement.setString(2,boat.getReason());
+			preparedStatement.setDouble(3, boat.getTo_Pay());
+			preparedStatement.setDouble(4, boat.getPaid());
+			preparedStatement.setDouble(5, boat.getBuyer_ID());
+
+
+			preparedStatement.execute();
+			
+			
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		
+	}
+
+
+
+
+
+	public void setUnclearedBuyerRecievedForeign(int buyer_ID) {
+
+
+		
+		String i=String.valueOf(buyer_ID);
+
+
+		try {		
+			
+			connection=DBConnection.Connector();
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+				
+			String query = "DELETE FROM F_Fish_Uncleared WHERE Buyer_ID = ?";
+			
+			preparedStatement = connection.prepareStatement(query);		
+			
+			
+			preparedStatement.setString(1, i);
+			
+			preparedStatement.execute();		
+			
+			System.out.println(query);
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at setUnclearedBuyerRecievedForeign :" + e.getLocalizedMessage());
+			
+		} catch (Exception e) {
+			System.out.println("Exception In setUnclearedBuyerRecievedForeign  : " + e );
+		}finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
+			}		
+			
+		}
+		
+	}
+	
+	
+	
+	public void AddNewRecieved(Locl_Buyers_Account_Uncleared boat) {
+
+
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		
+		
+		String addEntryQuery="INSERT INTO Local_Fish_Buyers_Account(Date,Reason,To_Pay,Paid,Buyer_ID)"+" VALUES(?,?,?,?,?)";
+		
+		
+		try {
+			  
+			preparedStatement=connection.prepareStatement(addEntryQuery);
+			preparedStatement.setString(1, boat.getDate());
+			preparedStatement.setString(2,boat.getReason());
+			preparedStatement.setDouble(3, boat.getTo_Pay());
+			preparedStatement.setDouble(4, boat.getPaid());
+			preparedStatement.setDouble(5, boat.getBuyer_ID());
+
+
+			preparedStatement.execute();
+			
+			
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		
+	}
+
+
+
+
+
+	public void setUnclearedBuyerRecieved(int buyer_ID) {
+
+
+		
+		String i=String.valueOf(buyer_ID);
+
+
+		try {		
+			
+			connection=DBConnection.Connector();
+			if(connection==null) {
+				System.out.println("Connection not successful");
+			}
+				
+			String query = "DELETE FROM Local_Fish_Uncleared WHERE Buyer_ID = ?";
+			
+			preparedStatement = connection.prepareStatement(query);		
+			
+			
+			preparedStatement.setString(1, i);
+			
+			preparedStatement.execute();		
+			
+			System.out.println(query);
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at setUnclearedBuyerRecievedForeign :" + e.getLocalizedMessage());
+			
+		} catch (Exception e) {
+			System.out.println("Exception In setUnclearedBuyerRecievedForeign  : " + e );
+		}finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
+			}		
+			
+		}
+		
+	}
 	
 	
 	

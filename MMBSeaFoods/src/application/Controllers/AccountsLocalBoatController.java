@@ -153,7 +153,7 @@ public class AccountsLocalBoatController implements Initializable{
 
 		
 		if(!lblBoat.getText().isEmpty()) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Accounts/LMakePayment.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Accounts/LMakePayment.fxml"));
 			Parent root = loader.load();
 			AccountsLocalMakePaymentController controller = loader.<AccountsLocalMakePaymentController>getController();
 			controller.getBoatName(name); 
@@ -177,7 +177,7 @@ public class AccountsLocalBoatController implements Initializable{
 
     @FXML
     void back(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Accounts/Accounts.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
 		setNode(add);
     	
     }

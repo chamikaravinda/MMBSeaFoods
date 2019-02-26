@@ -121,10 +121,10 @@ public class FtradeController implements Initializable {
     	if(lot != null) {
 	    	if(lot.getBuying_Weight() != 0 ) {
 	    		
-	    		/*lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewSales.fxml"));
+	    		/*lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/NewSales.fxml"));
 				setNode(lots);*/
 	    		
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ftrade/NewSales.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Ftrade/NewSales.fxml"));
 				Parent root = loader.load();
 				FLotSalesController controller = loader.<FLotSalesController>getController();
 				String id=Integer.toString(lot.getID());
@@ -154,37 +154,37 @@ public class FtradeController implements Initializable {
     }
 
     public void switchStock(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Stocks.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Stocks.fxml"));
 		setNode(lots);
 		
 	}
     
     public void AddNewLot(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/NewLot.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/NewLot.fxml"));
 		setNode(lots);
 		
 	}
     
     public void switchLot(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
 		setNode(lots);
 		
 	}
     
     public void switchBoat(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Boats.fxml"));
 		setNode(lots);
 		
 	}
     
     public void switchBuyers(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Buyers.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Buyers.fxml"));
 		setNode(lots);
 		
 	}
     
     public void switchFishTypes(ActionEvent event) throws IOException {
-    	lots=FXMLLoader.load(getClass().getResource("../Views/Ftrade/FishTypes.fxml"));
+    	lots=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/FishTypes.fxml"));
 		setNode(lots);
 		
 	}

@@ -88,7 +88,7 @@ public class LocalBuyerController implements Initializable {
     
     @FXML
     void switchAddLbuyer(ActionEvent event)throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LNewBuyer.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LNewBuyer.fxml"));
         setNode(add);
     	
     }
@@ -97,25 +97,25 @@ public class LocalBuyerController implements Initializable {
 
     @FXML
     void switchBoats(ActionEvent event) throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBoats.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBoats.fxml"));
         setNode(add);
     }
 
     @FXML
     void switchFishTypes(ActionEvent event) throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LFishTypes.fxml"));
         setNode(add);
     }
 
     @FXML
     void switchStocks(ActionEvent event) throws IOException {
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
         setNode(add);
     }
     
 	@FXML
 	void switchSell(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LocalSell.fxml"));
 		setNode(add);
 	}
     @FXML
@@ -123,7 +123,7 @@ public class LocalBuyerController implements Initializable {
     	LocalBuyers LfBuyer = tblBuyers.getSelectionModel().getSelectedItem();
 
     	if (LfBuyer != null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ltrade/LEditBuyer.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Ltrade/LEditBuyer.fxml"));
 			Parent root = loader.load();
 			EditLocalBuyerController LByercontroller = loader.<EditLocalBuyerController>getController();
 			String id = Integer.toString(LfBuyer.getID());

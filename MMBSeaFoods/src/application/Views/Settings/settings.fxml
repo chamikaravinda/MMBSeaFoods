@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +16,7 @@
      <children>
       <Label layoutX="19.0" layoutY="17.0" prefHeight="29.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Settings" />
       <Separator layoutX="3.0" layoutY="55.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
-      <GridPane layoutX="7.0" layoutY="157.0" prefHeight="437.0" prefWidth="1104.0" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="157.0">
+      <GridPane layoutX="7.0" layoutY="157.0" prefHeight="470.0" prefWidth="1105.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="157.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,6 +26,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <JFXTextField fx:id="txtusername" labelFloat="true" prefHeight="45.0" prefWidth="303.0" promptText="Username" unFocusColor="#0d00ff" GridPane.columnIndex="1">
@@ -32,12 +35,10 @@
                   <Font size="18.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtpass" labelFloat="true" prefHeight="45.0" prefWidth="303.0" promptText="Password" unFocusColor="#0d00ff" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </JFXTextField>
-            <JFXButton fx:id="btnAdd" alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" onAction="#updateUser" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Update" textFill="#fefeff" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <JFXPasswordField fx:id="txtpass" labelFloat="true" promptText="Current Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <JFXPasswordField fx:id="txtpassnew" labelFloat="true" promptText="New Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <JFXPasswordField fx:id="txtpassconfirm" labelFloat="true" promptText="Password Confirmation" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <JFXButton fx:id="btnAdd" alignment="CENTER" maxWidth="140.0" minHeight="45.0" minWidth="140.0" onAction="#updateUser" prefHeight="45.0" prefWidth="140.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Update" textFill="#fefeff" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font size="18.0" />
                </font>
@@ -47,11 +48,12 @@
             </JFXButton>
          </children>
       </GridPane>
-      <Label layoutX="209.0" layoutY="119.0" prefHeight="45.0" prefWidth="219.0" text="Update User Details " textFill="#3b2f63">
+      <Label layoutX="19.0" layoutY="66.0" prefHeight="45.0" prefWidth="219.0" text="Update User Details " textFill="#3b2f63">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <Label fx:id="lblMsg" layoutX="418.0" layoutY="101.0" prefHeight="21.0" prefWidth="360.0" />
       
    </children>
 </AnchorPane>

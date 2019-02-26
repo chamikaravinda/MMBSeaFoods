@@ -113,13 +113,13 @@ public class VehiclesController implements Initializable{
 		
 	
 	public void NewVehicle(ActionEvent event) throws IOException {
-		add=FXMLLoader.load(getClass().getResource("../Views/Vehicles/Add.fxml"));
+		add=FXMLLoader.load(getClass().getResource("/application/Views/Vehicles/Add.fxml"));
 		setNode(add);
 		
 	}
 	
 	public void NewPayment(ActionEvent event) throws IOException {
-		add=FXMLLoader.load(getClass().getResource("../Views/Vehicles/NewLeasePayment.fxml"));
+		add=FXMLLoader.load(getClass().getResource("/application/Views/Vehicles/NewLeasePayment.fxml"));
 		setNode(add);
 		
 	}

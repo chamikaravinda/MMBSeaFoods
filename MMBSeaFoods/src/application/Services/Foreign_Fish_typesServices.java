@@ -18,14 +18,17 @@ public class Foreign_Fish_typesServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO Foreign_Fish_types (Name, price_20P, price_15B,price20_15)" + 
-							"VALUES (?,?,?,?)";
+		String insertQuery= "INSERT INTO Foreign_Fish_types (Name,price_U10, price_10T15,price_15T20,price_20T25,"
+				+ "price_25T30,price_A30) VALUES (?,?,?,?,?,?,?)";
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setString(1,type.getName());
-			preparedStatement.setDouble(2,type.getPrice_20P());
-			preparedStatement.setDouble(3,type.getPrice_15B());
-			preparedStatement.setDouble(4,type.getPrice20_15());
+			preparedStatement.setDouble(2,type.getPrice_U10());
+			preparedStatement.setDouble(3,type.getPrice_10T15());
+			preparedStatement.setDouble(4,type.getPrice_15T20());
+			preparedStatement.setDouble(5,type.getPrice_20T25());
+			preparedStatement.setDouble(6,type.getPrice_25T30());
+			preparedStatement.setDouble(7,type.getPrice_25T30());
 			resultSet=preparedStatement.executeUpdate();
 			
 			if(resultSet != 0) {
@@ -60,9 +63,12 @@ public class Foreign_Fish_typesServices {
 				Foreign_Fish_types fish=new Foreign_Fish_types();
 				fish.setID(Integer.parseInt(resultSet.getString("ID")));
 				fish.setName(resultSet.getString("Name"));
-				fish.setPrice20_15(Double.parseDouble(resultSet.getString("price20_15")));
-				fish.setPrice_15B(Double.parseDouble(resultSet.getString("price_15B")));
-				fish.setPrice_20P(Double.parseDouble(resultSet.getString("price_20P")));
+				fish.setPrice_U10(Double.parseDouble(resultSet.getString("price_U10")));
+				fish.setPrice_10T15(Double.parseDouble(resultSet.getString("price_10T15")));
+				fish.setPrice_15T20(Double.parseDouble(resultSet.getString("price_15T20")));
+				fish.setPrice_20T25(Double.parseDouble(resultSet.getString("price_20T25")));
+				fish.setPrice_25T30(Double.parseDouble(resultSet.getString("price_25T30")));
+				fish.setPrice_A30(Double.parseDouble(resultSet.getString("price_A30")));
 				list.add(fish);
 				
 			}
@@ -94,9 +100,12 @@ public class Foreign_Fish_typesServices {
 			if(resultSet.next()) {
 				fish.setID(Integer.parseInt(resultSet.getString("ID")));
 				fish.setName(resultSet.getString("Name"));
-				fish.setPrice20_15(Double.parseDouble(resultSet.getString("price20_15")));
-				fish.setPrice_15B(Double.parseDouble(resultSet.getString("price_15B")));
-				fish.setPrice_20P(Double.parseDouble(resultSet.getString("price_20P")));
+				fish.setPrice_U10(Double.parseDouble(resultSet.getString("price_U10")));
+				fish.setPrice_10T15(Double.parseDouble(resultSet.getString("price_10T15")));
+				fish.setPrice_15T20(Double.parseDouble(resultSet.getString("price_15T20")));
+				fish.setPrice_20T25(Double.parseDouble(resultSet.getString("price_20T25")));
+				fish.setPrice_25T30(Double.parseDouble(resultSet.getString("price_25T30")));
+				fish.setPrice_A30(Double.parseDouble(resultSet.getString("price_A30")));
 				
 			}
 			return fish;
@@ -126,10 +135,12 @@ public class Foreign_Fish_typesServices {
 			if(resultSet.next()) {
 				fish.setID(Integer.parseInt(resultSet.getString("ID")));
 				fish.setName(resultSet.getString("Name"));
-				fish.setPrice20_15(Double.parseDouble(resultSet.getString("price20_15")));
-				fish.setPrice_15B(Double.parseDouble(resultSet.getString("price_15B")));
-				fish.setPrice_20P(Double.parseDouble(resultSet.getString("price_20P")));
-				
+				fish.setPrice_U10(Double.parseDouble(resultSet.getString("price_U10")));
+				fish.setPrice_10T15(Double.parseDouble(resultSet.getString("price_10T15")));
+				fish.setPrice_15T20(Double.parseDouble(resultSet.getString("price_15T20")));
+				fish.setPrice_20T25(Double.parseDouble(resultSet.getString("price_20T25")));
+				fish.setPrice_25T30(Double.parseDouble(resultSet.getString("price_25T30")));
+				fish.setPrice_A30(Double.parseDouble(resultSet.getString("price_A30")));
 			}
 			return fish;
 			
@@ -150,14 +161,17 @@ public boolean UpdateForeign_Fish_Type(Foreign_Fish_types type) throws SQLExcept
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "UPDATE Foreign_Fish_types set Name =?, price_20P =?, price_15B=?, price20_15=? where ID=?";
+		String insertQuery= "UPDATE Foreign_Fish_types set Name =?,price_U10=?, price_10T15=?,price_15T20=?,price_20T25=?,price_25T30=?,price_A30=? where ID=?";
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setString(1,type.getName());
-			preparedStatement.setDouble(2,type.getPrice_20P());
-			preparedStatement.setDouble(3,type.getPrice_15B());
-			preparedStatement.setDouble(4,type.getPrice20_15());
-			preparedStatement.setDouble(5,type.getID());
+			preparedStatement.setDouble(2,type.getPrice_U10());
+			preparedStatement.setDouble(3,type.getPrice_10T15());
+			preparedStatement.setDouble(4,type.getPrice_15T20());
+			preparedStatement.setDouble(5,type.getPrice_20T25());
+			preparedStatement.setDouble(6,type.getPrice_25T30());
+			preparedStatement.setDouble(7,type.getPrice_A30());
+			preparedStatement.setDouble(8,type.getID());
 			resultSet=preparedStatement.executeUpdate();
 			
 			if(resultSet != 0) {

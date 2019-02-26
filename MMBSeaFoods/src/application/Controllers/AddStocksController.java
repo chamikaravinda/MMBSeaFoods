@@ -439,7 +439,7 @@ public class AddStocksController implements Initializable{
 									notifications.position(Pos.CENTER);
 									notifications.showConfirm();
 									
-									add=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Stocks.fxml"));
+									add=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Stocks.fxml"));
 									setNode(add);
 						}
 											
@@ -493,7 +493,7 @@ public class AddStocksController implements Initializable{
 			
 		
 		public void back(ActionEvent event) throws IOException {
-			add=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Stocks.fxml"));
+			add=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Stocks.fxml"));
 			setNode(add);
 			
 		}

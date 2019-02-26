@@ -61,7 +61,7 @@ public class AddLocalBoatController {
 			notifications.position(Pos.CENTER);
 			notifications.showConfirm();
 			
-			add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBoats.fxml"));
+			add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBoats.fxml"));
 			setNode(add);
 			
 		}else {
@@ -99,7 +99,7 @@ public class AddLocalBoatController {
     @FXML
     void back(ActionEvent event) throws IOException {
 
-    	add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBoats.fxml"));
+    	add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBoats.fxml"));
         setNode(add);
     }
 

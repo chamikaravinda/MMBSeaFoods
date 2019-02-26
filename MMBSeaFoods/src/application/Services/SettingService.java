@@ -89,12 +89,13 @@ public class SettingService {
 		PreparedStatement preparedStatement=null;
 		int resultSet;
 		
-		String upadateQuery="update Users set USERNAME=?,PASSWORD=?"+"where ID= '"+user.getId()+"' ";
+		String upadateQuery="update Users set USERNAME=?,PASSWORD=? where ID= ?";
 		try {
 			
 			preparedStatement= connection.prepareStatement(upadateQuery);
 			preparedStatement.setString(1,user.getUsername() );
 			preparedStatement.setString(2,user.getPassword() );
+			preparedStatement.setInt(3,user.getId() );
 			
 			resultSet=preparedStatement.executeUpdate();
 			

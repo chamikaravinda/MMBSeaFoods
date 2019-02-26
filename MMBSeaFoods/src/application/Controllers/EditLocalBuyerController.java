@@ -123,7 +123,7 @@ public class EditLocalBuyerController implements Initializable {
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
-				Vbuyer=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
+				Vbuyer=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBuyers.fxml"));
 				setNode(Vbuyer);
     			
     		}
@@ -148,7 +148,7 @@ public class EditLocalBuyerController implements Initializable {
 	 @FXML
 	    void back(ActionEvent event) throws IOException {
 
-		 Vbuyer=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
+		 Vbuyer=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBuyers.fxml"));
 	        setNode(Vbuyer);
 	    	
 	    }

@@ -92,6 +92,13 @@ public class AccountCommitionUnclearedController implements Initializable{
         
 	
     }
+	
+	 @FXML
+	    void back(ActionEvent event) throws IOException {
+
+	    	add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/Accounts.fxml"));
+			setNode(add);
+	    }
 
 	
 	

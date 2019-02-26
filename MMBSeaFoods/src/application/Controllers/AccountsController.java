@@ -45,44 +45,44 @@ public class AccountsController implements Initializable {
 	}
 
 	public void LocalBoats(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LBoatAccount.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/LBoatAccount.fxml"));
 		setNode(add);
 
 	}
 
 	public void ForeignBoats(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/FBoatAccount.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FBoatAccount.fxml"));
 		setNode(add);
 
 	}
 	
 	public void LocalBuyers(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LBuyerAccount.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/LBuyerAccount.fxml"));
 		setNode(add);
 
 	}
 	
 	public void ForeignBuyers(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/FBuyerAccount.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FBuyerAccount.fxml"));
 		setNode(add);
 
 	}
 	
 	public void LocalSales(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/LocalSales.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/LocalSales.fxml"));
 		setNode(add);
 
 	}
 	
 	
 	public void commition(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/CommissionAccount.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/CommissionAccount.fxml"));
 		setNode(add);
 
 	}
 	
 	public void fSales(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Accounts/forignSales.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/forignSales.fxml"));
 		setNode(add);
 
 	}

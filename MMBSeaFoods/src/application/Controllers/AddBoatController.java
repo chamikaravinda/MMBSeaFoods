@@ -116,7 +116,7 @@ public class AddBoatController implements Initializable {
 				notifications.position(Pos.CENTER);
 				notifications.showConfirm();
 				
-				back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+				back=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Boats.fxml"));
 				setNode(back);
 				
 			}else {
@@ -156,7 +156,7 @@ public class AddBoatController implements Initializable {
 		
 	
 	public void back(ActionEvent event) throws IOException {
-		back=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Boats.fxml"));
+		back=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Boats.fxml"));
 		setNode(back);
 		
 	}

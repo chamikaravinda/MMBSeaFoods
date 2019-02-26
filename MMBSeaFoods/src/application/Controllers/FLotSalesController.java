@@ -315,7 +315,7 @@ public class FLotSalesController implements Initializable{
 										notifications.position(Pos.CENTER);
 										notifications.showConfirm();
 										
-										sell=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+										sell=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
 										setNode(sell);
 								}
 							}
@@ -374,7 +374,7 @@ public class FLotSalesController implements Initializable{
 		
 	
 	public void back(ActionEvent event) throws IOException {
-		sell=FXMLLoader.load(getClass().getResource("../Views/Ftrade/Ftrade.fxml"));
+		sell=FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
 		setNode(sell);
 		
 	}

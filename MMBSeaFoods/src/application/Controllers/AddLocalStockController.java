@@ -206,7 +206,7 @@ public class AddLocalStockController implements Initializable  {
 									notifications.position(Pos.CENTER);
 									notifications.showConfirm();
 									
-									add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+									add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 									setNode(add);
 									
 								}
@@ -246,7 +246,7 @@ public class AddLocalStockController implements Initializable  {
 	  @FXML
 	   public void back(ActionEvent event)throws IOException {
 		  
-		    add=FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+		    add=FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 	        setNode(add);
 
 	    }

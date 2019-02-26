@@ -92,38 +92,38 @@ public class LocalBoatController implements Initializable {
 
 	@FXML
 	void back(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 		setNode(add);
 
 	}
 
 	@FXML
 	void switchAddLBoat(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LNewBoats.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LNewBoats.fxml"));
 		setNode(add);
 	}
 
 	@FXML
 	void switchBuyers(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LBuyers.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LBuyers.fxml"));
 		setNode(add);
 	}
 
 	@FXML
 	void switchFishTypes(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LFishTypes.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LFishTypes.fxml"));
 		setNode(add);
 	}
 
 	@FXML
 	void switchStoks(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LStocks.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 		setNode(add);
 	}
 	
 	@FXML
 	void switchSell(ActionEvent event) throws IOException {
-		add = FXMLLoader.load(getClass().getResource("../Views/Ltrade/LocalSell.fxml"));
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LocalSell.fxml"));
 		setNode(add);
 	}
 
@@ -132,7 +132,7 @@ public class LocalBoatController implements Initializable {
 
 		
 		if (Lboat != null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/Ltrade/EditLocalBoat.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Ltrade/EditLocalBoat.fxml"));
 			Parent root = loader.load();
 			EditLocalBoatController LBcontroller = loader.<EditLocalBoatController>getController();
 			String id = Integer.toString(Lboat.getID());
