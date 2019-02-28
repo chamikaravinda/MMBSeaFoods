@@ -45,6 +45,24 @@ public class Stock_Fish {
 		this.buying_Price = price;
 	}
 
+	//string view properties 
+	
+	private String STotal_weight ;
+	private String Sbuying_Price;
+
+	public String getSTotal_weight() {
+		return STotal_weight;
+	}
+	public void setSTotal_weight(String sTotal_weight) {
+		STotal_weight = sTotal_weight;
+	}
+	public String getSbuying_Price() {
+		return Sbuying_Price;
+	}
+	public void setSbuying_Price(String sbuying_Price) {
+		Sbuying_Price = sbuying_Price;
+	}
+	
 	
 		
 }

@@ -128,8 +128,12 @@ public class Fish_LotServices {
 				lot.setAdded_Date(resultSet.getString("Added_Date"));
 				lot.setBuying_Weight(Double.parseDouble(resultSet.getString("Buying_Weight")));
 				lot.setLorry_Number(resultSet.getString("Lorry_Number"));
-				lot.setBuying_price(Double.parseDouble(resultSet.getString("Buying_price")));
+				lot.setBuying_price(Double.parseDouble(resultSet.getString("buying_price")));
 				lot.setDisplay_Name(resultSet.getString("display_Name"));
+				lot.setIce_fee(Double.parseDouble(resultSet.getString("Ice_fee")));
+				lot.setLorry_fee(Double.parseDouble(resultSet.getString("Lorry_fee")));
+				lot.setOther_fees(Double.parseDouble(resultSet.getString("other_fees")));
+				lot.setBrokerFee(Double.parseDouble(resultSet.getString("brokerFee")));
 				lot.setID(Integer.parseInt(resultSet.getString("ID")));
 			}
 				connection.close();

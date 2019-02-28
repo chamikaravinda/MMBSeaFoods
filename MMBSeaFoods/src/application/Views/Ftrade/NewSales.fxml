@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -56,39 +57,51 @@
                <children>
                   <AnchorPane prefHeight="422.0" prefWidth="522.0">
                      <children>
-                        <JFXComboBox fx:id="cmbBuyer" layoutX="120.0" layoutY="283.0" prefHeight="45.0" prefWidth="406.0" promptText="Buyer" styleClass="font" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="283.0" />
-                        <Label fx:id="lblAddedDate" layoutX="259.0" layoutY="67.0" prefHeight="45.0" prefWidth="317.0" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="67.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblLorryNumber" layoutX="259.0" layoutY="129.0" prefHeight="45.0" prefWidth="317.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblbuyingprice" layoutX="259.0" layoutY="185.0" prefHeight="45.0" prefWidth="317.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
+                        <GridPane layoutX="76.0" layoutY="51.0" prefHeight="283.0" prefWidth="476.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="51.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="232.0" minWidth="10.0" prefWidth="161.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="357.0" minWidth="10.0" prefWidth="315.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="lblAddedDate1" prefHeight="45.0" prefWidth="137.0" text="Date :">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblAddedDate" prefHeight="45.0" prefWidth="304.0" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblAddedDate11" prefHeight="45.0" prefWidth="135.0" text="Lorry No:" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblAddedDate111" prefHeight="45.0" prefWidth="140.0" text="Bought Price : " GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblLorryNumber" prefHeight="45.0" prefWidth="317.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblbuyingprice" prefHeight="45.0" prefWidth="317.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
                         <Label fx:id="lblLotID" layoutX="95.0" prefHeight="45.0" prefWidth="218.0" />
                         <Label fx:id="lblLotID1" layoutX="12.0" prefHeight="45.0" prefWidth="64.0" text="Lot ID : " />
-                        <Label fx:id="lblAddedDate1" layoutX="119.0" layoutY="73.0" prefHeight="45.0" prefWidth="71.0" text="Date :" AnchorPane.leftAnchor="119.0" AnchorPane.topAnchor="73.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblAddedDate11" layoutX="123.0" layoutY="129.0" prefHeight="45.0" prefWidth="79.0" text="Lorry No:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblAddedDate111" layoutX="119.0" layoutY="185.0" prefHeight="45.0" prefWidth="140.0" text="Bought Price : Rs.">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
                      </children>
                   </AnchorPane>
                   <TableView fx:id="tblLotFishes" prefHeight="422.0" prefWidth="724.0" GridPane.columnIndex="1">
@@ -103,18 +116,23 @@
                   </TableView>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label layoutX="47.0" layoutY="27.0" prefHeight="45.0" prefWidth="190.0" text="Total Selling Price : Rs . " AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="27.0">
+                        <Label layoutX="47.0" layoutY="29.0" prefHeight="45.0" prefWidth="190.0" text="Total Selling Price : Rs . " AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="362.0" AnchorPane.topAnchor="29.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbltotalsellingPrice" layoutX="237.0" layoutY="27.0" prefHeight="45.0" prefWidth="190.0" AnchorPane.leftAnchor="237.0" AnchorPane.topAnchor="27.0">
+                        <Label fx:id="lbltotalsellingPrice" layoutX="237.0" layoutY="29.0" prefHeight="45.0" prefWidth="315.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="237.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="29.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
+                  <JFXComboBox fx:id="cmbBuyer" prefHeight="45.0" prefWidth="406.0" promptText="Buyer" styleClass="font" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="70.0" />
+                     </GridPane.margin>
+                  </JFXComboBox>
                </children>
             </GridPane>
          </children></AnchorPane>

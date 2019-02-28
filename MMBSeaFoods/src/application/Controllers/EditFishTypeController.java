@@ -219,18 +219,7 @@ public class EditFishTypeController implements Initializable {
 		type.setPrice_25T30(Double.parseDouble(txt25T30.getText()));
 		type.setPrice_A30(Double.parseDouble(txtA30.getText()));
 		type.setID(Integer.parseInt(lblID.getText()));
-//		if (type.getName().isEmpty() || txtU15.getText().isEmpty() || txt15B20.getText().isEmpty()
-//				|| txtA20.getText().isEmpty()) {
-//
-//			Notifications notifications = Notifications.create();
-//			notifications.title("Error");
-//			notifications.text("One more filed is empty");
-//			notifications.graphic(null);
-//			notifications.hideAfter(Duration.seconds(2));
-//			notifications.position(Pos.CENTER);
-//			notifications.showError();
-//
-//		} else {
+
 			if (service.UpdateForeign_Fish_Type(type)) {
 				Notifications notifications = Notifications.create();
 				notifications.title("Succesfull");
@@ -253,7 +242,7 @@ public class EditFishTypeController implements Initializable {
 				notifications.showError();
 			}
 		}
-	//}
+
 
 	@FXML
 	void back(ActionEvent event) throws IOException {

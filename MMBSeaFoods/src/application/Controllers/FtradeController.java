@@ -8,6 +8,7 @@ package application.Controllers;
 import com.jfoenix.controls.JFXButton;
 
 import application.Models.Fish_Lot;
+import application.Models.Fish_stock;
 import application.Models.Vehicles;
 import application.Services.Fish_LotServices;
 
@@ -34,6 +35,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -94,6 +96,33 @@ public class FtradeController implements Initializable {
     	clmBprice.setCellValueFactory(new PropertyValueFactory<>("Sbuying_price"));
 		
     	tableLots.setItems(list);
+    	
+    	
+    	tableLots.setRowFactory(tv -> {
+			TableRow<Fish_Lot> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					try {
+						Fish_Lot rowData = row.getItem();
+						FXMLLoader loader = new FXMLLoader(
+								getClass().getResource("/application/Views/Ftrade/ViewLot.fxml"));
+						Parent root;
+
+						root = loader.load();
+
+						ViewLotController controller = loader.<ViewLotController>getController();
+						String id = Integer.toString(rowData.getID());
+						controller.setID(id);
+
+						setNode(root);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+			return row;
+		});
 
     }
     

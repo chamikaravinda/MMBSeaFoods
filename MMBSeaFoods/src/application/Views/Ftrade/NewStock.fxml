@@ -57,9 +57,9 @@
                <children>
                   <AnchorPane prefHeight="491.0" prefWidth="541.0">
                      <children>
-                        <JFXComboBox fx:id="cmbLot" layoutX="14.0" layoutY="28.0" prefHeight="45.0" prefWidth="406.0" promptText="Select the lot" styleClass="font" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="28.0" />
-                        <JFXComboBox fx:id="cmbBoat" layoutX="14.0" layoutY="94.0" prefHeight="45.0" prefWidth="406.0" promptText="Select the Boat" styleClass="font" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="94.0" />
-                        <JFXTextField fx:id="txtHabour" labelFloat="true" layoutY="165.0" prefHeight="45.0" prefWidth="438.0" promptText="Habour" unFocusColor="#0d00ff" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="165.0">
+                        <JFXComboBox fx:id="cmbLot" layoutX="44.0" layoutY="25.0" prefHeight="45.0" prefWidth="406.0" promptText="Select the lot" styleClass="font" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="25.0" />
+                        <JFXComboBox fx:id="cmbBoat" layoutX="44.0" layoutY="101.0" prefHeight="45.0" prefWidth="406.0" promptText="Select the Boat" styleClass="font" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="101.0" />
+                        <JFXTextField fx:id="txtHabour" labelFloat="true" layoutX="29.0" layoutY="194.0" prefHeight="45.0" prefWidth="438.0" promptText="Habour" unFocusColor="#0d00ff" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="194.0">
                            <font>
                               <Font size="18.0" />
                            </font>
