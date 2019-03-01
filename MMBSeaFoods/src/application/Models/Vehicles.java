@@ -11,6 +11,7 @@ public class Vehicles {
     private double To_Pay;
     private double Premium_Amount;
     private String Last_Payment;
+    private String payment_status;
     
     private String STotal_Lease;     
     private String SPaid_Amount;   
@@ -83,6 +84,12 @@ public class Vehicles {
 	}
 	public void setLast_Payment(String last_Payment) {
 		Last_Payment = last_Payment;
+	}
+	public String getPayment_status() {
+		return payment_status;
+	}
+	public void setPayment_status(String payment_status) {
+		this.payment_status = payment_status;
 	}
 	
     

@@ -55,7 +55,7 @@ public class Fish_LotServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
-		String query= "select * from Fish_Lot where Sold_To IS NULL ";
+		String query= "select * from Fish_Lot where Sold_To IS NULL ORDER BY  ID DESC ";
 		ArrayList<Fish_Lot> list =new ArrayList<>();
 		
 		try {

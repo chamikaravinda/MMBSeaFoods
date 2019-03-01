@@ -126,7 +126,7 @@ public class AddVehiclesController implements Initializable {
 		vehicel.setPaid_Amount(Double.parseDouble(txtPaidAmount.getText()));
 		vehicel.setPremium_Amount(Double.parseDouble(txtPremiumeAmount.getText()));
 		vehicel.setTo_Pay(vehicel.getTotal_Lease()-vehicel.getPaid_Amount());
-		
+		vehicel.setPayment_status("Incomplete");
 		if(service.addVehicles(vehicel)) {
 			
 			Notifications notifications = Notifications.create();

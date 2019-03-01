@@ -18,6 +18,7 @@ import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 
 import application.Models.Buyers;
+import application.Models.F_BoatEntryCatogries;
 import application.Models.F_Fish_Buyers_Account;
 import application.Models.F_Fish_Buyers_Account_Uncleard;
 import application.Models.Fish_Lot;
@@ -161,29 +162,57 @@ public class FLotSalesController implements Initializable{
 				LotFishItems.clear();
 				for(Foreign_Fish_types type : typelist) {
 					
-					ForeignSallingFish item = new ForeignSallingFish();
-					item.setId(type.getID());
-					item.setName(type.getName()+" Under 15kg");
-					item.setPrice(0);
-					item.setTotalWeigth(0);
-					item.setWeightclass(1);
-					LotFishItems.add(item);
+					ForeignSallingFish type1 = new ForeignSallingFish();
+					ForeignSallingFish type2 = new ForeignSallingFish();
+					ForeignSallingFish type3 = new ForeignSallingFish();
+					ForeignSallingFish type4 = new ForeignSallingFish();
+					ForeignSallingFish type5 = new ForeignSallingFish();
+					ForeignSallingFish type6 = new ForeignSallingFish();
+
+					type1.setId(type.getID());
+					type1.setName(type.getName()+" Under 10kg");
+					type1.setPrice(0);
+					type1.setTotalWeigth(0);
+					type1.setWeightclass(1);
+					LotFishItems.add(type1);
+
+					type2.setId(type.getID());
+					type2.setName(type.getName()+" Between 10-15kg");
+					type2.setPrice(0);
+					type2.setTotalWeigth(0);
+					type2.setWeightclass(2);
+					LotFishItems.add(type2);
+
+					type3.setId(type.getID());
+					type3.setName(type.getName()+" Between 15-20kg");
+					type3.setPrice(0);
+					type3.setTotalWeigth(0);
+					type3.setWeightclass(3);
+					LotFishItems.add(type3);
 					
-					ForeignSallingFish item2 = new ForeignSallingFish();
-					item2.setId(type.getID());
-					item2.setName(type.getName()+" Between 15kg to 20kg");
-					item2.setPrice(0);
-					item2.setTotalWeigth(0);
-					item2.setWeightclass(2);
-					LotFishItems.add(item2);
+					type4.setId(type.getID());
+					type4.setName(type.getName()+"  Between 20-25kg");
+					type4.setPrice(0);
+					type4.setTotalWeigth(0);
+					type4.setWeightclass(4);
+					LotFishItems.add(type4);
+
+					type5.setId(type.getID());
+					type5.setName(type.getName()+"  Between 25-30kg");
+					type5.setPrice(0);
+					type5.setTotalWeigth(0);
+					type5.setWeightclass(5);
+					LotFishItems.add(type5);
+
+					type6.setId(type.getID());
+					type6.setName(type.getName()+" Above 30kg");
+					type6.setPrice(0);
+					type6.setTotalWeigth(0);
+					type6.setWeightclass(6);
+					LotFishItems.add(type6);
+
+
 					
-					ForeignSallingFish item3 = new ForeignSallingFish();
-					item3.setId(type.getID());
-					item3.setName(type.getName()+ " above 20kg");
-					item3.setPrice(0);
-					item3.setTotalWeigth(0);
-					item3.setWeightclass(3);
-					LotFishItems.add(item3);
 				}	
 				
 				ArrayList<Fish_stock> stockList=new ArrayList<>();
@@ -196,17 +225,26 @@ public class FLotSalesController implements Initializable{
 						for(Stock_Fish fish:fishes) {
 							if(items.getId()==fish.getType()) {
 								
-								if( fish.getWeight()<=15.0 && items.getWeightclass() == 1 ) {
+								if( fish.getWeight()<=10.0 && items.getWeightclass() == 1 ) {
 								items.setPrice(items.getPrice()+fish.getPrice());
 								items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
-								}else if(fish.getWeight()>15.0 && fish.getWeight()<=20.0 && items.getWeightclass()==2) {
+								}else if(fish.getWeight()>10.0 && fish.getWeight()<=15.0 && items.getWeightclass()==2) {
 									items.setPrice(items.getPrice()+fish.getPrice());
 									items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
-									}else if(fish.getWeight()>20.0 && items.getWeightclass()==3) {
+									}else if(fish.getWeight()>15.0 && fish.getWeight()<=20.0 && items.getWeightclass()==3) {
 									items.setPrice(items.getPrice()+fish.getPrice());
 									items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
+									}else if(fish.getWeight()>20.0 && fish.getWeight()<=25.0 && items.getWeightclass()==4) {
+										items.setPrice(items.getPrice()+fish.getPrice());
+										items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
+									}else if(fish.getWeight()>25.0 && fish.getWeight()<=30.0 && items.getWeightclass()==5) {
+										items.setPrice(items.getPrice()+fish.getPrice());
+										items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
+									}else if(fish.getWeight()>30.0 && items.getWeightclass()==6) {
+										items.setPrice(items.getPrice()+fish.getPrice());
+										items.setTotalWeigth(items.getTotalWeigth()+fish.getWeight());
 									}else {
-										System.out.println("Error");
+										System.out.println("error");
 									}
 								
 							}

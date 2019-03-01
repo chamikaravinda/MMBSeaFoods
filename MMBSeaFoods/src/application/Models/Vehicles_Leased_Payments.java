@@ -8,6 +8,7 @@ public class Vehicles_Leased_Payments {
 	private int Vehicle_ID;
 	private double Paid_Amount;
 	private String Payment_Date;
+	private String Vno;
 	
 	public int getID() {
 		return ID;
@@ -33,5 +34,22 @@ public class Vehicles_Leased_Payments {
 	public void setPayment_Date(String payment_Date) {
 		Payment_Date = payment_Date;
 	}
+	public String getVno() {
+		return Vno;
+	}
+	public void setVno(String vno) {
+		Vno = vno;
+	}
+	
+	private String SPaid_Amount;
+
+	public String getSPaid_Amount() {
+		return SPaid_Amount;
+	}
+	public void setSPaid_Amount(String sPaid_Amount) {
+		SPaid_Amount = sPaid_Amount;
+	}
+	
+	
     
 }

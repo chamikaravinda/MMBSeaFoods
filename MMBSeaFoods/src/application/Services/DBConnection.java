@@ -47,7 +47,8 @@ public class DBConnection {
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
 						+ "  Vehicle_No     TEXT    	NOT NULL UNIQUE, " + "  Total_Lease    DOUBLE    NOT NULL, "
 						+ "  Paid_Amount    DOUBLE    NOT NULL," + "  To_Pay    	    DOUBLE    NOT NULL, "
-						+ "  Premium_Amount DOUBLE    NOT NULL, " + "  Last_Payment   DATE    )";
+						+ "  Premium_Amount DOUBLE    NOT NULL, " + "  Last_Payment   DATE,"
+						+ "  payment_status TEXT NOT NULL  )";
 
 				String Vehicles_Leased_Payments = "CREATE TABLE IF NOT EXISTS Vehicles_Leased_Payments "
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
@@ -57,7 +58,7 @@ public class DBConnection {
 				String Boats = "CREATE TABLE IF NOT EXISTS Boats"
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
 						+ "  BoatNo     	TEXT      NOT NULL," + "  Owner     	    TEXT      ,"
-						+ "  Mobile_No      TEXT      NOT NULL)";
+						+ "  Mobile_No      TEXT      )";
 
 				String Boat_Account = "CREATE TABLE IF NOT EXISTS Boat_Account"
 						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
@@ -154,7 +155,7 @@ public class DBConnection {
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
 						+ "  BoatNo     	TEXT      NOT NULL," 
 						+ "  Owner     	  TEXT      ,"
-						+ "  Mobile_No      TEXT      NOT NULL)";
+						+ "  Mobile_No      TEXT      )";
 
 				String Local_Fish_stock = "CREATE TABLE IF NOT EXISTS Local_Fish_stock"
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"

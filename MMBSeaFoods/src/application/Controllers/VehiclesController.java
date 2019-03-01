@@ -8,6 +8,10 @@ import java.util.ResourceBundle;
 
 import javax.xml.crypto.Data;
 
+import org.controlsfx.control.Notifications;
+import org.controlsfx.control.spreadsheet.SpreadsheetCell;
+
+import application.Models.Foreign_Fish_types;
 import application.Models.Vehicles;
 import application.Services.VehiclesServices;
 import javafx.animation.FadeTransition;
@@ -17,7 +21,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -50,6 +56,8 @@ public class VehiclesController implements Initializable{
 	@FXML
 	private TableColumn<?,?> clmLastPayment;
 	
+	@FXML
+	private TableColumn<?,?> clmPayemntStatus;
 	public ObservableList<Vehicles> list = FXCollections.observableArrayList();
 	
 	AnchorPane add;
@@ -69,11 +77,12 @@ public class VehiclesController implements Initializable{
 			}
 			
 			for(Vehicles sup : Vlist) {
-				sup.setSTotal_Lease("Rs. "+String.format ("%2.0f", sup.getTotal_Lease())+".00");
-				sup.setSPaid_Amount("Rs. "+String.format ("%2.0f", sup.getPaid_Amount())+".00");
-				sup.setSTo_Pay("Rs. "+String.format ("%2.0f", sup.getTo_Pay())+".00");
-				sup.setSPremium_Amount("Rs. "+String.format("%2.0f", sup.getPremium_Amount())+".00");
+				sup.setSTotal_Lease("Rs. "+String.format ("%2.2f", sup.getTotal_Lease()));
+				sup.setSPaid_Amount("Rs. "+String.format ("%2.2f", sup.getPaid_Amount()));
+				sup.setSTo_Pay("Rs. "+String.format ("%2.2f", sup.getTo_Pay()));
+				sup.setSPremium_Amount("Rs. "+String.format("%2.2f", sup.getPremium_Amount()));
 				sup.setLast_Payment(sup.getLast_Payment());
+				
 
 				list.add(sup);
 			}
@@ -84,7 +93,7 @@ public class VehiclesController implements Initializable{
 			clmRemainAmt.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
 			clmPremiumAmt.setCellValueFactory(new PropertyValueFactory<>("SPremium_Amount"));
 			clmLastPayment.setCellValueFactory(new PropertyValueFactory<>("Last_Payment"));
-			
+			clmPayemntStatus.setCellValueFactory(new PropertyValueFactory<>("payment_status"));
 			vehicles.setItems(list);
 	}
 	
@@ -124,6 +133,38 @@ public class VehiclesController implements Initializable{
 		
 	}
 	
+	public void AllPayments (ActionEvent event) throws IOException {
+		add=FXMLLoader.load(getClass().getResource("/application/Views/Vehicles/payments.fxml"));
+		setNode(add);
+		
+	}
+	public 	void editVehicle(ActionEvent event) throws IOException{
+		
+		Vehicles vehicle= vehicles.getSelectionModel().getSelectedItem();
+
+		if (vehicle != null) {
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Vehicles/Edit.fxml"));
+			Parent root = loader.load();
+			EditVehiclesController controller = loader.<EditVehiclesController>getController();
+			int id = vehicle.getID();
+			controller.setID(id);
+
+			setNode(root);
+		} else {
+
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select a Vehicle to edit");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+
+		}
+
+		
+	}
 	
 
 }

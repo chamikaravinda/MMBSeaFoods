@@ -50,7 +50,7 @@ public class AddLocalBoatController {
     	localboat.setMobile(txtMobile.getText());
     	localboat.setOwner(txtOwner.getText());
 		
-		if(!txtBoatName.getText().isEmpty() && !txtMobile.getText().isEmpty() && !txtOwner.getText().isEmpty()   ) {
+		if(!txtBoatName.getText().isEmpty() && !txtOwner.getText().isEmpty()   ) {
 			
 			service.addLocalBoat(localboat);
 			Notifications notifications = Notifications.create();

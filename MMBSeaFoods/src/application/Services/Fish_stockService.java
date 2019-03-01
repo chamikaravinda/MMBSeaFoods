@@ -58,7 +58,7 @@ public class Fish_stockService {
 		connection = DBConnection.Connector();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "select * from Fish_stock where Status = 'UNSOLD' ";
+		String query = "select * from Fish_stock where Status = 'UNSOLD' ORDER BY  ID DESC";
 		ArrayList<Fish_stock> list = new ArrayList<>();
 
 		try {
@@ -121,7 +121,7 @@ public class Fish_stockService {
 		connection = DBConnection.Connector();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "select * from Fish_stock where Lot_ID = ? ";
+		String query = "select * from Fish_stock where Lot_ID = ? ORDER BY  ID DESC";
 		ArrayList<Fish_stock> list = new ArrayList<>();
 
 		try {
@@ -137,6 +137,7 @@ public class Fish_stockService {
 				fishStock.setTotal_Weight(Double.parseDouble(resultSet.getString("Total_Weight")));
 				fishStock.setTotalBuying_price(Double.parseDouble(resultSet.getString("totalprice")));
 				fishStock.setBoat_ID(Integer.parseInt(resultSet.getString("Boat_ID")));
+				fishStock.setFishprice(Double.parseDouble(resultSet.getString("fishprice")));
 				list.add(fishStock);
 
 			}
@@ -155,7 +156,7 @@ public class Fish_stockService {
 		connection = DBConnection.Connector();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "select * from Fish_stock where ID = ? ";
+		String query = "select * from Fish_stock where ID = ?  ";
 
 		try {
 			preparedStatement = connection.prepareStatement(query);

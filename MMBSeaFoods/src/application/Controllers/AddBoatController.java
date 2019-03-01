@@ -58,7 +58,6 @@ public class AddBoatController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		RequiredFieldValidator boatName = new RequiredFieldValidator();
-		RequiredFieldValidator mobile = new RequiredFieldValidator();
 
 		
 		txtBoatName.getValidators().add(boatName);
@@ -74,26 +73,7 @@ public class AddBoatController implements Initializable {
 				
 			}
 			
-		});
-		
-		txtMobile.getValidators().add(mobile);
-		mobile.setMessage("Please input correct values");
-		
-		txtMobile.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					txtMobile.validate();
-				}
-				
-			}
-			
-		});
-		
-	
-
-	
+		});	
 }
 	
 	public void AddBoat(ActionEvent event) throws SQLException, IOException {
@@ -104,7 +84,7 @@ public class AddBoatController implements Initializable {
 			boat.setMobile(txtMobile.getText());
 			boat.setOwner(txtOwner.getText());
 			
-		if(!boat.getBoatNameorNumber().isEmpty() && !boat.getMobile().isEmpty()) {
+		if(!boat.getBoatNameorNumber().isEmpty() && !boat.getOwner().isEmpty()) {
 
 			if(service.addBoat(boat)) {
 				

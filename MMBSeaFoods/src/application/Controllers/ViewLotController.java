@@ -79,6 +79,7 @@ public class ViewLotController implements Initializable {
 
 	@FXML
 	private Label lblLotID;
+	
 	AnchorPane lots;
 
 	Fish_stockService service = new Fish_stockService();
@@ -86,6 +87,8 @@ public class ViewLotController implements Initializable {
 	BoatService serviceC = new BoatService();
 
 	public ObservableList<Fish_stock> list = FXCollections.observableArrayList();
+	
+	public double totalFishPrice=0;
 
 	public void setID(String id) {
 
@@ -118,6 +121,7 @@ public class ViewLotController implements Initializable {
 					lot.setBoatName(boat.getBoatNameorNumber());
 					lot.setStotal_Weight("Kg " + lot.getTotal_Weight() + "0");
 					lot.setStotalBuying_price("Rs." + lot.getTotalBuying_price() + "0");
+					totalFishPrice=totalFishPrice+lot.getFishprice();
 					list.add(lot);
 				}
 
@@ -128,12 +132,13 @@ public class ViewLotController implements Initializable {
 
 				lblAddedDate.setText(thislot.getAdded_Date());
 				lblLorryNumber.setText(thislot.getLorry_Number());
-				lblFishWeight.setText(String.format("%2.0f", thislot.getBuying_Weight()) + ".00");
-				lblIceFee.setText("Rs. " + String.format("%2.0f", thislot.getIce_fee()) + ".00");
-				lblLorryFee.setText("Rs. " + String.format("%2.0f", thislot.getLorry_fee()) + ".00");
-				lblOtherFee.setText("Rs. " + String.format("%2.0f", thislot.getOther_fees()) + ".00");
-				lblTotalCommision.setText("Rs. " + String.format("%2.0f", thislot.getBrokerFee()) + ".00");
-				lblBuyingPrice.setText("Rs. " + String.format("%2.0f", thislot.getBuying_price()) + ".00");
+				lblFishWeight.setText(String.format("%2.2f", thislot.getBuying_Weight()));
+				lblIceFee.setText("Rs. " + String.format("%2.2f", thislot.getIce_fee()));
+				lblLorryFee.setText("Rs. " + String.format("%2.2f", thislot.getLorry_fee()));
+				lblOtherFee.setText("Rs. " + String.format("%2.2f", thislot.getOther_fees()));
+				lblTotalCommision.setText("Rs. " + String.format("%2.2f", thislot.getBrokerFee()));
+				lblBuyingPrice.setText("Rs. " + String.format("%2.2f", thislot.getBuying_price()));
+				lblFishPrice.setText("Rs. " + String.format("%2.2f", totalFishPrice) );
 
 				Fish_Stock.setRowFactory(tv -> {
 					TableRow<Fish_stock> row = new TableRow<>();

@@ -77,7 +77,9 @@ public class AddLeasePaymentController implements Initializable{
 		try {
 			ArrayList<Vehicles> vlist = services.getVehicles();
 			for(Vehicles vehicles:vlist) {
+				if(vehicles.getPayment_status().equals("Incomplete")) {
 				vehiclesList.add(vehicles.getVehicle_No());			
+				}
 			}
 			
 			cmbVehicles.setItems(vehiclesList);
