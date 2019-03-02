@@ -15,7 +15,7 @@ public class Fish_Lot {
     private double Sold_price;
     private int Sold_To;
     private String display_Name;
-    
+    private String Sold_Date;
     
 	public int getID() {
 		return ID;
@@ -95,12 +95,18 @@ public class Fish_Lot {
 	public void setDisplay_Name(String display_Name) {
 		this.display_Name = display_Name;
 	}
-    
-    
-    
-	
-    
-    //display Strings
+	public String getSold_Date() {
+		return Sold_Date;
+	}
+	public void setSold_Date(String date) {
+		Sold_Date = date;
+	}
+
+
+
+
+
+	//display Strings
 	private String Sbuying_price;
 	private String SBuying_Weight;
 	public String getSbuying_price() {

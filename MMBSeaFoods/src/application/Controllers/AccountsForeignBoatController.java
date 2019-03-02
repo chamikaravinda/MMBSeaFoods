@@ -191,7 +191,7 @@ public class AccountsForeignBoatController implements Initializable {
 			Newentry.setBoat_ID(entry.getBoat_ID());
 			Newentry.setPaid(0);
 			Newentry.setStock_ID(entry.getStock_ID());
-			Newentry.setTo_Pay(entry.getTo_Pay());
+			Newentry.setTo_Pay(entry.getPaid());
 			Fish_stock stock = stockService.getStocks((int) entry.getStock_ID());
 			Newentry.setReason("Stock Purchase of " + stock.getTotal_Weight());
 			Newentry.setDate(stock.getAdded_Date());

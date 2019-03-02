@@ -19,8 +19,8 @@ public class Foreign_Fish_Buyers_AccountServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO F_Fish_Buyers_Account (Date, Reason,To_Pay,Paid,Buyer_ID)" + 
-							"VALUES (?,?,?,?,?)";
+		String insertQuery= "INSERT INTO F_Fish_Buyers_Account (Date, Reason,To_Pay,Paid,Buyer_ID,Lot_ID)" + 
+							"VALUES (?,?,?,?,?,?)";
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setString(1,entry.getDate());
@@ -28,7 +28,7 @@ public class Foreign_Fish_Buyers_AccountServices {
 			preparedStatement.setDouble(3, entry.getTo_Pay());
 			preparedStatement.setDouble(4, entry.getPaid());
 			preparedStatement.setDouble(5, entry.getBuyer_ID());
-		
+			preparedStatement.setInt(6, entry.getLot_ID());
 			resultSet=preparedStatement.executeUpdate();
 			
 			if(resultSet != 0) {
@@ -51,8 +51,8 @@ public class Foreign_Fish_Buyers_AccountServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery=  "INSERT INTO F_Fish_Uncleared (Date, Reason,To_Pay,Paid,Buyer_ID)" + 
-				"VALUES (?,?,?,?,?)";
+		String insertQuery=  "INSERT INTO F_Fish_Uncleared (Date, Reason,To_Pay,Paid,Buyer_ID,Lot_ID)" + 
+				"VALUES (?,?,?,?,?,?)";
 		
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
@@ -61,7 +61,7 @@ public class Foreign_Fish_Buyers_AccountServices {
 			preparedStatement.setDouble(3, unclearEntry.getTo_Pay());
 			preparedStatement.setDouble(4, unclearEntry.getPaid());
 			preparedStatement.setDouble(5, unclearEntry.getBuyer_ID());
-
+			preparedStatement.setInt(6, unclearEntry.getLot_ID());
 			resultSet=preparedStatement.executeUpdate();
 			
 			if(resultSet != 0) {
@@ -88,7 +88,7 @@ public class Foreign_Fish_Buyers_AccountServices {
 			connection=DBConnection.Connector();
 			PreparedStatement preparedStatement=null;
 			ResultSet resultSet=null;
-			String query = "select * from F_Fish_Buyers_Account where Buyer_ID=?";
+			String query = "select * from F_Fish_Buyers_Account where Buyer_ID=? ORDER BY ID DESC";
 			ArrayList<F_Fish_Buyers_Account> accountDetails=new ArrayList<>();
 			
 			try {
@@ -105,7 +105,7 @@ public class Foreign_Fish_Buyers_AccountServices {
 					entries.setTo_Pay(Double.parseDouble(resultSet.getString("To_Pay")));
 					entries.setPaid(Double.parseDouble(resultSet.getString("Paid")));
 					entries.setBuyer_ID(Integer.parseInt(resultSet.getString("Buyer_ID")));
-					System.out.println(resultSet.getString("Buyer_ID"));
+					entries.setLot_ID(Integer.parseInt(resultSet.getString("Lot_ID")));
 					accountDetails.add(entries);				
 				}
 				

@@ -135,6 +135,7 @@ public class Fish_LotServices {
 				lot.setOther_fees(Double.parseDouble(resultSet.getString("other_fees")));
 				lot.setBrokerFee(Double.parseDouble(resultSet.getString("brokerFee")));
 				lot.setID(Integer.parseInt(resultSet.getString("ID")));
+				lot.setSold_Date(resultSet.getString("Sold_Date"));
 			}
 				connection.close();
 				return lot;		
@@ -176,7 +177,7 @@ public class Fish_LotServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String Updatequery = "UPDATE Fish_Lot set Sold_Weight=?,Sold_price=?,Sold_To=?"
+		String Updatequery = "UPDATE Fish_Lot set Sold_Weight=?,Sold_price=?,Sold_To=?,Sold_Date=?"
 						+ " where ID= '"+lot.getID()+"' ";
 
 		try {
@@ -185,6 +186,7 @@ public class Fish_LotServices {
 				preparedStatement.setDouble(1, lot.getSold_Weight());
 				preparedStatement.setDouble(2,lot.getSold_price());
 				preparedStatement.setDouble(3,lot.getSold_To());
+				preparedStatement.setString(4, lot.getSold_Date());
 				resultSet=preparedStatement.executeUpdate();
 				
 				if(resultSet != 0) {

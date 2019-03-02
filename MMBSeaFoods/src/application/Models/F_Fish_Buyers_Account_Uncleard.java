@@ -8,6 +8,9 @@ public class F_Fish_Buyers_Account_Uncleard {
 	private double To_Pay;
 	private double Paid;
 	private int Buyer_ID;
+	private String buyer_name;
+	private int Lot_ID;
+
 	
 	public int getBuyer_ID() {
 		return Buyer_ID;
@@ -46,7 +49,19 @@ public class F_Fish_Buyers_Account_Uncleard {
 	public void setPaid(double paid) {
 		Paid = paid;
 	}
-
+	public String getBuyer_name() {
+		return buyer_name;
+	}
+	public void setBuyer_name(String buyer_name) {
+		this.buyer_name = buyer_name;
+	}
+	public int getLot_ID() {
+		return Lot_ID;
+	}
+	public void setLot_ID(int lot_ID) {
+		Lot_ID = lot_ID;
+	}
+	
 	
 	
 	

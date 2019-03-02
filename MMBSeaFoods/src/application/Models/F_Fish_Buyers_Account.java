@@ -8,6 +8,7 @@ public class F_Fish_Buyers_Account {
 	private double To_Pay;
 	private double Paid;
 	private int Buyer_ID;
+	private int Lot_ID;
 	
 
 	public int getBuyer_ID() {
@@ -46,7 +47,13 @@ public class F_Fish_Buyers_Account {
 	public void setPaid(double paid) {
 		Paid = paid;
 	}
-
+	public int getLot_ID() {
+		return Lot_ID;
+	}
+	public void setLot_ID(int lot_ID) {
+		Lot_ID = lot_ID;
+	}
+	
 	
 	
 	

@@ -88,7 +88,7 @@ public class AccountCommissionController implements Initializable {
 			
 			for( Commition entry : entryList ) {
 				if(entry.getTo_Pay()!=0) {
-					entry.setSTo_Pay("Rs."+String.format ("%2.0f", entry.getTo_Pay())+".00");
+					entry.setSTo_Pay("Rs."+String.format ("%2.2f", entry.getTo_Pay()));
 				}else {
 					entry.setSTo_Pay("Rs 0.00");
 				}

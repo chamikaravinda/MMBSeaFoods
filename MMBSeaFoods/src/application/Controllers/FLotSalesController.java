@@ -328,11 +328,12 @@ public class FLotSalesController implements Initializable{
 				totalWeight=totalWeight+fishprice.getTotalWeigth();
 			}
 	
-			
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			lot.setSold_price(totalItemPrice);
 			lot.setSold_Weight(totalWeight);
 			lot.setSold_To(buyers.getID());
-			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			lot.setSold_Date(format1.format( new Date()));
+			
 			F_Fish_Buyers_Account buyerAccount =new F_Fish_Buyers_Account();
 			if(isPricesSet()) {
 				if(service.SellFishLot(lot)){
@@ -342,6 +343,7 @@ public class FLotSalesController implements Initializable{
 						buyerAccount.setPaid(0);
 						buyerAccount.setReason("Selling Lot purchased form lorry "+lot.getLorry_Number()+" on "+lot.getAdded_Date());
 						buyerAccount.setBuyer_ID(buyers.getID());
+						buyerAccount.setLot_ID(lot.getID());
 							if(serviceE.addEntry(buyerAccount))	{	
 									if(serviceE.addEntryUncleared(buyerAccount)){
 									

@@ -79,7 +79,9 @@ public class ViewLotController implements Initializable {
 
 	@FXML
 	private Label lblLotID;
-	
+
+	private int backCommond = 0;
+
 	AnchorPane lots;
 
 	Fish_stockService service = new Fish_stockService();
@@ -87,13 +89,17 @@ public class ViewLotController implements Initializable {
 	BoatService serviceC = new BoatService();
 
 	public ObservableList<Fish_stock> list = FXCollections.observableArrayList();
-	
-	public double totalFishPrice=0;
+
+	public double totalFishPrice = 0;
 
 	public void setID(String id) {
 
 		lblLotID.setText(id);
 
+	}
+
+	public void setBackCommond(int cmd) {
+		this.backCommond = cmd;
 	}
 
 	@Override
@@ -121,7 +127,7 @@ public class ViewLotController implements Initializable {
 					lot.setBoatName(boat.getBoatNameorNumber());
 					lot.setStotal_Weight("Kg " + lot.getTotal_Weight() + "0");
 					lot.setStotalBuying_price("Rs." + lot.getTotalBuying_price() + "0");
-					totalFishPrice=totalFishPrice+lot.getFishprice();
+					totalFishPrice = totalFishPrice + lot.getFishprice();
 					list.add(lot);
 				}
 
@@ -138,7 +144,7 @@ public class ViewLotController implements Initializable {
 				lblOtherFee.setText("Rs. " + String.format("%2.2f", thislot.getOther_fees()));
 				lblTotalCommision.setText("Rs. " + String.format("%2.2f", thislot.getBrokerFee()));
 				lblBuyingPrice.setText("Rs. " + String.format("%2.2f", thislot.getBuying_price()));
-				lblFishPrice.setText("Rs. " + String.format("%2.2f", totalFishPrice) );
+				lblFishPrice.setText("Rs. " + String.format("%2.2f", totalFishPrice));
 
 				Fish_Stock.setRowFactory(tv -> {
 					TableRow<Fish_stock> row = new TableRow<>();
@@ -194,9 +200,17 @@ public class ViewLotController implements Initializable {
 
 	@FXML
 	void back(ActionEvent event) throws IOException {
-
-		lots = FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
-		setNode(lots);
+		if (backCommond == 1) {
+			lots = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FBuyerAccount.fxml"));
+			setNode(lots);
+		}
+		if (backCommond == 2) {
+			lots = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FAddBuyerReceived.fxml"));
+			setNode(lots);
+		} else {
+			lots = FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
+			setNode(lots);
+		}
 	}
 
 }
