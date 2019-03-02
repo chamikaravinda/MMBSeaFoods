@@ -7,6 +7,7 @@ public class Boat_Account {
 	private String Reason;
 	private double To_Pay;
 	private double Paid;
+	private long Stock_ID;
 	private int Boat_ID ;
 	
 	
@@ -45,8 +46,16 @@ public class Boat_Account {
 	}
 	public void setBoat_ID(int boat_ID) {
 		Boat_ID = boat_ID;
+	}	
+	public long getStock_ID() {
+		return Stock_ID;
 	}
-	
+	public void setStock_ID(long stockID) {
+		Stock_ID = stockID;
+	}
+
+
+
 	//String views 
 	private String STo_Pay;
 	private String SPaid;

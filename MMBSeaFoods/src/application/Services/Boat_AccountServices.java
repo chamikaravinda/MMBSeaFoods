@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import application.Models.Boat_Account;
 import application.Models.Boat_Account_UnCleared;
 import application.Models.F_Fish_Buyers_Account;
@@ -26,7 +28,7 @@ public class Boat_AccountServices {
 		
 		Boat_Account boat_Account= new Boat_Account();
 		
-		String getAllentriesQuery= "select * from Boat_Account where ID =?";
+		String getAllentriesQuery= "select * from Boat_Account where ID =? ";
 	
 		
 		try {
@@ -52,7 +54,7 @@ public class Boat_AccountServices {
     }
 	
 	// add entries
-	public boolean addEntries(Boat_Account entry)throws SQLException {
+	public boolean addEntries(Boat_Account entry){
 		
 
     	connection=DBConnection.Connector();
@@ -60,7 +62,7 @@ public class Boat_AccountServices {
 		int resultSet;
 		
 		
-		String addEntryQuery="INSERT INTO Boat_Account(Date,Reason,To_Pay,Paid,Boat_ID)"+" VALUES(?,?,?,?,?)";
+		String addEntryQuery="INSERT INTO Boat_Account(Date,Reason,To_Pay,Paid,Boat_ID,Stock_ID)"+" VALUES(?,?,?,?,?,?)";
 		
 		
 		try {
@@ -71,6 +73,7 @@ public class Boat_AccountServices {
 			preparedStatement.setDouble(3, entry.getTo_Pay());
 			preparedStatement.setDouble(4, entry.getPaid());
 			preparedStatement.setDouble(5, entry.getBoat_ID());
+			preparedStatement.setDouble(6, entry.getStock_ID());
 			resultSet= preparedStatement.executeUpdate();
 			
 			if (resultSet != 0) {
@@ -85,7 +88,12 @@ public class Boat_AccountServices {
 			e.printStackTrace();
 			return false;
 		} finally {
-			connection.close();
+			try {
+				connection.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
 		}
 
 		
@@ -100,9 +108,7 @@ public class Boat_AccountServices {
 		PreparedStatement preparedStatement=null;
 		int resultSet;
 		
-		System.out.println(entry.getDate());
-		String addEntryQuery="INSERT INTO Boat_Account_UnCleared(Date,Reason,To_Pay,Paid,Boat_ID)"+" VALUES(?,?,?,?,?)";
-		
+		String addEntryQuery="INSERT INTO Boat_Account_UnCleared(Date,Reason,To_Pay,Paid,Boat_ID,Stock_ID)"+" VALUES(?,?,?,?,?,?)";
 		
 		try {
 			  
@@ -112,6 +118,7 @@ public class Boat_AccountServices {
 			preparedStatement.setDouble(3, entry.getTo_Pay());
 			preparedStatement.setDouble(4, entry.getPaid());
 			preparedStatement.setDouble(5, entry.getBoat_ID());
+			preparedStatement.setDouble(6, entry.getStock_ID());
 			resultSet= preparedStatement.executeUpdate();
 			
 			if (resultSet != 0) {
@@ -132,5 +139,42 @@ public class Boat_AccountServices {
 		
 	}
 	
+	public boolean RemoveFromBoatAccount(int id) {
+
+		try {		
+			
+			connection=DBConnection.Connector();
+			PreparedStatement preparedStatement=null;	
+			
+			String query = "DELETE FROM Boat_Account WHERE ID = ?";
+			
+			preparedStatement = connection.prepareStatement(query);		
+			
+			
+			preparedStatement.setInt(1, id);
+			
+			if(preparedStatement.execute()) {
+				return true;
+			}else {
+				return false;
+			}
+		
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			return false;
+			
+		} catch (Exception e) {
+			return false;
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
+			}		
+			
+		}
+		
+	}
 
 }

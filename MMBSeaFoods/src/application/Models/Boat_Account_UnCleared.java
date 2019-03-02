@@ -7,6 +7,7 @@ public class Boat_Account_UnCleared {
 	private String Reason;
 	private double To_Pay;
 	private double Paid;
+	private long Stock_ID;
 	private int Boat_ID ;
 	public double getPaid() {
 		return Paid;
@@ -44,9 +45,36 @@ public class Boat_Account_UnCleared {
 	public void setBoat_ID(int boat_ID) {
 		Boat_ID = boat_ID;
 	}
+	public long getStock_ID() {
+		return Stock_ID;
+	}
+	public void setStock_ID(long stockID) {
+		Stock_ID = stockID;
+	}
 	
-	
-	
+	//String views 
+	private String STo_Pay;
+	private String SPaid;
+	private String BoatName;
+
+	public String getSTo_Pay() {
+		return STo_Pay;
+	}
+	public void setSTo_Pay(String string) {
+		STo_Pay = string;
+	}
+	public String getSPaid() {
+		return SPaid;
+	}
+	public void setSPaid(String sPaid) {
+		SPaid = sPaid;
+	}
+	public String getBoatName() {
+		return BoatName;
+	}
+	public void setBoatName(String boatName) {
+		BoatName = boatName;
+	}
 	
 	
 }

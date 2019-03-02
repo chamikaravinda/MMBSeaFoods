@@ -457,60 +457,26 @@ public class AddStocksController implements Initializable {
 						lot.setBuying_price(lot.getBuying_price() + stock.getTotalBuying_price());
 						if (service.UpdateFish_Lot(lot)) {
 
-							for (F_BoatEntryCatogries cat : catList) {
-								if (cat.getWeight() != 0) {
 									Boat_Account boatEntry = new Boat_Account();
 									boatEntry.setDate(format1.format(new Date()));
 									boatEntry.setBoat_ID(stock.getBoat_ID());
-									if (cat.getWeightGroup() == 1) {
-										boatEntry.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " under 10kg :Total Weight " + cat.getWeight());
-									}
-									if (cat.getWeightGroup() == 2) {
-										boatEntry.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " between 10kg-15kg:Total Weight " + cat.getWeight());
-									}
-									if (cat.getWeightGroup() == 3) {
-										boatEntry.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " between 15kg-20kg:Total Weight  " + cat.getWeight());
-									}
-									if (cat.getWeightGroup() == 4) {
-										boatEntry.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " between 20kg-25kg:Total Weight  " + cat.getWeight());
-									}
-									if (cat.getWeightGroup() == 5) {
-										boatEntry.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " between 25kg-30kg:Total Weight  " + cat.getWeight());
-									}
-									if (cat.getWeightGroup() == 6) {
-										boatEntry.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " Above 30kg:Total Weight  " + cat.getWeight());
-									}
-									boatEntry.setTo_Pay(cat.getTotalPrice());
+									boatEntry.setTo_Pay(stock.getFishprice());
 									boatEntry.setPaid(0);
+									boatEntry.setReason("Stock Purchase of "+stock.getTotal_Weight()+" Kg");
+									boatEntry.setStock_ID(stockID);
 
 									serviceH.addEntries(boatEntry);
 
 									Boat_Account_UnCleared boatEntryU = new Boat_Account_UnCleared();
 									boatEntryU.setDate(format1.format(new Date()));
 									boatEntryU.setBoat_ID(stock.getBoat_ID());
-									if (cat.getWeightGroup() == 1) {
-										boatEntryU.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " under 15kg :Total Weight " + cat.getWeight());
-									}
-									if (cat.getWeightGroup() == 2) {
-										boatEntryU.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " between 15kg-20kg:Total Weight " + cat.getWeight());
-									}
-									if (cat.getWeightGroup() == 3) {
-										boatEntryU.setReason(cat.getNoOfFishes() + " " + cat.getTypeName()
-												+ " above 20kg :Total Weight " + cat.getWeight());
-									}
-									boatEntryU.setTo_Pay(cat.getTotalPrice());
+									boatEntryU.setTo_Pay(stock.getFishprice());
 									boatEntryU.setPaid(0);
+									boatEntryU.setReason("Stock Purchase of "+stock.getTotal_Weight()+" Kg");
+									boatEntryU.setStock_ID(stockID);
 
 									serviceH.addEntries_Uncleard(boatEntryU);
-								}
+								
 							}
 							Notifications notifications = Notifications.create();
 							notifications.title("Succesfull");
@@ -546,7 +512,7 @@ public class AddStocksController implements Initializable {
 			}
 		}
 
-	}
+	
 
 	// switch windows
 

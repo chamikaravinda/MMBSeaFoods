@@ -111,8 +111,13 @@ public class ViewStockController implements Initializable {
 		if(backCommond ==0) {
 		types = FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Stocks.fxml"));
 		setNode(types);
-		}
-		else {
+		}else if(backCommond ==2) {
+			types = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FBoatAccount.fxml"));
+			setNode(types);
+		}else if(backCommond ==3) {
+			types = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/MakePayment.fxml"));
+			setNode(types);
+		}else {
 			
 			FXMLLoader loader = new FXMLLoader(
 					getClass().getResource("/application/Views/Ftrade/ViewLot.fxml"));
@@ -138,6 +143,8 @@ public class ViewStockController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		Platform.runLater(() -> {
 			try {
+				
+				System.out.println(lblStkID.getText());
 				stock = service.getStocks(Integer.parseInt(lblStkID.getText()));
 				Fish_Lot stockLot = serviceB.getTheLot(stock.getLot_ID());
 				lbllot.setText(stockLot.getDisplay_Name());

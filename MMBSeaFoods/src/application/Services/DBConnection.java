@@ -61,14 +61,22 @@ public class DBConnection {
 						+ "  Mobile_No      TEXT      )";
 
 				String Boat_Account = "CREATE TABLE IF NOT EXISTS Boat_Account"
-						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
-						+ "  Reason       TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"
-						+ "  Paid         DOUBLE            ," + "  Boat_ID      INTEGER   REFERENCES  Boats (ID) )";
+						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," 
+						+ "  Date     	  DATE      NOT NULL,"
+						+ "  Reason       TEXT      NOT NULL," 
+						+ "  To_Pay		  DOUBLE            ,"
+						+ "  Paid         DOUBLE            ,"
+						+ "	 Stock_ID     INTEGER 	REFERENCES  Fish_stock(ID)," 
+						+ "  Boat_ID      INTEGER   REFERENCES  Boats (ID) )";
 
 				String Boat_Account_UnCleared = "CREATE TABLE IF NOT EXISTS Boat_Account_UnCleared"
-						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
-						+ "  Reason       TEXT      NOT NULL," + "  To_Pay		  DOUBLE   			,"
-						+ "  Paid         DOUBLE            ," + "  Boat_ID      INTEGER   REFERENCES  Boats (ID))";
+						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," 
+						+ "  Date     	  DATE      NOT NULL,"
+						+ "  Reason       TEXT      NOT NULL,"
+						+ "  To_Pay		  DOUBLE   			,"
+						+ "  Paid         DOUBLE            ," 
+						+ "	 Stock_ID     INTEGER 	REFERENCES  Fish_stock(ID)," 
+						+ "  Boat_ID      INTEGER   REFERENCES  Boats (ID))";
 
 				String Foreign_Fish_Buyers = "CREATE TABLE IF NOT EXISTS Foreign_Fish_Buyers"
 						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Name         TEXT      NOT NULL,"
@@ -208,8 +216,6 @@ public class DBConnection {
 				stmt.executeUpdate(Vehicles);
 				stmt.executeUpdate(Vehicles_Leased_Payments);
 				stmt.executeUpdate(Boats);
-				stmt.executeUpdate(Boat_Account);
-				stmt.executeUpdate(Boat_Account_UnCleared);
 				stmt.executeUpdate(Foreign_Fish_Buyers);
 				stmt.executeUpdate(F_Fish_Buyers_Account);
 				stmt.executeUpdate(F_Fish_Buyers_Account_Uncleard);
@@ -230,6 +236,8 @@ public class DBConnection {
 			    stmt.executeUpdate(Local_Sales);
 			    stmt.executeUpdate(Local_Fish_Buyers_Account);
 			    stmt.executeUpdate(Local_Fish_Buyers_Account_Uncleared);
+			    stmt.executeUpdate(Boat_Account);
+				stmt.executeUpdate(Boat_Account_UnCleared);
 
 
 				stmt.close();

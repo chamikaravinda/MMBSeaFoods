@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import application.Models.Boat_Account;
+import application.Models.Boat_Account_UnCleared;
 import application.Models.Commition;
 import application.Models.F_Fish_Buyers_Account;
 import application.Models.F_Fish_Buyers_Account_Uncleard;
@@ -331,7 +332,7 @@ public class AccountServices {
 				System.out.println("Connection not successful");
 			}
 			
-			String query = "SELECT * FROM Boat_Account WHERE Boat_ID=?";
+			String query = "SELECT * FROM Boat_Account WHERE Boat_ID=? ORDER BY ID DESC";
 			
 			preparedStatement=connection.prepareStatement(query);
 			preparedStatement.setString(1, String.valueOf(id));
@@ -346,7 +347,8 @@ public class AccountServices {
 				boat.setReason(resultSet.getString(3));
 				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
 				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
-				boat.setBoat_ID(Integer.parseInt(resultSet.getString(6)));
+				boat.setStock_ID(Long.parseLong(resultSet.getString(6)));
+				boat.setBoat_ID(Integer.parseInt(resultSet.getString(7)));
 				
 				
 				
@@ -377,30 +379,21 @@ public class AccountServices {
 	return boatList;
 	}
 
-
-
-
-
-	public ArrayList<Boat_Account> getAllBOQListUnclearedForeign(int id) {
+	public ArrayList<Boat_Account_UnCleared> getAllBOQListUnclearedForeign(int id) {
 		
-		ArrayList<Boat_Account> boatList=new ArrayList<Boat_Account>();
+		ArrayList<Boat_Account_UnCleared> boatList=new ArrayList<Boat_Account_UnCleared>();
 		
 		try {
 			
 			connection=DBConnection.Connector();
 			
-			if(connection==null) {
-				System.out.println("Connection not successful");
-			}
-			
-			String query = "SELECT * FROM Boat_Account_UnCleared WHERE Boat_ID=?";
+			String query = "SELECT * FROM Boat_Account_UnCleared  WHERE Boat_ID=? ORDER BY ID ORDER BY ID DESC";
 			
 			preparedStatement=connection.prepareStatement(query);
-			preparedStatement.setString(1, String.valueOf(id));
 			resultSet = preparedStatement.executeQuery();
 			
 			while (resultSet.next()) {
-				Boat_Account boat = new Boat_Account();
+				Boat_Account_UnCleared boat = new Boat_Account_UnCleared();
 				
 				
 				boat.setID(Integer.parseInt(resultSet.getString(1)));
@@ -408,15 +401,14 @@ public class AccountServices {
 				boat.setReason(resultSet.getString(3));
 				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
 				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
-				boat.setBoat_ID(Integer.parseInt(resultSet.getString(6)));
+				boat.setStock_ID(Long.parseLong(resultSet.getString(6)));
+				boat.setBoat_ID(Integer.parseInt(resultSet.getString(7)));
 				
 				
 				
 				
 				boatList.add(boat);
 			}
-			
-			System.out.println(query);
 			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
@@ -428,6 +420,59 @@ public class AccountServices {
 			try {
 				preparedStatement.close();
 				resultSet.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In get All BOAT List Uncleared Foreign : " + e);
+			}
+			
+			
+		}
+		
+	return boatList;
+	}
+
+
+
+
+	public ArrayList<Boat_Account_UnCleared> getAllUnclearedpayments() {
+		
+		ArrayList<Boat_Account_UnCleared> boatList=new ArrayList<Boat_Account_UnCleared>();
+		
+		try {
+			
+			connection=DBConnection.Connector();
+			
+			String query = "SELECT * FROM Boat_Account_UnCleared ORDER BY ID DESC";
+			
+			preparedStatement=connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				Boat_Account_UnCleared boat = new Boat_Account_UnCleared();
+				
+				
+				boat.setID(Integer.parseInt(resultSet.getString(1)));
+				boat.setDate(resultSet.getString(2));
+				boat.setReason(resultSet.getString(3));
+				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
+				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
+				boat.setStock_ID(Long.parseLong(resultSet.getString(6)));
+				boat.setBoat_ID(Integer.parseInt(resultSet.getString(7)));
+				
+				
+				
+				
+				boatList.add(boat);
+			}
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at  get All BOAT List Uncleared Foreign :" + e.getLocalizedMessage());	
+			
+		} catch (Exception e) {
+			System.out.println("Exception In get All BOAT List Uncleared Foreign : " + e);	
+		}finally {
+			try {
 				connection.close();
 			} catch (SQLException e) {
 				System.out.println("Finally Exception In get All BOAT List Uncleared Foreign : " + e);
@@ -1522,7 +1567,43 @@ public class AccountServices {
 	
 	
 	
-	
+public boolean RemoveFromBoatAccount_Unclear(int id) {
+
+		try {		
+			
+			connection=DBConnection.Connector();
+				
+			String query = "DELETE FROM Boat_Account_UnCleared WHERE ID = ?";
+			
+			preparedStatement = connection.prepareStatement(query);		
+			
+			
+			preparedStatement.setInt(1, id);
+			
+			if(preparedStatement.execute()) {
+				return true;
+			}else {
+				return false;
+			}
+		
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			return false;
+			
+		} catch (Exception e) {
+			return false;
+		}finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
+			}		
+			
+		}
+		
+	}
 	
 	
 	
