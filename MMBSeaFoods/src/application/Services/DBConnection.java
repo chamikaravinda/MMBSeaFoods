@@ -137,9 +137,13 @@ public class DBConnection {
 				String Local_Fish_Buyers = "CREATE TABLE IF NOT EXISTS Local_Fish_Buyers"
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Name          TEXT      NOT NULL,"
 						+ "  Mobile_No	  TEXT            )";
+				 
 				String Local_Fish_types = "CREATE TABLE IF NOT EXISTS Local_Fish_types"
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
-						+ "  Name           TEXT      NOT NULL," + "  price          DOUBLE    NOT NULL )";
+						+ "  Name           TEXT      NOT NULL," + "  price_U10      DOUBLE    NOT NULL, "
+						+ "  price_10T15    DOUBLE    NOT NULL, " + "  price_15T20    DOUBLE    NOT NULL,"
+						+ "  price_20T25    DOUBLE    NOT NULL," + "	 price_25T30    DOUBLE    NOT NULL,"
+						+ "  price_A30      DOUBLE    NOT NULL )";
 
 				String Local_Boats = "CREATE TABLE IF NOT EXISTS Local_Boats "
 						+ "( ID             INTEGER 	PRIMARY KEY AUTOINCREMENT,"
@@ -154,9 +158,17 @@ public class DBConnection {
 				String Local_Purchases = "CREATE TABLE IF NOT EXISTS Local_Purchases"
 						+ "(ID          INTEGER PRIMARY KEY AUTOINCREMENT," + " Date     	DATE      NOT NULL,"
 						+ " Boat_ID     INTEGER   REFERENCES  Boats (ID),"
-						+ " Fish_Type   INTEGER   REFERENCES  Local_Fish_types(ID) ," + " Weight      DOUBLE  ,"
-						+ " Price       DOUBLE )";
+						+ " Habour      DOUBLE  ,"
+						+ " Total_Weight      DOUBLE  ,"
+						+ " Total_Price       DOUBLE )";
 
+				String Local_stock_items= "CREATE TABLE IF NOT EXISTS Local_stock_items"
+						+ "( ID             INTEGER  PRIMARY KEY AUTOINCREMENT,"
+						+ "  Fish_Type           INTEGER  REFERENCES  Local_Fish_types (ID),"
+						+ "  Total_Weight   INTEGER  NOT NULL," + "  buying_Price   DOUBLE   NOT NULL,"
+						+ "  Fish_stock_ID  INTEGER  REFERENCES  Local_Fish_stock (ID) )";
+				
+				
 				String Local_Boat_Account = "CREATE TABLE IF NOT EXISTS Local_Boat_Account"
 						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
 						+ "  Reason       TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"
@@ -211,7 +223,7 @@ public class DBConnection {
 				stmt.executeUpdate(Boat_Account_UnCleared);
 				stmt.executeUpdate(F_Fish_Buyers_Account);
 				stmt.executeUpdate(F_Fish_Buyers_Account_Uncleard);
-
+				stmt.executeUpdate(Local_stock_items);
 				stmt.close();
 
 			}

@@ -90,6 +90,8 @@ public class ViewStockController implements Initializable {
 
 	private int backCommond=0;
 	
+	private int backCommondLot=0;
+	
 	Fish_stockService service = new Fish_stockService();
 	Fish_LotServices serviceB = new Fish_LotServices();
 	BoatService serviceC = new BoatService();
@@ -104,6 +106,10 @@ public class ViewStockController implements Initializable {
 	
 	public void setbackCommond(int cmd) {
 		backCommond=cmd;
+	}
+	
+	public void setbackCommondForLot(int cmd) {
+		backCommondLot=cmd;
 	}
 
 	@FXML
@@ -128,6 +134,7 @@ public class ViewStockController implements Initializable {
 			ViewLotController controller = loader.<ViewLotController>getController();
 			String id = Integer.toString(stock.getID());
 			controller.setID(id);
+			controller.setBackCommond(backCommondLot);
 
 			setNode(root);
 			

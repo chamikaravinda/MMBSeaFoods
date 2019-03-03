@@ -135,11 +135,16 @@
                               <FontAwesomeIconView fill="#fcfcfc" glyphName="EDIT" size="17.0" wrappingWidth="21.0" />
                            </graphic>
                         </JFXButton>
-                        <TableView fx:id="tblvLocalFishType" layoutX="10.0" layoutY="11.0" prefHeight="334.0" prefWidth="1156.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn fx:id="tblcNameLocal" prefWidth="578.0" text="Name" />
-                            <TableColumn fx:id="tblcPriceLocal" prefWidth="599.0" text="Price" />
-                          </columns>
+                        <TableView fx:id="tblFishType1" prefHeight="339.0" prefWidth="1179.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="clmName1" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="clmB101" prefWidth="75.0" text="Below 10kg" />
+                              <TableColumn fx:id="clm10T151" prefWidth="75.0" text="Between 10kg - 15kg" />
+                              <TableColumn fx:id="clm15T201" prefWidth="75.0" text=" Between 15kg - 20kg" />
+                              <TableColumn fx:id="clm20T251" prefWidth="75.0" text="Between 20kg - 25kg" />
+                              <TableColumn fx:id="clm25T301" prefWidth="75.0" text=" Between 25kg - 30kg" />
+                              <TableColumn fx:id="clmA301" prefWidth="75.0" text="Above 30kg" />
+                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>

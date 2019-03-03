@@ -91,16 +91,23 @@ public class FishTypeController implements Initializable {
 		}
 
 		for (Foreign_Fish_types sup : ftypes) {
+			
+			sup.setSprice_U10("Rs." + String.format("%2.2f", sup.getPrice_U10()) );
+			sup.setSprice_10T15("Rs." + String.format("%2.2f", sup.getPrice_10T15()) );
+			sup.setSprice_15T20("Rs." + String.format("%2.2f", sup.getPrice_15T20()) );
+			sup.setSprice_20T25("Rs." + String.format("%2.2f", sup.getPrice_20T25()));
+			sup.setSprice_25T30("Rs." + String.format("%2.2f", sup.getPrice_25T30()));
+			sup.setSprice_A30("Rs." + String.format("%2.2f", sup.getPrice_A30()) );
 			list.add(sup);
 		}
 
 		clmName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-		clmB10.setCellValueFactory(new PropertyValueFactory<>("price_U10"));
-		clm10T15.setCellValueFactory(new PropertyValueFactory<>("price_10T15"));
-		clm15T20.setCellValueFactory(new PropertyValueFactory<>("price_15T20"));
-		clm20T25.setCellValueFactory(new PropertyValueFactory<>("price_20T25"));
-		clm25T30.setCellValueFactory(new PropertyValueFactory<>("price_25T30"));
-		clmA30.setCellValueFactory(new PropertyValueFactory<>("price_A30"));
+		clmB10.setCellValueFactory(new PropertyValueFactory<>("sprice_U10"));
+		clm10T15.setCellValueFactory(new PropertyValueFactory<>("sprice_10T15"));
+		clm15T20.setCellValueFactory(new PropertyValueFactory<>("sprice_15T20"));
+		clm20T25.setCellValueFactory(new PropertyValueFactory<>("sprice_20T25"));
+		clm25T30.setCellValueFactory(new PropertyValueFactory<>("sprice_25T30"));
+		clmA30.setCellValueFactory(new PropertyValueFactory<>("sprice_A30"));
 		
 
 		tblFishType.setItems(list);

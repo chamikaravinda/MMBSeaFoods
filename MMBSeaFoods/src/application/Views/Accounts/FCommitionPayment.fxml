@@ -7,6 +7,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.AccountCommitionUnclearedController">
@@ -15,9 +18,9 @@
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Make Payment" />
             <Separator prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
-            <AnchorPane layoutY="172.0" prefHeight="481.0" prefWidth="1219.0" AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+            <AnchorPane layoutY="172.0" prefHeight="580.0" prefWidth="1219.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                <children>
-                  <TableView fx:id="tblvSales" layoutX="115.0" layoutY="102.0" prefHeight="371.0" prefWidth="830.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="274.0" AnchorPane.topAnchor="102.0">
+                  <TableView fx:id="tblvSales" layoutX="75.0" layoutY="20.0" prefHeight="429.0" prefWidth="1029.0" AnchorPane.bottomAnchor="131.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="20.0">
                     <columns>
                       <TableColumn fx:id="tblcDate" prefWidth="75.0" text=" Date" />
                       <TableColumn fx:id="tblcReason" prefWidth="75.0" text="Reason" />
@@ -32,11 +35,26 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="1018.0" layoutY="268.0" prefHeight="56.0" prefWidth="168.0" style="-fx-background-color: #1d0b96;" text="Pay" textFill="WHITE" AnchorPane.bottomAnchor="157.0" AnchorPane.rightAnchor="33.0">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </JFXButton>
+                  <GridPane layoutX="75.0" layoutY="498.0" prefHeight="47.0" prefWidth="1029.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#pay" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Pay Selected" textFill="#fefeff" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="#f7f8f8" glyphName="SHARE" size="17.0" wrappingWidth="21.0" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </GridPane>
                </children>
             </AnchorPane>
             <JFXButton layoutX="58.0" layoutY="68.0" onAction="#back" text="Back">

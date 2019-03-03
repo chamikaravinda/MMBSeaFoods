@@ -1022,7 +1022,7 @@ public class AccountServices {
 				System.out.println("Connection not successful");
 			}
 
-			String query = "SELECT * FROM Fish_Lot";
+			String query = "SELECT * FROM Fish_Lot ";
 
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
@@ -1045,7 +1045,68 @@ public class AccountServices {
 				boat.setSold_price(Double.parseDouble(resultSet.getString(11)));
 				boat.setDisplay_Name(resultSet.getString(12));
 				boat.setSold_To(Integer.parseInt(resultSet.getString(13)));
+				boat.setSold_Date(resultSet.getString(14));
+				boatList.add(boat);
+			}
 
+			System.out.println(query);
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Exception at  get All Sales List Foreign :" + e.getLocalizedMessage());
+
+		} catch (Exception e) {
+			System.out.println("Exception In get All Sales List Foreign : " + e);
+		} finally {
+			try {
+				preparedStatement.close();
+				resultSet.close();
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In get All Sales List Foreign : " + e);
+			}
+
+		}
+
+		return boatList;
+	}
+	
+	public ArrayList<Fish_Lot> getSoldLots() {
+
+		ArrayList<Fish_Lot> boatList = new ArrayList<Fish_Lot>();
+
+		try {
+
+			connection = DBConnection.Connector();
+
+			if (connection == null) {
+				System.out.println("Connection not successful");
+			}
+
+			String query = "SELECT * FROM Fish_Lot WHERE Sold_To IS NOT NULL ORDER BY ID DESC";
+
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Fish_Lot boat = new Fish_Lot();
+
+				boat.setID(Integer.parseInt(resultSet.getString(1)));
+				boat.setAdded_Date(resultSet.getString(2));
+				boat.setLorry_Number(resultSet.getString(3));
+				boat.setBuying_Weight(Double.parseDouble(resultSet.getString(4)));
+				boat.setIce_fee(Double.parseDouble(resultSet.getString(5)));
+				boat.setLorry_fee(Double.parseDouble(resultSet.getString(6)));
+
+				boat.setOther_fees(Double.parseDouble(resultSet.getString(7)));
+				boat.setBrokerFee(Double.parseDouble(resultSet.getString(8)));
+				boat.setBuying_price(Double.parseDouble(resultSet.getString(9)));
+
+				boat.setSold_Weight(Double.parseDouble(resultSet.getString(10)));
+				boat.setSold_price(Double.parseDouble(resultSet.getString(11)));
+				boat.setDisplay_Name(resultSet.getString(12));
+				boat.setSold_To(Integer.parseInt(resultSet.getString(13)));
+				boat.setSold_Date(resultSet.getString(14));
 				boatList.add(boat);
 			}
 

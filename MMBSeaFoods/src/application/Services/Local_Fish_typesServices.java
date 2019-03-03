@@ -12,21 +12,23 @@ public class Local_Fish_typesServices {
 
 	Connection connection;
 
-	public boolean addLocal_Fish_Type(Local_Fish_types Lftype) throws SQLException {
+	public boolean addLocal_Fish_Type(Local_Fish_types type) throws SQLException {
 
 		connection = DBConnection.Connector();
 		PreparedStatement preparedStatement = null;
 		int resultSet;
-		String insertQuery = "INSERT INTO Local_Fish_types (Name,price )" + "VALUES (?,?)";
+		String insertQuery = "INSERT INTO Local_Fish_types (Name,price_U10, price_10T15,"
+				+ "price_15T20,price_20T25,price_25T30,price_A30 ) VALUES (?,?,?,?,?,?,?)";
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
-			preparedStatement.setString(1, Lftype.getName());
-			preparedStatement.setDouble(2, Lftype.getPrice());
-
-			resultSet = preparedStatement.executeUpdate();
-			
-		    
-
+			preparedStatement.setString(1,type.getName());
+			preparedStatement.setDouble(2,type.getPrice_U10());
+			preparedStatement.setDouble(3,type.getPrice_10T15());
+			preparedStatement.setDouble(4,type.getPrice_15T20());
+			preparedStatement.setDouble(5,type.getPrice_20T25());
+			preparedStatement.setDouble(6,type.getPrice_25T30());
+			preparedStatement.setDouble(7,type.getPrice_A30());
+			resultSet=preparedStatement.executeUpdate();
 			if (resultSet != 0) {
 				return true;
 			} else
@@ -55,12 +57,16 @@ public class Local_Fish_typesServices {
 
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				Local_Fish_types local_fish = new Local_Fish_types();
-				local_fish.setID(Integer.parseInt(resultSet.getString("ID")));
-				local_fish.setName(resultSet.getString("Name"));
-				local_fish.setPrice(Double.parseDouble(resultSet.getString("price")));
-
-				list.add(local_fish);
+				Local_Fish_types fish = new Local_Fish_types();
+				fish.setID(Integer.parseInt(resultSet.getString("ID")));
+				fish.setName(resultSet.getString("Name"));
+				fish.setPrice_U10(Double.parseDouble(resultSet.getString("price_U10")));
+				fish.setPrice_10T15(Double.parseDouble(resultSet.getString("price_10T15")));
+				fish.setPrice_15T20(Double.parseDouble(resultSet.getString("price_15T20")));
+				fish.setPrice_20T25(Double.parseDouble(resultSet.getString("price_20T25")));
+				fish.setPrice_25T30(Double.parseDouble(resultSet.getString("price_25T30")));
+				fish.setPrice_A30(Double.parseDouble(resultSet.getString("price_A30")));
+				list.add(fish);
 
 			}
 			return list;
@@ -82,21 +88,25 @@ public class Local_Fish_typesServices {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		String query = "select * from Local_Fish_types where ID= ?";
-		Local_Fish_types local_fish = new Local_Fish_types();
+		Local_Fish_types fish = new Local_Fish_types();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, type);//type
 			resultSet = preparedStatement.executeQuery();
 			
 			if (resultSet.next()) {
-				local_fish.setID(resultSet.getInt("ID"));
-				local_fish.setName(resultSet.getString("Name"));
-				local_fish.setPrice(resultSet.getDouble("price"));
-				
+				fish.setID(Integer.parseInt(resultSet.getString("ID")));
+				fish.setName(resultSet.getString("Name"));
+				fish.setPrice_U10(Double.parseDouble(resultSet.getString("price_U10")));
+				fish.setPrice_10T15(Double.parseDouble(resultSet.getString("price_10T15")));
+				fish.setPrice_15T20(Double.parseDouble(resultSet.getString("price_15T20")));
+				fish.setPrice_20T25(Double.parseDouble(resultSet.getString("price_20T25")));
+				fish.setPrice_25T30(Double.parseDouble(resultSet.getString("price_25T30")));
+				fish.setPrice_A30(Double.parseDouble(resultSet.getString("price_A30")));				
 			}
 			
 			
-			return local_fish;
+			return fish;
 
 		} catch (Exception e) {
 			return null;
@@ -113,21 +123,26 @@ public class Local_Fish_typesServices {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		String query = "select * from Local_Fish_types where Name= ?";
-		Local_Fish_types local_fish = new Local_Fish_types();
+		Local_Fish_types fish = new Local_Fish_types();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, typeName);//type
 			resultSet = preparedStatement.executeQuery();
 			
 			if (resultSet.next()) {
-				local_fish.setID(resultSet.getInt(1));
-				local_fish.setName(resultSet.getString(2));
-				local_fish.setPrice(Double.parseDouble(resultSet.getString(3)));
+				fish.setID(Integer.parseInt(resultSet.getString("ID")));
+				fish.setName(resultSet.getString("Name"));
+				fish.setPrice_U10(Double.parseDouble(resultSet.getString("price_U10")));
+				fish.setPrice_10T15(Double.parseDouble(resultSet.getString("price_10T15")));
+				fish.setPrice_15T20(Double.parseDouble(resultSet.getString("price_15T20")));
+				fish.setPrice_20T25(Double.parseDouble(resultSet.getString("price_20T25")));
+				fish.setPrice_25T30(Double.parseDouble(resultSet.getString("price_25T30")));
+				fish.setPrice_A30(Double.parseDouble(resultSet.getString("price_A30")));	
 				
 			}
 			
 			
-			return local_fish;
+			return fish;
 
 		} catch (Exception e) {
 			return null;
@@ -142,14 +157,18 @@ public class Local_Fish_typesServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "UPDATE Local_Fish_types set Name =?, price =? where ID=?";
+		String insertQuery= "UPDATE Local_Fish_types set Name =?,price_U10=?, price_10T15=?,price_15T20=?,price_20T25=?,price_25T30=?,price_A30=? where ID=?";
 		try {
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setString(1,type.getName());
-			preparedStatement.setDouble(2,type.getPrice());
-			preparedStatement.setDouble(3,type.getID());
+			preparedStatement.setDouble(2,type.getPrice_U10());
+			preparedStatement.setDouble(3,type.getPrice_10T15());
+			preparedStatement.setDouble(4,type.getPrice_15T20());
+			preparedStatement.setDouble(5,type.getPrice_20T25());
+			preparedStatement.setDouble(6,type.getPrice_25T30());
+			preparedStatement.setDouble(7,type.getPrice_A30());
+			preparedStatement.setDouble(8,type.getID());
 			resultSet=preparedStatement.executeUpdate();
-			
 			if(resultSet != 0) {
 				return true;
 			}

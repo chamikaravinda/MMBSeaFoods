@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="FishType" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.AddFishTypeController">
      <children>
-      <Label layoutX="19.0" layoutY="17.0" prefHeight="29.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="New Fish Type" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="17.0" />
+      <Label layoutX="19.0" layoutY="17.0" prefHeight="30.0" prefWidth="254.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="New Foreign Fish Type" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="17.0" />
       <Separator layoutX="3.0" layoutY="55.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
       <AnchorPane layoutX="35.0" layoutY="49.0" prefHeight="631.0" prefWidth="1119.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="49.0">
          <children>

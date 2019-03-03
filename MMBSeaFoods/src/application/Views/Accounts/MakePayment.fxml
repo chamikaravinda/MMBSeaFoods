@@ -34,7 +34,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <JFXButton alignment="CENTER" layoutX="915.0" layoutY="518.0" maxWidth="208.0" onAction="#paid" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Paid" textFill="#fefeff" AnchorPane.leftAnchor="915.0" AnchorPane.topAnchor="518.0">
+                  <JFXButton alignment="CENTER" layoutX="518.0" layoutY="510.0" maxWidth="208.0" onAction="#paid" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Paid" textFill="#fefeff" AnchorPane.leftAnchor="518.0" AnchorPane.topAnchor="510.0">
                      <font>
                         <Font size="18.0" />
                      </font>

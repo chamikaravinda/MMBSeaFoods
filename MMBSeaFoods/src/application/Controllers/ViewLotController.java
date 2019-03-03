@@ -162,7 +162,7 @@ public class ViewLotController implements Initializable {
 								String id = Integer.toString(rowData.getID());
 								controller.setID(id);
 								controller.setbackCommond(1);
-
+								controller.setbackCommondForLot(backCommond);
 								setNode(root);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
@@ -204,8 +204,12 @@ public class ViewLotController implements Initializable {
 			lots = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FBuyerAccount.fxml"));
 			setNode(lots);
 		}
-		if (backCommond == 2) {
+		else if (backCommond == 2) {
 			lots = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FAddBuyerReceived.fxml"));
+			setNode(lots);
+		}
+		else if (backCommond == 3) {
+			lots = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/forignSales.fxml"));
 			setNode(lots);
 		} else {
 			lots = FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));

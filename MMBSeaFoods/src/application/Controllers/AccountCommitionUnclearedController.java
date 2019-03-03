@@ -3,6 +3,7 @@ package application.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 
 import application.Models.Commition;
@@ -15,8 +16,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
@@ -68,6 +71,9 @@ public class AccountCommitionUnclearedController implements Initializable{
 
 		tblvSales.setItems(commitionAccountEntries);
 		
+		TableViewSelectionModel<Commition> tsm = tblvSales.getSelectionModel();
+		tsm.setSelectionMode(SelectionMode.MULTIPLE);
+		
 	}
 	
 	
@@ -92,6 +98,19 @@ public class AccountCommitionUnclearedController implements Initializable{
         
 	
     }
+	/* Pay method */
+	public void pay(ActionEvent event) {
+		
+		ObservableList<Commition> selectedItems = tblvSales.getSelectionModel().getSelectedItems();
+        // TEST
+        ArrayList<Commition> selectedIDs = new ArrayList<Commition>();
+        
+        for (Commition row : selectedItems) {
+           selectedIDs.add(row);
+           System.out.println(row.getReason());
+        }
+		
+	}
 	
 	 @FXML
 	    void back(ActionEvent event) throws IOException {

@@ -6,11 +6,9 @@ public class LocalPurchase {
 	private String Date;
 	private int BoatID;
 	private String BoatName;
-	private int FishType;
-	private double Price;
-	private double TotalWeight;
-	
-	
+	private String Habour;
+	private double Total_Price;
+	private double Total_Weight;
 	public int getID() {
 		return ID;
 	}
@@ -35,23 +33,23 @@ public class LocalPurchase {
 	public void setBoatName(String boatName) {
 		BoatName = boatName;
 	}
-	public int getFishType() {
-		return FishType;
+	public String getHabour() {
+		return Habour;
 	}
-	public void setFishType(int fishType) {
-		FishType = fishType;
+	public void setHabour(String habour) {
+		Habour = habour;
 	}
-	public double getPrice() {
-		return Price;
+	public double getTotal_Price() {
+		return Total_Price;
 	}
-	public void setPrice(double price) {
-		Price = price;
+	public void setTotal_Price(double total_Price) {
+		Total_Price = total_Price;
 	}
-	public double getTotalWeight() {
-		return TotalWeight;
+	public double getTotal_Weight() {
+		return Total_Weight;
 	}
-	public void setTotalWeight(double totalWeight) {
-		TotalWeight = totalWeight;
+	public void setTotal_Weight(double total_Weight) {
+		Total_Weight = total_Weight;
 	}
 	
 	

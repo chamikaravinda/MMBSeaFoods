@@ -73,14 +73,32 @@ public class DashboardHomeController implements Initializable {
 	@FXML
 	private TableColumn<?, ?> clmA30;
 
+	/**
+	 * Local fish table
+	 */
 	@FXML
-	private TableView<Local_Fish_types> tblvLocalFishType;
+	private TableView<Local_Fish_types> tblFishType1;
 
 	@FXML
-	private TableColumn<?, ?> tblcNameLocal;
+	private TableColumn<?, ?> clmName1;
 
 	@FXML
-	private TableColumn<?, ?> tblcPriceLocal;
+	private TableColumn<?, ?> clmB101;
+
+	@FXML
+	private TableColumn<?, ?> clm10T151;
+
+	@FXML
+	private TableColumn<?, ?> clm15T201;
+
+	@FXML
+	private TableColumn<?, ?> clm20T251;
+
+	@FXML
+	private TableColumn<?, ?> clm25T301;
+
+	@FXML
+	private TableColumn<?, ?> clmA301;
 
 	DashboardHomeService service = new DashboardHomeService();
 	ObservableList<Foreign_Fish_types> list = FXCollections.observableArrayList();
@@ -113,20 +131,25 @@ public class DashboardHomeController implements Initializable {
 			}
 
 			for (Foreign_Fish_types sup : ftypes) {
-				sup.setSprice_U10("Rs." + String.format("%2.0f", sup.getPrice_U10()) + ".00");
-				sup.setSprice_10T15("Rs." + String.format("%2.0f", sup.getPrice_10T15()) + ".00");
-				sup.setSprice_15T20("Rs." + String.format("%2.0f", sup.getPrice_15T20()) + ".00");
-				sup.setSprice_20T25("Rs." + String.format("%2.0f", sup.getPrice_20T25()) + ".00");
-				sup.setSprice_25T30("Rs." + String.format("%2.0f", sup.getPrice_25T30()) + ".00");
-				sup.setSprice_A30("Rs." + String.format("%2.0f", sup.getPrice_A30()) + ".00");
+				sup.setSprice_U10("Rs." + String.format("%2.2f", sup.getPrice_U10()) );
+				sup.setSprice_10T15("Rs." + String.format("%2.2f", sup.getPrice_10T15()) );
+				sup.setSprice_15T20("Rs." + String.format("%2.2f", sup.getPrice_15T20()) );
+				sup.setSprice_20T25("Rs." + String.format("%2.2f", sup.getPrice_20T25()));
+				sup.setSprice_25T30("Rs." + String.format("%2.2f", sup.getPrice_25T30()));
+				sup.setSprice_A30("Rs." + String.format("%2.2f", sup.getPrice_A30()) );
 				list.add(sup);
-				System.out.println("Bug check " +sup.getPrice_U10() );
 
 			}
 
-			for (Local_Fish_types sup1 : ftypesLocal) {
+			for (Local_Fish_types sup : ftypesLocal) {
+				sup.setSprice_U10("Rs." + String.format("%2.2f", sup.getPrice_U10()) );
+				sup.setSprice_10T15("Rs." + String.format("%2.2f", sup.getPrice_10T15()) );
+				sup.setSprice_15T20("Rs." + String.format("%2.2f", sup.getPrice_15T20()) );
+				sup.setSprice_20T25("Rs." + String.format("%2.2f", sup.getPrice_20T25()));
+				sup.setSprice_25T30("Rs." + String.format("%2.2f", sup.getPrice_25T30()));
+				sup.setSprice_A30("Rs." + String.format("%2.2f", sup.getPrice_A30()) );
+				listLocal.add(sup);
 
-				listLocal.add(sup1);
 			}
 			
 			clmName.setCellValueFactory(new PropertyValueFactory<>("Name"));
@@ -139,10 +162,15 @@ public class DashboardHomeController implements Initializable {
 
 			tblFishType.setItems(list);
 
-			tblcNameLocal.setCellValueFactory(new PropertyValueFactory<>("Name"));
-			tblcPriceLocal.setCellValueFactory(new PropertyValueFactory<>("Price"));
+			clmName1.setCellValueFactory(new PropertyValueFactory<>("Name"));
+			clmB101.setCellValueFactory(new PropertyValueFactory<>("sprice_U10"));
+			clm10T151.setCellValueFactory(new PropertyValueFactory<>("sprice_10T15"));
+			clm15T201.setCellValueFactory(new PropertyValueFactory<>("sprice_15T20"));
+			clm20T251.setCellValueFactory(new PropertyValueFactory<>("sprice_20T25"));
+			clm25T301.setCellValueFactory(new PropertyValueFactory<>("sprice_25T30"));
+			clmA301.setCellValueFactory(new PropertyValueFactory<>("sprice_A30"));
 
-			tblvLocalFishType.setItems(listLocal);
+			tblFishType1.setItems(listLocal);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -181,16 +209,17 @@ public class DashboardHomeController implements Initializable {
 	@FXML
 	void editTypeLocal(ActionEvent event) throws IOException {
 
-		Local_Fish_types type = tblvLocalFishType.getSelectionModel().getSelectedItem();
+		Local_Fish_types type = tblFishType1.getSelectionModel().getSelectedItem();
 
 		if (type != null) {
 
 			FXMLLoader loader = new FXMLLoader(
-					getClass().getResource("/application/Views/Home/EditFishTypeLocal.fxml"));
+					getClass().getResource("/application/Views/Ltrade/LEditFishType.fxml"));
 			Parent root = loader.load();
-			EditFishTypeController2Local controller = loader.<EditFishTypeController2Local>getController();
+			EditLocalFishTypeController controller = loader.<EditLocalFishTypeController>getController();
 			String id = Integer.toString(type.getID());
 			controller.setID(id);
+			controller.setBackCommond(1);
 
 			setNode(root);
 		} else {

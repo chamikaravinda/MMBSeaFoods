@@ -109,6 +109,10 @@ public class Fish_Lot {
 	//display Strings
 	private String Sbuying_price;
 	private String SBuying_Weight;
+	private String Buyer;
+	private String Sprofite;
+	private String Ssold_price;
+	
 	public String getSbuying_price() {
 		return Sbuying_price;
 	}
@@ -121,7 +125,25 @@ public class Fish_Lot {
 	public void setSBuying_Weight(String sBuying_Weight) {
 		SBuying_Weight = sBuying_Weight;
 	}
-
+	public String getBuyer() {
+		return Buyer;
+	}
+	public void setBuyer(String buyer) {
+		Buyer = buyer;
+	}
+	public String getSprofite() {
+		return Sprofite;
+	}
+	public void setSprofite(String sprofite) {
+		Sprofite = sprofite;
+	}
+	public String getSsold_price() {
+		return Ssold_price;
+	}
+	public void setSsold_price(String ssold_price) {
+		Ssold_price = ssold_price;
+	}
+	
 	
 	
 

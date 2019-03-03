@@ -16,7 +16,7 @@
       <AnchorPane fx:id="Accounts" layoutX="7.0" prefHeight="713.0" prefWidth="1226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
          <children>
             <Separator layoutX="-14.0" layoutY="133.0" prefHeight="4.0" prefWidth="1219.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="133.0" />
-            <GridPane layoutX="23.0" layoutY="226.0" prefHeight="78.0" prefWidth="1165.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="226.0">
+            <GridPane layoutX="23.0" layoutY="226.0" prefHeight="39.0" prefWidth="1159.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="226.0">
               <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -32,7 +32,7 @@
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#f7f8f8" glyphName="SHOPPING_CART" size="17.0" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#f7f8f8" glyphName="SHIP" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                      <GridPane.margin>
                         <Insets />
@@ -43,7 +43,7 @@
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#f7f8f8" glyphName="USERS" size="17.0" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#f7f8f8" glyphName="BALANCE_SCALE" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
                   <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#LocalBuyers" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Buyers" textFill="#fefeff" GridPane.columnIndex="1">
@@ -73,7 +73,7 @@
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#f7f8f8" glyphName="SHOPPING_CART" size="17.0" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#f7f8f8" glyphName="SHIP" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                      <GridPane.margin>
                         <Insets />
@@ -82,12 +82,12 @@
                         <Insets />
                      </opaqueInsets>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#commition" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Commission  Account" textFill="#fefeff" GridPane.columnIndex="2">
+                  <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#commition" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Commissions" textFill="#fefeff" GridPane.columnIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="#f7f8f8" glyphName="SHOPPING_CART" size="17.0" wrappingWidth="21.0" />
+                        <FontAwesomeIconView fill="#f7f8f8" glyphName="PERCENT" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                      <GridPane.margin>
                         <Insets />

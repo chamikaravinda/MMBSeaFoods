@@ -28,7 +28,7 @@ public class Foreign_Fish_typesServices {
 			preparedStatement.setDouble(4,type.getPrice_15T20());
 			preparedStatement.setDouble(5,type.getPrice_20T25());
 			preparedStatement.setDouble(6,type.getPrice_25T30());
-			preparedStatement.setDouble(7,type.getPrice_25T30());
+			preparedStatement.setDouble(7,type.getPrice_A30());
 			resultSet=preparedStatement.executeUpdate();
 			
 			if(resultSet != 0) {
@@ -179,8 +179,6 @@ public boolean UpdateForeign_Fish_Type(Foreign_Fish_types type) throws SQLExcept
 			}
 			else 
 				return false;
-	
-		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

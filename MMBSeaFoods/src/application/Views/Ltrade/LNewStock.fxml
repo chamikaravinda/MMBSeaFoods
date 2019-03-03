@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -20,11 +21,6 @@
       <Separator layoutX="3.0" layoutY="55.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
       <AnchorPane layoutX="22.0" layoutY="62.0" prefHeight="641.0" prefWidth="1187.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
          <children>
-            <JFXButton layoutY="-2.0" onAction="#back" text="Back" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <graphic>
-                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15.0" />
-               </graphic>
-            </JFXButton>
             <GridPane layoutX="-7.0" layoutY="583.0" prefHeight="30.0" prefWidth="1222.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -45,7 +41,12 @@
                   </JFXButton>
                </children>
             </GridPane>
-            <GridPane layoutX="148.0" layoutY="182.0" prefHeight="346.0" prefWidth="1012.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="182.0">
+            <JFXButton layoutY="-2.0" onAction="#back" text="Back" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15.0" />
+               </graphic>
+            </JFXButton>
+            <GridPane layoutX="73.0" layoutY="5.0" prefHeight="549.0" prefWidth="1087.0" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="5.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -54,44 +55,118 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="clmFishTable" prefHeight="364.0" prefWidth="454.0">
-                    <columns>
-                      <TableColumn fx:id="clmfishtype" prefWidth="75.0" text="Fish Type" />
-                      <TableColumn fx:id="clmTotalWeight" prefWidth="75.0" text="Total Weight" />
-                        <TableColumn fx:id="clmTotalPrice" prefWidth="75.0" text="Total Price" />
-
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
-                  <AnchorPane prefHeight="357.0" prefWidth="508.0" GridPane.columnIndex="1">
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.0" minWidth="10.0" prefWidth="391.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="153.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <JFXButton alignment="CENTER" layoutX="221.0" layoutY="272.0" maxWidth="175.0" minHeight="31.0" minWidth="120.0" onAction="#AddLocalFishActions" prefHeight="44.0" prefWidth="147.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add fish" textFill="#fefeff" AnchorPane.leftAnchor="221.0" AnchorPane.topAnchor="272.0">
+                        <JFXComboBox fx:id="cmbLsBoat" prefHeight="45.0" prefWidth="409.0" promptText="Select the Boat " styleClass="font" GridPane.rowIndex="2" />
+                        <JFXTextField prefHeight="31.0" prefWidth="442.0" promptText="Habour" GridPane.rowIndex="3" />
+                        <Label fx:id="lbltotalprice" prefHeight="47.0" prefWidth="391.0" GridPane.rowIndex="5">
                            <font>
                               <Font size="18.0" />
                            </font>
-                           <graphic>
-                              <FontAwesomeIconView fill="#f7f8f8" glyphName="PLUS" size="17.0" wrappingWidth="21.0" />
-                           </graphic>
-                        </JFXButton>
-                        <JFXComboBox fx:id="cmbLftype" layoutX="159.0" layoutY="80.0" prefHeight="45.0" prefWidth="272.0" promptText="Select the Fish type" styleClass="font" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="80.0" />
-                        <JFXTextField fx:id="Lfweight" labelFloat="true" layoutX="147.0" layoutY="170.0" maxWidth="295.0" minWidth="283.0" onAction="#AddLocalFishActions" prefHeight="45.0" prefWidth="295.0" promptText="Weight" unFocusColor="#0d00ff" AnchorPane.leftAnchor="147.0" AnchorPane.topAnchor="170.0">
+                        </Label>
+                        <Label fx:id="lbltotalweight" layoutX="10.0" layoutY="341.0" prefHeight="47.0" prefWidth="391.0" GridPane.rowIndex="4">
                            <font>
                               <Font size="18.0" />
                            </font>
-                        </JFXTextField>
+                        </Label>
                      </children>
-                  </AnchorPane>
+                  </GridPane>
+                  <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="257.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="386.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TableView fx:id="clmFishTable" prefHeight="382.0" prefWidth="543.0" GridPane.rowIndex="1">
+                          <columns>
+                            <TableColumn fx:id="clmfishtype" prefWidth="75.0" text="Fish Type" />
+                            <TableColumn fx:id="clmTotalWeight" prefWidth="75.0" text="Weight" />
+                              <TableColumn fx:id="clmTotalPrice" prefWidth="75.0" text="Price" />
+            
+                                      </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <GridPane.margin>
+                              <Insets top="20.0" />
+                           </GridPane.margin>
+                        </TableView>
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <GridPane GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <JFXButton alignment="CENTER" maxWidth="175.0" minHeight="31.0" minWidth="120.0" onAction="#AddLocalFishActions" prefHeight="44.0" prefWidth="147.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add fish" textFill="#fefeff" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#f7f8f8" glyphName="PLUS" size="17.0" wrappingWidth="21.0" />
+                                       </graphic>
+                                    </JFXButton>
+                                 </children>
+                              </GridPane>
+                              <GridPane prefHeight="117.0" prefWidth="543.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <JFXTextField fx:id="Lfweight" labelFloat="true" maxWidth="295.0" minWidth="283.0" onAction="#AddLocalFishActions" prefHeight="45.0" prefWidth="295.0" promptText="Weight" unFocusColor="#0d00ff" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                    </JFXTextField>
+                                    <JFXComboBox fx:id="cmbLftype" prefHeight="45.0" prefWidth="272.0" promptText="Select the Fish type" styleClass="font">
+                                       <padding>
+                                          <Insets right="10.0" />
+                                       </padding>
+                                    </JFXComboBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
                </children>
             </GridPane>
-            <Label layoutX="14.0" layoutY="40.0" prefHeight="45.0" prefWidth="165.0" text="Add Fishes " textFill="#3b2f63" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="419.0" AnchorPane.topAnchor="40.0">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <JFXComboBox fx:id="cmbLsBoat" layoutX="12.0" layoutY="108.0" prefHeight="45.0" prefWidth="237.0" promptText="Select the Boat " AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="108.0" />
-            <JFXButton fx:id="btnremove" alignment="CENTER" layoutX="148.0" layoutY="528.0" maxWidth="175.0" minHeight="31.0" minWidth="120.0" prefHeight="44.0" prefWidth="147.0" text="Remove" textFill="#0d0d0d" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="148.0">
+            <JFXButton fx:id="btnremove" alignment="CENTER" layoutX="1019.0" layoutY="554.0" maxWidth="175.0" minHeight="31.0" minWidth="120.0" prefHeight="44.0" prefWidth="147.0" text="Remove" textFill="#0d0d0d" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="1019.0">
                <font>
                   <Font size="18.0" />
                </font>
