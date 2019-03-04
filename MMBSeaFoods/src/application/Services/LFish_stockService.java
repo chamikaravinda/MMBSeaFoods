@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Models.LFish_stock;
+import application.Models.Local_stock_items;
 import javafx.collections.ObservableList;
 
 
@@ -52,14 +53,14 @@ public class LFish_stockService {
 		
 	}
 
-	public boolean newStock(ObservableList<LFish_stock> list) throws SQLException {
+	public boolean newStock(ObservableList<Local_stock_items> list) throws SQLException {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
 		String query= "select * from Local_Fish_stock where Fish_Type =? ";
 		
 		try {
-		for(LFish_stock item :list) {
+		for(Local_stock_items item :list) {
 			
 			
 				preparedStatement =connection.prepareStatement(query);

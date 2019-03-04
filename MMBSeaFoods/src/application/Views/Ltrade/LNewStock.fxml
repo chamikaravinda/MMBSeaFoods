@@ -71,7 +71,10 @@
                     </rowConstraints>
                      <children>
                         <JFXComboBox fx:id="cmbLsBoat" prefHeight="45.0" prefWidth="409.0" promptText="Select the Boat " styleClass="font" GridPane.rowIndex="2" />
-                        <JFXTextField prefHeight="31.0" prefWidth="442.0" promptText="Habour" GridPane.rowIndex="3" />
+                        <JFXTextField fx:id="txthabour" prefHeight="31.0" prefWidth="442.0" promptText="Habour" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="18.0" />
+                           </font></JFXTextField>
                         <Label fx:id="lbltotalprice" prefHeight="47.0" prefWidth="391.0" GridPane.rowIndex="5">
                            <font>
                               <Font size="18.0" />
@@ -126,7 +129,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <JFXButton alignment="CENTER" maxWidth="175.0" minHeight="31.0" minWidth="120.0" onAction="#AddLocalFishActions" prefHeight="44.0" prefWidth="147.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add fish" textFill="#fefeff" GridPane.columnIndex="1">
+                                    <JFXButton alignment="CENTER" maxWidth="175.0" minHeight="31.0" minWidth="120.0" onAction="#AddLocalFish" prefHeight="44.0" prefWidth="147.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Add fish" textFill="#fefeff" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -145,7 +148,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <JFXTextField fx:id="Lfweight" labelFloat="true" maxWidth="295.0" minWidth="283.0" onAction="#AddLocalFishActions" prefHeight="45.0" prefWidth="295.0" promptText="Weight" unFocusColor="#0d00ff" GridPane.columnIndex="1">
+                                    <JFXTextField fx:id="Lfweight" labelFloat="true" maxWidth="295.0" minWidth="283.0" onAction="#AddLocalFish" prefHeight="45.0" prefWidth="295.0" promptText="Weight" unFocusColor="#0d00ff" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="18.0" />
                                        </font>

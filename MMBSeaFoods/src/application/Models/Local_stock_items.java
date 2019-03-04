@@ -7,6 +7,7 @@ public class Local_stock_items {
 	private double Total_Weight;
 	private double buying_Price;
 	private int Fish_stock_ID;
+	private String fish_name;
 	public int getID() {
 		return ID;
 	}
@@ -37,6 +38,13 @@ public class Local_stock_items {
 	public void setFish_stock_ID(int fish_stock_ID) {
 		Fish_stock_ID = fish_stock_ID;
 	}
+	public String getFish_name() {
+		return fish_name;
+	}
+	public void setFish_name(String fish_name) {
+		this.fish_name = fish_name;
+	}
+	
 	
 	
 
