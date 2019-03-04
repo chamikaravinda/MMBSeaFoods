@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.springframework.cglib.core.Local;
 
 import application.Models.Buyers;
 import application.Models.LocalPurchase;
 import application.Models.Local_stock_items;
 import javafx.collections.ObservableList;
+import javafx.util.converter.PercentageStringConverter;
 
 public class Local_PurchasesService {
 
@@ -47,13 +51,13 @@ public class Local_PurchasesService {
 
 	}
 
-	public boolean addStockItems(ObservableList<Local_stock_items> list,int stockId) throws SQLException {
+	public boolean addStockItems(ObservableList<Local_stock_items> list, int stockId) throws SQLException {
 		connection = DBConnection.Connector();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
 			for (Local_stock_items item : list) {
-				
+
 				String insertQuery = "INSERT INTO Local_stock_items (Fish_Type,Total_Weight,buying_Price,Fish_stock_ID) VALUES (?,?,?,?)";
 				preparedStatement = connection.prepareStatement(insertQuery);
 				preparedStatement.setInt(1, item.getFish_Type());
@@ -69,6 +73,104 @@ public class Local_PurchasesService {
 		} finally {
 			connection.close();
 		}
+	}
+
+	public LocalPurchase getLocalPurchase(int id) throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		String Query = "SELECT * FROM Local_Purchases WHERE ID=?";
+
+		try {
+			preparedStatement = connection.prepareStatement(Query);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			LocalPurchase purchase = new LocalPurchase();
+			if (resultSet.next()) {
+				purchase.setID(resultSet.getInt("ID"));
+				purchase.setDate(resultSet.getString("Date"));
+				purchase.setBoatID(resultSet.getInt("Boat_ID"));
+				purchase.setHabour(resultSet.getString("Habour"));
+				purchase.setTotal_Price(resultSet.getDouble("Total_Price"));
+				purchase.setTotal_Weight(resultSet.getDouble("Total_Weight"));
+
+			}
+			return purchase;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			connection.close();
+		}
+
+	}
+
+	public ArrayList<LocalPurchase> getLocalPurchase() throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		ArrayList<LocalPurchase> list = new ArrayList<>();
+
+		String Query = "SELECT * FROM Local_Purchases  ORDER BY  ID DESC";
+
+		try {
+			preparedStatement = connection.prepareStatement(Query);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				LocalPurchase purchase = new LocalPurchase();
+				purchase.setID(resultSet.getInt("ID"));
+				purchase.setDate(resultSet.getString("Date"));
+				purchase.setBoatID(resultSet.getInt("Boat_ID"));
+				purchase.setHabour(resultSet.getString("Habour"));
+				purchase.setTotal_Price(resultSet.getDouble("Total_Price"));
+				purchase.setTotal_Weight(resultSet.getDouble("Total_Weight"));
+				list.add(purchase);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			connection.close();
+		}
+
+	}
+	
+	public ArrayList<Local_stock_items> getLPurchaseStockItems(int id) throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		ArrayList<Local_stock_items> list = new ArrayList<>();
+
+		String Query = "SELECT * FROM Local_stock_items WHERE Fish_stock_ID=?  ORDER BY  ID DESC";
+
+		try {
+			preparedStatement = connection.prepareStatement(Query);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Local_stock_items item=new Local_stock_items();
+				
+				item.setFish_Type(resultSet.getInt("Fish_Type"));
+				item.setBuying_Price(resultSet.getDouble("buying_Price"));
+				item.setTotal_Weight(resultSet.getDouble("Total_Weight"));
+				
+				list.add(item);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			connection.close();
+		}
+
 	}
 
 }

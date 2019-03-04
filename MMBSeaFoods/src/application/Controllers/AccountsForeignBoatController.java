@@ -154,12 +154,11 @@ public class AccountsForeignBoatController implements Initializable {
 		}
 	}
 
-	public void showBoatDetailsTableList(int id) {
+	public void showBoatDetailsTableList(int id) throws SQLException {
 
 		boatDetailsList.clear();
 
-		ArrayList<Boat_Account> boat_list = accountServices.getAllBOATList(id);
-
+		ArrayList<Boat_Account> boat_list = boatAccountService.getAllentries(id);
 		for (Boat_Account boat : boat_list) {
 			boat.setSTo_Pay("Rs. " + String.format("%2.0f", boat.getTo_Pay()) + ".00");
 			boat.setSPaid("Rs. " + String.format("%2.0f", boat.getSPaid()) + ".00");

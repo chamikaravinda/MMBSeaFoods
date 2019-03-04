@@ -46,6 +46,23 @@ public class Local_stock_items {
 	}
 	
 	
+	//String view
+	
+	private String STotal_Weight;
+	private String Sbuying_Price;
+	public String getSTotal_Weight() {
+		return STotal_Weight;
+	}
+	public void setSTotal_Weight(String sTotal_Weight) {
+		STotal_Weight = sTotal_Weight;
+	}
+	public String getSbuying_Price() {
+		return Sbuying_Price;
+	}
+	public void setSbuying_Price(String sbuying_Price) {
+		Sbuying_Price = sbuying_Price;
+	}
+	
 	
 
 }

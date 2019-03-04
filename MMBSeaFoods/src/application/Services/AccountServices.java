@@ -14,6 +14,8 @@ import application.Models.Commition;
 import application.Models.F_Fish_Buyers_Account;
 import application.Models.F_Fish_Buyers_Account_Uncleard;
 import application.Models.Fish_Lot;
+import application.Models.LocalBoatAccount;
+import application.Models.LocalBoatAccountUnCleared;
 import application.Models.LocalSales;
 import application.Models.Local_Buyers_Account;
 import application.Models.Locl_Buyers_Account_Uncleared;
@@ -75,9 +77,9 @@ public class AccountServices {
 		return boatNameList;
 	}
 
-	public ArrayList<Boat_Account> getAllBOATList(int id) {
+	public ArrayList<LocalBoatAccount> getAllBOATList(int id) {
 
-		ArrayList<Boat_Account> boatList = new ArrayList<Boat_Account>();
+		ArrayList<LocalBoatAccount> boatList = new ArrayList<LocalBoatAccount>();
 
 		try {
 
@@ -87,14 +89,14 @@ public class AccountServices {
 				System.out.println("Connection not successful");
 			}
 
-			String query = "SELECT * FROM Local_Boat_Account WHERE Boat_ID=?";
+			String query = "SELECT * FROM Local_Boat_Account WHERE Boat_ID=? ORDER BY ID DESC";
 
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, String.valueOf(id));
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				Boat_Account boat = new Boat_Account();
+				LocalBoatAccount boat = new LocalBoatAccount();
 
 				boat.setID(Integer.parseInt(resultSet.getString(1)));
 				boat.setDate(resultSet.getString(2));
@@ -102,11 +104,10 @@ public class AccountServices {
 				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
 				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
 				boat.setBoat_ID(Integer.parseInt(resultSet.getString(6)));
-
+				boat.setPurchase_ID(resultSet.getInt("purchase_ID"));
 				boatList.add(boat);
 			}
 
-			System.out.println(query);
 
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
@@ -152,9 +153,9 @@ public class AccountServices {
 		return Integer.parseInt(id);
 	}
 
-	public ArrayList<Boat_Account> getAllBOQListUncleared(int id) {
+	public ArrayList<LocalBoatAccountUnCleared> getAllBoatAccountUncleared() {
 
-		ArrayList<Boat_Account> boatList = new ArrayList<Boat_Account>();
+		ArrayList<LocalBoatAccountUnCleared> boatList = new ArrayList<LocalBoatAccountUnCleared>();
 
 		try {
 
@@ -164,14 +165,13 @@ public class AccountServices {
 				System.out.println("Connection not successful");
 			}
 
-			String query = "SELECT * FROM Local_Boat_Account_UnCleared WHERE Boat_ID=?";
+			String query = "SELECT * FROM Local_Boat_Account_UnCleared ";
 
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, String.valueOf(id));
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				Boat_Account boat = new Boat_Account();
+				LocalBoatAccountUnCleared boat = new LocalBoatAccountUnCleared();
 
 				boat.setID(Integer.parseInt(resultSet.getString(1)));
 				boat.setDate(resultSet.getString(2));
@@ -179,18 +179,18 @@ public class AccountServices {
 				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
 				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
 				boat.setBoat_ID(Integer.parseInt(resultSet.getString(6)));
+				boat.setPurchase_ID(Integer.parseInt(resultSet.getString(7)));
 
 				boatList.add(boat);
 			}
-
-			System.out.println(query);
-
+			return boatList;
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
 			System.out.println("Exception at  get All BOAT List Uncleared :" + e.getLocalizedMessage());
-
+			return null;
 		} catch (Exception e) {
-			System.out.println("Exception In get All BOAT List Uncleared : " + e);
+			e.printStackTrace();
+			return null;
 		} finally {
 			try {
 				preparedStatement.close();
@@ -201,8 +201,6 @@ public class AccountServices {
 			}
 
 		}
-
-		return boatList;
 	}
 
 	public int getBoatIDByNameForeign(String name) {

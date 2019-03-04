@@ -185,8 +185,15 @@ public class DBConnection {
 				String Local_Sales = "CREATE TABLE IF NOT EXISTS Local_Sales"
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + " Date 		 DATE		 NOT NULL,"
 						+ " BuyerID 		 INTEGER REFERENCES Local_Fish_Buyers(ID),"
-						+ " Fish_type 	 INTEGER REFERENCES Local_Fish_types(ID)," + " Price          DOUBLE ,"
+						+ " Total_Price          DOUBLE ,"
 						+ " Total_Weight   DOUBLE )";
+				
+				String Local_sale_items= "CREATE TABLE IF NOT EXISTS Local_sale_items"
+						+ "( ID             INTEGER  PRIMARY KEY AUTOINCREMENT,"
+						+ "  Fish_Type      INTEGER  REFERENCES  Local_Fish_types (ID),"
+						+ "  Total_Weight   INTEGER  NOT NULL," + "  buying_Price   DOUBLE   NOT NULL,"
+						+ "  Fish_sale_ID   INTEGER  REFERENCES  Local_Sales (ID) )";
+				
 
 				String Local_Fish_Buyers_Account = "CREATE TABLE IF NOT EXISTS Local_Fish_Buyers_Account"
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	   DATE      NOT NULL,"
@@ -227,6 +234,7 @@ public class DBConnection {
 				stmt.executeUpdate(F_Fish_Buyers_Account);
 				stmt.executeUpdate(F_Fish_Buyers_Account_Uncleard);
 				stmt.executeUpdate(Local_stock_items);
+				stmt.executeUpdate(Local_sale_items);
 				stmt.close();
 
 			}

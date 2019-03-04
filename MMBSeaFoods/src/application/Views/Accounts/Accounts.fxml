@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controllers.AccountsController">
      <children>
-      <AnchorPane fx:id="Accounts" layoutX="7.0" prefHeight="713.0" prefWidth="1226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="Accounts" layoutX="7.0" prefHeight="713.0" prefWidth="1226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Separator layoutX="-14.0" layoutY="133.0" prefHeight="4.0" prefWidth="1219.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="133.0" />
             <GridPane layoutX="23.0" layoutY="226.0" prefHeight="39.0" prefWidth="1159.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="226.0">

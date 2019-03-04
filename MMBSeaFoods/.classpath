@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="net.sf.jasperreports.JR_CONTAINER"/>
+	<classpathentry kind="con" path="net.sf.jasperreports.JR_DEPENDENCIES_CONTAINER"/>
+	<classpathentry kind="con" path="com.jaspersoft.server.JRS_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/chami/git/MMBSeaFoods/MMBSeaFoods/lib/controlsfx-8.40.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chami/git/MMBSeaFoods/MMBSeaFoods/lib/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chami/git/MMBSeaFoods/MMBSeaFoods/lib/itextpdf-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chami/git/MMBSeaFoods/MMBSeaFoods/lib/jfoenix.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chami/git/MMBSeaFoods/MMBSeaFoods/lib/sqlite-jdbc-3.23.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -25,7 +25,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -61,20 +63,41 @@ public class LocalStocksController implements Initializable {
 	    @FXML
 	    private JFXButton switchFishTypes;
 	    
+	    @FXML
+	    private TableView<LocalPurchase> tblPurchases;
+
+	    @FXML
+	    private TableColumn<?, ?> clmData;
+
+	    @FXML
+	    private TableColumn<?, ?> clmBoat;
+
+	    @FXML
+	    private TableColumn<?, ?> clmWeight;
+
+	    @FXML
+	    private TableColumn<?, ?> clmPrice;
+
+	    
 	    //if you want to load to date to table use that below method
 	    public ObservableList<LFish_stock> list = FXCollections.observableArrayList();
-	    
+	    public ObservableList<LocalPurchase> purhcaselist = FXCollections.observableArrayList();
 	    AnchorPane add,LocalNewStocks; //handle buttons that contains in Anchorpane 
 	    
 	    LFish_stockService service= new LFish_stockService(); //Database handling
 	    Local_Fish_typesServices serviceB= new Local_Fish_typesServices();//Data base handling
+	    Local_PurchasesService serviceD = new Local_PurchasesService(); 
+	    LocalBoatService boatService =new LocalBoatService();
+	    
 	    ArrayList<LFish_stock> Llots=null;
+	    ArrayList<LocalPurchase> plist =null;
 	    @Override
 	    public void initialize(URL url, ResourceBundle rb) {
 	    	
 	    	list.clear();//to remove temporary values
 	    	try {
 				Llots=service.getUnsoldLocalStocks();
+				plist=serviceD.getLocalPurchase();
 				
 				for(LFish_stock Llot: Llots) {
 		    		
@@ -82,20 +105,58 @@ public class LocalStocksController implements Initializable {
 			    	  Llot.setFishName(localfishtypes.getName());
 			    	  
 			    	  list.add(Llot);
-				}		
+				}
+				
+				for(LocalPurchase entry:plist){
+					LocalBoat boat =boatService.getLocalBoat(entry.getBoatID());
+					entry.setBoatName(boat.getBoatNameorNumber());
+					entry.setSTotal_Price("Rs. "+String.format("%2.2f", entry.getTotal_Price()));
+					entry.setSTotal_Weight(String.format("%2.2f", entry.getTotal_Weight()));
+					System.out.println(entry.getDate());
+					purhcaselist.add(entry);
+				}
+				
+				
 			FishName.setCellValueFactory(new PropertyValueFactory<>("FishName"));
 	    	TotalWeight.setCellValueFactory(new PropertyValueFactory<>("Total_Weight"));
-	    	
 	    	LstockTable.setItems(list);
 		    	
+	    	clmData.setCellValueFactory(new PropertyValueFactory<>("Date"));
+	    	clmBoat.setCellValueFactory(new PropertyValueFactory<>("BoatName"));
+	    	clmPrice.setCellValueFactory(new PropertyValueFactory<>("STotal_Price"));
+	    	clmWeight.setCellValueFactory(new PropertyValueFactory<>("STotal_Weight"));
+	    	tblPurchases.setItems(purhcaselist);
+	    	
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 	    	
-	    	//use to change the FXML 
 	    	
 	    	
+	    	tblPurchases.setRowFactory(tv -> {
+				TableRow<LocalPurchase> row = new TableRow<>();
+				row.setOnMouseClicked(event -> {
+					if (event.getClickCount() == 2 && (!row.isEmpty())) {
+						try {
+							LocalPurchase rowData = row.getItem();
+							FXMLLoader loader = new FXMLLoader(
+									getClass().getResource("/application/Views/Ltrade/ViewPurchase.fxml"));
+							Parent root;
+
+							root = loader.load();
+
+							ViewLocalPurchaseController controller = loader.<ViewLocalPurchaseController>getController();
+							controller.setID(rowData.getID());
+							setNode(root);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+				return row;
+			});
 	    	
 	    }
 	    

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -20,7 +21,7 @@ public class Boat_AccountServices {
 	
 	
 	//search and get particular Boat account
-	public Boat_Account getAllentries(int ID) throws SQLException {
+	public ArrayList<Boat_Account> getAllentries(int ID) throws SQLException {
     	
     	connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
@@ -30,27 +31,34 @@ public class Boat_AccountServices {
 		
 		String getAllentriesQuery= "select * from Boat_Account where ID =? ";
 	
-		
+		ArrayList<Boat_Account> list= new ArrayList<Boat_Account>();
 		try {
 			
 			preparedStatement= connection.prepareStatement(getAllentriesQuery);
-			//preparedStatement.setString(Integer.parseInt());
-			
+			preparedStatement.setInt(1,ID);
 			resultSet=preparedStatement.executeQuery();
 			
+			while(resultSet.next()) {
+				
+				Boat_Account boat= new Boat_Account();
+				boat.setBoat_ID(resultSet.getInt("Boat_ID"));
+				boat.setDate(resultSet.getString("Date"));
+				boat.setPaid(resultSet.getDouble("Paid"));
+				boat.setReason(resultSet.getString("Reason"));
+				boat.setTo_Pay(resultSet.getDouble("To_Pay"));
+				
+				list.add(boat);
+				
+			}
 			
-			
-			
+			return list;
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}finally {
 			connection.close();
 		}
-		return boat_Account;
-
-		
-		
+	
     }
 	
 	// add entries

@@ -21,7 +21,7 @@
             <Separator prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
             <AnchorPane layoutY="172.0" prefHeight="481.0" prefWidth="1219.0" AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                <children>
-                  <TableView fx:id="tblvBoatDetails" layoutX="53.0" layoutY="124.0" prefHeight="361.0" prefWidth="1114.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="100.0">
+                  <TableView fx:id="tblvBoatDetails" layoutX="53.0" layoutY="124.0" prefHeight="361.0" prefWidth="1114.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="100.0">
                     <columns>
                       <TableColumn fx:id="tblcDate" prefWidth="75.0" text=" Date" />
                       <TableColumn fx:id="tblcReason" prefWidth="75.0" text="Reason" />
@@ -32,37 +32,46 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Label fx:id="lblBoat" layoutX="53.0" layoutY="53.0" prefHeight="39.0" prefWidth="196.0" textFill="#3b2f63">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
+                  <GridPane AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="20.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="285.0" minWidth="0.0" prefWidth="134.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="702.0" minWidth="10.0" prefWidth="435.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="216.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="344.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXComboBox fx:id="cmbBoatNames" prefHeight="30.0" prefWidth="256.0" promptText="Boat Names" styleClass="font" GridPane.columnIndex="1" />
+                        <Label fx:id="lblBoat" prefHeight="30.0" prefWidth="110.0" text="Boat :" textFill="#3b2f63">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXButton alignment="CENTER" maxWidth="208.0" onAction="#makePayment" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Make Payment" textFill="#fefeff" GridPane.columnIndex="3">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="#f7f8f8" glyphName="USERS" size="17.0" wrappingWidth="21.0" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </GridPane>
                </children>
             </AnchorPane>
-            <GridPane layoutY="59.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
-              <columnConstraints>
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <JFXComboBox fx:id="cmbBoatNames" prefHeight="30.0" prefWidth="256.0" promptText="Boat Names" styleClass="font" />
-               </children>
-            </GridPane>
-            <JFXButton alignment="CENTER" layoutX="981.0" layoutY="611.0" maxWidth="208.0" onAction="#makePayment" prefHeight="39.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Make Payment" textFill="#fefeff" AnchorPane.bottomAnchor="63.0" AnchorPane.rightAnchor="54.0">
+            <JFXButton layoutX="30.0" layoutY="66.0" onAction="#back" text="Back">
+               <graphic>
+                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15" />
+               </graphic>
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="51.0" layoutY="596.0" maxWidth="208.0" onAction="#notPayied" prefHeight="39.0" prefWidth="184.0" text="Remove" textFill="#3b2f63" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="51.0">
                <font>
                   <Font size="18.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="#f7f8f8" glyphName="USERS" size="17.0" wrappingWidth="21.0" />
-               </graphic>
-            </JFXButton>
-            <JFXButton layoutX="30.0" layoutY="66.0" onAction="#back" text="Back">
-               <graphic>
-                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15" />
+                  <FontAwesomeIconView fill="#3b2f63" glyphName="TIMES" size="17.0" wrappingWidth="21.0" />
                </graphic>
             </JFXButton>
          </children>
