@@ -22,8 +22,8 @@
                     <columns>
                       <TableColumn fx:id="clmDate" prefWidth="75.0" text=" Date" />
                       <TableColumn fx:id="clmBname" prefWidth="75.0" text="Buyer Name" />
-                        <TableColumn fx:id="clmFtype" prefWidth="75.0" text="Fish Type" />
                         <TableColumn fx:id="clmWeight" prefWidth="75.0" text="Total Weight" />
+                        <TableColumn fx:id="clmPrice" prefWidth="75.0" text="Total Price" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

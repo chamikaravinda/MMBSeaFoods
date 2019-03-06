@@ -841,7 +841,7 @@ public class AccountServices {
 
 	}
 
-	public ArrayList<LocalSales> getAllForienSales() throws SQLException {
+	public ArrayList<LocalSales> getAllLocalSales() throws SQLException {
 
 		ArrayList<LocalSales> boatList = new ArrayList<LocalSales>();
 
@@ -859,10 +859,8 @@ public class AccountServices {
 				boat.setID(Integer.parseInt(resultSet.getString(1)));
 				boat.setDate(resultSet.getString(2));
 				boat.setBuyerID(Integer.parseInt(resultSet.getString(3)));
-				boat.setFishType(Integer.parseInt(resultSet.getString(4)));
-				boat.setPrice(Double.parseDouble(resultSet.getString(5)));
-				boat.setTotalWeight(Double.parseDouble(resultSet.getString(6)));
-				System.out.println(boat.getBuyerName() + boat.getDate() + boat.getPrice());
+				boat.setPrice(Double.parseDouble(resultSet.getString(4)));
+				boat.setTotalWeight(Double.parseDouble(resultSet.getString(5)));
 				boatList.add(boat);
 			}
 

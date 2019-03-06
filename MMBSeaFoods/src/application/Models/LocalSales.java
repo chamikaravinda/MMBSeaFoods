@@ -6,10 +6,9 @@ public class LocalSales {
 	private String Date;
 	private int BuyerID;
 	private String BuyerName;
-	private int FishType;
 	private double Price;
 	private double TotalWeight;
-	private String SFishType;
+
 	
 	public int getID() {
 		return ID;
@@ -35,12 +34,6 @@ public class LocalSales {
 	public void setBuyerName(String buyerName) {
 		BuyerName = buyerName;
 	}
-	public int getFishType() {
-		return FishType;
-	}
-	public void setFishType(int fishType) {
-		FishType = fishType;
-	}
 	public double getPrice() {
 		return Price;
 	}
@@ -53,13 +46,26 @@ public class LocalSales {
 	public void setTotalWeight(double totalWeight) {
 		TotalWeight = totalWeight;
 	}
-	public String getSFishType() {
-		return SFishType;
+	
+	//String view
+	
+	private String SPrice;
+	private String STotalWeight;
+
+
+	public String getSPrice() {
+		return SPrice;
 	}
-	public void setSFishType(String sFishType) {
-		SFishType = sFishType;
+	public void setSPrice(String sPrice) {
+		SPrice = sPrice;
+	}
+	public String getSTotalWeight() {
+		return STotalWeight;
+	}
+	public void setSTotalWeight(String sTotalWeight) {
+		STotalWeight = sTotalWeight;
 	}
 	
 	
-	
+
 }

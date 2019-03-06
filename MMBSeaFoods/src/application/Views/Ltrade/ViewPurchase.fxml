@@ -104,7 +104,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="179.0" layoutY="309.0" prefHeight="68.0" prefWidth="24.0" text=" :" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label layoutX="179.0" layoutY="309.0" prefHeight="68.0" prefWidth="24.0" text=" :" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>

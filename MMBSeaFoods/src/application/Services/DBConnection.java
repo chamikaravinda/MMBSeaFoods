@@ -162,15 +162,16 @@ public class DBConnection {
 						+ " Total_Weight      DOUBLE  ,"
 						+ " Total_Price       DOUBLE )";
 
-				String Local_stock_items= "CREATE TABLE IF NOT EXISTS Local_stock_items"
+				//local stock item
+				String Local_Purchases_items= "CREATE TABLE IF NOT EXISTS Local_stock_items"
 						+ "( ID             INTEGER  PRIMARY KEY AUTOINCREMENT,"
 						+ "  Fish_Type           INTEGER  REFERENCES  Local_Fish_types (ID),"
 						+ "  Total_Weight   INTEGER  NOT NULL," + "  buying_Price   DOUBLE   NOT NULL,"
-						+ "  Fish_stock_ID  INTEGER  REFERENCES  Local_Fish_stock (ID) )";
+						+ "  Fish_stock_ID  INTEGER  REFERENCES  Local_Purchases(ID) )";
 				
 				
 				String Local_Boat_Account = "CREATE TABLE IF NOT EXISTS Local_Boat_Account"
-						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
+						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date DATE NOT NULL,"
 						+ "  Reason       TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"
 						+ "  Paid         DOUBLE            ," + "  Boat_ID      INTEGER   REFERENCES  Boats (ID),"
 						+ "  purchase_ID  INTEGER   REFERENCES  Local_Purchases (ID))";
@@ -183,12 +184,12 @@ public class DBConnection {
 
 
 				String Local_Sales = "CREATE TABLE IF NOT EXISTS Local_Sales"
-						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + " Date 		 DATE		 NOT NULL,"
+						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + " Date DATE NOT NULL,"
 						+ " BuyerID 		 INTEGER REFERENCES Local_Fish_Buyers(ID),"
 						+ " Total_Price          DOUBLE ,"
 						+ " Total_Weight   DOUBLE )";
 				
-				String Local_sale_items= "CREATE TABLE IF NOT EXISTS Local_sale_items"
+				String Local_sale_items = "CREATE TABLE IF NOT EXISTS Local_sale_items"
 						+ "( ID             INTEGER  PRIMARY KEY AUTOINCREMENT,"
 						+ "  Fish_Type      INTEGER  REFERENCES  Local_Fish_types (ID),"
 						+ "  Total_Weight   INTEGER  NOT NULL," + "  buying_Price   DOUBLE   NOT NULL,"
@@ -199,14 +200,16 @@ public class DBConnection {
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	   DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," + "  To_Pay		   DOUBLE            ,"
 						+ "  Paid          DOUBLE            ,"
-						+ "  Buyer_ID      INTEGER   REFERENCES  Local_Fish_Buyers (ID))";
+						+ "  Buyer_ID      INTEGER   REFERENCES  Local_Fish_Buyers (ID),"
+						+ "  purchase_ID   INTEGER   REFERENCES  Local_Fish_Buyers (ID))";
 
 				String Local_Fish_Buyers_Account_Uncleared = "CREATE TABLE IF NOT EXISTS Local_Fish_Uncleared"
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"
 						+ "  Paid          DOUBLE            ,"
-						+ "  Buyer_ID      INTEGER   REFERENCES  Local_Fish_Buyers (ID))";
-
+						+ "  Buyer_ID      INTEGER   REFERENCES  Local_Fish_Buyers (ID),"
+						+ "  purchase_ID   INTEGER   REFERENCES  Local_Fish_Buyers (ID))";
+				
 				stmt.executeUpdate(UserTB);
 				stmt.executeUpdate(Vehicles);
 				stmt.executeUpdate(Vehicles_Leased_Payments);
@@ -233,7 +236,7 @@ public class DBConnection {
 				stmt.executeUpdate(Boat_Account_UnCleared);
 				stmt.executeUpdate(F_Fish_Buyers_Account);
 				stmt.executeUpdate(F_Fish_Buyers_Account_Uncleard);
-				stmt.executeUpdate(Local_stock_items);
+				stmt.executeUpdate(Local_Purchases_items);
 				stmt.executeUpdate(Local_sale_items);
 				stmt.close();
 

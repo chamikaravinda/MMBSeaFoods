@@ -137,6 +137,41 @@ public class LocalBuyerService{
 		
 	}
 	
+	public LocalBuyers getLocalBuyer(int id) throws SQLException{
+		
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		String query= "select * from Local_Fish_Buyers WHERE ID=?";
+		ArrayList<LocalBuyers> list =new ArrayList<>();
+		
+		try {
+			preparedStatement =connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			LocalBuyers Lbuyers=new LocalBuyers();
+			if(resultSet.next()) {
+				
+				Lbuyers.setID(Integer.parseInt(resultSet.getString("ID")));
+				Lbuyers.setMobile_No(resultSet.getString("Mobile_No"));
+				Lbuyers.setName(resultSet.getString("Name"));				
+				return Lbuyers;
+			}
+			return null;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			preparedStatement.close();
+			resultSet.close();
+			connection.close();
+		}
+		
+		
+	}
+	
+	
 	
 	/// update Query to Local boat------------------------------------------------------------
 		public boolean UpdateLocalBuyer(LocalBuyers LBuyer) throws SQLException {

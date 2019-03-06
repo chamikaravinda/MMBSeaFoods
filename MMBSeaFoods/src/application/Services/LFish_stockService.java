@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Models.LFish_stock;
+import application.Models.Local_sale_item;
 import application.Models.Local_stock_items;
 import javafx.collections.ObservableList;
 
@@ -99,11 +100,10 @@ public class LFish_stockService {
 		}
 	}
 	
-	public boolean sellStock(ObservableList<LFish_stock> items) throws SQLException {
+	public boolean sellStock(ObservableList<Local_sale_item> local_fishStock) throws SQLException {
 		
 		
 		
-		connection=DBConnection.Connector();
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
@@ -112,7 +112,7 @@ public class LFish_stockService {
 		PreparedStatement preparedStatement2=null;
 		String updateQuery= "UPDATE Local_Fish_stock set Total_Weight =?  where Fish_Type= ? ";
 		try {
-		for(LFish_stock item:items) {
+		for(Local_sale_item item:local_fishStock) {
 				preparedStatement =connection.prepareStatement(query);
 				preparedStatement.setInt(1, item.getFish_Type());
 				resultSet = preparedStatement.executeQuery();
