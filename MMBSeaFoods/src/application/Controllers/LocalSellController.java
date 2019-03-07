@@ -1,21 +1,37 @@
 package application.Controllers;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.Notifications;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.html.WebColors;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Models.Local_Fish_types;
 import application.Models.Local_sale_item;
+import application.Models.Local_stock_items;
 import application.Models.ForeignSallingFish;
 import application.Models.LFish_stock;
 import application.Models.LocalBoat;
@@ -92,6 +108,7 @@ public class LocalSellController implements Initializable {
 
 	ObservableList<Local_sale_item> local_fishStock = FXCollections.observableArrayList();
 
+	String invoiceName;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -240,6 +257,24 @@ public class LocalSellController implements Initializable {
 									back = FXMLLoader
 											.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 									setNode(back);
+									
+									generateAccountsLocalInvoice(local_fishStock,buyer.getName());
+
+									// open pdf
+									File pdfFile = new File(
+											"C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\" + invoiceName);
+									if (pdfFile.exists()) {
+
+										if (Desktop.isDesktopSupported()) {
+											Desktop.getDesktop().open(pdfFile);
+										} else {
+											System.out.println("Awt Desktop is not supported!");
+										}
+
+									} else {
+										System.out.println("File is not exists!");
+									}
+									
 								}
 							}
 
@@ -268,6 +303,149 @@ public class LocalSellController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+	
+	
+	/*---------------generate the jasper report--------------------*/
+	public void generateAccountsLocalInvoice(ObservableList<Local_sale_item> list , String buyer) {
+
+		invoiceName = "SellLocalStock_Invoice_" + getCurrentDate() + "_" + getCurrentTime() + ".pdf";
+
+		double totalAmount = 0.0;
+		double totalWeight = 0.0;
+
+		Document document = new Document();
+		try {
+			@SuppressWarnings("unused")
+			PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(
+					"C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\" + invoiceName));
+			document.open();
+
+			Font f1 = new Font(Font.FontFamily.HELVETICA, 21, Font.BOLD);
+			BaseColor color = WebColors.getRGBColor("#283593");
+			f1.setColor(color);
+
+			Paragraph title = new Paragraph("M.M.B. SEA FOOD SUPPLIERS", f1);
+			title.setAlignment(title.ALIGN_CENTER);
+
+			Font f2 = new Font(Font.FontFamily.HELVETICA, 12);
+			BaseColor color2 = WebColors.getRGBColor("#303f9f");
+			f2.setColor(color2);
+			Paragraph address = new Paragraph("Kanthoru Watta,Kiriparuwa Road,Devinuwara", f2);
+			address.setAlignment(address.ALIGN_CENTER);
+
+			Font f3 = new Font(Font.FontFamily.HELVETICA, 12);
+			BaseColor color3 = WebColors.getRGBColor("#303f9f");
+			f3.setColor(color3);
+			Paragraph telephone = new Paragraph("Tel : 071 71 79 382 / 071 30 13 939(Predeep Samaru) " + "\n \n", f3);
+			telephone.setAlignment(telephone.ALIGN_CENTER);
+
+			Font topDetails = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
+			topDetails.setColor(BaseColor.BLACK);
+
+			PdfPTable table = new PdfPTable(2);
+			PdfPCell cellOne = new PdfPCell(new Phrase("Date : " + getCurrentDate(), topDetails));
+			PdfPCell cellTwo = new PdfPCell(new Phrase("Buyer : " + buyer, topDetails));
+	
+
+			cellOne.setBorder(Rectangle.NO_BORDER);
+			cellTwo.setBorder(Rectangle.NO_BORDER);
+
+			table.addCell(cellOne);
+			table.addCell(cellTwo);
+
+			table.setWidthPercentage(100);
+
+			Paragraph line_brake = new Paragraph("\n", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
+			line_brake.setAlignment(line_brake.ALIGN_LEFT);
+
+			document.add(title);
+			document.add(address);
+			document.add(telephone);
+			document.add(table);
+			document.add(line_brake);
+
+			Font cellFont = new Font(Font.FontFamily.HELVETICA);
+			cellFont.setColor(BaseColor.WHITE);
+
+			PdfPTable pdfPTable = new PdfPTable(3);
+			PdfPCell pdfCell1 = new PdfPCell(new Phrase("Item", cellFont));
+			PdfPCell pdfCell2 = new PdfPCell(new Phrase("Weight", cellFont));
+			PdfPCell pdfCell3 = new PdfPCell(new Phrase("Price", cellFont));
+
+			BaseColor cellColor = WebColors.getRGBColor("#78909c");
+
+			pdfCell1.setBackgroundColor(cellColor);
+			pdfCell2.setBackgroundColor(cellColor);
+			pdfCell3.setBackgroundColor(cellColor);
+
+			pdfPTable.addCell(pdfCell1);
+			pdfPTable.addCell(pdfCell2);
+			pdfPTable.addCell(pdfCell3);
+
+			for (Local_sale_item entry : list) {
+				Font priceCell = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
+
+				PdfPCell itemCell = new PdfPCell(new Phrase(entry.getFish_name(), priceCell));
+				pdfPTable.addCell(itemCell);
+
+				PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", entry.getTotal_Weight()), priceCell));
+				weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
+				pdfPTable.addCell(weight);
+
+				PdfPCell total = new PdfPCell(new Phrase(String.format("%2.2f", entry.getBuying_Price()), priceCell));
+				total.setHorizontalAlignment(total.ALIGN_RIGHT);
+				pdfPTable.addCell(total);
+
+				totalAmount += entry.getBuying_Price();
+				totalWeight += entry.getTotal_Weight();
+			}
+
+			// Add spacing cell
+			pdfPTable.addCell(" ");
+			pdfPTable.addCell(" ");
+			pdfPTable.addCell(" ");
+
+			Font footerCell = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+			PdfPCell total = new PdfPCell(new Phrase("Total", footerCell));
+			pdfPTable.addCell(total);
+
+			PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", totalWeight), footerCell));
+			weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
+			pdfPTable.addCell(weight);
+
+			
+			PdfPCell amount = new PdfPCell(new Phrase(String.format("%2.2f",totalAmount ), footerCell));
+			amount.setHorizontalAlignment(amount.ALIGN_RIGHT);
+			pdfPTable.addCell(amount);
+
+			pdfPTable.setWidthPercentage(100);
+
+			document.add(pdfPTable);
+			document.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/*-------------------Generate Current Date -----------------*/
+	public static String getCurrentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String newDate = dateFormat.format(date);
+
+		return newDate;
+	}
+
+	/*-------------------Generate Current Time -----------------*/
+	public static String getCurrentTime() {
+
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-ss");
+
+		return (sdf.format(cal.getTime()));
 	}
 
 	void setNode(Node node) {
