@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import application.Models.Boat_Account;
+import application.Models.Fish_stock;
 import application.Models.LocalBuyers;
 import application.Models.LocalSales;
 import application.Models.Local_Fish_types;
@@ -20,8 +21,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -66,8 +69,8 @@ public class AccountLocalSalesController implements Initializable {
 			for (LocalSales sales : saleList) {
 				buyer = buyerService.getLocalBuyer(sales.getBuyerID());
 				sales.setBuyerName(buyer.getName());
-				sales.setSPrice("Rs." +String.format("%2.2f", sales.getPrice()));
-				sales.setSTotalWeight(String.format("%2.1f",sales.getTotalWeight()+"Kg"));
+				sales.setSPrice("Rs." + String.format("%2.2f", sales.getPrice()));
+				sales.setSTotalWeight(String.format("%2.2f", sales.getTotalWeight())+ "Kg");
 				localSalesEntries.add(sales);
 			}
 			clmDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
@@ -76,6 +79,31 @@ public class AccountLocalSalesController implements Initializable {
 			clmWeight.setCellValueFactory(new PropertyValueFactory<>("STotalWeight"));
 
 			tblLsales.setItems(localSalesEntries);
+
+			tblLsales.setRowFactory(tv -> {
+				TableRow<LocalSales> row = new TableRow<>();
+				row.setOnMouseClicked(event -> {
+					if (event.getClickCount() == 2 && (!row.isEmpty())) {
+						try {
+							LocalSales rowData = row.getItem();
+							FXMLLoader loader = new FXMLLoader(
+									getClass().getResource("/application/Views/Ltrade/ViewLocalSell.fxml"));
+							Parent root;
+
+							root = loader.load();
+
+							ViewLocalSellController controller = loader.<ViewLocalSellController>getController();
+							controller.setID(rowData.getID());
+							setNode(root);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+				return row;
+			});
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

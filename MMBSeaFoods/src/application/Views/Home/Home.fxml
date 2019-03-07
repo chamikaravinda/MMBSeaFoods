@@ -79,8 +79,7 @@
                   <VBox layoutY="12.0" prefHeight="101.0" prefWidth="291.0">
                      <children>
                         <Label fx:id="lblbuyerpay" prefHeight="43.0" prefWidth="281.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" />
-                        <Label prefHeight="25.0" prefWidth="170.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="To recive" />
-                        <Label layoutX="20.0" layoutY="53.0" prefHeight="25.0" prefWidth="203.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="From Foriegn Fish Buyers" />
+                        <Label prefHeight="25.0" prefWidth="170.0" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: white;" text="To recive From Buyers" />
                      </children>
                      <padding>
                         <Insets left="10.0" />

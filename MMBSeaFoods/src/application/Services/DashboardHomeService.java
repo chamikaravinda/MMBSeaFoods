@@ -72,7 +72,20 @@ public class DashboardHomeService {
 			
 			total=total+result.getDouble("To_Pay");			
 		}
-		String Stotal = formatter.format(total);
+		
+		PreparedStatement preparedStatement2=null;
+		ResultSet result2 =null;
+		String query2 = "select * from Local_Boat_Account_UnCleared"; 
+		preparedStatement2 = connection.prepareStatement(query2);
+		
+		result2 = preparedStatement2.executeQuery();
+		
+		while(result2.next()) {
+			
+			total=total+result2.getDouble("To_Pay");			
+		}
+		
+		String Stotal = String.format("%2.2f", total);
 		connection.close();
 		return "Rs."+Stotal;
 		
@@ -93,7 +106,20 @@ public class DashboardHomeService {
 			total = total+ result.getDouble("To_Pay");			
 		}
 		
-		String Stotal = formatter.format(total);
+		
+		PreparedStatement preparedStatement2=null;
+		ResultSet result2 =null;
+		String query2 = "select * from Local_Fish_Uncleared"; 
+		preparedStatement2 = connection.prepareStatement(query2);
+		
+		result2 = preparedStatement2.executeQuery();
+		
+		while(result2.next()) {			
+			total = total+ result2.getDouble("To_Pay");			
+		}
+		
+		
+		String Stotal = String.format("%2.2f", total);
 		connection.close();
 		
 		return "Rs."+Stotal;

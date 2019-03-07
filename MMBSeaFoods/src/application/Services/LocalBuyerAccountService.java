@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import application.Models.LFish_stock;
 import application.Models.LocalSales;
 import application.Models.Local_Buyers_Account;
 import application.Models.Local_Fish_types;
+import application.Models.Local_sale_item;
 import javafx.collections.ObservableList;
 
 public class LocalBuyerAccountService {
@@ -101,6 +104,105 @@ public class LocalBuyerAccountService {
 			return 0;
 		} finally {
 			connection.close();
+		}
+
+	}
+	
+	public boolean addLocalSaleItems(ObservableList<Local_sale_item> list) throws SQLException {
+
+		connection = DBConnection.Connector();
+
+		PreparedStatement preparedStatement3 = null;
+		int result = 0;
+		String insertQuery = "INSERT INTO Local_sale_items (Fish_Type,Total_Weight, buying_Price,Fish_sale_ID) VALUES (?,?,?,?)";
+		try {
+			for(Local_sale_item sale: list) {
+			preparedStatement3 = connection.prepareStatement(insertQuery);
+
+			preparedStatement3.setInt(1, sale.getFish_Type());
+			preparedStatement3.setDouble(2, sale.getTotal_Weight());
+			preparedStatement3.setDouble(3, sale.getBuying_Price());
+			preparedStatement3.setInt(4, sale.getFish_sale_ID());
+			result = preparedStatement3.executeUpdate();
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			connection.close();
+		}
+
+	}
+	
+	public boolean RemoveFromLocalBuyersAccount_Uncleared(int id) {
+
+		try {
+			connection = DBConnection.Connector();
+
+			PreparedStatement preparedStatement = null;
+
+			String query = "DELETE FROM Local_Fish_Uncleared WHERE ID = ?";
+
+			preparedStatement = connection.prepareStatement(query);
+
+			preparedStatement.setInt(1, id);
+
+			if (preparedStatement.execute()) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			return false;
+
+		} catch (Exception e) {
+			return false;
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
+			}
+
+		}
+
+	}
+	
+	public boolean RemoveFromLocalBuyersAccount(int id) {
+
+		try {
+			connection = DBConnection.Connector();
+
+			PreparedStatement preparedStatement = null;
+
+			String query = "DELETE FROM Local_Fish_Buyers_Account WHERE ID = ?";
+
+			preparedStatement = connection.prepareStatement(query);
+
+			preparedStatement.setInt(1, id);
+
+			if (preparedStatement.execute()) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+			return false;
+
+		} catch (Exception e) {
+			return false;
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
+			}
+
 		}
 
 	}

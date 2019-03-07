@@ -225,18 +225,22 @@ public class LocalSellController implements Initializable {
 						if (serviceF.addEntries(newEntry)) {
 							if (serviceF.addEntriesUncleared(newEntry)) {
 
-								Notifications notifications = Notifications.create();
-								notifications.title("Succesfull");
-								notifications.text("Sold succesfully");
-								notifications.graphic(null);
-								notifications.hideAfter(Duration.seconds(2));
-								notifications.position(Pos.CENTER);
-								notifications.showConfirm();
+								for (Local_sale_item item : local_fishStock) {
+									item.setFish_sale_ID((int)purchaseId);
+								}
+								if (serviceF.addLocalSaleItems(local_fishStock)) {
+									Notifications notifications = Notifications.create();
+									notifications.title("Succesfull");
+									notifications.text("Sold succesfully");
+									notifications.graphic(null);
+									notifications.hideAfter(Duration.seconds(2));
+									notifications.position(Pos.CENTER);
+									notifications.showConfirm();
 
-								back = FXMLLoader
-										.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
-								setNode(back);
-
+									back = FXMLLoader
+											.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
+									setNode(back);
+								}
 							}
 
 						}

@@ -2,14 +2,13 @@ package application.Models;
 
 public class Locl_Buyers_Account_Uncleared {
 	
-
 	private int ID;
 	private String Date;
 	private String Reason;
 	private double To_Pay;
 	private double Paid;
 	private int Buyer_ID ;
-	
+	private int purchase_ID;	
 	
 	public int getID() {
 		return ID;
@@ -47,6 +46,13 @@ public class Locl_Buyers_Account_Uncleared {
 	public void setBuyer_ID(int buyer_ID) {
 		Buyer_ID = buyer_ID;
 	}
+	public int getPurchase_ID() {
+		return purchase_ID;
+	}
+	public void setPurchase_ID(int purchase_ID) {
+		this.purchase_ID = purchase_ID;
+	}
+	
 	
 	
 	

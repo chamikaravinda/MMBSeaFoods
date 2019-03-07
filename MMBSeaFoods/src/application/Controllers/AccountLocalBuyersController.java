@@ -2,6 +2,7 @@ package application.Controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -10,8 +11,16 @@ import org.controlsfx.control.Notifications;
 import com.jfoenix.controls.JFXComboBox;
 
 import application.Models.Boat_Account;
+import application.Models.F_Fish_Buyers_Account;
+import application.Models.F_Fish_Buyers_Account_Uncleard;
+import application.Models.Fish_Lot;
+import application.Models.LocalPurchase;
+import application.Models.LocalSales;
 import application.Models.Local_Buyers_Account;
+import application.Models.Locl_Buyers_Account_Uncleared;
 import application.Services.AccountServices;
+import application.Services.LocalBuyerAccountService;
+import application.Services.Local_PurchasesService;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -39,10 +48,10 @@ public class AccountLocalBuyersController implements Initializable {
 	AnchorPane add;
 	
 	@FXML private JFXComboBox<String>  cmbBuyersNames;
-
-	@FXML private Label  lblBoat;
 	
 	AccountServices accountServices=new AccountServices();
+	Local_PurchasesService saleService =new Local_PurchasesService();
+	LocalBuyerAccountService buyerService =new LocalBuyerAccountService();
 	
 	private ObservableList<String> buyersNameList = FXCollections.observableArrayList();
 	private ObservableList<Local_Buyers_Account> buyersDetailsList = FXCollections.observableArrayList();
@@ -69,7 +78,7 @@ public class AccountLocalBuyersController implements Initializable {
 		            
 		            String name= t1;
 					
-					lblBoat.setText(name);
+					
 					
 					int id=accountServices.getBuyerIDByName(name);
 					
@@ -96,6 +105,48 @@ public class AccountLocalBuyersController implements Initializable {
 		    });
 		
 		
+		
+	}
+	
+public void notRecived(ActionEvent event) throws SQLException {
+		
+	Local_Buyers_Account entry = tblvBuyersDetails.getSelectionModel().getSelectedItem();
+		
+		if (entry != null && entry.getPaid() !=0) {
+			Local_Buyers_Account Newentry = new Local_Buyers_Account();
+			
+			LocalSales lot =saleService.getLocalSales(entry.getPurchase_ID());
+			
+			Newentry.setDate(lot.getDate());
+			Newentry.setBuyer_ID(entry.getBuyer_ID());
+			Newentry.setPaid(0);
+			Newentry.setPurchase_ID(entry.getPurchase_ID());
+			Newentry.setTo_Pay(entry.getPaid());
+			Newentry.setReason("Fish Purchase of " + lot.getTotalWeight()+"Kg");
+			tblvBuyersDetails.getItems().remove(entry);
+			tblvBuyersDetails.refresh();
+			System.out.println("function working");
+			if (buyerService.addEntriesUncleared(Newentry)){
+				System.out.println("first working");
+				if (buyerService.RemoveFromLocalBuyersAccount(entry.getID())){
+					Notifications notifications = Notifications.create();
+					notifications.title("Succesfull");
+					notifications.text("Payment paid succesfully");
+					notifications.graphic(null);
+					notifications.hideAfter(Duration.seconds(2));
+					notifications.position(Pos.CENTER);
+					notifications.showConfirm();
+				}
+			}
+		}else {
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Boat adding unsuccesfull");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+		}
 		
 	}
 	
@@ -129,25 +180,10 @@ public class AccountLocalBuyersController implements Initializable {
 	
 	
 	public void addRecieved(ActionEvent event) throws IOException {
-		
-		String name=lblBoat.getText();
-		if(!lblBoat.getText().isEmpty()) {
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Views/Accounts/LAddBuyerReceived.fxml"));
-			Parent root = loader.load();
-			LocalAddBuyerRecievedController controller = loader.<LocalAddBuyerRecievedController>getController();
-			controller.getBuyerName(name); 
-			setNode(root);
-			
-		}else {
-			Notifications notifications = Notifications.create();
-			notifications.title("Error");
-			notifications.text("Select a Buyer to continue");
-			notifications.graphic(null);
-			notifications.hideAfter(Duration.seconds(2));
-			notifications.position(Pos.CENTER);
-			notifications.showError();
-		}
+
+		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/LAddBuyerReceived.fxml"));
+		setNode(add);
+
 	}
 	
 	

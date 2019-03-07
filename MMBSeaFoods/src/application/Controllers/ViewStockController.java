@@ -151,7 +151,7 @@ public class ViewStockController implements Initializable {
 		Platform.runLater(() -> {
 			try {
 				
-				System.out.println(lblStkID.getText());
+				
 				stock = service.getStocks(Integer.parseInt(lblStkID.getText()));
 				Fish_Lot stockLot = serviceB.getTheLot(stock.getLot_ID());
 				lbllot.setText(stockLot.getDisplay_Name());

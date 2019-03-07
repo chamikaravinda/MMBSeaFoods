@@ -1,4 +1,3 @@
-
 package application.Services;
 
 import java.sql.*;
@@ -201,14 +200,14 @@ public class DBConnection {
 						+ "  Reason        TEXT      NOT NULL," + "  To_Pay		   DOUBLE            ,"
 						+ "  Paid          DOUBLE            ,"
 						+ "  Buyer_ID      INTEGER   REFERENCES  Local_Fish_Buyers (ID),"
-						+ "  purchase_ID   INTEGER   REFERENCES  Local_Fish_Buyers (ID))";
+						+ "  purchase_ID   INTEGER   REFERENCES  Local_Sales (ID))";
 
 				String Local_Fish_Buyers_Account_Uncleared = "CREATE TABLE IF NOT EXISTS Local_Fish_Uncleared"
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"
 						+ "  Paid          DOUBLE            ,"
 						+ "  Buyer_ID      INTEGER   REFERENCES  Local_Fish_Buyers (ID),"
-						+ "  purchase_ID   INTEGER   REFERENCES  Local_Fish_Buyers (ID))";
+						+ "  purchase_ID   INTEGER   REFERENCES  Local_Sales (ID))";
 				
 				stmt.executeUpdate(UserTB);
 				stmt.executeUpdate(Vehicles);

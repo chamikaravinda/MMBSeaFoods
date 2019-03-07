@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import org.springframework.cglib.core.Local;
 
 import application.Models.Buyers;
+import application.Models.Fish_stock;
 import application.Models.LocalPurchase;
+import application.Models.LocalSales;
+import application.Models.Local_sale_item;
 import application.Models.Local_stock_items;
 import javafx.collections.ObservableList;
 import javafx.util.converter.PercentageStringConverter;
@@ -166,6 +169,70 @@ public class Local_PurchasesService {
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
+		} finally {
+			connection.close();
+		}
+
+	}
+	
+	public ArrayList<Local_sale_item> getLocalSaleItems(int id) throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		ArrayList<Local_sale_item> list = new ArrayList<>();
+
+		String Query = "SELECT * FROM Local_sale_items WHERE Fish_sale_ID=?  ORDER BY  ID DESC";
+
+		try {
+			preparedStatement = connection.prepareStatement(Query);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Local_sale_item item=new Local_sale_item();
+				
+				item.setFish_Type(resultSet.getInt("Fish_Type"));
+				item.setBuying_Price(resultSet.getDouble("buying_Price"));
+				item.setTotal_Weight(resultSet.getDouble("Total_Weight"));
+				
+				list.add(item);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			connection.close();
+		}
+
+	}
+	
+	public LocalSales getLocalSales(int id) throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "select * from Local_Sales where ID = ?  ";
+
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			LocalSales sale= new LocalSales();
+			if (resultSet.next()) {
+
+				sale.setID(Integer.parseInt(resultSet.getString("ID")));
+				sale.setDate(resultSet.getString("Date"));
+				sale.setBuyerID(Integer.parseInt(resultSet.getString("BuyerID")));
+				sale.setPrice(Double.parseDouble(resultSet.getString("Total_Price")));
+				sale.setTotalWeight(Double.parseDouble(resultSet.getString("Total_Weight")));
+			}
+			System.out.println(sale.getPrice());
+			return sale;
+
+		} catch (Exception e) {
 			return null;
 		} finally {
 			connection.close();

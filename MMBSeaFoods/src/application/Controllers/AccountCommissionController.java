@@ -93,6 +93,12 @@ public class AccountCommissionController implements Initializable {
 					entry.setSTo_Pay("Rs 0.00");
 				}
 		
+				if(entry.getPaid()!=0) {
+					entry.setSPaid("Rs."+String.format ("%2.2f", entry.getPaid()));
+				}else {
+					entry.setSPaid("Rs 0.00");
+				}
+				
 				commitionAccountEntries.add(entry);
 			}
 			
@@ -100,7 +106,7 @@ public class AccountCommissionController implements Initializable {
 			clmDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 			clmReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
 			clmTopay.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
-			clmPaid.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
+			clmPaid.setCellValueFactory(new PropertyValueFactory<>("SPaid"));
 			
 			tblCommision.setItems(commitionAccountEntries);
 				
