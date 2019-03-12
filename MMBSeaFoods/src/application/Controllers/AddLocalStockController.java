@@ -105,7 +105,7 @@ public class AddLocalStockController implements Initializable {
 	private double total_weight;
 
 	String invoiceName;
-	
+
 	AnchorPane add;
 
 	ObservableList<String> LocalFishTypeList = FXCollections.observableArrayList();
@@ -201,17 +201,24 @@ public class AddLocalStockController implements Initializable {
 			local_Fish.setTotal_Weight(Double.parseDouble(Lfweight.getText()));
 			if (local_Fish.getTotal_Weight() > 30.0) {
 				local_Fish.setBuying_Price(local_Fish.getTotal_Weight() * types.getPrice_A30());
+				local_Fish.setUnitePrice(types.getPrice_A30());
 			} else if (local_Fish.getTotal_Weight() > 25.0 && local_Fish.getTotal_Weight() <= 30.0) {
 				local_Fish.setBuying_Price(local_Fish.getTotal_Weight() * types.getPrice_25T30());
+				local_Fish.setUnitePrice(types.getPrice_25T30());
 			} else if (local_Fish.getTotal_Weight() > 20.0 && local_Fish.getTotal_Weight() <= 25.0) {
 				local_Fish.setBuying_Price(local_Fish.getTotal_Weight() * types.getPrice_20T25());
+				local_Fish.setUnitePrice(types.getPrice_20T25());
 			} else if (local_Fish.getTotal_Weight() > 15.0 && local_Fish.getTotal_Weight() <= 20.0) {
 				local_Fish.setBuying_Price(local_Fish.getTotal_Weight() * types.getPrice_15T20());
+				local_Fish.setUnitePrice(types.getPrice_15T20());
 			} else if (local_Fish.getTotal_Weight() > 10.0 && local_Fish.getTotal_Weight() <= 15.0) {
 				local_Fish.setBuying_Price(local_Fish.getTotal_Weight() * types.getPrice_10T15());
+				local_Fish.setUnitePrice(types.getPrice_10T15());
 			} else {
 				local_Fish.setBuying_Price(local_Fish.getTotal_Weight() * types.getPrice_U10());
+				local_Fish.setUnitePrice(types.getPrice_U10());
 			}
+			
 			local_Fish.setFish_Type(types.getID());
 			local_fishStock.add(local_Fish);
 			clmFishTable.refresh();
@@ -266,12 +273,13 @@ public class AddLocalStockController implements Initializable {
 									add = FXMLLoader
 											.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 									setNode(add);
-									
-									generateAccountsLocalInvoice(local_fishStock, boat.getBoatNameorNumber(), txthabour.getText());
+
+									generateAccountsLocalInvoice(local_fishStock, boat.getBoatNameorNumber(),
+											txthabour.getText());
 
 									// open pdf
-									File pdfFile = new File(
-											"C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\" + invoiceName);
+									File pdfFile = new File("C:\\Users\\" + System.getProperty("user.name")
+											+ "\\Documents\\" + invoiceName);
 									if (pdfFile.exists()) {
 
 										if (Desktop.isDesktopSupported()) {
@@ -317,9 +325,9 @@ public class AddLocalStockController implements Initializable {
 			notifications.showError();
 		}
 	}
-	
+
 	/*---------------generate the jasper report--------------------*/
-	public void generateAccountsLocalInvoice(ObservableList<Local_stock_items> list , String boatName, String harbour) {
+	public void generateAccountsLocalInvoice(ObservableList<Local_stock_items> list, String boatName, String harbour) {
 
 		invoiceName = "LocalAddStock_Invoice_" + getCurrentDate() + "_" + getCurrentTime() + ".pdf";
 
@@ -382,9 +390,10 @@ public class AddLocalStockController implements Initializable {
 			Font cellFont = new Font(Font.FontFamily.HELVETICA);
 			cellFont.setColor(BaseColor.WHITE);
 
-			PdfPTable pdfPTable = new PdfPTable(3);
+			PdfPTable pdfPTable = new PdfPTable(4);
 			PdfPCell pdfCell1 = new PdfPCell(new Phrase("Item", cellFont));
 			PdfPCell pdfCell2 = new PdfPCell(new Phrase("Weight", cellFont));
+			PdfPCell pdfCell4 = new PdfPCell(new Phrase("Unite Price", cellFont));
 			PdfPCell pdfCell3 = new PdfPCell(new Phrase("Price", cellFont));
 
 			BaseColor cellColor = WebColors.getRGBColor("#78909c");
@@ -392,10 +401,12 @@ public class AddLocalStockController implements Initializable {
 			pdfCell1.setBackgroundColor(cellColor);
 			pdfCell2.setBackgroundColor(cellColor);
 			pdfCell3.setBackgroundColor(cellColor);
+			pdfCell4.setBackgroundColor(cellColor);
 
 			pdfPTable.addCell(pdfCell1);
 			pdfPTable.addCell(pdfCell2);
 			pdfPTable.addCell(pdfCell3);
+			pdfPTable.addCell(pdfCell4);
 
 			for (Local_stock_items entry : list) {
 				Font priceCell = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
@@ -406,6 +417,11 @@ public class AddLocalStockController implements Initializable {
 				PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", entry.getTotal_Weight()), priceCell));
 				weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
 				pdfPTable.addCell(weight);
+
+				PdfPCell unitePrice = new PdfPCell(
+						new Phrase(String.format("%2.2f", entry.getUnitePrice()), priceCell));
+				unitePrice.setHorizontalAlignment(unitePrice.ALIGN_RIGHT);
+				pdfPTable.addCell(unitePrice);
 
 				PdfPCell total = new PdfPCell(new Phrase(String.format("%2.2f", entry.getBuying_Price()), priceCell));
 				total.setHorizontalAlignment(total.ALIGN_RIGHT);
@@ -419,17 +435,21 @@ public class AddLocalStockController implements Initializable {
 			pdfPTable.addCell(" ");
 			pdfPTable.addCell(" ");
 			pdfPTable.addCell(" ");
+			pdfPTable.addCell(" ");
 
 			Font footerCell = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 			PdfPCell total = new PdfPCell(new Phrase("Total", footerCell));
 			pdfPTable.addCell(total);
 
+			PdfPCell blankcell = new PdfPCell(new Phrase(" "));
+			blankcell.setHorizontalAlignment(blankcell.ALIGN_RIGHT);
+			pdfPTable.addCell(blankcell);
+			
 			PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", totalWeight), footerCell));
 			weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
 			pdfPTable.addCell(weight);
 
-			
-			PdfPCell amount = new PdfPCell(new Phrase(String.format("%2.2f",totalAmount ), footerCell));
+			PdfPCell amount = new PdfPCell(new Phrase(String.format("%2.2f", totalAmount), footerCell));
 			amount.setHorizontalAlignment(amount.ALIGN_RIGHT);
 			pdfPTable.addCell(amount);
 

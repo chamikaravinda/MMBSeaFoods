@@ -12,8 +12,11 @@ import application.Models.Fish_Lot;
 import application.Models.Fish_stock;
 import application.Models.Vehicles;
 import application.Services.BoatService;
+import application.Services.Boat_AccountServices;
 import application.Services.Fish_LotServices;
 import application.Services.Fish_stockService;
+import application.Services.Third_Party_AccountServices;
+import application.Services.stock_FishService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +25,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.controlsfx.control.Notifications;
+
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,11 +35,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -70,6 +80,9 @@ public class StocksController implements Initializable {
 	Fish_stockService service = new Fish_stockService();
 	Fish_LotServices serviceB = new Fish_LotServices();
 	BoatService serviceC = new BoatService();
+	Boat_AccountServices serviceD = new Boat_AccountServices();
+	Third_Party_AccountServices serviceF = new Third_Party_AccountServices();
+	stock_FishService serviceG = new stock_FishService();
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -137,6 +150,89 @@ public class StocksController implements Initializable {
 
 	}
 
+	public void deleteStock(ActionEvent event) throws SQLException {
+
+		Fish_stock toDelete = Fish_Stock.getSelectionModel().getSelectedItem();
+		if (toDelete != null) {
+			Alert alert = new Alert(AlertType.CONFIRMATION,
+					"Are You Sure ? This will remove all the data belong to this Stock including account details",
+					ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+			alert.showAndWait();
+
+			if (alert.getResult() == ButtonType.YES) {
+
+				if (serviceD.RemoveFromBoatAccountStockEntry(toDelete.getID())) {
+					if (serviceD.RemoveFromBoatAccountStockEntryUncleard(toDelete.getID())) {
+						// update lot
+						Fish_Lot updatingLOt = serviceB.getTheLot(toDelete.getLot_ID());
+						updatingLOt.setBuying_Weight(updatingLOt.getBuying_Weight() - toDelete.getTotal_Weight());
+						updatingLOt.setBrokerFee(updatingLOt.getBrokerFee() - toDelete.getCommition_price());
+						updatingLOt.setBuying_price(updatingLOt.getBuying_price() - toDelete.getTotalBuying_price());
+						if (serviceB.UpdateFish_Lot(updatingLOt)) {
+							if (serviceF.clearAccontsStockDelete(toDelete.getID())) {
+								if (serviceF.clearAccontsStockDeleteUncleard(toDelete.getID())) {
+									if (serviceG.deleteStockFishes(toDelete.getID())) {
+										if (service.deleteStock(toDelete.getID())) {
+
+											Notifications notifications = Notifications.create();
+											notifications.title("Succesfull");
+											notifications.text("Stock deleted succesfully");
+											notifications.graphic(null);
+											notifications.hideAfter(Duration.seconds(2));
+											notifications.position(Pos.CENTER);
+											notifications.showConfirm();
+
+											Fish_Stock.getItems().remove(toDelete);
+											Fish_Stock.refresh();
+										} else {
+
+											Notifications notifications = Notifications.create();
+											notifications.title("Error");
+											notifications.text("Deleting stock unsuccesfull");
+											notifications.graphic(null);
+											notifications.hideAfter(Duration.seconds(2));
+											notifications.position(Pos.CENTER);
+											notifications.showError();
+
+											System.out.println("Delete stock fail");
+
+										}
+									} else {
+										System.out.println("Delete stock fish fail");
+									}
+
+								} else {
+									System.out.println("Delete commision entry unclear fail");
+								}
+							} else {
+								System.out.println("Delete commision entry fail");
+							}
+
+						} else {
+							System.out.println("update lot fail");
+						}
+
+					} else {
+						System.out.println("Delete boat account entry unclear fail");
+					}
+				} else {
+					System.out.println("Delete boat account entry fail");
+				}
+
+			}
+
+		} else {
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select a stock to delete");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+		}
+
+	}
+
 	// Set selected node to a content holder
 	void setNode(Node node) {
 		Stocks.getChildren().clear();
@@ -190,7 +286,5 @@ public class StocksController implements Initializable {
 		setNode(lots);
 
 	}
-
-
 
 }

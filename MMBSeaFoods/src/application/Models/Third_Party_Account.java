@@ -8,6 +8,7 @@ public class Third_Party_Account {
             private String Reason;
             private double To_Pay;             
             private double Paid;
+            private int stockID;
             
 			public int getID() {
 				return ID;
@@ -38,6 +39,12 @@ public class Third_Party_Account {
 			}
 			public void setPaid(double paid) {
 				Paid = paid;
+			}
+			public int getStockID() {
+				return stockID;
+			}
+			public void setStockID(int stockID) {
+				this.stockID = stockID;
 			}
             
             

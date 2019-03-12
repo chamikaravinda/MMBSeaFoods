@@ -184,5 +184,70 @@ public class Boat_AccountServices {
 		}
 		
 	}
+	
+	
+	public boolean RemoveFromBoatAccountStockEntry(int id) throws SQLException {
+
+		try {		
+			
+			connection=DBConnection.Connector();
+			PreparedStatement preparedStatement=null;	
+			
+			String query = "DELETE FROM Boat_Account WHERE Stock_ID = ?";
+			
+			preparedStatement = connection.prepareStatement(query);		
+			
+			
+			preparedStatement.setInt(1, id);
+			
+			preparedStatement.execute();
+			return true;		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			connection.close();
+		}
+		
+	}
+	
+	public boolean RemoveFromBoatAccountStockEntryUncleard(int id) {
+
+		try {		
+			
+			connection=DBConnection.Connector();
+			PreparedStatement preparedStatement=null;	
+			
+			String query = "DELETE FROM Boat_Account_UnCleared WHERE Stock_ID = ?";
+			
+			preparedStatement = connection.prepareStatement(query);		
+			
+			
+			preparedStatement.setInt(1, id);
+			
+			preparedStatement.execute();
+				return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
+			}		
+			
+		}
+		
+	}
 
 }

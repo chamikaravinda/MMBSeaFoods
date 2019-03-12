@@ -8,6 +8,7 @@ public class Local_stock_items {
 	private double buying_Price;
 	private int Fish_stock_ID;
 	private String fish_name;
+	private double unitePrice;
 	public int getID() {
 		return ID;
 	}
@@ -48,6 +49,14 @@ public class Local_stock_items {
 	
 	//String view
 	
+	public double getUnitePrice() {
+		return unitePrice;
+	}
+	public void setUnitePrice(double unitePrice) {
+		this.unitePrice = unitePrice;
+	}
+
+
 	private String STotal_Weight;
 	private String Sbuying_Price;
 	public String getSTotal_Weight() {

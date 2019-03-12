@@ -10,7 +10,12 @@ import com.jfoenix.controls.JFXButton;
 import application.Models.Fish_Lot;
 import application.Models.Fish_stock;
 import application.Models.Vehicles;
+import application.Services.BoatService;
+import application.Services.Boat_AccountServices;
 import application.Services.Fish_LotServices;
+import application.Services.Fish_stockService;
+import application.Services.Third_Party_AccountServices;
+import application.Services.stock_FishService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +39,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -41,6 +49,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
+import sun.print.resources.serviceui_pt_BR;
 
 public class FtradeController implements Initializable {
 
@@ -69,14 +78,21 @@ public class FtradeController implements Initializable {
 
 	AnchorPane lots, stoks, boats, buyers, fishtypes, newLots;
 
+	Fish_stockService service = new Fish_stockService();
+	Fish_LotServices serviceB = new Fish_LotServices();
+	BoatService serviceC = new BoatService();
+	Boat_AccountServices serviceD = new Boat_AccountServices();
+	Third_Party_AccountServices serviceF = new Third_Party_AccountServices();
+	stock_FishService serviceG = new stock_FishService();
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
 		list.clear();
-		Fish_LotServices service = new Fish_LotServices();
+
 		ArrayList<Fish_Lot> lots = null;
 		try {
-			lots = service.getUnslodLots();
+			lots = serviceB.getUnslodLots();
 			for (Fish_Lot lot : lots) {
 				lot.setSbuying_price("Rs." + lot.getBuying_price() + "0");
 				lot.setSBuying_Weight("Kg " + lot.getBuying_Weight() + "0");
@@ -112,7 +128,7 @@ public class FtradeController implements Initializable {
 							controller.setID(id);
 
 							setNode(root);
-						}else {
+						} else {
 							Notifications notifications = Notifications.create();
 							notifications.title("Error");
 							notifications.text("No stocks in Lot to see");
@@ -149,6 +165,47 @@ public class FtradeController implements Initializable {
 		ft.setCycleCount(1);
 		ft.setAutoReverse(false);
 		ft.play();
+	}
+
+	public void deleteLot(ActionEvent event) throws SQLException {
+
+		Fish_Lot toDeleteLot = tableLots.getSelectionModel().getSelectedItem();
+		ArrayList<Fish_stock> toDeleteStocks = service.getLotStocks(toDeleteLot.getID());
+		if (toDeleteLot != null) {
+			Alert alert = new Alert(AlertType.CONFIRMATION,
+					"Are You Sure ? This will remove all the data belong to this Lot including account details and stocks",
+					ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+			alert.showAndWait();
+
+			if (alert.getResult() == ButtonType.YES) {
+				if (deleteStocks(toDeleteStocks)) {
+					if (serviceB.deleteLot(toDeleteLot.getID())) {
+
+						Notifications notifications = Notifications.create();
+						notifications.title("Succesfull");
+						notifications.text("Lot deleted succesfully");
+						notifications.graphic(null);
+						notifications.hideAfter(Duration.seconds(2));
+						notifications.position(Pos.CENTER);
+						notifications.showConfirm();
+
+						tableLots.getItems().remove(toDeleteLot);
+						tableLots.refresh();
+
+					}
+				}
+			}
+
+		} else {
+
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Select A Lot to delete");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
+		}
 	}
 
 	public void SellALot() throws IOException {
@@ -225,6 +282,53 @@ public class FtradeController implements Initializable {
 		lots = FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/FishTypes.fxml"));
 		setNode(lots);
 
+	}
+
+	private boolean deleteStocks(ArrayList<Fish_stock> toDeleteStocks) throws SQLException {
+		for (Fish_stock stock : toDeleteStocks) {
+
+			Fish_stock toDelete = stock;
+			if (serviceD.RemoveFromBoatAccountStockEntry(toDelete.getID())) {
+				if (serviceD.RemoveFromBoatAccountStockEntryUncleard(toDelete.getID())) {
+					if (serviceF.clearAccontsStockDelete(toDelete.getID())) {
+						if (serviceF.clearAccontsStockDeleteUncleard(toDelete.getID())) {
+							if (serviceG.deleteStockFishes(toDelete.getID())) {
+								if (service.deleteStock(toDelete.getID())) {
+									tableLots.refresh();
+								} else {
+
+									Notifications notifications = Notifications.create();
+									notifications.title("Error");
+									notifications.text("Deleting stock unsuccesfull");
+									notifications.graphic(null);
+									notifications.hideAfter(Duration.seconds(2));
+									notifications.position(Pos.CENTER);
+									notifications.showError();
+									System.out.println("Delete stock fail");
+									return false;
+
+								}
+							} else {
+								System.out.println("Delete stock fish fail");
+							}
+
+						} else {
+							System.out.println("Delete commision entry unclear fail");
+						}
+					} else {
+						System.out.println("Delete commision entry fail");
+					}
+
+				} else {
+					System.out.println("Delete boat account entry unclear fail");
+				}
+			} else {
+				System.out.println("Delete boat account entry fail");
+			}
+
+		}
+
+		return true;
 	}
 
 }

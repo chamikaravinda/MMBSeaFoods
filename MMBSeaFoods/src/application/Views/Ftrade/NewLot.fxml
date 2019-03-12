@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
@@ -17,7 +18,7 @@
      <children>
       <Label layoutX="19.0" layoutY="17.0" prefHeight="29.0" prefWidth="207.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="New Lots" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="17.0" />
       <Separator layoutX="3.0" layoutY="55.0" prefHeight="4.0" prefWidth="1213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
-      <AnchorPane layoutX="35.0" layoutY="98.0" prefHeight="535.0" prefWidth="1134.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="98.0">
+      <AnchorPane layoutX="35.0" layoutY="98.0" prefHeight="601.0" prefWidth="1119.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="98.0">
          <children>
             <GridPane layoutX="-7.0" layoutY="310.0" prefHeight="60.0" prefWidth="1119.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <columnConstraints>
@@ -47,6 +48,7 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
@@ -82,7 +84,7 @@
                         <Insets left="20.0" right="80.0" />
                      </padding>
                   </JFXTextField>
-                  <Label prefHeight="27.0" prefWidth="420.0" text="Expences Need to added for the 3rd party account :" GridPane.rowIndex="2">
+                  <Label prefHeight="27.0" prefWidth="420.0" text="Expences Need to added for the 3rd party account :" GridPane.rowIndex="3">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -90,7 +92,7 @@
                         <Insets left="80.0" right="20.0" />
                      </GridPane.margin>
                   </Label>
-                  <AnchorPane prefHeight="72.0" prefWidth="334.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <AnchorPane prefHeight="72.0" prefWidth="334.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <children>
                         <CheckBox fx:id="chkIce" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="82.0" text="Ice Fee" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="263.0" AnchorPane.topAnchor="27.0" />
                         <CheckBox fx:id="chkLorry" layoutX="96.0" layoutY="27.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="105.0" text="Lorry Fee" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="27.0" />
@@ -100,6 +102,11 @@
                         <Insets right="160.0" />
                      </GridPane.margin>
                   </AnchorPane>
+                  <JFXDatePicker fx:id="date" defaultColor="#0d00ff" maxWidth="1500.0" prefHeight="39.0" prefWidth="440.0" promptText="Added Date" style="-jfx-default-color: #0d00ff;" styleClass="font" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="80.0" right="20.0" />
+                     </GridPane.margin>
+                  </JFXDatePicker>
                </children>
             </GridPane>
          </children></AnchorPane>

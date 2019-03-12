@@ -16,8 +16,8 @@ public class Third_Party_AccountServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO Third_Party_Account (Date, Reason, To_Pay,Paid)" + 
-							"VALUES (?,?,?,?)";
+		String insertQuery= "INSERT INTO Third_Party_Account (Date, Reason, To_Pay,Paid,stockID)" + 
+							"VALUES (?,?,?,?,?)";
 		try {
 			
 			preparedStatement = connection.prepareStatement(insertQuery);
@@ -25,6 +25,7 @@ public class Third_Party_AccountServices {
 			preparedStatement.setString(2, entry.getReason());
 			preparedStatement.setDouble(3,entry.getTo_Pay());
 			preparedStatement.setDouble(4,entry.getPaid());
+			preparedStatement.setDouble(5,entry.getStockID());
 			resultSet=preparedStatement.executeUpdate();
 			if(resultSet!=0)
 				return true;
@@ -46,8 +47,8 @@ public class Third_Party_AccountServices {
 		connection=DBConnection.Connector();
 		PreparedStatement preparedStatement=null;
 		int resultSet;
-		String insertQuery= "INSERT INTO Third_Party_Acc_Uncleared (Date, Reason, To_Pay,Paid)" + 
-							"VALUES (?,?,?,?)";
+		String insertQuery= "INSERT INTO Third_Party_Acc_Uncleared (Date, Reason, To_Pay,Paid,stockID)" + 
+							"VALUES (?,?,?,?,?)";
 		try {
 			
 			preparedStatement = connection.prepareStatement(insertQuery);
@@ -55,6 +56,7 @@ public class Third_Party_AccountServices {
 			preparedStatement.setString(2, entry.getReason());
 			preparedStatement.setDouble(3,entry.getTo_Pay());
 			preparedStatement.setDouble(4,entry.getPaid());
+			preparedStatement.setDouble(5,entry.getStockID());
 			resultSet=preparedStatement.executeUpdate();
 			if(resultSet!=0)
 				return true;
@@ -96,6 +98,54 @@ public class Third_Party_AccountServices {
 	
 		return true;
 }
+	
+	public boolean clearAccontsStockDelete(int id) throws SQLException {
 
+		connection=DBConnection.Connector();
+		PreparedStatement preparedStatement=null;
+		int resultSet;
+		
+		
+		String deleteQuery="delete from Third_Party_Account WHERE stockID=? ";
+		
+		try {
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setInt(1, id);
+			resultSet=preparedStatement.executeUpdate();
+			return true;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			
+			connection.close();
+		}
+	
+		
+}
+
+	public boolean clearAccontsStockDeleteUncleard(int id) throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		int resultSet;
+
+		String deleteQuery = "delete from Third_Party_Acc_Uncleared WHERE stockID=? ";
+
+		try {
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+
+			connection.close();
+		}
+
+	
+	}
 	
 }

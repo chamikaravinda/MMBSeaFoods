@@ -367,16 +367,22 @@ public class AddStocksController implements Initializable {
 
 			if (fish.getWeight() > 30.0) {
 				fish.setPrice(fish.getWeight() * fishtype.getPrice_A30());
+				fish.setUnitePrice(fishtype.getPrice_A30());
 			} else if (fish.getWeight() > 25.0) {
 				fish.setPrice(fish.getWeight() * fishtype.getPrice_25T30());
+				fish.setUnitePrice(fishtype.getPrice_25T30());
 			} else if (fish.getWeight() > 20.0) {
 				fish.setPrice(fish.getWeight() * fishtype.getPrice_20T25());
+				fish.setUnitePrice(fishtype.getPrice_20T25());
 			} else if (fish.getWeight() > 15.0) {
 				fish.setPrice(fish.getWeight() * fishtype.getPrice_15T20());
+				fish.setUnitePrice(fishtype.getPrice_15T20());
 			} else if (fish.getWeight() > 10.0) {
 				fish.setPrice(fish.getWeight() * fishtype.getPrice_10T15());
+				fish.setUnitePrice(fishtype.getPrice_10T15());
 			} else {
 				fish.setPrice(fish.getWeight() * fishtype.getPrice_U10());
+				fish.setUnitePrice(fishtype.getPrice_U10());
 			}
 			fish.setFish_type_name(fishtype.getName());
 			list.add(fish);
@@ -465,6 +471,7 @@ public class AddStocksController implements Initializable {
 						entry.setDate(format1.format(new Date()));
 						entry.setTo_Pay(stock.getCommition_price());
 						entry.setPaid(0);
+						entry.setStockID((int)stockID);
 						entry.setReason("Commition for stock from boat " + stockboat.getBoatNameorNumber());
 
 						serviceF.addEntry(entry);
@@ -638,9 +645,10 @@ public class AddStocksController implements Initializable {
 			Font cellFont = new Font(Font.FontFamily.HELVETICA);
 			cellFont.setColor(BaseColor.WHITE);
 
-			PdfPTable pdfPTable = new PdfPTable(3);
+			PdfPTable pdfPTable = new PdfPTable(4);
 			PdfPCell pdfCell1 = new PdfPCell(new Phrase("Item", cellFont));
 			PdfPCell pdfCell2 = new PdfPCell(new Phrase("Weight", cellFont));
+			PdfPCell pdfCell4 = new PdfPCell(new Phrase("Unit Price", cellFont));
 			PdfPCell pdfCell3 = new PdfPCell(new Phrase("Price", cellFont));
 
 			BaseColor cellColor = WebColors.getRGBColor("#78909c");
@@ -648,10 +656,12 @@ public class AddStocksController implements Initializable {
 			pdfCell1.setBackgroundColor(cellColor);
 			pdfCell2.setBackgroundColor(cellColor);
 			pdfCell3.setBackgroundColor(cellColor);
+			pdfCell4.setBackgroundColor(cellColor);
 
 			pdfPTable.addCell(pdfCell1);
 			pdfPTable.addCell(pdfCell2);
 			pdfPTable.addCell(pdfCell3);
+			pdfPTable.addCell(pdfCell4);
 
 			for (Stock_Fish entry : list) {
 				Font priceCell = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
@@ -662,6 +672,10 @@ public class AddStocksController implements Initializable {
 				PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", entry.getWeight()), priceCell));
 				weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
 				pdfPTable.addCell(weight);
+				
+				PdfPCell uniteprice = new PdfPCell(new Phrase(String.format("%2.2f", entry.getUnitePrice()), priceCell));
+				uniteprice.setHorizontalAlignment(uniteprice.ALIGN_RIGHT);
+				pdfPTable.addCell(uniteprice);
 
 				PdfPCell total = new PdfPCell(new Phrase(String.format("%2.2f", entry.getPrice()), priceCell));
 				total.setHorizontalAlignment(total.ALIGN_RIGHT);
@@ -675,10 +689,14 @@ public class AddStocksController implements Initializable {
 			pdfPTable.addCell(" ");
 			pdfPTable.addCell(" ");
 			pdfPTable.addCell(" ");
+			pdfPTable.addCell(" ");
 
 			Font footerCell = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 			PdfPCell total = new PdfPCell(new Phrase("Total", footerCell));
 			pdfPTable.addCell(total);
+			
+			PdfPCell blank = new PdfPCell(new Phrase(" ", footerCell));
+			pdfPTable.addCell(blank);
 
 			PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", totalWeight), footerCell));
 			weight.setHorizontalAlignment(weight.ALIGN_RIGHT);

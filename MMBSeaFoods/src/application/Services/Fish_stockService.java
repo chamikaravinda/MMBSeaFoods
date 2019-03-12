@@ -74,6 +74,10 @@ public class Fish_stockService {
 				fishStock.setTotal_Weight(Double.parseDouble(resultSet.getString("Total_Weight")));
 				fishStock.setTotalBuying_price(Double.parseDouble(resultSet.getString("totalprice")));
 				fishStock.setBoat_ID(Integer.parseInt(resultSet.getString("Boat_ID")));
+				fishStock.setCommition_price(resultSet.getDouble("commitionprice"));
+				fishStock.setHarbour("Harbour");
+				fishStock.setNoofFishes(resultSet.getInt("NoofFishes"));
+				fishStock.setFishprice(resultSet.getDouble("fishprice"));
 				list.add(fishStock);
 
 			}
@@ -185,5 +189,28 @@ public class Fish_stockService {
 			connection.close();
 		}
 
+	}
+	
+	public boolean deleteStock(int id) throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		int resultSet;
+
+		String deleteQuery = "delete from Fish_stock where ID = ?";
+
+		try {
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+
+			connection.close();
+		}
+
+		return true;
 	}
 }

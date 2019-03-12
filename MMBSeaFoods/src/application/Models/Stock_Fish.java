@@ -7,6 +7,7 @@ public class Stock_Fish {
 	private double buying_Price;
 	private int Fish_stock_ID;
 	private String fish_type_name;
+	private double unitePrice;
 	
 	public String getFish_type_name() {
 		return fish_type_name;
@@ -44,11 +45,19 @@ public class Stock_Fish {
 	public void setPrice(double price) {
 		this.buying_Price = price;
 	}
-
+	public double getUnitePrice() {
+		return unitePrice;
+	}
+	public void setUnitePrice(double unitePrice) {
+		this.unitePrice = unitePrice;
+	}
 	//string view properties 
 	
+
+
 	private String STotal_weight ;
 	private String Sbuying_Price;
+	private String SunitePrice;
 
 	public String getSTotal_weight() {
 		return STotal_weight;
@@ -62,6 +71,13 @@ public class Stock_Fish {
 	public void setSbuying_Price(String sbuying_Price) {
 		Sbuying_Price = sbuying_Price;
 	}
+	public String getSunitePrice() {
+		return SunitePrice;
+	}
+	public void setSunitePrice(String sunitePrice) {
+		SunitePrice = sunitePrice;
+	}
+	
 	
 	
 		

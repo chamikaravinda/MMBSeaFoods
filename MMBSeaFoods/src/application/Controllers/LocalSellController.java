@@ -368,9 +368,10 @@ public class LocalSellController implements Initializable {
 			Font cellFont = new Font(Font.FontFamily.HELVETICA);
 			cellFont.setColor(BaseColor.WHITE);
 
-			PdfPTable pdfPTable = new PdfPTable(3);
+			PdfPTable pdfPTable = new PdfPTable(4);
 			PdfPCell pdfCell1 = new PdfPCell(new Phrase("Item", cellFont));
 			PdfPCell pdfCell2 = new PdfPCell(new Phrase("Weight", cellFont));
+			PdfPCell pdfCell4 = new PdfPCell(new Phrase("Unit Price", cellFont));
 			PdfPCell pdfCell3 = new PdfPCell(new Phrase("Price", cellFont));
 
 			BaseColor cellColor = WebColors.getRGBColor("#78909c");
@@ -378,10 +379,13 @@ public class LocalSellController implements Initializable {
 			pdfCell1.setBackgroundColor(cellColor);
 			pdfCell2.setBackgroundColor(cellColor);
 			pdfCell3.setBackgroundColor(cellColor);
+			pdfCell4.setBackgroundColor(cellColor);
 
 			pdfPTable.addCell(pdfCell1);
 			pdfPTable.addCell(pdfCell2);
+			pdfPTable.addCell(pdfCell4);
 			pdfPTable.addCell(pdfCell3);
+			
 
 			for (Local_sale_item entry : list) {
 				Font priceCell = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
@@ -393,6 +397,10 @@ public class LocalSellController implements Initializable {
 				weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
 				pdfPTable.addCell(weight);
 
+				PdfPCell uniteprice = new PdfPCell(new Phrase(String.format("%2.2f", entry.getUnit_price()), priceCell));
+				uniteprice.setHorizontalAlignment(uniteprice.ALIGN_RIGHT);
+				pdfPTable.addCell(uniteprice);
+				
 				PdfPCell total = new PdfPCell(new Phrase(String.format("%2.2f", entry.getBuying_Price()), priceCell));
 				total.setHorizontalAlignment(total.ALIGN_RIGHT);
 				pdfPTable.addCell(total);
@@ -405,10 +413,16 @@ public class LocalSellController implements Initializable {
 			pdfPTable.addCell(" ");
 			pdfPTable.addCell(" ");
 			pdfPTable.addCell(" ");
+			pdfPTable.addCell(" ");
 
 			Font footerCell = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 			PdfPCell total = new PdfPCell(new Phrase("Total", footerCell));
 			pdfPTable.addCell(total);
+			
+			PdfPCell blankcell = new PdfPCell(new Phrase(" "));
+			blankcell.setHorizontalAlignment(blankcell.ALIGN_RIGHT);
+			pdfPTable.addCell(blankcell);
+			
 
 			PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", totalWeight), footerCell));
 			weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
