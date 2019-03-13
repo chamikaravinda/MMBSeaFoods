@@ -1,5 +1,7 @@
 package application.Controllers;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -7,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,14 +22,22 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.html.WebColors;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.NumberValidator;
+import com.jfoenix.validation.RequiredFieldValidator;
 
 import application.Models.Boat;
 import application.Models.Boat_Account;
 import application.Models.Boat_Account_UnCleared;
 import application.Models.Fish_stock;
+import application.Models.Stock_Fish;
 import application.Services.AccountServices;
 import application.Services.BoatService;
 import application.Services.Boat_AccountServices;
@@ -35,6 +46,8 @@ import application.Services.stock_FishService;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -63,35 +76,89 @@ import net.sf.jasperreports.swing.JRViewer;
 
 public class AccountsForeignMakePaymentController implements Initializable {
 
+	AnchorPane add;
+
 	@FXML
 	private AnchorPane Accounts;
 
-	AnchorPane add;
+	@FXML
+	private Label lblBoatName;
 
 	@FXML
 	private TableView<Boat_Account_UnCleared> tblvBoatDetails;
 
 	@FXML
-	private TableColumn<?, ?> tblcDate;
-	@FXML
-	private TableColumn<?, ?> tblcReason;
+	private TableColumn<?, ?> tblBoat;
+
 	@FXML
 	private TableColumn<?, ?> tblcTopay;
+
 	@FXML
-	private TableColumn<?, ?> tblcPaid;
+	private JFXComboBox<String> cmbBoatNames;
+
 	@FXML
-	private TableColumn<?, ?> tblBoat;
+	private JFXTextField txtAmount;
+
+	@FXML
+	private JFXTextField txtDescription;
+
+	@FXML
+	private JFXDatePicker date;
+
+	String invoiceName;
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
 	AccountServices accountServices = new AccountServices();
 	Boat_AccountServices boatAccountService = new Boat_AccountServices();
 	Fish_stockService stockService = new Fish_stockService();
 	BoatService boatService = new BoatService();
 	private ObservableList<Boat_Account_UnCleared> boatDetailsList = FXCollections.observableArrayList();
+	private ObservableList<String> boatNameList = FXCollections.observableArrayList();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		Platform.runLater(() -> {
+
+			boatNameList = accountServices.getAllBoatNamesForeign();
+			cmbBoatNames.setItems(boatNameList);
+
+			NumberValidator numValidator = new NumberValidator();
+			RequiredFieldValidator textValidator = new RequiredFieldValidator();
+
+			txtAmount.getValidators().add(numValidator);
+			numValidator.setMessage("Please input Paying Amount Correctly");
+
+			txtAmount.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					if (!newValue) {
+						if (!txtAmount.getText().isEmpty()) {
+							txtAmount.validate();
+						}
+					}
+
+				}
+
+			});
+
+			txtDescription.getValidators().add(textValidator);
+			textValidator.setMessage("Please input Description");
+
+			txtDescription.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					if (!newValue) {
+						if (!txtDescription.getText().isEmpty()) {
+							txtDescription.validate();
+						}
+					}
+
+				}
+
+			});
 
 			boatDetailsList.clear();
 
@@ -104,11 +171,6 @@ public class AccountsForeignMakePaymentController implements Initializable {
 					} else {
 						boat.setSTo_Pay("Rs 0.00");
 					}
-					if (boat.getPaid() != 0) {
-						boat.setSPaid("Rs. " + String.format("%2.0f", boat.getSPaid()) + ".00");
-					} else {
-						boat.setSPaid("Rs 0.00");
-					}
 
 					Boat entryboat = boatService.getBoat(boat.getBoat_ID());
 					boat.setBoatName(entryboat.getBoatNameorNumber());
@@ -120,260 +182,75 @@ public class AccountsForeignMakePaymentController implements Initializable {
 
 			}
 			tblBoat.setCellValueFactory(new PropertyValueFactory<>("BoatName"));
-			tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-			tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
 			tblcTopay.setCellValueFactory(new PropertyValueFactory<>("STo_Pay"));
-			tblcPaid.setCellValueFactory(new PropertyValueFactory<>("SPaid"));
 
 			tblvBoatDetails.setItems(boatDetailsList);
-
-			tblvBoatDetails.setRowFactory(tv -> {
-				TableRow<Boat_Account_UnCleared> row = new TableRow<>();
-				row.setOnMouseClicked(event -> {
-					if (event.getClickCount() == 2 && (!row.isEmpty())) {
-						try {
-							Boat_Account_UnCleared rowData = row.getItem();
-							FXMLLoader loader = new FXMLLoader(
-									getClass().getResource("/application/Views/Ftrade/ViewStock.fxml"));
-							Parent root;
-
-							root = loader.load();
-
-							ViewStockController controller = loader.<ViewStockController>getController();
-							String Stockid = Long.toString(rowData.getStock_ID());
-							controller.setID(Stockid);
-							controller.setbackCommond(3);
-
-							setNode(root);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
-				return row;
-			});
 
 		});
 
 	}
 
-	public void paid(ActionEvent event) throws SQLException {
+	public void paid(ActionEvent event) throws SQLException, IOException {
+		LocalDate localDate = date.getValue();
 
-		Boat_Account_UnCleared entry = tblvBoatDetails.getSelectionModel().getSelectedItem();
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		if (entry != null) {
-			Boat_Account Newentry = new Boat_Account();
-			Newentry.setDate(format1.format(new Date()));
-			Newentry.setBoat_ID(entry.getBoat_ID());
-			Newentry.setPaid(entry.getTo_Pay());
-			Newentry.setStock_ID(entry.getStock_ID());
-			Newentry.setTo_Pay(0);
-			Fish_stock stock = stockService.getStocks((int) entry.getStock_ID());
-			Newentry.setReason("Payment for stock purchase of " + stock.getTotal_Weight() + "Kg");
-			System.out.println("Done");
+		String Payingboat = cmbBoatNames.getValue();
+		Boat entryboat = boatService.getBoat(Payingboat);
 
-			tblvBoatDetails.getItems().remove(entry);
-			tblvBoatDetails.refresh();
+		Boat_Account entry = new Boat_Account();
 
-			if (boatAccountService.addEntries(Newentry)) {
-				if (accountServices.RemoveFromBoatAccount_Unclear(entry.getID())) {
-					Notifications notifications = Notifications.create();
-					notifications.title("Succesfull");
-					notifications.text("Payment paid succesfully");
-					notifications.graphic(null);
-					notifications.hideAfter(Duration.seconds(2));
-					notifications.position(Pos.CENTER);
-					notifications.showConfirm();
+		entry.setDate(getDate(localDate));
+		entry.setPaid(Double.parseDouble(txtAmount.getText()));
+		entry.setReason(txtDescription.getText());
+		entry.setBoat_ID(entryboat.getID());
+		entry.setStock_ID(0);
+		entry.setTo_Pay(0);
+
+		Boat_Account_UnCleared unEntry = new Boat_Account_UnCleared();
+		unEntry.setBoat_ID(entryboat.getID());
+		unEntry.setTo_Pay(entry.getPaid());
+
+		if (boatAccountService.addEntries(entry)) {
+			if (boatAccountService.RemoveFromBoatAccountStockEntryUncleard(unEntry)) {
+
+				Notifications notifications = Notifications.create();
+				notifications.title("Succesfull");
+				notifications.text("Payment added succesfully");
+				notifications.graphic(null);
+				notifications.hideAfter(Duration.seconds(2));
+				notifications.position(Pos.CENTER);
+				notifications.showConfirm();
+				
+				add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/MakePayment.fxml"));
+				setNode(add);
+
+				generateAccountsLocalInvoice(entryboat.getBoatNameorNumber(),entry);
+
+				// open pdf
+				File pdfFile = new File(
+						"C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\" + invoiceName);
+				if (pdfFile.exists()) {
+
+					if (Desktop.isDesktopSupported()) {
+						Desktop.getDesktop().open(pdfFile);
+					} else {
+						System.out.println("Awt Desktop is not supported!");
+					}
+
+				} else {
+					System.out.println("File is not exists!");
 				}
 			}
+		} else {
+			Notifications notifications = Notifications.create();
+			notifications.title("Error");
+			notifications.text("Error in completing the payment");
+			notifications.graphic(null);
+			notifications.hideAfter(Duration.seconds(2));
+			notifications.position(Pos.CENTER);
+			notifications.showError();
 		}
 	}
 
-	/*
-	 * 
-	 * public void pay() {
-	 * 
-	 * try {
-	 * 
-	 * 
-	 * 
-	 * generateAccountsLocalInvoice();
-	 * 
-	 * 
-	 * 
-	 * String boatName=lblBoatName.getText();
-	 * 
-	 * int id = accountServices.getBoatIDByNameForeign(boatName);
-	 * 
-	 * for (Boat_Account item : tblvBoatDetails.getItems()) {
-	 * 
-	 * Boat_Account boat= new Boat_Account();
-	 * 
-	 * boat.setID(item.getID()); boat.setReason(item.getReason());
-	 * boat.setDate(item.getDate()); boat.setTo_Pay(0);
-	 * boat.setPaid(item.getTo_Pay()); boat.setBoat_ID(id);
-	 * 
-	 * 
-	 * System.out.println(boat.getPaid()); accountServices.AddNewPaidForeign(boat);
-	 * 
-	 * accountServices.setUnclearedForeign(boat.getBoat_ID());
-	 * 
-	 * 
-	 * }
-	 * 
-	 * 
-	 * 
-	 * Notifications notifications = Notifications.create();
-	 * notifications.title("Succesfull"); notifications.text("Done");
-	 * notifications.graphic(null); notifications.hideAfter(Duration.seconds(2));
-	 * notifications.position(Pos.CENTER); notifications.showConfirm();
-	 * 
-	 * 
-	 * 
-	 * add=FXMLLoader.load(getClass().getResource(
-	 * "/application/Views/Accounts/Accounts.fxml")); setNode(add);
-	 * 
-	 * 
-	 * 
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } }
-	 * 
-	 * 
-	 * //-------------------Generate Current Date ----------------- public static
-	 * String getCurrentDate() { DateFormat dateFormat = new
-	 * SimpleDateFormat("yyyy-MM-dd"); Date date = new Date(); String newDate =
-	 * dateFormat.format(date);
-	 * 
-	 * return newDate; }
-	 * 
-	 * //-------------------Generate Current Time ----------------- public static
-	 * String getCurrentTime() {
-	 * 
-	 * Calendar cal = Calendar.getInstance(); SimpleDateFormat sdf = new
-	 * SimpleDateFormat("HH-mm-ss");
-	 * 
-	 * return (sdf.format(cal.getTime())); }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * //---------------generate the jasper report-------------------- public void
-	 * generateAccountsLocalInvoice() {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * int id = accountServices.getBoatIDByNameForeign(lblBoatName.getText());
-	 * 
-	 * ArrayList<Boat_Account> boat_list =
-	 * accountServices.getAllBOQListUnclearedForeign(id);
-	 * 
-	 * String invoiceName = "FBAI_"+getCurrentDate()+"_"+getCurrentTime()+".pdf";
-	 * 
-	 * double totalAmount = 0.0;
-	 * 
-	 * Document document = new Document(); try {
-	 * 
-	 * @SuppressWarnings("unused") PdfWriter pdfWriter =
-	 * PdfWriter.getInstance(document, new
-	 * FileOutputStream("C:\\Users\\" + System.getProperty("user.name") + "\\
-	 * Documents\\"+invoiceName)); document.open();
-	 * 
-	 * Paragraph para = new Paragraph( "MMB Sea Foods\n\n",new
-	 * Font(Font.FontFamily.HELVETICA, 18,Font.BOLD));
-	 * para.setAlignment(para.ALIGN_CENTER);
-	 * 
-	 * Paragraph paraDesc = new Paragraph( "Local Account Invoice " +"\n",new
-	 * Font(Font.FontFamily.HELVETICA, 15,Font.BOLD));
-	 * paraDesc.setAlignment(paraDesc.ALIGN_CENTER);
-	 * 
-	 * Paragraph para2 = new Paragraph( "Date : " + getCurrentDate(),new
-	 * Font(Font.FontFamily.HELVETICA, 13,Font.BOLD));
-	 * para2.setAlignment(para2.ALIGN_RIGHT);
-	 * 
-	 * Paragraph para3 = new Paragraph( "Time : " + getCurrentTime() +"\n\n",new
-	 * Font(Font.FontFamily.HELVETICA, 13,Font.BOLD));
-	 * para2.setAlignment(para3.ALIGN_LEFT);
-	 * 
-	 * 
-	 * document.add(para); document.add(paraDesc); document.add(para2);
-	 * document.add(para3);
-	 * 
-	 * 
-	 * PdfPTable pdfPTable =new PdfPTable(4); PdfPCell pdfCell1 = new PdfPCell(new
-	 * Phrase("Date")); PdfPCell pdfCell2 = new PdfPCell(new Phrase("Reason"));
-	 * PdfPCell pdfCell3 = new PdfPCell(new Phrase("To Pay Amount")); PdfPCell
-	 * pdfCell4 = new PdfPCell(new Phrase("Boat ID"));
-	 * 
-	 * 
-	 * pdfCell1.setBackgroundColor(BaseColor.BLUE);
-	 * pdfCell2.setBackgroundColor(BaseColor.BLUE);
-	 * pdfCell3.setBackgroundColor(BaseColor.BLUE);
-	 * pdfCell4.setBackgroundColor(BaseColor.BLUE);
-	 * 
-	 * pdfPTable.addCell(pdfCell1); pdfPTable.addCell(pdfCell2);
-	 * pdfPTable.addCell(pdfCell3); pdfPTable.addCell(pdfCell4);
-	 * 
-	 * 
-	 * 
-	 * for( Boat_Account boat : boat_list ) { pdfPTable.addCell(boat.getDate());
-	 * pdfPTable.addCell(boat.getReason());
-	 * pdfPTable.addCell(Double.toString(boat.getTo_Pay()));
-	 * pdfPTable.addCell(Integer.toString(boat.getBoat_ID()));
-	 * 
-	 * totalAmount += boat.getTo_Pay(); }
-	 * 
-	 * pdfPTable.addCell("Total"); pdfPTable.addCell("");
-	 * pdfPTable.addCell(Double.toString(totalAmount)); pdfPTable.addCell("");
-	 * 
-	 * 
-	 * pdfPTable.setWidthPercentage(90);
-	 * 
-	 * document.add(pdfPTable); document.close(); } catch (Exception e) {
-	 * e.printStackTrace(); }
-	 * 
-	 * 
-	 * }
-	 * 
-	 * public void getBoatDetails(String name) { try {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * int id=accountServices.getBoatIDByNameForeign(name);
-	 * 
-	 * 
-	 * showBoatDetailsTableList(id);
-	 * 
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } }
-	 * 
-	 * 
-	 * public void showBoatDetailsTableList(int id) {
-	 * 
-	 * 
-	 * boatDetailsList.clear();
-	 * 
-	 * 
-	 * ArrayList<Boat_Account> boat_list =
-	 * accountServices.getAllBOQListUnclearedForeign(id);
-	 * 
-	 * for( Boat_Account boat : boat_list ) { boatDetailsList.add(boat); }
-	 * tblcDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-	 * tblcReason.setCellValueFactory(new PropertyValueFactory<>("Reason"));
-	 * tblcTopay.setCellValueFactory(new PropertyValueFactory<>("To_Pay"));
-	 * tblcPaid.setCellValueFactory(new PropertyValueFactory<>("Paid"));
-	 * 
-	 * tblvBoatDetails.setItems(boatDetailsList);
-	 * 
-	 * //tblvBoatDetails.setItems(boatDetailsList);
-	 * 
-	 * 
-	 * }
-	 */
 	void setNode(Node node) {
 
 		Accounts.getChildren().clear();
@@ -398,6 +275,133 @@ public class AccountsForeignMakePaymentController implements Initializable {
 		add = FXMLLoader.load(getClass().getResource("/application/Views/Accounts/FBoatAccount.fxml"));
 		setNode(add);
 
+	}
+
+	/*---------------generate the jasper report--------------------*/
+	public void generateAccountsLocalInvoice(String boatName, Boat_Account entry) {
+
+		invoiceName = "ForeingPaymentInvoice" + getCurrentDate() + "_" + getCurrentTime() + ".pdf";
+
+		Document document = new Document();
+		try {
+			@SuppressWarnings("unused")
+			PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(
+					"C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\" + invoiceName));
+			document.open();
+
+			Font f1 = new Font(Font.FontFamily.HELVETICA, 21, Font.BOLD);
+			BaseColor color = WebColors.getRGBColor("#283593");
+			f1.setColor(color);
+
+			Paragraph title = new Paragraph("M.M.B. SEA FOOD SUPPLIERS", f1);
+			title.setAlignment(title.ALIGN_CENTER);
+
+			Font f2 = new Font(Font.FontFamily.HELVETICA, 12);
+			BaseColor color2 = WebColors.getRGBColor("#303f9f");
+			f2.setColor(color2);
+			Paragraph address = new Paragraph("Kanthoru Watta,Kiriparuwa Road,Devinuwara", f2);
+			address.setAlignment(address.ALIGN_CENTER);
+
+			Font f3 = new Font(Font.FontFamily.HELVETICA, 12);
+			BaseColor color3 = WebColors.getRGBColor("#303f9f");
+			f3.setColor(color3);
+			Paragraph telephone = new Paragraph("Tel : 071 71 79 382 / 071 30 13 939(Predeep Samaru) " + "\n \n", f3);
+			telephone.setAlignment(telephone.ALIGN_CENTER);
+
+			Font topDetails = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
+			topDetails.setColor(BaseColor.BLACK);
+
+			PdfPTable table = new PdfPTable(2);
+			PdfPCell cellOne = new PdfPCell(new Phrase("Date : " + entry.getDate(), topDetails));
+			PdfPCell cellTwo = new PdfPCell(new Phrase("Boat : " + boatName, topDetails));
+
+			cellOne.setBorder(Rectangle.NO_BORDER);
+			cellTwo.setBorder(Rectangle.NO_BORDER);
+
+			table.addCell(cellOne);
+			table.addCell(cellTwo);
+
+			table.setWidthPercentage(100);
+
+			Paragraph line_brake = new Paragraph("\n", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
+			line_brake.setAlignment(line_brake.ALIGN_LEFT);
+
+			document.add(title);
+			document.add(address);
+			document.add(telephone);
+			document.add(table);
+			document.add(line_brake);
+
+			Font cellFont = new Font(Font.FontFamily.HELVETICA);
+			cellFont.setColor(BaseColor.WHITE);
+
+			PdfPTable pdfPTable = new PdfPTable(3);
+			PdfPCell pdfCell1 = new PdfPCell(new Phrase("Date", cellFont));
+			PdfPCell pdfCell2 = new PdfPCell(new Phrase("Reason", cellFont));
+			PdfPCell pdfCell3 = new PdfPCell(new Phrase("Amount", cellFont));
+
+			BaseColor cellColor = WebColors.getRGBColor("#78909c");
+
+			pdfCell1.setBackgroundColor(cellColor);
+			pdfCell2.setBackgroundColor(cellColor);
+			pdfCell3.setBackgroundColor(cellColor);
+
+			pdfPTable.addCell(pdfCell1);
+			pdfPTable.addCell(pdfCell2);
+			pdfPTable.addCell(pdfCell3);
+
+			Font priceCell = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
+
+			PdfPCell itemCell = new PdfPCell(new Phrase(entry.getDate(), priceCell));
+			pdfPTable.addCell(itemCell);
+
+			PdfPCell weight = new PdfPCell(new Phrase(entry.getReason(), priceCell));
+			weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
+			pdfPTable.addCell(weight);
+
+			PdfPCell uniteprice = new PdfPCell(new Phrase(String.format("%2.2f", entry.getPaid()), priceCell));
+			uniteprice.setHorizontalAlignment(uniteprice.ALIGN_RIGHT);
+			pdfPTable.addCell(uniteprice);
+
+			pdfPTable.setWidthPercentage(100);
+
+			document.add(pdfPTable);
+			document.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/*-------------------Generate Bill Date -----------------*/
+
+	private String getDate(LocalDate date) {
+		if (date != null) {
+			return date.toString();
+		} else {
+			return format1.format(new Date());
+
+		}
+	}
+
+	private String getCurrentDate() {
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String newDate = dateFormat.format(date);
+
+		return newDate;
+
+	}
+
+	/*-------------------Generate Current Time -----------------*/
+	public static String getCurrentTime() {
+
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-ss");
+
+		return (sdf.format(cal.getTime()));
 	}
 
 }

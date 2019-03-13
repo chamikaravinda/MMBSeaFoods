@@ -342,13 +342,9 @@ public class AccountServices {
 			while (resultSet.next()) {
 				Boat_Account_UnCleared boat = new Boat_Account_UnCleared();
 
-				boat.setID(Integer.parseInt(resultSet.getString(1)));
-				boat.setDate(resultSet.getString(2));
-				boat.setReason(resultSet.getString(3));
-				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
-				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
-				boat.setStock_ID(Long.parseLong(resultSet.getString(6)));
-				boat.setBoat_ID(Integer.parseInt(resultSet.getString(7)));
+				boat.setID(Integer.parseInt(resultSet.getString("ID")));	
+				boat.setTo_Pay(Double.parseDouble(resultSet.getString("To_Pay")));
+				boat.setBoat_ID(Integer.parseInt(resultSet.getString("Boat_ID")));
 
 				boatList.add(boat);
 			}
@@ -389,14 +385,9 @@ public class AccountServices {
 			while (resultSet.next()) {
 				Boat_Account_UnCleared boat = new Boat_Account_UnCleared();
 
-				boat.setID(Integer.parseInt(resultSet.getString(1)));
-				boat.setDate(resultSet.getString(2));
-				boat.setReason(resultSet.getString(3));
-				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
-				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
-				boat.setStock_ID(Long.parseLong(resultSet.getString(6)));
-				boat.setBoat_ID(Integer.parseInt(resultSet.getString(7)));
-
+				boat.setID(Integer.parseInt(resultSet.getString("ID")));	
+				boat.setTo_Pay(Double.parseDouble(resultSet.getString("To_Pay")));
+				boat.setBoat_ID(Integer.parseInt(resultSet.getString("Boat_ID")));
 				boatList.add(boat);
 			}
 

@@ -62,9 +62,8 @@ public class DBConnection {
 						+ "  Boat_ID      INTEGER   REFERENCES  Boats (ID) )";
 
 				String Boat_Account_UnCleared = "CREATE TABLE IF NOT EXISTS Boat_Account_UnCleared"
-						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
-						+ "  Reason       TEXT      NOT NULL," + "  To_Pay		  DOUBLE   			,"
-						+ "  Paid         DOUBLE            ," + "	 Stock_ID     INTEGER 	REFERENCES  Fish_stock(ID),"
+						+ "( ID           INTEGER 	PRIMARY KEY AUTOINCREMENT,"
+						+ "  To_Pay		  DOUBLE   			,"
 						+ "  Boat_ID      INTEGER   REFERENCES  Boats (ID))";
 
 				String Foreign_Fish_Buyers = "CREATE TABLE IF NOT EXISTS Foreign_Fish_Buyers"

@@ -18,7 +18,6 @@ public class LocalBoatAccountService {
 
 	Connection connection;
 
-	
 	Local_Fish_typesServices service = new Local_Fish_typesServices();
 
 	public boolean addEntries(LocalBoatAccount entry) throws SQLException {
@@ -29,7 +28,7 @@ public class LocalBoatAccountService {
 		String insertQuery = "INSERT INTO Local_Boat_Account (Date,Reason,To_Pay,Paid,Boat_ID,purchase_ID) VALUES (?,?,?,?,?,?)";
 		try {
 			preparedStatement3 = connection.prepareStatement(insertQuery);
-			preparedStatement3.setString(1,entry.getDate());
+			preparedStatement3.setString(1, entry.getDate());
 			preparedStatement3.setString(2, entry.getReason());
 			preparedStatement3.setDouble(3, entry.getTo_Pay());
 			preparedStatement3.setDouble(4, entry.getPaid());
@@ -69,7 +68,7 @@ public class LocalBoatAccountService {
 			connection.close();
 		}
 	}
-	
+
 	public boolean RemoveFromBoatAccount_Unclear(int id) {
 
 		try {
@@ -104,7 +103,7 @@ public class LocalBoatAccountService {
 		}
 
 	}
-	
+
 	public boolean RemoveFromBoatAccount(int id) {
 
 		try {
@@ -136,6 +135,61 @@ public class LocalBoatAccountService {
 				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
 			}
 
+		}
+
+	}
+
+	public boolean RemovePurchaseFromBoatAccount_Unclear(int id) throws SQLException {
+
+		try {
+
+			connection = DBConnection.Connector();
+			PreparedStatement preparedStatement = null;
+			String query = "DELETE FROM Local_Boat_Account_UnCleared WHERE purchase_ID = ?";
+
+			preparedStatement = connection.prepareStatement(query);
+
+			preparedStatement.setInt(1, id);
+
+			preparedStatement.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+				connection.close();
+		}
+
+	}
+
+	public boolean RemovePurchaseFromBoatAccount(int id) throws SQLException {
+
+		try {
+
+			connection = DBConnection.Connector();
+			PreparedStatement preparedStatement = null;
+			String query = "DELETE FROM Local_Boat_Account WHERE purchase_ID = ?";
+
+			preparedStatement = connection.prepareStatement(query);
+
+			preparedStatement.setInt(1, id);
+
+			preparedStatement.execute();
+				return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally { 
+				connection.close();
 		}
 
 	}

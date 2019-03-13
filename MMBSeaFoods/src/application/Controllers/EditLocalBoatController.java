@@ -95,21 +95,6 @@ public class EditLocalBoatController implements Initializable {
 			}
 			
 		});
-		txtMobile.getValidators().add(mobile);
-		mobile.setMessage("Please input correct values");
-		
-		txtMobile.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if(!newValue) {
-					txtMobile.validate();
-				}
-				
-			}
-			
-		});
-    	
     	
     	});
     	
@@ -126,7 +111,7 @@ public class EditLocalBoatController implements Initializable {
     	localBoat.setID(Integer.parseInt(lblID.getText()));
     	
     	
-    	if(!localBoat.getBoatNameorNumber().isEmpty() && !localBoat.getMobile().isEmpty() && !localBoat.getOwner().isEmpty()) {
+    	if(!localBoat.getBoatNameorNumber().isEmpty() && !localBoat.getOwner().isEmpty()) {
     		if(service.UpdateLocalBoat(localBoat)) {
     			Notifications notifications = Notifications.create();
 				notifications.title("Succesfull");

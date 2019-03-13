@@ -7,8 +7,10 @@ package application.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 
+import application.Models.Boat_Account_UnCleared;
 import application.Models.Fish_Lot;
 import application.Models.Fish_stock;
+import application.Models.LocalBoatAccountUnCleared;
 import application.Models.Vehicles;
 import application.Services.BoatService;
 import application.Services.Boat_AccountServices;
@@ -292,7 +294,10 @@ public class FtradeController implements Initializable {
 
 			Fish_stock toDelete = stock;
 			if (serviceD.RemoveFromBoatAccountStockEntry(toDelete.getID())) {
-				if (serviceD.RemoveFromBoatAccountStockEntryUncleard(toDelete.getID())) {
+				Boat_Account_UnCleared entry =new Boat_Account_UnCleared();
+				entry.setBoat_ID(toDelete.getBoat_ID());
+				entry.setTo_Pay(toDelete.getFishprice());
+				if (serviceD.RemoveFromBoatAccountStockEntryUncleard(entry)) {
 					if (serviceF.clearAccontsStockDelete(toDelete.getID())) {
 						if (serviceF.clearAccontsStockDeleteUncleard(toDelete.getID())) {
 							if (serviceG.deleteStockFishes(toDelete.getID())) {

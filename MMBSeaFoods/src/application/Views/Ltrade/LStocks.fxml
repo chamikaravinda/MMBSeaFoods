@@ -29,7 +29,7 @@
                         <FontAwesomeIconView fill="#3b2f63" glyphName="PLUS" size="17.0" wrappingWidth="21.0" />
                      </graphic>
                   </JFXButton>
-                  <GridPane layoutX="37.0" layoutY="56.0" prefHeight="455.0" prefWidth="1150.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="56.0">
+                  <GridPane layoutX="42.0" layoutY="56.0" prefHeight="425.0" prefWidth="1145.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="56.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="427.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="22.0" minWidth="8.0" prefWidth="13.0" />
@@ -87,6 +87,22 @@
                         </Label>
                      </children>
                   </GridPane>
+                  <JFXButton alignment="CENTER" layoutX="1093.0" layoutY="493.0" maxWidth="208.0" onAction="#removePurchase" prefHeight="30.0" prefWidth="184.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Delete Purchase" textFill="#fefeff" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="31.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#f7f8f8" glyphName="TRASH" size="15.0" wrappingWidth="21.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton alignment="CENTER" layoutX="42.0" layoutY="493.0" maxWidth="208.0" onAction="#RemovestockItem" prefHeight="30.0" prefWidth="134.0" style="-fx-alignment: left; -fx-background-color: #3B2F63;" styleClass="nav-button" text="Remove Item" textFill="#fefeff" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="42.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#f7f8f8" glyphName="TRASH" size="15.0" wrappingWidth="21.0" />
+                     </graphic>
+                  </JFXButton>
                </children>
             </AnchorPane>
             <GridPane layoutY="59.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">

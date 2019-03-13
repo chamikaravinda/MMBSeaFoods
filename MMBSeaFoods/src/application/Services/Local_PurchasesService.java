@@ -53,6 +53,30 @@ public class Local_PurchasesService {
 		}
 
 	}
+	
+	public boolean deleteLocalPurchase(int id) throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		int resultSet;
+
+		String deleteQuery = "delete from Local_Purchases where ID=? ";
+
+		try {
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+
+			connection.close();
+		}
+
+
+	}
 
 	public boolean addStockItems(ObservableList<Local_stock_items> list, int stockId) throws SQLException {
 		connection = DBConnection.Connector();
@@ -76,6 +100,30 @@ public class Local_PurchasesService {
 		} finally {
 			connection.close();
 		}
+	}
+	
+	public boolean deleteLocalStockItems(int id) throws SQLException {
+
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		int resultSet;
+
+		String deleteQuery = "delete from Local_stock_items where Fish_stock_ID=? ";
+
+		try {
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+
+			connection.close();
+		}
+
+
 	}
 
 	public LocalPurchase getLocalPurchase(int id) throws SQLException {

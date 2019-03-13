@@ -507,13 +507,8 @@ public class AddStocksController implements Initializable {
 							serviceH.addEntries(boatEntry);
 
 							Boat_Account_UnCleared boatEntryU = new Boat_Account_UnCleared();
-							boatEntryU.setDate(getDate(localDate));
 							boatEntryU.setBoat_ID(stock.getBoat_ID());
 							boatEntryU.setTo_Pay(stock.getFishprice());
-							boatEntryU.setPaid(0);
-							boatEntryU.setReason("Stock Purchase of " + stock.getTotal_Weight() + " Kg");
-							boatEntryU.setStock_ID(stockID);
-
 							serviceH.addEntries_Uncleard(boatEntryU);
 
 						}
