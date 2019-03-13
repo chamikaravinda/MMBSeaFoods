@@ -172,14 +172,9 @@ public class AccountServices {
 			while (resultSet.next()) {
 				LocalBoatAccountUnCleared boat = new LocalBoatAccountUnCleared();
 
-				boat.setID(Integer.parseInt(resultSet.getString(1)));
-				boat.setDate(resultSet.getString(2));
-				boat.setReason(resultSet.getString(3));
-				boat.setTo_Pay(Double.parseDouble(resultSet.getString(4)));
-				boat.setPaid(Double.parseDouble(resultSet.getString(5)));
-				boat.setBoat_ID(Integer.parseInt(resultSet.getString(6)));
-				boat.setPurchase_ID(Integer.parseInt(resultSet.getString(7)));
-
+				boat.setID(Integer.parseInt(resultSet.getString("ID")));
+				boat.setTo_Pay(Double.parseDouble(resultSet.getString("To_Pay")));
+				boat.setBoat_ID(Integer.parseInt(resultSet.getString("Boat_ID")));
 				boatList.add(boat);
 			}
 			return boatList;

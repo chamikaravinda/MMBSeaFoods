@@ -329,7 +329,10 @@ public class AccountsForeignMakePaymentController implements Initializable {
 			document.add(title);
 			document.add(address);
 			document.add(telephone);
+			document.add(line_brake);
 			document.add(table);
+			document.add(line_brake);
+			document.add(line_brake);
 			document.add(line_brake);
 
 			Font cellFont = new Font(Font.FontFamily.HELVETICA);

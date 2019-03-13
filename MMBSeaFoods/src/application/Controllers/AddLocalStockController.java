@@ -37,6 +37,7 @@ import application.Models.F_BoatEntryCatogries;
 import application.Models.LFish_stock;
 import application.Models.LocalBoat;
 import application.Models.LocalBoatAccount;
+import application.Models.LocalBoatAccountUnCleared;
 import application.Models.LocalPurchase;
 import application.Models.Local_Fish_types;
 import application.Models.Local_stock_items;
@@ -270,7 +271,12 @@ public class AddLocalStockController implements Initializable {
 						entry.setReason("Fish Purchase of " + total_weight + "Kg");
 						entry.setTo_Pay(total_price);
 						if (serviceD.addEntries(entry)) {
-							if (serviceD.addEntriesUncleard(entry)) {
+							
+							LocalBoatAccountUnCleared unEntry =new LocalBoatAccountUnCleared();
+							unEntry.setBoat_ID(boat.getID());
+							unEntry.setTo_Pay(total_price);
+							
+							if (serviceD.addEntriesUncleard(unEntry)) {
 								if (serviceF.addStockItems(local_fishStock, (int) StockId)) {
 									Notifications notifications = Notifications.create();
 									notifications.title("Succesfull");

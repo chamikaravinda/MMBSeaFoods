@@ -35,6 +35,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
@@ -49,9 +50,6 @@ public class LocalStocksController implements Initializable {
 
 	@FXML
 	private TableColumn<?, ?> FishName;
-
-	@FXML
-	private TableColumn<?, ?> TotalWeight;
 
 	@FXML
 	private JFXButton switchNewStocks;
@@ -109,7 +107,7 @@ public class LocalStocksController implements Initializable {
 
 				Local_Fish_types localfishtypes = serviceB.getLocalfishTypes(Llot.getFish_Type());
 				Llot.setFishName(localfishtypes.getName());
-
+				Llot.setSTotal_Weight(String.format("%2.2f", Llot.getTotal_Weight()));
 				list.add(Llot);
 			}
 
@@ -117,13 +115,58 @@ public class LocalStocksController implements Initializable {
 				LocalBoat boat = boatService.getLocalBoat(entry.getBoatID());
 				entry.setBoatName(boat.getBoatNameorNumber());
 				entry.setSTotal_Price("Rs. " + String.format("%2.2f", entry.getTotal_Price()));
-				entry.setSTotal_Weight(String.format("%2.2f", entry.getTotal_Weight()));
+				entry.setSTotal_Weight(String.format("%2.1f", entry.getTotal_Weight()));
 				System.out.println(entry.getDate());
 				purhcaselist.add(entry);
 			}
 
 			FishName.setCellValueFactory(new PropertyValueFactory<>("FishName"));
-			TotalWeight.setCellValueFactory(new PropertyValueFactory<>("Total_Weight"));
+					
+			LstockTable.setEditable(true);
+			TableColumn<LFish_stock, String> totalWeight = 
+		            new TableColumn<>("Total Weight");
+			totalWeight.setCellValueFactory(
+		            new PropertyValueFactory<>("STotal_Weight"));
+			
+			totalWeight.setCellFactory(TextFieldTableCell.<LFish_stock>forTableColumn());
+			totalWeight.setOnEditCommit(event -> {
+				LFish_stock fish = event.getRowValue();
+	        		fish.setSTotal_Weight(event.getNewValue());
+	        		fish.setTotal_Weight(Double.parseDouble(fish.getSTotal_Weight()));
+	        		
+	        		
+	        		try {
+						if(service.UpdateStock(fish)) {
+							
+							Notifications notifications = Notifications.create();
+							notifications.title("Succesfull");
+							notifications.text("Fish Stock Updated succesfully");
+							notifications.graphic(null);
+							notifications.hideAfter(Duration.seconds(2));
+							notifications.position(Pos.CENTER);
+							notifications.showConfirm();
+							
+						}else {
+							Notifications notifications = Notifications.create();
+							notifications.title("Error");
+							notifications.text("Error occured in updating fish stock");
+							notifications.graphic(null);
+							notifications.hideAfter(Duration.seconds(2));
+							notifications.position(Pos.CENTER);
+							notifications.showError();
+						}
+						
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	        		LstockTable.refresh();
+	        		
+	        		
+	        });
+			
+			LstockTable.getColumns().addAll(totalWeight);
 			LstockTable.setItems(list);
 
 			clmData.setCellValueFactory(new PropertyValueFactory<>("Date"));
@@ -178,7 +221,10 @@ public class LocalStocksController implements Initializable {
 				if (service.UpdateStockAtRemovePurchases(itemsTodelete)) {
 					if (serviceD.deleteLocalStockItems(toDelete.getID())) {
 						if (boatAccountService.RemovePurchaseFromBoatAccount(toDelete.getID())) {
-							if (boatAccountService.RemovePurchaseFromBoatAccount_Unclear(toDelete.getID())) {
+							LocalBoatAccountUnCleared unEntry =new LocalBoatAccountUnCleared();
+							unEntry.setBoat_ID(toDelete.getBoatID());
+							unEntry.setTo_Pay(toDelete.getTotal_Price());
+							if (boatAccountService.RemovePurchaseFromBoatAccount_Unclear(unEntry)) {
 								if (serviceD.deleteLocalPurchase(toDelete.getID())) {
 
 									Notifications notifications = Notifications.create();

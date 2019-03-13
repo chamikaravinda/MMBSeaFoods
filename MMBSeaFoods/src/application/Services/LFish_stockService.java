@@ -94,6 +94,36 @@ public class LFish_stockService {
 		}
 	}
 
+	public boolean UpdateStock(LFish_stock fish) throws SQLException {
+		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "select * from Local_Fish_stock where Fish_Type =? ";
+
+		try {
+
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, fish.getFish_Type());
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+			double currentWeight = resultSet.getDouble("Total_Weight");
+			
+			PreparedStatement preparedStatement2 = null;
+			String updateQuery = "UPDATE Local_Fish_stock set Total_Weight =?  where Fish_Type= ? ";
+			preparedStatement2 = connection.prepareStatement(updateQuery);
+			preparedStatement2.setDouble(1, fish.getTotal_Weight());
+			preparedStatement2.setInt(2, fish.getFish_Type());
+			preparedStatement2.executeUpdate();
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			connection.close();
+		}
+	}
+
 	public boolean sellStock(ObservableList<Local_sale_item> local_fishStock) throws SQLException {
 
 		connection = DBConnection.Connector();

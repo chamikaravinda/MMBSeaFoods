@@ -43,7 +43,6 @@
                         <TableView fx:id="LstockTable" prefHeight="387.0" prefWidth="442.0" GridPane.rowIndex="1">
                           <columns>
                             <TableColumn fx:id="FishName" prefWidth="75.0" text="Fish Name" />
-                            <TableColumn fx:id="TotalWeight" prefWidth="75.0" text="Total Weight" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

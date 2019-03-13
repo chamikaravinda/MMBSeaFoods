@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import application.Models.LFish_stock;
 import application.Models.LocalBoatAccount;
+import application.Models.LocalBoatAccountUnCleared;
 import application.Models.Local_Fish_types;
 import javafx.collections.ObservableList;
 
@@ -45,24 +46,47 @@ public class LocalBoatAccountService {
 
 	}
 
-	public boolean addEntriesUncleard(LocalBoatAccount entry) throws SQLException {
+	public boolean addEntriesUncleard(LocalBoatAccountUnCleared entry) throws SQLException {
 
 		connection = DBConnection.Connector();
+		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatement2 = null;
+		int resultSet;
 
-		PreparedStatement preparedStatement3 = null;
-		String insertQuery = "INSERT INTO Local_Boat_Account_UnCleared (Date,Reason,To_Pay,Paid,Boat_ID,purchase_ID) VALUES (?,?,?,?,?,?)";
+		String selectQuery = "SELECT * FROM Local_Boat_Account_UnCleared WHERE Boat_ID=?";
+
+		preparedStatement = connection.prepareStatement(selectQuery);
+		preparedStatement.setInt(1, entry.getBoat_ID());
+		ResultSet result = preparedStatement.executeQuery();
+
 		try {
-			preparedStatement3 = connection.prepareStatement(insertQuery);
-			preparedStatement3.setString(1, entry.getDate());
-			preparedStatement3.setString(2, entry.getReason());
-			preparedStatement3.setDouble(3, entry.getTo_Pay());
-			preparedStatement3.setDouble(4, entry.getPaid());
-			preparedStatement3.setInt(5, entry.getBoat_ID());
-			preparedStatement3.setInt(6, entry.getPurchase_ID());
-			preparedStatement3.executeUpdate();
+			if (result.next()) {
 
-			return true;
-		} catch (Exception e) {
+				String updateQuery = "UPDATE Local_Boat_Account_UnCleared SET To_Pay=? WHERE Boat_ID = ?";
+				preparedStatement2 = connection.prepareStatement(updateQuery);
+				preparedStatement2.setDouble(1, result.getDouble("To_Pay") + entry.getTo_Pay());
+				preparedStatement2.setInt(2, entry.getBoat_ID());
+				preparedStatement2.executeUpdate();
+
+				return true;
+			} else {
+
+				String addEntryQuery = "INSERT INTO Local_Boat_Account_UnCleared(To_Pay,Boat_ID)" + " VALUES(?,?)";
+
+				preparedStatement2 = connection.prepareStatement(addEntryQuery);
+
+				preparedStatement2.setDouble(1, entry.getTo_Pay());
+				preparedStatement2.setDouble(2, entry.getBoat_ID());
+				resultSet = preparedStatement2.executeUpdate();
+
+				if (resultSet != 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		} finally {
 			connection.close();
@@ -139,20 +163,31 @@ public class LocalBoatAccountService {
 
 	}
 
-	public boolean RemovePurchaseFromBoatAccount_Unclear(int id) throws SQLException {
-
+	public boolean RemovePurchaseFromBoatAccount_Unclear(LocalBoatAccountUnCleared entry) throws SQLException {
 		try {
 
 			connection = DBConnection.Connector();
 			PreparedStatement preparedStatement = null;
-			String query = "DELETE FROM Local_Boat_Account_UnCleared WHERE purchase_ID = ?";
+			PreparedStatement preparedStatement2 = null;
+			int resultSet;
 
-			preparedStatement = connection.prepareStatement(query);
+			String selectQuery = "SELECT * FROM Local_Boat_Account_UnCleared WHERE Boat_ID=?";
+			preparedStatement = connection.prepareStatement(selectQuery);
+			preparedStatement.setInt(1, entry.getBoat_ID());
+			ResultSet result = preparedStatement.executeQuery();
 
-			preparedStatement.setInt(1, id);
+			if (result.next()) {
+				String query = "UPDATE Local_Boat_Account_UnCleared SET To_Pay=? WHERE Boat_ID = ?";
 
-			preparedStatement.execute();
-			return true;
+				preparedStatement2 = connection.prepareStatement(query);
+
+				preparedStatement2.setDouble(1, result.getDouble("To_Pay") - entry.getTo_Pay());
+				preparedStatement2.setInt(2, entry.getBoat_ID());
+				preparedStatement2.execute();
+				return true;
+			}
+			return false;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -161,7 +196,12 @@ public class LocalBoatAccountService {
 			e.printStackTrace();
 			return false;
 		} finally {
+			try {
 				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Finally Exception In setUnclearedBuyerRecievedForeign : " + e);
+			}
+
 		}
 
 	}
@@ -179,7 +219,7 @@ public class LocalBoatAccountService {
 			preparedStatement.setInt(1, id);
 
 			preparedStatement.execute();
-				return true;
+			return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -188,8 +228,8 @@ public class LocalBoatAccountService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		} finally { 
-				connection.close();
+		} finally {
+			connection.close();
 		}
 
 	}

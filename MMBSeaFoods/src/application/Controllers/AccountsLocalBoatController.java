@@ -174,19 +174,14 @@ public class AccountsLocalBoatController implements Initializable {
 		LocalBoatAccount entry = tblvBoatDetails.getSelectionModel().getSelectedItem();
 
 		if (entry != null && entry.getPaid() != 0) {
-			LocalBoatAccount Newentry = new LocalBoatAccount();
+			LocalBoatAccountUnCleared Newentry = new LocalBoatAccountUnCleared();
 
 			Newentry.setBoat_ID(entry.getBoat_ID());
-			Newentry.setPaid(0);
-			Newentry.setPurchase_ID(entry.getPurchase_ID());
 			Newentry.setTo_Pay(entry.getPaid());
-			LocalPurchase stock = purchaseService.getLocalPurchase((int) entry.getPurchase_ID());
-			Newentry.setReason("Fish Purchase of " + stock.getTotal_Weight());
-			Newentry.setDate(stock.getDate());
-
+			
 			tblvBoatDetails.getItems().remove(entry);
 			tblvBoatDetails.refresh();
-
+			
 			if (boatAccountService.addEntriesUncleard(Newentry)) {
 				if (boatAccountService.RemoveFromBoatAccount(entry.getID())) {
 					Notifications notifications = Notifications.create();
