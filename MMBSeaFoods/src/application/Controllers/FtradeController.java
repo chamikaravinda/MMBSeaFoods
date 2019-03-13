@@ -179,23 +179,26 @@ public class FtradeController implements Initializable {
 
 			if (alert.getResult() == ButtonType.YES) {
 				if (deleteStocks(toDeleteStocks)) {
-					if (serviceB.deleteLot(toDeleteLot.getID())) {
+					if (serviceF.clearAccontsLotDeleteUncleard(toDeleteLot.getID())) {
+						if (serviceF.clearAccontsLotDelete(toDeleteLot.getID())) {
+							if (serviceB.deleteLot(toDeleteLot.getID())) {
 
-						Notifications notifications = Notifications.create();
-						notifications.title("Succesfull");
-						notifications.text("Lot deleted succesfully");
-						notifications.graphic(null);
-						notifications.hideAfter(Duration.seconds(2));
-						notifications.position(Pos.CENTER);
-						notifications.showConfirm();
+								Notifications notifications = Notifications.create();
+								notifications.title("Succesfull");
+								notifications.text("Lot deleted succesfully");
+								notifications.graphic(null);
+								notifications.hideAfter(Duration.seconds(2));
+								notifications.position(Pos.CENTER);
+								notifications.showConfirm();
 
-						tableLots.getItems().remove(toDeleteLot);
-						tableLots.refresh();
+								tableLots.getItems().remove(toDeleteLot);
+								tableLots.refresh();
 
+							}
+						}
 					}
 				}
 			}
-
 		} else {
 
 			Notifications notifications = Notifications.create();

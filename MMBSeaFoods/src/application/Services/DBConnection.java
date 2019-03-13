@@ -120,14 +120,16 @@ public class DBConnection {
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"
 						+ "  Paid          DOUBLE            ,"
-						+ "  stockID       INTEGER	)";
+						+ "  stockID       INTEGER,"
+						+ "	 lotID 		   INTEGER	)";
 
 				String Third_Party_Acc_Uncleared = "CREATE TABLE IF NOT EXISTS Third_Party_Acc_Uncleared"
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"
 						+ "  Paid          DOUBLE            ,"
-						+ "  stockID       INTEGER	)";
-
+						+ "  stockID       INTEGER,"
+						+ "	 lotID 		   INTEGER	)";
+						
 				String ProfiteAndLose = "CREATE TABLE IF NOT EXISTS ProfiteAndLose "
 						+ "( ID            INTEGER 	PRIMARY KEY AUTOINCREMENT," + "  Date     	  DATE      NOT NULL,"
 						+ "  Reason        TEXT      NOT NULL," + "  To_Pay		  DOUBLE            ,"

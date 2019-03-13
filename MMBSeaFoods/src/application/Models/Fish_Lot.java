@@ -16,6 +16,7 @@ public class Fish_Lot {
     private int Sold_To;
     private String display_Name;
     private String Sold_Date;
+
     
 	public int getID() {
 		return ID;
@@ -101,11 +102,7 @@ public class Fish_Lot {
 	public void setSold_Date(String date) {
 		Sold_Date = date;
 	}
-
-
-
-
-
+	
 	//display Strings
 	private String Sbuying_price;
 	private String SBuying_Weight;

@@ -151,40 +151,27 @@ public class AddLottsController implements Initializable {
 
 		LocalDate localDate = date.getValue();
 		Fish_Lot newLot = new Fish_Lot();
-		if(localDate != null) {
-		newLot.setAdded_Date(localDate.toString());
-		}else {
-			newLot.setAdded_Date(format1.format(new Date()));
-			
-		}
+		newLot.setAdded_Date(getDate(localDate));
 		newLot.setLorry_Number(txtLorryNo.getText());
 		newLot.setLorry_fee(Double.parseDouble(txtLorryFee.getText()));
 		newLot.setIce_fee(Double.parseDouble(txtIceFee.getText()));
 		newLot.setOther_fees(Double.parseDouble(txtOtherFee.getText()));
-
-		if (service.addLot(newLot)) {
+		long lotID =service.addLot(newLot);
+		if (lotID !=0) {
 			if (newLot.getIce_fee() > 0.0) {
 				if (chkIce.isSelected()) {
 					Third_Party_Account entry = new Third_Party_Account();
-					entry.setDate(newLot.getAdded_Date());
+					
 					entry.setTo_Pay(newLot.getIce_fee());
 					entry.setPaid(0);
 					entry.setStockID(0);
 					entry.setReason("Ice fee for Lot form Lorry " + newLot.getLorry_Number());
-
+					entry.setDate(getDate(localDate));
+					entry.setLotID((int)lotID);
 					service2.addEntry_Uncleared(entry);
 					service2.addEntry(entry);
 
-				} else {
-
-					ProfiteAndLose entry = new ProfiteAndLose();
-					entry.setDate(newLot.getAdded_Date());
-					entry.setTo_Pay(0);
-					entry.setPaid(newLot.getIce_fee());
-					entry.setReason("Ice fee for Lot form Lorry " + newLot.getLorry_Number());
-
-					ProfitAndLossService.addProfitAndLossEntry(entry);
-				}
+				} 
 			}
 			if (newLot.getLorry_fee() > 0.0) {
 				if (chkLorry.isSelected()) {
@@ -193,18 +180,12 @@ public class AddLottsController implements Initializable {
 					entry.setTo_Pay(newLot.getLorry_fee());
 					entry.setPaid(0);
 					entry.setStockID(0);
+					entry.setLotID((int)lotID);
 					entry.setReason("Lorry fee for Lot form  Lorry " + newLot.getLorry_Number());
 
 					service2.addEntry_Uncleared(entry);
 					service2.addEntry(entry);
-				} else {
-					ProfiteAndLose entry = new ProfiteAndLose();
-					entry.setDate(newLot.getAdded_Date());
-					entry.setTo_Pay(0);
-					entry.setPaid(newLot.getLorry_fee());
-					entry.setReason("Lorry fee for Lot form Lorry " + newLot.getLorry_Number());
-					ProfitAndLossService.addProfitAndLossEntry(entry);
-				}
+				} 
 			}
 			if (newLot.getOther_fees() > 0.0) {
 				if (chkOther.isSelected()) {
@@ -213,18 +194,12 @@ public class AddLottsController implements Initializable {
 					entry.setTo_Pay(newLot.getLorry_fee());
 					entry.setPaid(0);
 					entry.setStockID(0);
+					entry.setLotID((int)lotID);
 					entry.setReason("Other expences for Lot form  Lorry  " + newLot.getLorry_Number());
 
 					service2.addEntry_Uncleared(entry);
 					service2.addEntry(entry);
-				} else {
-					ProfiteAndLose entry = new ProfiteAndLose();
-					entry.setDate(newLot.getAdded_Date());
-					entry.setTo_Pay(0);
-					entry.setPaid(newLot.getLorry_fee());
-					entry.setReason("Other expences for Lot form  Lorry " + newLot.getLorry_Number());
-					ProfitAndLossService.addProfitAndLossEntry(entry);
-				}
+				} 
 			}
 
 			Notifications notifications = Notifications.create();
@@ -273,6 +248,17 @@ public class AddLottsController implements Initializable {
 		back = FXMLLoader.load(getClass().getResource("/application/Views/Ftrade/Ftrade.fxml"));
 		setNode(back);
 
+	}
+	
+	private String getDate(LocalDate date) {
+		
+		if(date != null) {
+			return date.toString();
+			}else {
+				return format1.format(new Date());
+				
+			}
+		
 	}
 
 }

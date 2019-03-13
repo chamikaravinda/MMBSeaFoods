@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +27,9 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Models.Local_Fish_types;
@@ -83,6 +86,12 @@ public class LocalSellController implements Initializable {
 	private JFXComboBox<String> cmbLBuyers;
 
 	@FXML
+	private JFXDatePicker date;
+
+	@FXML
+	private JFXCheckBox billDate;
+
+	@FXML
 	private JFXButton btnremove;
 	@FXML
 	private Label lbltotalprice;
@@ -109,6 +118,10 @@ public class LocalSellController implements Initializable {
 	ObservableList<Local_sale_item> local_fishStock = FXCollections.observableArrayList();
 
 	String invoiceName;
+
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -219,21 +232,22 @@ public class LocalSellController implements Initializable {
 	@FXML
 	void AddFinalizeStock(ActionEvent event) throws IOException {
 		try {
-			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			
+			LocalDate localDate = date.getValue();
 			String Buyername = cmbLBuyers.getValue();
 			LocalBuyers buyer = serviceD.getLocalBoat(Buyername);
 			if (Buyername != null && !local_fishStock.isEmpty() && isPricesSet()) {
 				if (serviceE.sellStock(local_fishStock)) {
 
 					LocalSales sale = new LocalSales();
-					sale.setDate(format1.format(new Date()));
+					sale.setDate(getDate(localDate));
 					sale.setBuyerID(buyer.getID());
 					sale.setPrice(totalPrice);
 					sale.setTotalWeight(totalWeight);
 					long purchaseId = serviceF.addLocalSale(sale);
 					if (purchaseId != 0) {
 						Local_Buyers_Account newEntry = new Local_Buyers_Account();
-						newEntry.setDate(format1.format(new Date()));
+						newEntry.setDate(getDate(localDate));
 						newEntry.setReason("Fish Purchase of " + String.format("%2.1f", totalWeight) + "Kg");
 						newEntry.setTo_Pay(totalPrice);
 						newEntry.setPaid(0);
@@ -243,7 +257,7 @@ public class LocalSellController implements Initializable {
 							if (serviceF.addEntriesUncleared(newEntry)) {
 
 								for (Local_sale_item item : local_fishStock) {
-									item.setFish_sale_ID((int)purchaseId);
+									item.setFish_sale_ID((int) purchaseId);
 								}
 								if (serviceF.addLocalSaleItems(local_fishStock)) {
 									Notifications notifications = Notifications.create();
@@ -257,12 +271,12 @@ public class LocalSellController implements Initializable {
 									back = FXMLLoader
 											.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 									setNode(back);
-									
-									generateAccountsLocalInvoice(local_fishStock,buyer.getName());
+
+									generateAccountsLocalInvoice(local_fishStock, buyer.getName());
 
 									// open pdf
-									File pdfFile = new File(
-											"C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\" + invoiceName);
+									File pdfFile = new File("C:\\Users\\" + System.getProperty("user.name")
+											+ "\\Documents\\" + invoiceName);
 									if (pdfFile.exists()) {
 
 										if (Desktop.isDesktopSupported()) {
@@ -274,7 +288,7 @@ public class LocalSellController implements Initializable {
 									} else {
 										System.out.println("File is not exists!");
 									}
-									
+
 								}
 							}
 
@@ -304,10 +318,9 @@ public class LocalSellController implements Initializable {
 		}
 
 	}
-	
-	
+
 	/*---------------generate the jasper report--------------------*/
-	public void generateAccountsLocalInvoice(ObservableList<Local_sale_item> list , String buyer) {
+	public void generateAccountsLocalInvoice(ObservableList<Local_sale_item> list, String buyer) {
 
 		invoiceName = "SellLocalStock_Invoice_" + getCurrentDate() + "_" + getCurrentTime() + ".pdf";
 
@@ -346,7 +359,6 @@ public class LocalSellController implements Initializable {
 			PdfPTable table = new PdfPTable(2);
 			PdfPCell cellOne = new PdfPCell(new Phrase("Date : " + getCurrentDate(), topDetails));
 			PdfPCell cellTwo = new PdfPCell(new Phrase("Buyer : " + buyer, topDetails));
-	
 
 			cellOne.setBorder(Rectangle.NO_BORDER);
 			cellTwo.setBorder(Rectangle.NO_BORDER);
@@ -385,7 +397,6 @@ public class LocalSellController implements Initializable {
 			pdfPTable.addCell(pdfCell2);
 			pdfPTable.addCell(pdfCell4);
 			pdfPTable.addCell(pdfCell3);
-			
 
 			for (Local_sale_item entry : list) {
 				Font priceCell = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
@@ -397,10 +408,11 @@ public class LocalSellController implements Initializable {
 				weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
 				pdfPTable.addCell(weight);
 
-				PdfPCell uniteprice = new PdfPCell(new Phrase(String.format("%2.2f", entry.getUnit_price()), priceCell));
+				PdfPCell uniteprice = new PdfPCell(
+						new Phrase(String.format("%2.2f", entry.getUnit_price()), priceCell));
 				uniteprice.setHorizontalAlignment(uniteprice.ALIGN_RIGHT);
 				pdfPTable.addCell(uniteprice);
-				
+
 				PdfPCell total = new PdfPCell(new Phrase(String.format("%2.2f", entry.getBuying_Price()), priceCell));
 				total.setHorizontalAlignment(total.ALIGN_RIGHT);
 				pdfPTable.addCell(total);
@@ -418,18 +430,16 @@ public class LocalSellController implements Initializable {
 			Font footerCell = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 			PdfPCell total = new PdfPCell(new Phrase("Total", footerCell));
 			pdfPTable.addCell(total);
-			
-			PdfPCell blankcell = new PdfPCell(new Phrase(" "));
-			blankcell.setHorizontalAlignment(blankcell.ALIGN_RIGHT);
-			pdfPTable.addCell(blankcell);
-			
 
 			PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", totalWeight), footerCell));
 			weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
 			pdfPTable.addCell(weight);
 
-			
-			PdfPCell amount = new PdfPCell(new Phrase(String.format("%2.2f",totalAmount ), footerCell));
+			PdfPCell blankcell = new PdfPCell(new Phrase(" "));
+			blankcell.setHorizontalAlignment(blankcell.ALIGN_RIGHT);
+			pdfPTable.addCell(blankcell);
+
+			PdfPCell amount = new PdfPCell(new Phrase(String.format("%2.2f", totalAmount), footerCell));
 			amount.setHorizontalAlignment(amount.ALIGN_RIGHT);
 			pdfPTable.addCell(amount);
 
@@ -444,13 +454,30 @@ public class LocalSellController implements Initializable {
 
 	}
 
-	/*-------------------Generate Current Date -----------------*/
-	public static String getCurrentDate() {
+/*-------------------Generate Bill Date -----------------*/
+	
+	private String getDate(LocalDate date) {
+		if(date != null) {
+			return date.toString();
+			}else {
+				return format1.format(new Date());
+				
+			}
+	}
+	
+	private String getCurrentDate() {
+		
+		if(billDate.isSelected()) {
+			
+		return getDate(date.getValue());
+			
+		}else {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String newDate = dateFormat.format(date);
-
+		
 		return newDate;
+		}
 	}
 
 	/*-------------------Generate Current Time -----------------*/
@@ -461,7 +488,6 @@ public class LocalSellController implements Initializable {
 
 		return (sdf.format(cal.getTime()));
 	}
-
 	void setNode(Node node) {
 		Stocks.getChildren().clear();
 		Stocks.setTopAnchor(node, 0.0);

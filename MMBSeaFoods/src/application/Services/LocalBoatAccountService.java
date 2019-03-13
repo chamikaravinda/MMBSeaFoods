@@ -18,7 +18,7 @@ public class LocalBoatAccountService {
 
 	Connection connection;
 
-	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+	
 	Local_Fish_typesServices service = new Local_Fish_typesServices();
 
 	public boolean addEntries(LocalBoatAccount entry) throws SQLException {
@@ -29,7 +29,7 @@ public class LocalBoatAccountService {
 		String insertQuery = "INSERT INTO Local_Boat_Account (Date,Reason,To_Pay,Paid,Boat_ID,purchase_ID) VALUES (?,?,?,?,?,?)";
 		try {
 			preparedStatement3 = connection.prepareStatement(insertQuery);
-			preparedStatement3.setString(1, format1.format(new Date()));
+			preparedStatement3.setString(1,entry.getDate());
 			preparedStatement3.setString(2, entry.getReason());
 			preparedStatement3.setDouble(3, entry.getTo_Pay());
 			preparedStatement3.setDouble(4, entry.getPaid());
@@ -54,7 +54,7 @@ public class LocalBoatAccountService {
 		String insertQuery = "INSERT INTO Local_Boat_Account_UnCleared (Date,Reason,To_Pay,Paid,Boat_ID,purchase_ID) VALUES (?,?,?,?,?,?)";
 		try {
 			preparedStatement3 = connection.prepareStatement(insertQuery);
-			preparedStatement3.setString(1, format1.format(new Date()));
+			preparedStatement3.setString(1, entry.getDate());
 			preparedStatement3.setString(2, entry.getReason());
 			preparedStatement3.setDouble(3, entry.getTo_Pay());
 			preparedStatement3.setDouble(4, entry.getPaid());

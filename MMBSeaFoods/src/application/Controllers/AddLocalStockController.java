@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,7 +28,9 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Models.F_BoatEntryCatogries;
@@ -99,6 +102,11 @@ public class AddLocalStockController implements Initializable {
 	private JFXButton btnremove;
 
 	@FXML
+	private JFXDatePicker date;
+
+	@FXML
+	private JFXCheckBox billDate;
+	@FXML
 	private JFXButton AddLFish;
 
 	private double total_price;
@@ -107,6 +115,8 @@ public class AddLocalStockController implements Initializable {
 	String invoiceName;
 
 	AnchorPane add;
+
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
 	ObservableList<String> LocalFishTypeList = FXCollections.observableArrayList();
 	ObservableList<String> LocalBoatList = FXCollections.observableArrayList();
@@ -218,7 +228,7 @@ public class AddLocalStockController implements Initializable {
 				local_Fish.setBuying_Price(local_Fish.getTotal_Weight() * types.getPrice_U10());
 				local_Fish.setUnitePrice(types.getPrice_U10());
 			}
-			
+
 			local_Fish.setFish_Type(types.getID());
 			local_fishStock.add(local_Fish);
 			clmFishTable.refresh();
@@ -234,17 +244,17 @@ public class AddLocalStockController implements Initializable {
 	}
 
 	public void AddFinalizeStock(ActionEvent event) throws SQLException, IOException {
+		LocalDate localDate = date.getValue();
+		
 		if (cmbLsBoat.getValue() != null && txthabour.getText() != null) {
 			String boatname = cmbLsBoat.getValue();
 			LocalBoat boat = serviceE.getLocalBoat(boatname);
-
-			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
 			if (!local_fishStock.isEmpty()) {
 				LocalPurchase newPurchase = new LocalPurchase();
 
 				newPurchase.setBoatID(boat.getID());
-				newPurchase.setDate(format1.format(new Date()));
+				newPurchase.setDate(getDate(localDate));
 				newPurchase.setHabour(txthabour.getText());
 				newPurchase.setTotal_Price(total_price);
 				newPurchase.setTotal_Weight(total_weight);
@@ -254,7 +264,7 @@ public class AddLocalStockController implements Initializable {
 						LocalBoatAccount entry = new LocalBoatAccount();
 
 						entry.setBoat_ID(boat.getID());
-						entry.setDate(format1.format(new Date()));
+						entry.setDate(getDate(localDate));
 						entry.setPaid(0);
 						entry.setPurchase_ID((int) StockId);
 						entry.setReason("Fish Purchase of " + total_weight + "Kg");
@@ -405,8 +415,8 @@ public class AddLocalStockController implements Initializable {
 
 			pdfPTable.addCell(pdfCell1);
 			pdfPTable.addCell(pdfCell2);
-			pdfPTable.addCell(pdfCell3);
 			pdfPTable.addCell(pdfCell4);
+			pdfPTable.addCell(pdfCell3);
 
 			for (Local_stock_items entry : list) {
 				Font priceCell = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
@@ -441,14 +451,14 @@ public class AddLocalStockController implements Initializable {
 			PdfPCell total = new PdfPCell(new Phrase("Total", footerCell));
 			pdfPTable.addCell(total);
 
-			PdfPCell blankcell = new PdfPCell(new Phrase(" "));
-			blankcell.setHorizontalAlignment(blankcell.ALIGN_RIGHT);
-			pdfPTable.addCell(blankcell);
-			
 			PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", totalWeight), footerCell));
 			weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
 			pdfPTable.addCell(weight);
 
+			PdfPCell blankcell = new PdfPCell(new Phrase(" "));
+			blankcell.setHorizontalAlignment(blankcell.ALIGN_RIGHT);
+			pdfPTable.addCell(blankcell);
+			
 			PdfPCell amount = new PdfPCell(new Phrase(String.format("%2.2f", totalAmount), footerCell));
 			amount.setHorizontalAlignment(amount.ALIGN_RIGHT);
 			pdfPTable.addCell(amount);
@@ -464,13 +474,30 @@ public class AddLocalStockController implements Initializable {
 
 	}
 
-	/*-------------------Generate Current Date -----------------*/
-	public static String getCurrentDate() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		String newDate = dateFormat.format(date);
+	/*-------------------Generate Bill Date -----------------*/
 
-		return newDate;
+	private String getDate(LocalDate date) {
+		if (date != null) {
+			return date.toString();
+		} else {
+			return format1.format(new Date());
+
+		}
+	}
+
+	private String getCurrentDate() {
+
+		if (billDate.isSelected()) {
+
+			return getDate(date.getValue());
+
+		} else {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			String newDate = dateFormat.format(date);
+
+			return newDate;
+		}
 	}
 
 	/*-------------------Generate Current Time -----------------*/
@@ -481,13 +508,10 @@ public class AddLocalStockController implements Initializable {
 
 		return (sdf.format(cal.getTime()));
 	}
-
-	@FXML
+	
 	public void back(ActionEvent event) throws IOException {
-
 		add = FXMLLoader.load(getClass().getResource("/application/Views/Ltrade/LStocks.fxml"));
 		setNode(add);
 
 	}
-
 }

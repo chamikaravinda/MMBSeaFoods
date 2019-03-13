@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
@@ -46,7 +48,7 @@
                   <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" size="15.0" />
                </graphic>
             </JFXButton>
-            <GridPane layoutX="-29.0" layoutY="32.0" prefHeight="491.0" prefWidth="1199.0" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+            <GridPane layoutX="-29.0" layoutY="32.0" prefHeight="517.0" prefWidth="1199.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -59,41 +61,43 @@
                      <children>
                         <JFXComboBox fx:id="cmbLot" layoutX="44.0" layoutY="25.0" prefHeight="45.0" prefWidth="406.0" promptText="Select the lot" styleClass="font" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="25.0" />
                         <JFXComboBox fx:id="cmbBoat" layoutX="44.0" layoutY="101.0" prefHeight="45.0" prefWidth="406.0" promptText="Select the Boat" styleClass="font" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="101.0" />
-                        <JFXTextField fx:id="txtHabour" labelFloat="true" layoutX="29.0" layoutY="194.0" prefHeight="45.0" prefWidth="438.0" promptText="Habour" unFocusColor="#0d00ff" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="194.0">
+                        <JFXTextField fx:id="txtHabour" labelFloat="true" layoutX="29.0" layoutY="180.0" prefHeight="45.0" prefWidth="438.0" promptText="Habour" unFocusColor="#0d00ff" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="180.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </JFXTextField>
-                        <Label layoutX="28.0" layoutY="432.0" prefHeight="27.0" prefWidth="120.0" text="Total Weigh :">
+                        <Label layoutX="28.0" layoutY="470.0" prefHeight="27.0" prefWidth="120.0" text="Total Weigh :">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="28.0" layoutY="392.0" prefHeight="27.0" prefWidth="145.0" text="Total Price    : Rs.">
+                        <Label layoutX="28.0" layoutY="430.0" prefHeight="27.0" prefWidth="145.0" text="Total Price    : Rs.">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="28.0" layoutY="347.0" prefHeight="27.0" prefWidth="120.0" text="No of Fishes :">
+                        <Label layoutX="28.0" layoutY="385.0" prefHeight="27.0" prefWidth="120.0" text="No of Fishes :">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblNoOfFish" layoutX="142.0" layoutY="347.0" prefHeight="27.0" prefWidth="120.0">
+                        <Label fx:id="lblNoOfFish" layoutX="142.0" layoutY="385.0" prefHeight="27.0" prefWidth="120.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbltotalPrice" layoutX="167.0" layoutY="392.0" prefHeight="27.0" prefWidth="145.0">
+                        <Label fx:id="lbltotalPrice" layoutX="167.0" layoutY="430.0" prefHeight="27.0" prefWidth="145.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbltotalWeight" layoutX="139.0" layoutY="428.0" prefHeight="27.0" prefWidth="145.0">
+                        <Label fx:id="lbltotalWeight" layoutX="139.0" layoutY="466.0" prefHeight="27.0" prefWidth="145.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
+                        <JFXDatePicker fx:id="date" defaultColor="#0d00ff" layoutX="29.0" layoutY="256.0" maxWidth="1500.0" prefHeight="39.0" prefWidth="440.0" promptText="Added Date" style="-jfx-default-color: #0d00ff;" styleClass="font" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="256.0" />
+                        <JFXCheckBox fx:id="billDate" layoutX="29.0" layoutY="320.0" prefHeight="17.0" prefWidth="283.0" text="Use the Added Date as Bill Date" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="188.0" AnchorPane.topAnchor="320.0" />
                      </children>
                      <GridPane.margin>
                         <Insets left="100.0" />
@@ -146,7 +150,7 @@
                   </AnchorPane>
                </children>
             </GridPane>
-            <JFXButton fx:id="btnremove" alignment="TOP_CENTER" layoutX="1053.0" layoutY="523.0" maxWidth="175.0" minHeight="31.0" minWidth="120.0" prefHeight="45.0" prefWidth="132.0" text="remove" AnchorPane.bottomAnchor="73.0" AnchorPane.rightAnchor="14.0">
+            <JFXButton fx:id="btnremove" alignment="TOP_CENTER" layoutX="1053.0" layoutY="549.0" maxWidth="175.0" minHeight="31.0" minWidth="120.0" prefHeight="45.0" prefWidth="132.0" text="remove" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="14.0">
                <font>
                   <Font size="18.0" />
                </font>

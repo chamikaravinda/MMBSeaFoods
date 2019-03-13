@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
@@ -62,29 +64,31 @@
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXComboBox fx:id="cmbLsBoat" prefHeight="45.0" prefWidth="409.0" promptText="Select the Boat " styleClass="font" GridPane.rowIndex="2" />
-                        <JFXTextField fx:id="txthabour" prefHeight="31.0" prefWidth="442.0" promptText="Habour" GridPane.rowIndex="3">
+                        <JFXComboBox fx:id="cmbLsBoat" prefHeight="45.0" prefWidth="409.0" promptText="Select the Boat " styleClass="font" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="txthabour" prefHeight="31.0" prefWidth="442.0" promptText="Habour" GridPane.rowIndex="2">
                            <font>
                               <Font size="18.0" />
                            </font></JFXTextField>
-                        <Label fx:id="lbltotalprice" prefHeight="47.0" prefWidth="391.0" GridPane.rowIndex="5">
+                        <Label fx:id="lbltotalprice" prefHeight="47.0" prefWidth="391.0" GridPane.rowIndex="6">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbltotalweight" layoutX="10.0" layoutY="341.0" prefHeight="47.0" prefWidth="391.0" GridPane.rowIndex="4">
+                        <Label fx:id="lbltotalweight" layoutX="10.0" layoutY="341.0" prefHeight="47.0" prefWidth="391.0" GridPane.rowIndex="5">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
+                        <JFXDatePicker fx:id="date" defaultColor="#0d00ff" maxWidth="1500.0" prefHeight="39.0" prefWidth="440.0" promptText="Added Date" style="-jfx-default-color: #0d00ff;" styleClass="font" GridPane.rowIndex="3" />
+                        <JFXCheckBox fx:id="billDate" prefHeight="17.0" prefWidth="283.0" text="Use the Added Date as Bill Date" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.columnIndex="1">
@@ -92,11 +96,12 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="257.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="386.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="257.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="453.0" minHeight="10.0" prefHeight="372.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="28.0" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TableView fx:id="clmFishTable" prefHeight="382.0" prefWidth="543.0" GridPane.rowIndex="1">
+                        <TableView fx:id="clmFishTable" prefHeight="351.0" prefWidth="543.0" GridPane.rowIndex="1">
                           <columns>
                             <TableColumn fx:id="clmfishtype" prefWidth="75.0" text="Fish Type" />
                             <TableColumn fx:id="clmTotalWeight" prefWidth="75.0" text="Weight" />
@@ -165,18 +170,18 @@
                               </GridPane>
                            </children>
                         </GridPane>
+                        <JFXButton fx:id="btnremove" alignment="CENTER" maxWidth="175.0" minHeight="31.0" minWidth="120.0" prefHeight="44.0" prefWidth="147.0" text="Remove" textFill="#0d0d0d" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="#0a0a0a" glyphName="REMOVE" size="15.0" wrappingWidth="21.0" />
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </GridPane>
                </children>
             </GridPane>
-            <JFXButton fx:id="btnremove" alignment="CENTER" layoutX="1019.0" layoutY="554.0" maxWidth="175.0" minHeight="31.0" minWidth="120.0" prefHeight="44.0" prefWidth="147.0" text="Remove" textFill="#0d0d0d" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="1019.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView fill="#0a0a0a" glyphName="REMOVE" size="17.0" wrappingWidth="21.0" />
-               </graphic>
-            </JFXButton>
          </children></AnchorPane>
       
    </children>

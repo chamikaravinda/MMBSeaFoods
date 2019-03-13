@@ -9,7 +9,7 @@ public class Third_Party_Account {
             private double To_Pay;             
             private double Paid;
             private int stockID;
-            
+            private int lotID;
 			public int getID() {
 				return ID;
 			}
@@ -45,6 +45,12 @@ public class Third_Party_Account {
 			}
 			public void setStockID(int stockID) {
 				this.stockID = stockID;
+			}
+			public int getLotID() {
+				return lotID;
+			}
+			public void setLotID(int lotID) {
+				this.lotID = lotID;
 			}
             
             

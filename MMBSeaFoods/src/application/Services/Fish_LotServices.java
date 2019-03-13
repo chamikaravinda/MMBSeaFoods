@@ -13,7 +13,7 @@ public class Fish_LotServices {
 
 	Connection connection;
 
-	public boolean addLot(Fish_Lot lot) throws SQLException {
+	public long addLot(Fish_Lot lot) throws SQLException {
 		connection = DBConnection.Connector();
 		PreparedStatement preparedStatement = null;
 		int resultSet;
@@ -33,14 +33,17 @@ public class Fish_LotServices {
 			resultSet = preparedStatement.executeUpdate();
 
 			if (resultSet != 0) {
-				return true;
+				ResultSet result = preparedStatement.getGeneratedKeys();
+				if (result.next()) {
+					return result.getLong(1);
+				} else {
+					return 0;
+				}
 			} else
-				return false;
-
+				return 0;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
+			return 0;
 		} finally {
 			connection.close();
 		}

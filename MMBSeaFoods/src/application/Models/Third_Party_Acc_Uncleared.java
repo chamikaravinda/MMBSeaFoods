@@ -8,7 +8,7 @@ public class Third_Party_Acc_Uncleared {
             private String Reason;
             private double To_Pay;             
             private double Paid;
-            
+            private int lotID;
 			public int getID() {
 				return ID;
 			}
@@ -38,6 +38,12 @@ public class Third_Party_Acc_Uncleared {
 			}
 			public void setPaid(double paid) {
 				Paid = paid;
+			}
+			public int getLotID() {
+				return lotID;
+			}
+			public void setLotID(int lotID) {
+				this.lotID = lotID;
 			}
             
             

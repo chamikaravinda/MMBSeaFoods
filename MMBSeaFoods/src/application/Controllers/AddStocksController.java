@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +27,9 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
@@ -128,6 +131,13 @@ public class AddStocksController implements Initializable {
 	@FXML
 	private JFXButton btnremove;
 
+    @FXML
+    private JFXDatePicker date;
+
+    @FXML
+    private JFXCheckBox billDate;
+    
+    
 	Fish_LotServices service = new Fish_LotServices();
 	BoatService serviceB = new BoatService();
 	Foreign_Fish_typesServices serviceC = new Foreign_Fish_typesServices();
@@ -440,6 +450,8 @@ public class AddStocksController implements Initializable {
 
 	public void FinaliseStock(ActionEvent event) throws SQLException, IOException {
 
+		LocalDate localDate = date.getValue();
+		
 		if (cmbBoat.getSelectionModel().getSelectedItem() != null
 				&& cmbLot.getSelectionModel().getSelectedItem() != null) {
 			if (!txtHabour.getText().isEmpty()) {
@@ -449,7 +461,8 @@ public class AddStocksController implements Initializable {
 					Boat stockboat = serviceB.getBoat(cmbBoat.getValue());
 					Fish_Lot lot = service.getTheLot(cmbLot.getValue());
 
-					stock.setAdded_Date(format1.format(new Date()));
+
+					stock.setAdded_Date(getDate(localDate));
 					stock.setBoat_ID(stockboat.getID());
 					stock.setHarbour(txtHabour.getText());
 					stock.setNoofFishes(totalNoofFish);
@@ -468,10 +481,11 @@ public class AddStocksController implements Initializable {
 						}
 
 						Third_Party_Account entry = new Third_Party_Account();
-						entry.setDate(format1.format(new Date()));
+						entry.setDate(getDate(localDate));
 						entry.setTo_Pay(stock.getCommition_price());
 						entry.setPaid(0);
 						entry.setStockID((int)stockID);
+						entry.setLotID(0);
 						entry.setReason("Commition for stock from boat " + stockboat.getBoatNameorNumber());
 
 						serviceF.addEntry(entry);
@@ -483,7 +497,7 @@ public class AddStocksController implements Initializable {
 						if (service.UpdateFish_Lot(lot)) {
 
 							Boat_Account boatEntry = new Boat_Account();
-							boatEntry.setDate(format1.format(new Date()));
+							boatEntry.setDate(getDate(localDate));
 							boatEntry.setBoat_ID(stock.getBoat_ID());
 							boatEntry.setTo_Pay(stock.getFishprice());
 							boatEntry.setPaid(0);
@@ -493,7 +507,7 @@ public class AddStocksController implements Initializable {
 							serviceH.addEntries(boatEntry);
 
 							Boat_Account_UnCleared boatEntryU = new Boat_Account_UnCleared();
-							boatEntryU.setDate(format1.format(new Date()));
+							boatEntryU.setDate(getDate(localDate));
 							boatEntryU.setBoat_ID(stock.getBoat_ID());
 							boatEntryU.setTo_Pay(stock.getFishprice());
 							boatEntryU.setPaid(0);
@@ -660,8 +674,9 @@ public class AddStocksController implements Initializable {
 
 			pdfPTable.addCell(pdfCell1);
 			pdfPTable.addCell(pdfCell2);
-			pdfPTable.addCell(pdfCell3);
 			pdfPTable.addCell(pdfCell4);
+			pdfPTable.addCell(pdfCell3);
+
 
 			for (Stock_Fish entry : list) {
 				Font priceCell = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
@@ -695,13 +710,12 @@ public class AddStocksController implements Initializable {
 			PdfPCell total = new PdfPCell(new Phrase("Total", footerCell));
 			pdfPTable.addCell(total);
 			
-			PdfPCell blank = new PdfPCell(new Phrase(" ", footerCell));
-			pdfPTable.addCell(blank);
-
 			PdfPCell weight = new PdfPCell(new Phrase(String.format("%2.2f", totalWeight), footerCell));
 			weight.setHorizontalAlignment(weight.ALIGN_RIGHT);
 			pdfPTable.addCell(weight);
 
+			PdfPCell blank = new PdfPCell(new Phrase(" ", footerCell));
+			pdfPTable.addCell(blank);
 			
 			PdfPCell amount = new PdfPCell(new Phrase(String.format("%2.2f",totalAmount ), footerCell));
 			amount.setHorizontalAlignment(amount.ALIGN_RIGHT);
@@ -718,13 +732,30 @@ public class AddStocksController implements Initializable {
 
 	}
 
-	/*-------------------Generate Current Date -----------------*/
-	public static String getCurrentDate() {
+	/*-------------------Generate Bill Date -----------------*/
+	
+	private String getDate(LocalDate date) {
+		if(date != null) {
+			return date.toString();
+			}else {
+				return format1.format(new Date());
+				
+			}
+	}
+	
+	private String getCurrentDate() {
+		
+		if(billDate.isSelected()) {
+			
+		return getDate(date.getValue());
+			
+		}else {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String newDate = dateFormat.format(date);
-
+		
 		return newDate;
+		}
 	}
 
 	/*-------------------Generate Current Time -----------------*/
